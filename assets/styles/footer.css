@@ -1,0 +1,197 @@
+/*-------------------------------------------------
+FOOTER
+-------------------------------------------------*/
+
+footer {
+    background-image: url(../../public/images/rose-des-vents.png);
+    background-repeat: no-repeat;
+    background-position: 85% 0%;
+    font-variant: small-caps;
+}
+
+/*-------------------------------------------------
+FOOTER ORANGE
+-------------------------------------------------*/
+
+.bg-footer-orange {
+    background-color: rgba(255, 131, 0, 0.94);
+}
+
+.titrefooterorange {
+    color: white;
+    font-family: 'Pathway Gothic One', sans-serif;
+    text-align: center;
+}
+
+.sousmenufooterorange a {
+    color: white;
+    font-size: 1.7em;
+    font-family: 'Pathway Gothic One', sans-serif;
+}
+
+.sousmenufooterorange a:hover {
+    color: #525252;
+    text-decoration: none;
+}
+
+/*-------------------------------------------------
+FOOTER gris
+-------------------------------------------------*/
+.bg-footer-gris {
+    background-color: rgba(128, 128, 128, 0.94);
+
+}
+
+.no-bg {
+    background: none;
+}
+
+.footer-gris h2 {
+    font-size: 1em;
+    font-weight: bold;
+    color: white;
+    text-transform: uppercase;
+    text-align: center;
+    margin-top: 15px;
+    margin-bottom: 10px;
+}
+
+.footer-gris a,
+.contact {
+    font-family: 'Open Sans', sans-serif;
+    text-decoration: none;
+    color: rgb(255, 255, 255);
+    font-size: .8em;
+}
+
+.footer-gris a:hover {
+    color: #525252;
+}
+
+.footer-gris ul {
+    list-style: none;
+}
+
+.sousmenusommaire {
+    font-size: 0.8em;
+    font-weight: 100;
+}
+
+.list-group-item {
+    padding: 0;
+}
+
+.nouscontacter h2 {
+    margin-top: 40px;
+    font-size: 1em;
+    font-weight: bold;
+    color: white;
+    text-transform: uppercase;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.mention {
+    margin-top: 100px;
+    margin-bottom: 20px;
+}
+
+.btn-mentions-cookies-plandusite {
+    font-family: 'Open Sans', sans-serif;
+    font-variant: small-caps;
+    color: white;
+    font-size: 0.7em;
+}
+
+.btn-mentions-cookies-plandusite:hover {
+    color: #525252;
+}
+
+.btn-style {
+    background-color: #ff8300;
+    color: white;
+    font-family: 'Open Sans', sans-serif;
+    font-variant: small-caps;
+    font-size: .9em;
+    font-weight: bold;
+}
+
+.btn-style:hover {
+    background-color: #d2d2d2;
+    color: white;
+    -webkit-box-shadow: 4px 7px 14px -3px rgba(0, 0, 0, 0.40);
+    -moz-box-shadow: 4px 7px 14px -3px rgba(0, 0, 0, 0.40);
+    box-shadow: 4px 4px 14px -3px rgba(0, 0, 0, 0.40);
+    transition-duration: .1s;
+}
+
+/*-------------PLAN DU SITE------------*/
+
+.modal-plan-du-site h6 {
+    font-family: 'Open Sans', sans-serif;
+    font-variant: small-caps;
+    color: white;
+    font-size: 1.2em;
+    border: solid 1.5px #ff8300;
+    background-color: #ff8300;
+}
+
+.modal-plan-du-site h6:hover {
+    color: #4e4e4e;
+}
+
+.modal-plan-du-site ul li {
+    font-family: 'Open Sans', sans-serif;
+    font-variant: small-caps;
+    color: white;
+    font-size: 0.9em;
+    background-color: #ff8300;
+    margin-top: 5px;
+}
+
+/*-------- PICTO / HOVER PICTO --------*/
+.fb {
+    content: url("../../public/images/facebook.png");
+}
+
+.fb:hover {
+    content: url("../../public/images/facebook-hover.png");
+}
+
+.inst {
+    content: url("../../public/images/instagram.png");
+}
+
+.inst:hover {
+    content: url("../../public/images/instagram-hover.png");
+}
+
+.yt {
+    content: url("../../public/images/youtube.png");
+}
+
+.yt:hover {
+    content: url("../../public/images/youtube-hover.png");
+}
+
+.pictocontact {
+    content: url("../../public/images/contact.png");
+}
+
+.pictocontact:hover {
+    content: url("../../public/images/contact-hover.png");
+}
+
+/*-------------------------------------------------
+FOOTER GRIS FONCE MENTION
+-------------------------------------------------*/
+.bg-mention-grey {
+    background-color: #4e4e4e;
+}
+
+.bg-mention-grey p {
+    font-size: 0.6em;
+    text-align: right;
+    padding-bottom: 1px;
+    color: #d2d2d2;
+}
