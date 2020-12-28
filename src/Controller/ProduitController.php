@@ -91,4 +91,14 @@ class ProduitController extends AbstractController
 
         return $this->redirectToRoute('produit_index');
     }
+
+     /**
+     * @Route("/{id}/reservation", name="produit_reservation", methods={"GET"})
+     */
+    public function reservation(Produit $produit): Response
+    {
+        return $this->render('produit/reservation.html.twig', [
+            'produit' => $produit,
+        ]);
+    }
 }
