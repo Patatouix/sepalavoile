@@ -1,0 +1,189 @@
+/*-------------- MENU LANGUE ----------------*/
+
+/*-----------------HEADER------------------*/
+header {
+    margin-top: 5px;
+    padding-right: 35px;
+}
+
+.menulang a {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 0.8em;
+    letter-spacing: -0.6px;
+    line-height: 0;
+    font-weight: 300;
+    color: black;
+    padding-left: 5px;
+    padding-right: 5px;
+    margin-left: -3px;
+}
+
+.menulang a:hover {
+    color: white;
+    background-color: #ff8300;
+}
+
+.menulangborder {
+    border-left: solid 1px black;
+    padding-left: 3px;
+}
+.active-lang {
+    color: #ff8300;
+    border-bottom: solid 2px #ff8300;
+    
+}
+
+.login {
+    margin-top: -5px;
+    margin-right: 39px;
+
+}
+.login a {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 0.8em;
+    color: #ff8300;
+    font-weight: bold;
+}
+
+.login a:hover {
+    
+    color: rgb(87, 87, 87);
+    text-decoration: none;
+    
+}
+
+/*------------------- BOUTON RETOUR VERS LE HAUT --------------------*/
+
+a#cRetour{
+    border-radius:3px;
+    padding-top: 0px;
+    padding-left: 5px;
+    padding-right: 5px;
+    font-size:30px;
+    text-align:center;
+    color: #ff8a00;
+    background:none;
+    position:fixed;
+    right:50px;
+    opacity:1;
+    z-index:99999;
+    transition:all ease-in 0.2s;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    text-decoration: none;
+    box-shadow: none;
+  }
+  /* Flèche */
+  a#cRetour:before{ content: "\25b2"; }
+  a#cRetour:hover{
+    background:rgb(255, 255, 255);
+    transition:all ease-in 0.2s;
+
+  }
+
+  a#cRetour.cInvisible{
+    bottom:-35px;
+    opacity:0;
+    transition:all ease-in 0.5s;
+  }
+  
+  a#cRetour.cVisible{
+    bottom:30px;
+    opacity:1;
+  }
+
+/*--------------- MENU ---------------*/
+/*--------------- NAV ----------------*/
+.mainNavBar {
+    font-size: 12px;
+    text-transform: uppercase;
+}
+
+.navbar {
+    color: black;
+    font-family: 'Open Sans', sans-serif;
+    letter-spacing: -0.6px;
+    font-weight: 500;
+    line-height: 10px;
+}
+.mb-05 {
+    margin-bottom: 5px;
+}
+.menutitre {
+    color: black;
+    font-family: 'Open Sans', sans-serif;
+    letter-spacing: -0.6px;
+    font-weight: 500;
+    margin-bottom: 20px;
+}
+#navbarSupportedContent ul li {
+    display: inline-block;
+    text-decoration: none;
+    background-image: linear-gradient(#ff8300, #ff8300);
+    background-size: 0 3px, auto;
+    background-repeat: no-repeat;
+    background-position: center bottom;
+    transition: all .15s ease-out;
+    margin-left: 10px;
+}
+
+#navbarSupportedContent ul li:hover {
+    background-size: 70% 3px, auto;
+    color: #ff8300;
+}
+.active-page {
+    color: #ff8300;
+    border-bottom: solid 3px #ff8300;
+    
+}
+
+.sousmenu {
+    color: rgb(92, 92, 92);
+    font-family: 'Open Sans', sans-serif;
+    font-size: 0.7em;
+    letter-spacing: -0.6px;
+}
+
+.sousmenu:hover {
+    color: white;
+    background-color: #ff8300;
+}
+
+.activesousmenu {
+    color: white;
+    background-color: #ff8300;
+}
+
+.participer {
+    color: #FF8300;
+    font-weight: 700;
+}
+
+.borderleft {
+    border-left: solid 1px black;
+}
+
+/* BOUTON MENU RESPONSIVE */
+.fa-bars {
+    color: #ff8300;
+    font-size: 30px;
+}
+
+.styleboutton {
+    border-style: none;
+}
+
+/* LOGO */
+.logo {
+    position: absolute;
+    z-index: 2;
+}
+
+.logo:hover {
+    filter: grayscale(100%);
+    -webkit-box-shadow: 4px 7px 14px -3px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 4px 7px 14px -3px rgba(0, 0, 0, 0.75);
+    box-shadow: 4px 4px 14px -3px rgba(0, 0, 0, 0.75);
+    transition-duration: .2s;
+}
+
