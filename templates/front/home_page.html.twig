@@ -1,0 +1,329 @@
+{% extends 'base.html.twig' %}
+
+{# {% block stylesheets %}
+    {{ encore_entry_link_tags('home_page') }}
+{% endblock %} #}
+
+{% block title %}SEP à la voile{% endblock %}
+
+{% block body %}
+
+    {# =============== SLIDE VIDEO =============== #}
+    <section>
+        <div class="fondslide">
+            <div class="container-video">
+                <div class="bloc-degrade">
+                    <div class="container">
+                        <div class="conteneur-titre">
+                            <h1>Le tour du monde à la voile</h1>
+                        </div>
+                    </div>
+                </div>
+                <video autoplay loop muted src="{{ asset('/images/slidevideo/video-site-internet-projet-web-disii.mov') }}" width="100%"
+                    class="video">Il est temps de mettre à jour votre navigateur !
+                </video>
+            </div>
+        </div>
+    </section>
+    {# =============== SECTION CITATION =============== #}
+    <section>
+        <div class="bg-lightgrey pb-5 mt-n5 pt-5">
+            <div class="container pr-lg-10 pl-lg-10">
+                <div class="container pb-3">
+                    <img src="{{ asset('/images/guillement-ouvert.png') }}" alt="">
+                </div>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12 col-md-12 col-lg-4 text-center p-0"><img class="image-fluide"
+                                src="{{ asset('/images/alban-intro.jpg') }}" alt="Photo Alban"></div>
+                        <div class="col-12 col-md-12 col-lg-8 pl-0 mt-4 text-justify bloc-txt">
+                            <p>Sep à la voile est le nom du projet qui m’anime depuis un an et qui devrait se
+                                concrétiser d’ici 2021.<br>
+                                Je suis atteint d’une sclérose en plaques, diagnostiquée en 2016.<br>
+                                Ce constat a été déclencheur, pour ma part d’une sérieuse envie de partir. Ce n’est pas
+                                une fuite en avant mais bel et bien un moyen pour se mobiliser et partager.<br>
+                                Cette volonté se traduira par un tour du monde à la voile.<br>
+                                L’objectif est de démontrer que la maladie n’est un frein en rien !
+                            </p>
+                            <br>
+                            <h6 class="text-right">Alban JAILLAIS</h6>
+                        </div>
+                    </div>
+                </div>
+                <div class="container text-right pt-1">
+                    <img src="{{ asset('/images/guillement-ferme.png') }}" alt="">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    {# =============== SECTION VLOG =============== #}
+    <section>
+        <div class="bg-white pb-5">
+            <div class="container pt-1">
+                <div class="titresection">
+                    <h2>Nos dernières vidéos</h2>
+                </div>
+                <div class="row d-flex justify-content-around">
+                    <!-- DÉBUT MODAL VIDEO -->
+                        {# {% for video in video|slice(0, 3) %}
+                            <div class="col-lg-4 col-md-12 mb-4">
+                                <a>
+                                    <img class="img-fluid z-depth-1 shadow-vlog" style="cursor:pointer;"
+                                    src="" alt="" data-toggle="modal" data-target="#modalShowVideo">
+                                </a>
+                                <div class="modal fade" id="modalShowVideo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+                                    aria-hidden="true">
+                                    <div class="modal-dialog modal-lg" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-body mb-0 p-0">
+                                                <div class="embed-responsive embed-responsive-16by9 z-depth-1-half">
+                                                    <iframe class="embed-responsive-item" src="" allowfullscreen></iframe>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer footer-vlog justify-content-between">
+                                                <span class="mr-4 parlez-en">
+                                                    <a type="button" class="btn-floating btn-sm btn-fb mr-4" href="" target="_blank">
+                                                        <i class="fab fa-facebook-f"></i>
+                                                    </a>
+                                                    Parlez-en !
+                                                </span>
+                                                <button type="button" class="btn btn-vlog btn-rounded btn-md ml-4" data-dismiss="modal">
+                                                    <i class="fas fa-times"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %} #}
+                    <!-- FIN MODAL VIDEO -->
+                </div>
+            </div>
+        </div>
+    </section>
+        {# =============== SECTION BLOG =============== #}
+        <section id="section-blog">
+            <div class="bg-lightgrey pb-5">
+                <div class="container pt-1">
+                    <div class="titresection">
+                        <h2>Nos articles de blog</h2>
+                    </div>
+
+                    {# <div class="card-group">
+                    {% for article in article|slice(0, 3)  %}
+                        <div class="card mx-4">
+                            <img src="{{ article.filename ? asset('/images/photoarticle/' ~ article.filename) : asset('/images/logo.svg') }}" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ article.title|u.truncate(65, '...') }}</h5>
+                                <p class="card-text">{{ article.content|u.truncate(190, '...')|raw }}</p>
+                            </div>
+                            <div class="text-right mb-3 mr-3">
+                                <a href="{{ path('article_show', {'id': article.id}) }}" class="btn btn-style">En lire plus</a>
+                            </div>
+                            <div class="card-footer">
+                                <small class="text-muted">{{ article.createdAt|date('d/m/Y') }}</small>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div> #}                  
+
+                    <nav>
+                        <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                            <a class="nav-item nav-link active" id="nav-lastArticle-tab" data-toggle="tab" href="#nav-lastArticle" role="tab" aria-controls="nav-lastArticle" aria-selected="true">3 derniers articles</a>
+                            <a class="nav-item nav-link" id="nav-bestViewArticle-tab" data-toggle="tab" href="#nav-bestViewArticle" role="tab" aria-controls="nav-bestViewArticle" aria-selected="false">3 articles les plus vus</a>
+                            {# <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false">Contact</a> #}
+                        </div>
+                    </nav>
+                    <div class="tab-content mt-3" id="nav-tabContent">
+                        <div class="tab-pane fade show active" id="nav-lastArticle" role="tabpanel" aria-labelledby="nav-lastArticle-tab">
+                            <div class="card-group">
+                                {# {% for article in article|slice(0, 3)  %}
+                                    <div class="card card-article d-flex justify-content-between mx-3 border">
+                                        <img src="{{ article.filename ? asset('/images/photoarticle/' ~ article.filename) : asset('/images/logo.svg') }}" class="card-img-top" alt="...">
+                                        <hr>
+                                        <div class="card-body py-0">
+                                            <h5 class="card-title">{{ article.title|u.truncate(65, '...') }}</h5>
+                                            <hr>
+                                            <p class="card-text">{{ article.content|u.truncate(190, '...')|raw }}</p>
+                                        </div>
+                                        <div class="text-right mb-3 mr-3">
+                                            <a href="{{ path('article_show', {'id': article.id}) }}" class="btn btn-style">En lire plus</a>
+                                        </div>
+                                        <div class="card-footer">
+                                            <div class="row">
+                                                <div class="col-6 text-left">
+                                                    <small class="text-muted font-italic">Créé le : {{ article.createdAt|date('d/m/Y') }}</small>
+                                                </div>
+                                                <div class="col-6 text-right">
+                                                    <small class="text-muted font-italic">Vu : {{ article.nombrevu }} fois</small>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% endfor %} #}
+                            </div>      
+                        </div>
+                        <div class="tab-pane fade" id="nav-bestViewArticle" role="tabpanel" aria-labelledby="nav-bestViewArticle-tab">
+                            <div class="card-group">
+                                {# {% for articleBestView in articleBestView|slice(0, 3)  %}
+                                    <div class="card card-article d-flex justify-content-between mx-3 border">
+                                        <img src="{{ articleBestView.filename ? asset('/images/photoarticle/' ~ articleBestView.filename) : asset('/images/logo.svg') }}" class="card-img-top" alt="...">
+                                        <hr>
+                                        <div class="card-body py-0">
+                                            <h5 class="card-title">{{ articleBestView.title|u.truncate(65, '...') }}</h5>
+                                            <hr>
+                                            <p class="card-text">{{ articleBestView.content|u.truncate(190, '...')|raw }}</p>
+                                        </div>
+                                        <div class="text-right mb-3 mr-3">
+                                            <a href="{{ path('article_show', {'id': articleBestView.id}) }}" class="btn btn-style">En lire plus</a>
+                                        </div>
+                                        <div class="card-footer">
+                                            <div class="row">
+                                                <div class="col-6 text-left">
+                                                    <small class="text-muted font-italic">Créé le : {{ articleBestView.createdAt|date('d/m/Y') }}</small>
+                                                </div>
+                                                <div class="col-6 text-right">
+                                                    <small class="text-muted font-italic">Vu {{ articleBestView.nombrevu }} fois</small>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% endfor %} #}
+                            </div> 
+
+
+                            
+    
+    
+    
+                        </div>
+                        {# <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">...</div> #}
+                    </div>
+    
+    
+                    
+                </div>
+            </div>
+        </section>
+    
+    {# =============== SECTION GALLERY =============== #}
+    <section>
+        <div class="bg-white pb-5">
+            <div class="container pt-1">
+                <div class="titresection">
+                    <h2>Galerie photo</h2>
+                </div>
+                <!-- CAROUSEL -->
+                <!--Carousel Wrapper-->
+                <div id="multi-item-example" class="carousel slide carousel-multi-item carousel-multi-item-2"
+                    data-ride="carousel">
+
+                    
+
+                    <!--Slides-->
+                    <div class="carousel-inner" role="listbox">
+
+                        <!--First slide-->
+                        <div class="carousel-item active">
+                            <div class="row">
+                                {# {% for galeriephoto in galeriephotos|slice(0, 4) %}
+                                    <div class="col-md-3">
+                                        <div class="card" style="max-height: 168.5px;">
+                                            <img class="img-fluid" src="{{ galeriephoto.filename ? asset('/images/galleryPhoto/' ~ galeriephoto.filename) : asset('/images/logo.svg') }}" alt="{{ galeriephoto.descriptionALT}}">
+                                        </div>
+                                    </div>
+                                {% endfor %}                             #}
+                            </div>
+                        </div>
+                        <!--/.First slide-->
+
+                        <!--Second slide-->
+                        <div class="carousel-item">
+                            <div class="row">
+                                {# {% for galeriephoto in galeriephotos|slice(4, 4) %}
+                                    <div class="col-md-3">
+                                        <div class="card" style="max-height: 168.5px;">
+                                            <img class="img-fluid" src="{{ galeriephoto.filename ? asset('/images/galleryPhoto/' ~ galeriephoto.filename) : asset('/images/logo.svg') }}" alt="{{ galeriephoto.descriptionALT}}">
+                                        </div>
+                                    </div>
+                                {% endfor %}                             #}
+                            </div>
+                        </div>
+                        <!--/.Second slide-->
+
+                        <!--Third slide-->
+                        <div class="carousel-item">
+                            <div class="row">
+                                {# {% for galeriephoto in galeriephotos|slice(8, 4) %}
+                                    <div class="col-md-3">
+                                        <div class="card" style="max-height: 168.5px;">
+                                            <img class="img-fluid" src="{{ galeriephoto.filename ? asset('/images/galleryPhoto/' ~ galeriephoto.filename) : asset('/images/logo.svg') }}" alt="{{ galeriephoto.descriptionALT}}">
+                                        </div>
+                                    </div>
+                                {% endfor %}                             #}
+                            </div>
+                        </div>
+                        <!--/.Third slide-->
+
+                    </div>
+                    <!--/.Slides-->
+
+                    <!--Controls-->
+                    <div class="controls-top text-center mt-3">
+                        <a class="black-text" href="#multi-item-example" data-slide="prev"><i
+                                class="fad fa-arrow-left fa-2x pr-5"></i></a>
+                        <a class="black-text" href="#multi-item-example" data-slide="next">
+                            <i class="fad fa-arrow-right fa-2x pl-3"></i>
+                        </a>
+                    </div>
+                    <!--/.Controls-->
+
+                </div>
+                <!--/.Carousel Wrapper-->
+
+            </div>
+        </div>
+    </section>
+    {# =============== SECTION AIS =============== #}
+    <section>
+        <div class="bg-lightgrey pb-5">
+            <div class="container pt-1">
+                <div class="titresection">
+                    <h2>nous trouver</h2>
+                </div>
+                <!-- PHP AIS (fr/en) -->
+                <div class="col">
+                    <script type="text/javascript" class="carte">
+                        var width = "100%";
+                        var height = "300px";
+                        var mmsi = "227538890";
+                        var show_track = true;
+                    </script>
+                    <script type="text/javascript" src="https://www.vesselfinder.com/aismap.js"></script>
+                </div>
+            </div>
+        </div>
+    </section>
+    {# =============== SECTION PARTENAIRE =============== #}
+    <section>
+        <div class="bg-white pb-5">
+            <div class="container pt-1">
+                <div class="titresection">
+                    <h2>ils nous soutiennent</h2>
+                </div>
+                <div class="row d-flex justify-content-around">
+                    {# BOUCLE SUR LES PARTENAIRES #}
+                    {# {% for partner in partners %}
+                    <div class="col-12 col-sm-6 col-lg-4 mb-5 text-center partenaires partenaires-hover">
+                        <a href="{{ partner.website }}" target="_blank">
+                            <img src="{{ asset('/images/partners/' ~ partner.fileName ) }}" alt="">
+                        </a>
+                    </div>
+                    {% endfor %} #}
+                    {# FIN DE LA BOUCLE SUR LES PARTENAIRES #}
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
