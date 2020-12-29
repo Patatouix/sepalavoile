@@ -12,7 +12,7 @@
                             href="https://www.helloasso.com/associations/sep-a-la-voile/collectes/sep-a-la-voile"
                             target="_blank">Faire un don</a></div>
                     <div class="col-12 col-md-4 col-lg-4 text-center sousmenufooterorange"><a
-                            href="https://www.photosautourdumonde.com" target="_blank">Acheter des photos</a></div>
+                            href="https://www.helloasso.com/associations/sep-a-la-voile/collectes/sep-a-la-voile" target="_blank">Devenir membre de l'association</a></div>
                     {# <div class="col-12 col-md-3 col-lg-3 text-center sousmenufooterorange"><a
                             href="RESERVER UN BAPTEME">Réserver un baptême</a></div> #}
                     <div class="col-12 col-md-4 col-lg-4 text-center sousmenufooterorange"><a
@@ -28,20 +28,20 @@
                         <h2>Sommaire</h2>
                         <div class="sommaire text-center footerib">
                             <ul class="list-group">
-                                <li><a href="ACCUEIL">Accueil</a></li>
+                                <li><a href="{{ path('home_page') }}">Accueil</a></li>
                                 <li><a href="BLOG">Blog</a></li>
-                                <li><a href="L'ASSOCIATION">L'association</a></li>
+                                <li><a href="{{ path('association') }}">L'association</a></li>
                                 <li><a href="#">Notre aventure</a>
                                     <ul class="sousmenusommaire list-group">
-                                        <li><a href="MON HISTOIRE">Mon histoire</a></li>
-                                        <li><a href="LE PROJET">Le projet</a></li>
-                                        <li><a href="LE PARCOURS">Le parcours</a></li>
-                                        <li><a href="L'EQUIPE">L'équipe</a></li>
-                                        <li><a href="LE BATEAU">Le bateau</a></li>
+                                        <li><a href="{{ path('monhistoire') }}">Mon histoire</a></li>
+                                        <li><a href="{{ path('leprojet') }}">Le projet</a></li>
+                                        <li><a href="{{ path('leparcours') }}">Le parcours</a></li>
+                                        <li><a href="{{ path('lequipe') }}">L'équipe</a></li>
+                                        <li><a href="{{ path('lebateau') }}">Le bateau</a></li>
                                     </ul>
                                 </li>
-                                <li><a href="NOS PARTENAIRES">Nos partenaires</a></li>
-                                <li><a href="ON PARLE DE NOUS">On parle de nous</a></li>
+                                <li><a href="{{ path('nospartenaires') }}">Nos partenaires</a></li>
+                                <li><a href="{{ path('onparledenous') }}">On parle de nous</a></li>
                             </ul>
                         </div>
                     </div>
