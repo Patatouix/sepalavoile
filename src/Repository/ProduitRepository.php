@@ -37,6 +37,9 @@ class ProduitRepository extends ServiceEntityRepository
                 ->setParameter('produitTypes', $search->produitTypes);
         }
 
+        $query = $query
+            ->groupBy('p.nom');
+
         return $query->getQuery()->getResult();
     }
 
