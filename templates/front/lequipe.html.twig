@@ -1,0 +1,289 @@
+    {% extends "base.html.twig" %}
+    {% block stylesheets %}
+        {{ parent() }}
+    {% endblock %}
+    
+    {% block body %}
+
+    <!-- CAROUSEL -->
+    {% include "_include/carousel.html.twig" %}
+
+    {# SECTION TEXTE #}
+    <section>
+        <div class="container">
+            <div class="titresection">
+                <h2>l'équipe</h2>
+            </div>
+            <div class="row">
+                <div class="col-12 col-sm-12 col-md-6 col-lg-4 mb-5">
+                    <div class="card mx-auto" style="width: 18rem;">
+                        <img src="{{ asset('/images/lequipe/alban.jpg') }}" class="card-img-top" alt="photo d'alban">
+                        <div class="card-body">
+                            <h5 class="card-title">Alban</h5>
+                            <p class="card-text">Président et Skipper</p>
+                            <div class="modal-footer justify-content-between pb-0 px-0">
+                                <button type="button" class="btn ml-0 mr-4 px-0 pt-0 pb-1 suivez-moi"
+                                    data-toggle="modal" data-target="#modalalban">
+                                    Pour en savoir plus !
+                                </button>
+                                <a type="button" class="btn-floating btn-fb"
+                                    href="https://www.facebook.com/alban.jaillais" target="_blank"><i
+                                        class="fab fa-facebook-f"></i></a>
+                                <div class="modal fade" id="modalalban" tabindex="-1" role="dialog"
+                                    aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalCenterTitle">Alban Jaillais</h5>
+                                                <button type="button" class="close" data-dismiss="modal"
+                                                    aria-label="Close"><span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                Voici quelques lignes à mon sujet.
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button " class="btn btn-style"
+                                                    data-dismiss="modal">Fermer</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-sm-12 col-md-6 col-lg-4 mb-5">
+                    <div class="card mx-auto" style="width: 18rem;">
+                        <img src="{{ asset('/images/lequipe/margaux.jpg') }}" class="card-img-top" alt="photo de Margaux">
+                        <div class="card-body">
+                            <h5 class="card-title">Margaux</h5>
+                            <p class="card-text">Trésorière et co-skipper</p>
+                            <div class="modal-footer justify-content-between pb-0 px-0">
+                                <button type="button" class="btn ml-0 mr-4 px-0 pt-0 pb-1 suivez-moi"
+                                    data-toggle="modal" data-target="#modalmargaux">
+                                    Pour en savoir plus !
+                                </button>
+                                <a type="button" class="btn-floating btn-fb"
+                                    href="https://www.facebook.com/margaux.seifert" target="_blank"><i
+                                        class="fab fa-facebook-f"></i></a>
+                                <div class="modal fade" id="modalmargaux" tabindex="-1" role="dialog"
+                                    aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalCenterTitle">Margaux Seifert
+                                                </h5>
+                                                <button type="button" class="close" data-dismiss="modal"
+                                                    aria-label="Close"><span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                Voici quelques lignes à mon sujet.
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button " class="btn btn-style"
+                                                    data-dismiss="modal">Fermer</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-sm-12 col-md-6 col-lg-4 mb-5">
+                    <div class="card mx-auto" style="width: 18rem;">
+                        <img src="{{ asset('/images/lequipe/jean-philippe.jpg') }}" class="card-img-top" alt="photo de Jean-Philippe">
+                        <div class="card-body">
+                            <h5 class="card-title">Jean-Philippe</h5>
+                            <p class="card-text">Secrétaire et propriétaire</p>
+                            <div class="modal-footer justify-content-between pb-0 px-0">
+                                <button type="button" class="btn ml-0 mr-4 px-0 pt-0 pb-1 suivez-moi"
+                                    data-toggle="modal" data-target="#modaljeanphilippe">
+                                    Pour en savoir plus !
+                                </button>
+                                <a type="button" class="btn-floating btn-fb"
+                                    href="https://www.facebook.com/jeanphilippe.jaillais" target="_blank"><i
+                                        class="fab fa-facebook-f"></i></a>
+                                <div class="modal fade" id="modaljeanphilippe" tabindex="-1" role="dialog"
+                                    aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalCenterTitle">Jean-Philippe</h5>
+                                                <button type="button" class="close" data-dismiss="modal"
+                                                    aria-label="Close"><span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                Voici quelques lignes à mon sujet.
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button " class="btn btn-style"
+                                                    data-dismiss="modal">Fermer</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-sm-12 col-md-6 col-lg-4 mb-5">
+                    <div class="card mx-auto" style="width: 18rem;">
+                        <img src="{{ asset('/images/lequipe/daniel.jpg') }}" class="card-img-top" alt="photo de Daniel">
+                        <div class="card-body">
+                            <h5 class="card-title">Daniel</h5>
+                            <p class="card-text">Vice-Président et Team manager</p>
+                            <div class="modal-footer justify-content-between pb-0 px-0">
+                                <button type="button" class="btn ml-0 mr-4 px-0 pt-0 pb-1 suivez-moi"
+                                    data-toggle="modal" data-target="#modaldaniel">
+                                    Pour en savoir plus !
+                                </button>
+                                <a type="button" class="btn-floating btn-fb"
+                                    href="https://www.facebook.com/daniel.seifert.545" target="_blank"><i
+                                        class="fab fa-facebook-f"></i></a>
+                                <div class="modal fade" id="modaldaniel" tabindex="-1" role="dialog"
+                                    aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalCenterTitle">Daniel Seifert</h5>
+                                                <button type="button" class="close" data-dismiss="modal"
+                                                    aria-label="Close"><span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                Voici quelques lignes à mon sujet.
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button " class="btn btn-style"
+                                                    data-dismiss="modal">Fermer</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-sm-12 col-md-6 col-lg-4 mb-5">
+                    <div class="card mx-auto" style="width: 18rem;">
+                        <img src="{{ asset('/images/lequipe/chantal.jpg') }}" class="card-img-top" alt="photo de Chantal">
+                        <div class="card-body">
+                            <h5 class="card-title">Chantal</h5>
+                            <p class="card-text">Co-propriétaire</p>
+                            <div class="modal-footer justify-content-between pb-0 px-0">
+                                <button type="button" class="btn ml-0 mr-4 px-0 pt-0 pb-1 suivez-moi"
+                                    data-toggle="modal" data-target="#modalchantal">
+                                    Pour en savoir plus !
+                                </button>
+                                <a type="button" class="btn-floating btn-fb"
+                                    href="https://www.facebook.com/chantal.jaillais" target="_blank"><i
+                                        class="fab fa-facebook-f"></i></a>
+                                <div class="modal fade" id="modalchantal" tabindex="-1" role="dialog"
+                                    aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalCenterTitle">Chantal</h5>
+                                                <button type="button" class="close" data-dismiss="modal"
+                                                    aria-label="Close"><span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                Voici quelques lignes à mon sujet.
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button " class="btn btn-style"
+                                                    data-dismiss="modal">Fermer</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-sm-12 col-md-6 col-lg-4 mb-5">
+                    <div class="card mx-auto" style="width: 18rem;">
+                        <img src="{{ asset('/images/lequipe/pascale.jpg') }}" class="card-img-top" alt="photo de Pascale">
+                        <div class="card-body">
+                            <h5 class="card-title">Pascale</h5>
+                            <p class="card-text">Membre de l'association</p>
+                            <div class="modal-footer justify-content-between pb-0 px-0">
+                                <button type="button" class="btn ml-0 mr-4 px-0 pt-0 pb-1 suivez-moi"
+                                    data-toggle="modal" data-target="#modalpascale">
+                                    Pour en savoir plus !
+                                </button>
+                                <a type="button" class="btn-floating btn-fb"
+                                    href="https://www.facebook.com/pascale.seifert" target="_blank"><i
+                                        class="fab fa-facebook-f"></i></a>
+                                <div class="modal fade" id="modalpascale" tabindex="-1" role="dialog"
+                                    aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalCenterTitle">Pascale</h5>
+                                                <button type="button" class="close" data-dismiss="modal"
+                                                    aria-label="Close"><span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                Voici quelques lignes à mon sujet.
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button " class="btn btn-style"
+                                                    data-dismiss="modal">Fermer</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-sm-12 col-md-12 col-lg-12 mb-5">
+                    <div class="card mx-auto" style="width: 18rem;">
+                        <img src="{{ asset('/images/lequipe/mathilde.jpg') }}" class="card-img-top" alt="photo de Mathilde">
+                        <div class="card-body">
+                            <h5 class="card-title">Mathilde</h5>
+                            <p class="card-text">Relation média</p>
+                            <div class="modal-footer justify-content-between pb-0 px-0">
+                                <button type="button" class="btn ml-0 mr-4 px-0 pt-0 pb-1 suivez-moi"
+                                    data-toggle="modal" data-target="#modalmathilde">
+                                    Pour en savoir plus !
+                                </button>
+                                <a type="button" class="btn-floating btn-fb"
+                                    href="https://www.facebook.com/mathilde.seifert" target="_blank"><i
+                                        class="fab fa-facebook-f"></i></a>
+                                <div class="modal fade" id="modalmathilde" tabindex="-1" role="dialog"
+                                    aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalCenterTitle">Mathilde</h5>
+                                                <button type="button" class="close" data-dismiss="modal"
+                                                    aria-label="Close"><span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                Voici quelques lignes à mon sujet.
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button " class="btn btn-style"
+                                                    data-dismiss="modal">Fermer</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    {% endblock %}
