@@ -1,0 +1,155 @@
+    {% extends "base.html.twig" %}
+    {% block stylesheets %}
+        {{ parent() }}
+    {% endblock %}
+    
+    {% block body %}
+
+        <!-- CAROUSEL -->
+        {% include "_include/carousel.html.twig" %}
+
+    {# SECTION TEXTE #}
+    <section>
+        <div class="container">
+            <h2 class="text-center titresection mb-5">Le bateau</h2>
+            <div class="col le-bateau">
+                <p>L'achat du bateau est le début du rêve, le début du projet ! <br><br>
+
+                    Mes parents par l'achat de ce bateau me permettent moi et les personnes qui me soutiennent au
+                    quotidien de rendre ce rêve, ce projet, un peu plus accessible. Je tenais à les remercier ici du
+                    fond du cœur pour l’aide qu'ils m'apportent !!! <br><br>
+
+                    Dans notre cas, le choix du bateau s'est fait en rapport avec notre programme de navigation et sa
+                    durée. <br><br>
+
+                    Le cahier des charges que nous avions fixé prenait également en compte l’accessibilité et l’habilité
+                    du bateau pour des personnes à mobilité réduite. Il devait en outre être manœuvrable en équipage
+                    très réduit voire en solitaire et répondre aux besoins d’autonomie en eau et en énergie. <br><br>
+
+                    Le choix s'est porté sur un quillard gréé en sloop (un seul mât) avec grand-voile, génois et
+                    trinquette sur enrouleurs. <br><br>
+
+                    ​Après 20 bateaux visités, en Atlantique, Méditerranée, Espagne et Portugal, le choix s'est arrêté
+                    sur une « perle rare » dans le port de la Pointe Rouge à Marseille. <br><br>
+
+                    Un OCEANIS 473 bien équipé, construit par BENETEAU et qui porte le joli nom de : <strong> CAP
+                        BONHEUR ! </strong> <br><br>
+                </p>
+            </div>
+        </div>
+    </section>
+    {# SECTION PHOTO NOM BATEAU #}
+    <section>
+        <div class="bg-lightgrey">
+            <div class="container text-center py-5 mb-5">
+                <img style="max-width:100%;height:auto;" src="{{ asset('/images/lebateau/nom-bateau2.jpg') }}" alt="Photo du nom du bateau">
+            </div>
+        </div>
+    </section>
+    {# SECTION PHOTO CAROUSSEL #}
+    <section>
+        <div class="bg-white">
+            <div class="container mb-5">
+
+                <div class="row">
+                    <div class="col-12 col-md-6 col-lg-4 p-0 m-0 lightbox-bateau"><a
+                            href="{{ asset('/images/lebateau/galerie-bateau/gal-1.jpg') }}" data-lightbox="lightbox-bateau"><img
+                                class="img-fluid" src="{{ asset('/images/lebateau/galerie-bateau/gal-1.jpg') }}" alt="image2"></a></div>
+                    <div class="col-12 col-md-6 col-lg-4 p-0 m-0 lightbox-bateau"><a
+                            href="{{ asset('/images/lebateau/galerie-bateau/gal-2.jpg') }}" data-lightbox="lightbox-bateau"><img
+                                class="img-fluid" src="{{ asset('/images/lebateau/galerie-bateau/gal-2.jpg') }}" alt="image2"></a></div>
+                    <div class="col-12 col-md-6 col-lg-4 p-0 m-0 lightbox-bateau"><a
+                            href="{{ asset('/images/lebateau/galerie-bateau/gal-3.jpg') }}" data-lightbox="lightbox-bateau"><img
+                                class="img-fluid" src="{{ asset('/images/lebateau/galerie-bateau/gal-3.jpg') }}" alt="image2"></a></div>
+                    <div class="col-12 col-md-6 col-lg-4 p-0 m-0 lightbox-bateau"><a
+                            href="{{ asset('/images/lebateau/galerie-bateau/gal-4.jpg') }}" data-lightbox="lightbox-bateau"><img
+                                class="img-fluid" src="{{ asset('/images/lebateau/galerie-bateau/gal-4.jpg') }}" alt="image2"></a></div>
+                    <div class="col-12 col-md-6 col-lg-4 p-0 m-0 lightbox-bateau"><a
+                            href="{{ asset('/images/lebateau/galerie-bateau/gal-5.jpg') }}" data-lightbox="lightbox-bateau"><img
+                                class="img-fluid" src="{{ asset('/images/lebateau/galerie-bateau/gal-5.jpg') }}" alt="image2"></a></div>
+                    <div class="col-12 col-md-6 col-lg-4 p-0 m-0 lightbox-bateau"><a
+                            href="{{ asset('/images/lebateau/galerie-bateau/gal-6.jpg') }}" data-lightbox="lightbox-bateau"><img
+                                class="img-fluid" src="{{ asset('/images/lebateau/galerie-bateau/gal-6.jpg') }}" alt="image2"></a></div>
+                    <div class="col-12 col-md-6 col-lg-4 p-0 m-0 lightbox-bateau"><a
+                            href="{{ asset('/images/lebateau/galerie-bateau/gal-7.jpg') }}" data-lightbox="lightbox-bateau"><img
+                                class="img-fluid" src="{{ asset('/images/lebateau/galerie-bateau/gal-7.jpg') }}" alt="image2"></a></div>
+                    <div class="col-12 col-md-6 col-lg-4 p-0 m-0 lightbox-bateau"><a
+                            href="{{ asset('/images/lebateau/galerie-bateau/gal-8.jpg') }}" data-lightbox="lightbox-bateau"><img
+                                class="img-fluid" src="{{ asset('/images/lebateau/galerie-bateau/gal-8.jpg') }}" alt="image2"></a></div>
+                    <div class="col-12 col-md-6 col-lg-4 p-0 m-0 lightbox-bateau"><a
+                            href="{{ asset('/images/lebateau/galerie-bateau/gal-9.jpg') }}" data-lightbox="lightbox-bateau"><img
+                                class="img-fluid" src="{{ asset('/images/lebateau/galerie-bateau/gal-9.jpg') }}" alt="image2"></a></div>
+                    <div class="col-12 col-md-6 col-lg-4 p-0 m-0 lightbox-bateau"><a
+                            href="{{ asset('/images/lebateau/galerie-bateau/gal-10.jpg') }}" data-lightbox="lightbox-bateau"><img
+                                class="img-fluid" src="{{ asset('/images/lebateau/galerie-bateau/gal-10.jpg') }}" alt="image2"></a></div>
+                    <div class="col-12 col-md-6 col-lg-4 p-0 m-0 lightbox-bateau"><a
+                            href="{{ asset('/images/lebateau/galerie-bateau/gal-11.jpg') }}" data-lightbox="lightbox-bateau"><img
+                                class="img-fluid" src="{{ asset('/images/lebateau/galerie-bateau/gal-11.jpg') }}" alt="image2"></a></div>
+                    <div class="col-12 col-md-6 col-lg-4 p-0 m-0 lightbox-bateau"><a
+                            href="{{ asset('/images/lebateau/galerie-bateau/gal-12.jpg') }}" data-lightbox="lightbox-bateau"><img
+                                class="img-fluid" src="{{ asset('/images/lebateau/galerie-bateau/gal-12.jpg') }}" alt="image2"></a></div>
+                </div>
+            </div>
+        </div>
+    </section>
+    {# SECTION CARACTERISTIQUE TECHNIQUE #}
+    <section>
+        <div class="bg-lightgrey pt-4 pb-4">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12 col-lg-8 my-auto">
+                        <img class="w-100" src="{{ asset('/images/lebateau/silhouette-473.png') }}" alt="Silhouette Océanis 473">
+                    </div>
+                    <div class="col-12 col-lg-4 my-auto">
+                        <ul class="list-unstyled">
+                            <li>Chantier : Bénéteau</li>
+                            <li>Architecte : Finot-Conq architectes navals</li>
+                            <li>Année : 2001</li>
+                            <li>Longueur de coque : 14.16m</li>
+                            <li>Largeur de coque : 4.31m</li>
+                            <li>Longueur de flottaison : 13.35m</li>
+                            <li>Tirant d'eau max : 2.1m</li>
+                            <li>Lest : 3300kg</li>
+                            <li>Déplacement lège : 11500 kg</li>
+                            <li>Puissance : 75 ch</li>
+                            <li>Capacité carburant : 400 l</li>
+                            <li>Nombre cabines : 3</li>
+                            <li>Nombre couchettes maximum : 6</li>
+                            <li>Toilettes : 2</li>
+                            <li>Salles d'eau : 2</li>
+                            <li>Hauteur sous barrot : 1.96m</li>
+                            <li>Capacité eau : 790 l</li>
+                            <li>Catégorie de conception CE: C</li>
+                            <li>Catégorie de navigation : 1</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>  
+        <div class="bg-white pt-4 pb-4">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12 col-lg-4 my-auto">
+                        <ul class="list-unstyled">
+                            <li> Voilure au portant : 193m²</li>
+                            <li>Voilure au près : 108m²</li>
+                            <li>Grand-voile : 43m²</li>
+                            <li>Génois : 65m²</li>
+                            <li>Spi asymétrique : 150m²</li>
+                            <li>Tirant d'air : 18.6m</li>
+                            <li>Type de gréement : Sloop en tête</li>
+                            <li>Voilure près poids : 9.39</li>
+                            <li>Voilure près largeur : 25.06</li>
+                            <li>Voilure portant poids : 16.78</li>
+                            <li>Voilure portant largeur : 44.78</li>
+                        </ul>
+                    </div>
+                    <div class="col-12 col-lg-8 my-auto">
+                        <img class=" w-100" src="{{ asset('/images/lebateau/eclate-473.jpg') }}" alt="Eclaté Océanis 473">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    {% endblock %}
