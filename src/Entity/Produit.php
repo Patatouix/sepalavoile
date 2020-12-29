@@ -77,6 +77,12 @@ class Produit
      */
     private $updatedAt;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=ProduitType::class, inversedBy="produits")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $produitType;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -222,6 +228,18 @@ class Produit
     public function setUpdatedAt(?\DateTimeInterface $updatedAt): self
     {
         $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    public function getProduitType(): ?ProduitType
+    {
+        return $this->produitType;
+    }
+
+    public function setProduitType(?ProduitType $produitType): self
+    {
+        $this->produitType = $produitType;
 
         return $this;
     }
