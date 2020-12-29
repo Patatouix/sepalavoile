@@ -1,0 +1,32 @@
+.btn-style {
+    background-color: #ff8300;
+    color: white;
+    font-family: 'Open Sans', sans-serif;
+    font-variant: small-caps;
+    font-size: .9em;
+    font-weight: bold;
+}
+
+.btn-style:hover {
+    background-color: #d2d2d2;
+    color: white;
+    -webkit-box-shadow: 4px 7px 14px -3px rgba(0, 0, 0, 0.40);
+    -moz-box-shadow: 4px 7px 14px -3px rgba(0, 0, 0, 0.40);
+    box-shadow: 4px 4px 14px -3px rgba(0, 0, 0, 0.40);
+    transition-duration: .1s;
+}
+
+/*---------------------------------------------------------------
+------------------------- PAGE LE PROJET-------------------------
+-----------------------------------------------------------------
+---------------------------------------------------------------*/
+.le-projet {
+    font-size: 1em;
+    font-family: "Open Sans";
+    font-variant: small-caps;
+    text-align: justify;
+    -moz-transform: scale(0.8, 1);
+    -webkit-transform: scale(0.8, 1);
+    -ms-transform: scale(0.8, 1);
+}
+

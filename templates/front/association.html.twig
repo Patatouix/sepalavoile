@@ -1,0 +1,55 @@
+    {% extends "base.html.twig" %}
+    {% block stylesheets %}
+        {{ parent() }}
+    {% endblock %}
+    
+    {% block body %}
+
+        <!-- CAROUSEL -->
+        {% include "_include/carousel.html.twig" %}
+        
+        <!-- SECTION TEXTE -->
+        <section>
+            <div class="container">
+                <h2 class="text-center mb-5 titresection">L'association</h2>
+                <div class="row">
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-5 text-center my-auto">
+                        <img class="w-50 mb-5" src="{{ asset('/images/logo.svg') }}" alt="Logo de l'association">
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-7 l-association mb-5">
+                        <p>
+                            Il fallait un cadre pour cette formidable aventure, l'association a été crée pour officialiser
+                            tout ça.<br><br>
+                            Le 10 avril 2017, SEP à la voile a vu le jour à la sous-préfecture de Bressuire sous le nom
+                            complet de : Sérieuse
+                            Envie de Partir à la voile.<br><br>
+                            Le premier constat de ce diagnostic médical a traduit pour moi une Sérieuse Envie de Partir,
+                            tellement j'éprouvais
+                            des difficultés à mesurer l’injustice de cette annonce. Cela ne correspond pas à une fuite en
+                            avant ou "en arrière".
+                            Etre malade sans trop connaître l'évolution de la maladie est une situation inconfortable
+                            !<br><br>
+                            Très rapidement je me suis rendu compte que cette aventure individuelle de vie et non de survie
+                            devait se
+                            positionner dans le cadre d'un projet d'échange(s) à plus large échelle. J'ai compris qu'il
+                            fallait Se mobiliser Et
+                            Partager en donnant également une dimension pédagogique à cette démarche.<br><br>
+                            Une fois l'association créée, il a fallu penser à une identité visuelle à l'image du projet : un
+                            logo !<br><br>
+
+                            Après divers essais , le voici !<br><br>
+                            Deux éléments qui constituent dans leur finalité un logo, inspiré de la force et de
+                            la dynamique traduite par un bateau toutes voiles dehors qui voyagera avec un objectif de tour
+                            du monde ponctué de
+                            belles rencontres humaines. <br><br>
+
+                            Aujourd'hui, ce globe surmonté d'une voile nous accompagne au quotidien et sera, nous en sommes
+                            persuadés,
+                            symbole de rêve et d’espoir pour de nombreuses personnes, malades ou pas.
+                        </p>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+    {% endblock %}

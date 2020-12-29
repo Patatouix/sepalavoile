@@ -1,0 +1,63 @@
+{% extends "base.html.twig" %}
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}
+
+{% block body %}
+    
+    <!-- CAROUSEL -->
+    {% include "_include/carousel.html.twig" %}
+    
+    <!-- SECTION TEXTE -->
+    <section>
+        <div class="container">
+            <h2 class="text-center mb-5 titresection">Mon histoire</h2>
+            <div class="row">
+                <div class="col-12 col-lg-5 text-center my-auto">
+                    <img class="w-50 mb-5" src="{{ asset('/images/alban-intro.jpg') }}" alt="Photo Alban">
+                </div>
+                <div class="col-12 col-sm-12 col-md-12 col-lg-7 mon-histoire mb-5">
+                    <p>
+                        Je m'appelle Alban Jaillais, la trentaine et suis de formation Préparateur et Concepteur de
+                        véhicules de
+                        compétition.<br>
+                        Actuellement, je vis à Strasbourg et travaille au sein d'une concession moto en qualité de
+                        Technico-commercial.
+                        Calme et réfléchi, j'ai toujours été animé et le suis encore par le goût de l'aventure, sans
+                        pour autant ne rien
+                        laisser au hasard.<br><br>
+
+
+
+                        "Ces traits de caractère se sont forgés au fil des années grâce à mes diverses expériences, mais
+                        aussi grâce à
+                        mon cercle familial. Aîné d'une famille de 2 enfants, mon frère et mon père sont tous deux
+                        pilotes
+                        d'hélicoptère.<br>
+                        Cette part de rêve que représente le fait de voler a toujours nourri mon désir d'évasion et de
+                        découvertes.»<br><br>
+
+
+
+                        C'est comme cela d'ailleurs que j'ai appris ce qu'était une Sclérose En Plaques -S.E.P.- qui a
+                        touché ma mère et
+                        pour laquelle j'ai également été diagnostiqué en novembre 2016. Cette maladie, non héréditaire,
+                        est un vrai coup
+                        dur et qui m'oblige à mener ce combat pour moi, ma famille, mes proches, mes amis et aussi
+                        toutes celles et ceux
+                        qui en sont aujourd'hui atteints.<br><br>
+
+
+
+                        Mes passions-loisirs à part la moto, que sont la voile, la plongée, la chasse sous-marine, les
+                        voyages et la
+                        photo, vous permettront de mieux comprendre pourquoi l'appel du large est pour moi l'un des
+                        moyens pour
+                        combattre cette maladie et démontrer qu'elle n'est un frein en rien.
+                    </p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+{% endblock %}

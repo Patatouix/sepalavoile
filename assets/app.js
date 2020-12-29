@@ -10,6 +10,15 @@ import './styles/app.css';
 import './styles/header.css';
 import './styles/footer.css';
 import './styles/home_page.css';
+import './styles/association.css';
+import './styles/carousel.css';
+import './styles/monhistoire.css';
+import './styles/leparcours.css';
+import './styles/leprojet.css';
+import './styles/lequipe.css';
+import './styles/lebateau.css';
+import './styles/onparledenous.css';
+import './styles/nospartenaires.css';
 
 // start the Stimulus application
 import './bootstrap';
