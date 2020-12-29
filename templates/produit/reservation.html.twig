@@ -2,16 +2,42 @@
 
 {% block title %}Produit{% endblock %}
 
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('reservation') }}
+{% endblock %}
+
 {% block body %}
     <div class="container">
         <div class="row">
             <div class="col-12 col-md-8">
-                <h1>Produit</h1>
-                <div>Fullcalendar</div>
+                <h1>{{ produit.nom }}</h1>
+                <div id="calendar">Fullcalendar</div>
             </div>
             <div class="col-12 col-md-4 border-left">
                 <h2>Mes réservations</h2>
             </div>
         </div>
     </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    <script>
+        let produits = [];
+        let produit = {};
+        {% for produit in produits %}
+            produit = {
+                title: '{{ produit.nom }}',
+                start: '{{ produit.dateDebut|date('Y-m-d H:i:s') }}',
+                end: '{{ produit.dateFin|date('Y-m-d H:i:s') }}'
+            }
+            produits.push(produit);
+        {% endfor %}
+        console.log(produits)
+        //console.log( {{ produits|json_encode()|raw }} );
+    </script>
+
+    {{ encore_entry_script_tags('reservation') }}
 {% endblock %}
