@@ -1,0 +1,58 @@
+    {% extends "base.html.twig" %}
+    {% block stylesheets %}
+        {{ parent() }}
+    {% endblock %}
+    
+    {% block body %}
+
+        <!-- CAROUSEL -->
+        {% include "_include/carousel.html.twig" %}
+        
+    {# SECTION TEXTE #}
+    <section>
+        <div class="container">
+            <h2 class="text-center mb-5 titresection">Le projet</h2>
+            <div class="row">
+
+                <div class="col-12 col-sm-12 col-md-12 col-lg-7 le-projet mb-5">
+                    <p>SEP à la voile est un projet qui va se traduire par un tour du monde à la voile sur une période
+                        de 2 ans et qui va concrétiser mon rêve, à savoir découvrir et parcourir le monde à ma façon,
+                        peut-être différente, et qui est le rêve d'une vie, de ma vie : la voile !!! <br><br>
+
+
+                        En résumé mais en quelques mots quand même, je dirais que c'est l'envie et le besoin de vivre ce
+                        qu’il y a de plus exceptionnel au monde, libéré, sans contraintes, sans frontières, avec mon
+                        temps et hors du temps, naviguer, s’évader, se dépasser, sortir des cadres, apprécier les choses
+                        simples, profiter, photographier, vivre quelque chose de fort. <br><br>
+
+                        ​
+
+                        L'objectif est aussi d'apprendre à mieux connaître la maladie, de l'amadouer sans qu'elle ne
+                        m'accapare, de prouver qu'il est nécessaire de ne pas se laisser abattre, de se fixer un but et
+                        surtout de le poursuivre afin de la combattre et de la vaincre. <br><br>
+
+                        ​​
+
+                        Partager est aussi un des mots fort de ce projet, car il n'est pas question de vivre l’aventure
+                        en solitaire, mais de la vivre en partageant avec ma famille, mes proches, mes amis et toutes
+                        celles et ceux qui m’encourageront et me soutiendront à leur manière à mener à bien ce rêve, ce
+                        DÉFI. <br><br>
+
+                        ​
+
+                        Il concernera directement les malades car ce voyage leur servira d'exécutoire, leurs permettra
+                        de voyager au travers de photos, de récits, de vidéos et de contacts réguliers via les réseaux
+                        sociaux. <br><br>
+
+                        Enfin, le partage se traduira aussi par des baptêmes de voile proposés partout dans le monde
+                        auprès des personnes malades car on ne le sait que trop, la maladie, elle, n'a pas de
+                        frontières.</p>
+                </div>
+                <div class="col-12 col-sm-12 col-md-12 col-lg-5 text-center my-auto">
+                    <img class="w-100 mb-5" src="{{ asset('/images/parcours-projet.jpg') }}" alt="Petite photo du trajet">
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    {% endblock %}
