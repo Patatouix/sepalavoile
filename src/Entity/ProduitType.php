@@ -12,6 +12,15 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class ProduitType
 {
+    const PRODUIT_TYPE_EVENT_NAME = 'Evénement';
+    const PRODUIT_TYPE_EVENT_SLUG = 'Evenement';
+
+    const PRODUIT_TYPE_ADHESION_NAME = 'Adhésion';
+    const PRODUIT_TYPE_ADHESION_SLUG = 'Adhesion';
+
+    const PRODUIT_TYPE_DONATION_NAME = 'Donation';
+    const PRODUIT_TYPE_DONATION_SLUG = 'Donation';
+
     /**
      * @ORM\Id
      * @ORM\GeneratedValue

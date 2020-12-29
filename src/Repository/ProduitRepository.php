@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Produit;
+use App\Data\ProduitSearchData;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -17,6 +18,26 @@ class ProduitRepository extends ServiceEntityRepository
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Produit::class);
+    }
+
+    /**
+     * Récupère les produits en lien avec une recherche
+     * @return Produit[]
+     */
+    public function findSearch(ProduitSearchData $search): array
+    {
+        $query = $this
+            ->createQueryBuilder('p')
+            ->select('p', 'pt')
+            ->join('p.produitType', 'pt');
+
+        if(!empty($search->produitTypes)) {
+            $query = $query
+                ->andWhere('pt.id IN (:produitTypes)')
+                ->setParameter('produitTypes', $search->produitTypes);
+        }
+
+        return $query->getQuery()->getResult();
     }
 
     // /**

@@ -2,7 +2,9 @@
 
 namespace App\Controller;
 
+use App\Data\ProduitSearchData;
 use App\Entity\Produit;
+use App\Form\ProduitSearchType;
 use App\Form\ProduitType;
 use App\Repository\ProduitRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -18,10 +20,15 @@ class ProduitController extends AbstractController
     /**
      * @Route("/", name="produit_index", methods={"GET"})
      */
-    public function index(ProduitRepository $produitRepository): Response
+    public function index(ProduitRepository $produitRepository, Request $request)
     {
+        $data = new ProduitSearchData();
+        $form = $this->createForm(ProduitSearchType::class, $data);
+        $form->handleRequest($request);
+        $produits = $produitRepository->findSearch($data);
         return $this->render('produit/index.html.twig', [
-            'produits' => $produitRepository->findAll(),
+            'produits' => $produits,
+            'form' => $form->createView()
         ]);
     }
 
@@ -95,10 +102,11 @@ class ProduitController extends AbstractController
      /**
      * @Route("/{id}/reservation", name="produit_reservation", methods={"GET"})
      */
-    public function reservation(Produit $produit): Response
+    public function reservation(Produit $produit, ProduitRepository $produitRepository): Response
     {
         return $this->render('produit/reservation.html.twig', [
             'produit' => $produit,
+            'produits' => $produitRepository->findAll(),
         ]);
     }
 }

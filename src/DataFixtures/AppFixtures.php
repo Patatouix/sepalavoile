@@ -15,15 +15,15 @@ class AppFixtures extends Fixture
     {
         //produitTypes
         $produitEvent = new ProduitType();
-        $produitEvent->setNom('Evénement');
+        $produitEvent->setNom(ProduitType::PRODUIT_TYPE_EVENT_NAME);
         $manager->persist($produitEvent);
 
         $produitDon = new ProduitType();
-        $produitDon->setNom('Donation');
+        $produitDon->setNom(ProduitType::PRODUIT_TYPE_DONATION_NAME);
         $manager->persist($produitDon);
 
         $produitAdhesion = new ProduitType();
-        $produitAdhesion->setNom('Adhésion');
+        $produitAdhesion->setNom(ProduitType::PRODUIT_TYPE_ADHESION_NAME);
         $manager->persist($produitAdhesion);
 
         //produits
