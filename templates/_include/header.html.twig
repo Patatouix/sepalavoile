@@ -1,10 +1,10 @@
 <!-- MENU -->
 <nav>
     <div class="container menuindex">
-        <a href="" class="logo logo-responsive d-none d-md-inline"><img
+        <a href="{{ path('home_page') }}" class="logo logo-responsive d-none d-md-inline"><img
                 src="{{ asset('/images/logo.svg') }}" alt="LOGO SEPALAVOILE" /></a>
         <nav class="navbar navbar-expand-md navbar-light">
-            <a href="" class="d-md-none"><img style="width: 90px"
+            <a href="{{ path('home_page') }}" class="d-md-none"><img style="width: 90px"
                     src="{{ asset('/images/logo.svg') }}" alt="LOGO SEPALAVOILE" /></a>
             <button class="navbar-toggler ml-auto styleboutton" type="button" data-toggle="collapse"
                 data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -18,7 +18,7 @@
                                 class="menutitre">Blog</span></a>
                     </li>
                     <li class="nav-item mainNavBar borderleft pl-2 pr-2 m-0">
-                        <a class="nav-link text-center" href="">
+                        <a class="nav-link text-center" href="{{ path('association') }}">
                             <span class=" menutitre">
                                 L'association
                             </span>
@@ -32,19 +32,19 @@
                             </span>
                         </a>
                         <div class="dropdown-menu  border-0" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item sousmenu text-center" href="">
+                            <a class="dropdown-item sousmenu text-center" href="{{ path('monhistoire') }}">
                                 Mon histoire
                             </a>
-                            <a class="dropdown-item sousmenu text-center" href="">
+                            <a class="dropdown-item sousmenu text-center" href="{{ path('leprojet') }}">
                                 Le projet
                             </a>
-                            <a class="dropdown-item sousmenu text-center" href="">
+                            <a class="dropdown-item sousmenu text-center" href="{{ path('leparcours') }}">
                                 Le parcours
                             </a>
-                            <a class="dropdown-item sousmenu text-center" href="">
+                            <a class="dropdown-item sousmenu text-center" href="{{ path('lequipe') }}">
                                 L'équipe
                             </a>
-                            <a class="dropdown-item sousmenu text-center" href="">
+                            <a class="dropdown-item sousmenu text-center" href="{{ path('lebateau') }}">
                                 Le bateau
                             </a>
                             <a class="dropdown-item sousmenu text-center" href="">
@@ -53,10 +53,10 @@
                         </div>
                     </li>
                     <li class="nav-item mainNavBar borderleft pl-2 pr-2 m-0">
-                        <a class="nav-link text-center" href=""><span class=" menutitre">Nos
+                        <a class="nav-link text-center" href="{{ path('nospartenaires') }}"><span class=" menutitre">Nos
                                 partenaires</span></a> </li>
                     <li class="nav-item mainNavBar borderleft pl-2 pr-2 m-0">
-                        <a class="nav-link text-center" href=""><span class="menutitre">On
+                        <a class="nav-link text-center" href="{{ path('onparledenous') }}"><span class="menutitre">On
                                 parle de
                                 nous</span></a>
                     </li>
@@ -72,8 +72,8 @@
                             <a class="dropdown-item sousmenu text-center"
                                 href="https://www.helloasso.com/associations/sep-a-la-voile/collectes/sep-a-la-voile"
                                 target="_blank">Faire un don</a>
-                            <a class="dropdown-item sousmenu text-center" href="https://www.photosautourdumonde.com"
-                                target="_blank">Acheter des photos</a>
+                            <a class="dropdown-item sousmenu text-center" href="https://www.helloasso.com/associations/sep-a-la-voile/collectes/sep-a-la-voile"
+                                target="_blank">Devenir membre</a>
                             <a class="dropdown-item sousmenu text-center" href="">Nos
                                 événements</a>
                         </div>
