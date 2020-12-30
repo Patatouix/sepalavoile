@@ -2,7 +2,15 @@
 
 {% block title %}Produit{% endblock %}
 
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('disponibilite') }}
+{% endblock %}
+
 {% block body %}
+
+    {{ include('produit/evenement/_modal_disponibilite.html.twig', {'button_label': 'Update'}) }}
+
     <h1>Produit</h1>
 
     <table class="table">
@@ -66,7 +74,32 @@
 
     <a href="{{ path('produit_edit', {'id': produit.id}) }}">edit</a>
 
+    <!-- Button trigger modal -->
+    <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#modal_disponibilite">
+        Voir dispos
+    </button>
+
     <a href="{{ path('produit_reservation', {'id': produit.id}) }}">Réserver</a>
 
     {{ include('produit/_delete_form.html.twig') }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    <script>
+        //construction du tableau à fournir au calendrier pour afficher les créneaux
+        let creneaux = [];
+        let creneau = {};
+        {% for creneau in produit.creneaux %}
+            creneau = {
+                start: '{{ creneau.debut|date('Y-m-d H:i:s') }}',
+                end: '{{ creneau.debut|date('Y-m-d H:i:s') }}',
+                //color: 'red'  =>ici il faudra changer la couleur des events suivant qu'ils sont complets ou pas
+            }
+            creneaux.push(creneau);
+        {% endfor %}
+    </script>
+
+    {{ encore_entry_script_tags('disponibilite') }}
 {% endblock %}
