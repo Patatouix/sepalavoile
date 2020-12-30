@@ -6,14 +6,14 @@
 import { Calendar } from '@fullcalendar/core';
 import dayGridPlugin from '@fullcalendar/daygrid';
 
-//construction du calendrier
+//construction du calendrier au chargement du DOM
 document.addEventListener('DOMContentLoaded', function() {
     var calendarEl = document.getElementById('calendar');
 
     var calendar = new Calendar(calendarEl, {
         plugins: [ dayGridPlugin ],
         initialView: 'dayGridMonth',
-        events: creneaux,  //la variable creneaux a été construite dans le fichier de template de reservation
+        events: creneaux,  //la variable creneaux a été construite dans le fichier de template _creneaux_for_calendar
         eventDidMount: function(info) {
           //dans cette fonction on peut modifier le rendu du creneau
         },
@@ -21,7 +21,6 @@ document.addEventListener('DOMContentLoaded', function() {
           //ici on modifie comment s'affiche l'heure des créneaux
           hour: '2-digit',
           minute: '2-digit',
-          second: '2-digit',
           meridiem: false
         }
     });

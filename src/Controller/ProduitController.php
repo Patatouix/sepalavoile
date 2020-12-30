@@ -123,7 +123,7 @@ class ProduitController extends AbstractController
      */
     public function reservation(Produit $produit, ProduitRepository $produitRepository): Response
     {
-        return $this->render('produit/reservation.html.twig', [
+        return $this->render('produit/evenement/reservation.html.twig', [
             'produit' => $produit,
             'produits' => $produitRepository->findAll(),
         ]);
