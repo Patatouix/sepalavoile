@@ -10,8 +10,6 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use App\Entity\ProduitType;
 use App\Data\ProduitSearchData;
 
-use Symfony\Component\String\Slugger\AsciiSlugger;
-
 class ProduitSearchType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
@@ -22,10 +20,7 @@ class ProduitSearchType extends AbstractType
                 'required' => false,
                 'class' => ProduitType::class,
                 'choice_label' => 'nom',
-                'choice_value' => function (ProduitType $entity) {
-                    $slugger = new AsciiSlugger();
-                    return $slugger->slug($entity->getNom());
-                },
+                'choice_value' => 'slug',
                 'expanded' => true,
                 'multiple' => true
             ])
