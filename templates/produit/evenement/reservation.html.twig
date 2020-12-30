@@ -32,7 +32,9 @@
         {% for creneau in produit.creneaux %}
             creneau = {
                 start: '{{ creneau.debut|date('Y-m-d H:i:s') }}',
-                end: '{{ creneau.debut|date('Y-m-d H:i:s') }}'
+                end: '{{ creneau.debut|date('Y-m-d H:i:s') }}',
+                //couleur selon la disponibilité
+                color: '{{ creneau.achats|length == produit.objectif ? 'red' : 'green' }}'
             }
             creneaux.push(creneau);
         {% endfor %}
