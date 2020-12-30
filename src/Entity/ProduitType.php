@@ -13,13 +13,13 @@ use Doctrine\ORM\Mapping as ORM;
 class ProduitType
 {
     const PRODUIT_TYPE_EVENT_NAME = 'Evénement';
-    const PRODUIT_TYPE_EVENT_SLUG = 'Evenement';
+    const PRODUIT_TYPE_EVENT_SLUG = 'evenement';
 
     const PRODUIT_TYPE_ADHESION_NAME = 'Adhésion';
-    const PRODUIT_TYPE_ADHESION_SLUG = 'Adhesion';
+    const PRODUIT_TYPE_ADHESION_SLUG = 'adhesion';
 
     const PRODUIT_TYPE_DONATION_NAME = 'Donation';
-    const PRODUIT_TYPE_DONATION_SLUG = 'Donation';
+    const PRODUIT_TYPE_DONATION_SLUG = 'donation';
 
     /**
      * @ORM\Id
@@ -37,6 +37,11 @@ class ProduitType
      * @ORM\OneToMany(targetEntity=Produit::class, mappedBy="produitType")
      */
     private $produits;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $slug;
 
     public function __construct()
     {
@@ -86,6 +91,18 @@ class ProduitType
                 $produit->setProduitType(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(string $slug): self
+    {
+        $this->slug = $slug;
 
         return $this;
     }
