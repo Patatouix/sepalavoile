@@ -1,18 +1,12 @@
-    {% extends "base.html.twig" %}
-    {% block stylesheets %}
-        {{ parent() }}
-    {% endblock %}
-    
-    {% block body %}
+{% extends "carousel.html.twig" %}
 
-    <!-- CAROUSEL -->
-    {% include "_include/carousel.html.twig" %}  
+    {% block content %}
 
-    {# SECTION TEXTE #}
-    <section>
-        <div class="container titresection text-center">
-            <h2 class="mt-5 mb-5">On parle de nous</h2>
-        </div>
-    </section>
-    
-    {% endblock %}
+        {# SECTION TEXTE #}
+        <section>
+            <div class="container titresection text-center">
+                <h2 class="mt-5 mb-5">On parle de nous</h2>
+            </div>
+        </section>
+
+{% endblock %}
