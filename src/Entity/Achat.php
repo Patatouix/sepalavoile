@@ -45,6 +45,11 @@ class Achat
      */
     private $produit;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Creneau::class, inversedBy="achats")
+     */
+    private $creneau;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -106,6 +111,18 @@ class Achat
     public function setProduit(?Produit $produit): self
     {
         $this->produit = $produit;
+
+        return $this;
+    }
+
+    public function getCreneau(): ?Creneau
+    {
+        return $this->creneau;
+    }
+
+    public function setCreneau(?Creneau $creneau): self
+    {
+        $this->creneau = $creneau;
 
         return $this;
     }
