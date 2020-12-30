@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Data\ProduitSearchData;
 use App\Entity\Produit;
+use App\Entity\ProduitType as EntityProduitType;
 use App\Form\ProduitSearchType;
 use App\Form\ProduitType;
 use App\Repository\ProduitRepository;
@@ -58,9 +59,27 @@ class ProduitController extends AbstractController
     /**
      * @Route("/{id}", name="produit_show", methods={"GET"})
      */
-    public function show(Produit $produit): Response
+    public function show(Produit $produit, ProduitType $produitType): Response
     {
-        return $this->render('produit/show.html.twig', [
+        $produitTypeSlug = $produit->getProduitType()->getSlug();
+
+        //sélection du bon template suivant le type de produit
+        switch ($produitTypeSlug) {
+            case EntityProduitType::PRODUIT_TYPE_EVENT_SLUG:
+                $templateFolder = EntityProduitType::PRODUIT_TYPE_EVENT_SLUG;
+                break;
+            case EntityProduitType::PRODUIT_TYPE_DONATION_SLUG:
+                $templateFolder = EntityProduitType::PRODUIT_TYPE_DONATION_SLUG;
+                break;
+            case EntityProduitType::PRODUIT_TYPE_ADHESION_SLUG:
+                $templateFolder = EntityProduitType::PRODUIT_TYPE_ADHESION_SLUG;
+                break;
+            default:
+                $templateFolder = 'default';
+                break;
+        }
+
+        return $this->render('produit/' . $templateFolder . '/show.html.twig', [
             'produit' => $produit,
         ]);
     }
