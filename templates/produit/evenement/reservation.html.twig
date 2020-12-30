@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Réservation{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('reservation') }}
+{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <div class="col-12 col-md-8">
+                <h1>{{ produit.nom }}</h1>
+                <div id="calendar"></div>
+            </div>
+            <div class="col-12 col-md-4 border-left">
+                <h2>Mes réservations</h2>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    <script>
+        //construction du tableau à fournir au calendrier pour afficher les créneaux
+        //ce tableau sera ensuite utilisé par le fichier js spécifique à cette page (assets/reservation.js)
+        let creneaux = [];
+        let creneau = {};
+        {% for creneau in produit.creneaux %}
+            creneau = {
+                start: '{{ creneau.debut|date('Y-m-d H:i:s') }}',
+                end: '{{ creneau.debut|date('Y-m-d H:i:s') }}'
+            }
+            creneaux.push(creneau);
+        {% endfor %}
+    </script>
+
+    {{ encore_entry_script_tags('reservation') }}
+{% endblock %}
