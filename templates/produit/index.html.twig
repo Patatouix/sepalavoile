@@ -15,8 +15,8 @@
                 <th>Id</th>
                 <th>Nom</th>
                 <th>Description</th>
-                <th>DateDebut</th>
-                <th>DateFin</th>
+                <th>DebutPublication</th>
+                <th>FinPublication</th>
                 <th>Adresse</th>
                 <th>CodePostal</th>
                 <th>Ville</th>
@@ -34,8 +34,8 @@
                 <td>{{ produit.id }}</td>
                 <td>{{ produit.nom }}</td>
                 <td>{{ produit.description }}</td>
-                <td>{{ produit.dateDebut ? produit.dateDebut|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ produit.dateFin ? produit.dateFin|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ produit.debutPublication ? produit.debutPublication|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ produit.finPublication ? produit.finPublication|date('Y-m-d H:i:s') : '' }}</td>
                 <td>{{ produit.adresse }}</td>
                 <td>{{ produit.codePostal }}</td>
                 <td>{{ produit.ville }}</td>
