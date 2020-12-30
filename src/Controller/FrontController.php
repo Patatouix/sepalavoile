@@ -5,6 +5,7 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
 class FrontController extends AbstractController
 {
@@ -18,9 +19,13 @@ class FrontController extends AbstractController
         ]);
     }
 
-
+    // @IsGranted("ROLE_ADMIN")
+    // ou
+    // /admin devant la route
+    
     /**
      * @Route("/association", name="association")
+    
      */
     public function association(): Response
     {

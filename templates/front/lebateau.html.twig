@@ -1,12 +1,6 @@
-    {% extends "base.html.twig" %}
-    {% block stylesheets %}
-        {{ parent() }}
-    {% endblock %}
-    
-    {% block body %}
+{% extends "carousel.html.twig" %}
 
-        <!-- CAROUSEL -->
-        {% include "_include/carousel.html.twig" %}
+{% block content %}
 
     {# SECTION TEXTE #}
     <section>
@@ -152,4 +146,4 @@
         </div>
     </section>
     
-    {% endblock %}
+{% endblock %}
