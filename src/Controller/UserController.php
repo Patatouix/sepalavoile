@@ -5,10 +5,12 @@ namespace App\Controller;
 use App\Entity\User;
 use App\Form\UserType;
 use App\Repository\UserRepository;
+use DateTime;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 /**
  * @Route("/user")
@@ -28,13 +30,29 @@ class UserController extends AbstractController
     /**
      * @Route("/new", name="user_new", methods={"GET","POST"})
      */
-    public function new(Request $request): Response
+    public function new(Request $request, UserPasswordEncoderInterface $passwordEncoder): Response
     {
         $user = new User();
         $form = $this->createForm(UserType::class, $user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            $user
+                ->setPassword(
+                    $passwordEncoder->encodePassword(
+                        $user,
+                        $form->get('password')->getData()
+                    )
+                )
+                ->setCreatedAt(
+                    new DateTime('NOW')
+                )
+                ->setRoles(
+                    ["ROLE_USER"]
+
+                );
+
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($user);
             $entityManager->flush();
@@ -53,7 +71,7 @@ class UserController extends AbstractController
      */
     public function show(User $user): Response
     {
-        return $this->render('user/show.html.twig', [
+        return $this->render('user/showMyProfil.html.twig', [
             'user' => $user,
         ]);
     }
@@ -61,12 +79,25 @@ class UserController extends AbstractController
     /**
      * @Route("/{id}/edit", name="user_edit", methods={"GET","POST"})
      */
-    public function edit(Request $request, User $user): Response
+    public function edit(Request $request, User $user, UserPasswordEncoderInterface $passwordEncoder): Response
     {
         $form = $this->createForm(UserType::class, $user);
+        $form->remove('password');
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            $user
+                // ->setPassword(
+                //     $passwordEncoder->encodePassword(
+                //         $user,
+                //         $form->get('password')->getData()
+                //     )
+                // )
+                ->setUpdatedAt(
+                    new DateTime('NOW')
+                );
+
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('user_index');
