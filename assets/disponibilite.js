@@ -14,7 +14,7 @@ $('#modal_disponibilite').on('shown.bs.modal', function () {
     var calendar = new Calendar(calendarEl, {
         plugins: [ dayGridPlugin ],
         initialView: 'dayGridMonth',
-        events: creneaux,  //la variable creneaux a été construite dans le fichier de template _creneaux_for_calendar
+        events: creneaux,  //la variable creneaux a été construite dans le fichier de template
         eventDidMount: function(info) {
           //dans cette fonction on peut modifier le rendu du creneau
         },

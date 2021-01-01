@@ -89,14 +89,17 @@
 
     <script>
         //construction du tableau à fournir au calendrier pour afficher les créneaux
+        //ce tableau sera ensuite utilisé par le fichier js spécifique à cette page (assets/disponibilite.js)
         let creneaux = [];
         let creneau = {};
+        let reservable;
         {% for creneau in produit.creneaux %}
+            reservable = {{ creneau.achats|length < produit.objectif ? 'true' : 'false' }};
             creneau = {
                 start: '{{ creneau.debut|date('Y-m-d H:i:s') }}',
-                end: '{{ creneau.debut|date('Y-m-d H:i:s') }}',
+                end: '{{ creneau.fin|date('Y-m-d H:i:s') }}',
                 //couleur selon la disponibilité
-                color: '{{ creneau.achats|length == produit.objectif ? 'red' : 'green' }}'
+                color: reservable ? 'green' : 'red',
             }
             creneaux.push(creneau);
         {% endfor %}
