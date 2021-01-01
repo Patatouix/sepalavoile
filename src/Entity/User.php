@@ -86,6 +86,11 @@ class User implements UserInterface
      */
     private $isVerified = false;
 
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     */
+    private $numTel;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -280,6 +285,18 @@ class User implements UserInterface
     public function setIsVerified(bool $isVerified): self
     {
         $this->isVerified = $isVerified;
+
+        return $this;
+    }
+
+    public function getNumTel(): ?string
+    {
+        return $this->numTel;
+    }
+
+    public function setNumTel(?string $numTel): self
+    {
+        $this->numTel = $numTel;
 
         return $this;
     }

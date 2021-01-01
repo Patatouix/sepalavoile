@@ -1,0 +1,685 @@
+{% block stylesheets %}
+{# {{ parent() }} #}
+{# {{ encore_entry_link_tags('dashboard') }} #}
+{% endblock %}
+
+{% block body %}
+
+<div class="hold-transition sidebar-mini layout-fixed">
+    <div class="wrapper">
+
+
+        <!-- Navbar -->
+        <nav class="main-header navbar navbar-expand navbar-white navbar-light sticky-top">
+            <!-- Left navbar links -->
+            <div class="navbar-nav">
+                <div class="nav-item">
+                    <a class="nav-link" data-widget="pushmenu" href="#"><i class="fas fa-bars"></i></a>
+                </div>
+                <div class="nav-item d-none d-sm-inline-block">
+                    <a href="{{ path('home_page') }}" class="nav-link">Retour au site</a>
+                </div>
+                {# <div class="nav-item d-none d-sm-inline-block">
+                    <a href="" class="nav-link">Contact</a>
+                </div> #}
+            </div>
+            <div class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
+                    <a href="{{ path('app_logout') }}"> <button type="button" class="btn btn-style mt-1">Se
+                        Déconnecter</button></a>
+            </div>
+        </nav>
+        <!-- /.navbar -->
+
+        <!-- Main Sidebar Container -->
+        <aside class="main-sidebar sidebar-dark-primary">
+            <!-- Brand Logo -->
+            <a href="{{ path('home_page') }}" class="brand-link align-middle">
+                <img src="{{ asset('/images/logo.svg') }}" alt="Logo Sepalavoile" class="brand-image">
+                <span class="brand-text font-weight-light">Sepalavoile</span>
+            </a>
+
+            <!-- Sidebar -->
+            <div class="sidebar">
+                <!-- Sidebar user panel (optional) -->
+                <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+                    <div class="image">
+                        {# <img src="{{ app.user.filename ? asset('/images/user/' ~ app.user.filename) : asset('/images/avatar.png') }}" class="avatar" alt="User Image"> #}
+                    </div>
+                    <div class="info">
+                        <a href="{{ path('user_show', {'id': app.user.id}) }}" class="d-block">{{ app.user.firstName }} {{ app.user.name }}</a>
+                    </div>
+                </div>
+
+                <!-- Sidebar Menu -->
+                <nav class="mt-2">
+                    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
+                        data-accordion="false">
+
+
+                        {# {* UTILISATEUR *} #}
+                        <li class="nav-item has-treeview mb-4">
+                            <a href="" class="nav-link">
+                                <i class="nav-icon fas fa-users"></i>
+                                <p>
+                                    Utilisateurs
+                                    <i class="fas fa-angle-left right"></i>
+                                    {# {* Permet de rajouter un badge à la fin *} #}
+                                    <span class="badge badge-info right"></span>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+
+                                {# {* {$smarty.session|var_dump} *} #}
+                                {# {if isset($smarty.session) AND $smarty.session.user.role eq 'Admin' OR $smarty.session.user.role eq 'Moderateur'} #}
+                                <li class="nav-item">
+                                    <a href="{{ path('user_index') }}" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Liste des utilisateurs</p>
+                                    </a>
+                                </li>
+                                {# {/if} #}
+
+                                <li class="nav-item">
+                                    <a href="{{ path('user_show', {'id': app.user.id}) }}" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Consulter mon profil</p>
+                                    </a>
+                                </li>
+                                {# {* <li class="nav-item">
+                        <a href="pages/layout/boxed.html" class="nav-link">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>Boxed</p>
+                        </a>
+                        </li>
+                        <li class="nav-item">
+                        <a href="pages/layout/fixed-sidebar.html" class="nav-link">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>Fixed Sidebar</p>
+                        </a>
+                        </li>
+                        <li class="nav-item">
+                        <a href="pages/layout/fixed-topnav.html" class="nav-link">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>Fixed Navbar</p>
+                        </a>
+                        </li>
+                        <li class="nav-item">
+                        <a href="pages/layout/fixed-footer.html" class="nav-link">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>Fixed Footer</p>
+                        </a>
+                        </li>
+                        <li class="nav-item">
+                        <a href="pages/layout/collapsed-sidebar.html" class="nav-link">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>Collapsed Sidebar</p>
+                        </a>
+                        </li> *} #}
+                            </ul>
+                        </li>
+
+
+
+                        {# {* EVENEMENT *} #}
+                        <li class="nav-item has-treeview mb-4">
+                            <a href="" class="nav-link">
+                                <i class="nav-icon far fa-calendar-alt"></i>
+                                <p>
+                                    Événements
+                                    <i class="fas fa-angle-left right"></i>
+                                    {# {* Permet de rajouter un badge à la fin *} #}
+                                    <span class="badge badge-info right"></span>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="" class="nav-link">
+                                        <i class="nav-icon far fa-circle"></i>
+                                        <p>
+                                            Liste des événements
+                                            {# {* Permet de rajouter un badge à la fin *} #}
+                                            <span class="badge badge-info right"></span>
+                                        </p>
+                                    </a>
+                                </li>
+                                {# {if isset($smarty.session) AND $smarty.session.user.role eq 'Admin' OR $smarty.session.user.role eq 'Moderateur'} #}
+                                <li class="nav-item">
+                                    <a href="" class="nav-link">
+                                        <i class="nav-icon far fa-circle"></i>
+                                        <p>
+                                            Ajouter
+                                            {# {* Permet de rajouter un badge à la fin *} #}
+                                            <span class="badge badge-info right"></span>
+                                        </p>
+                                    </a>
+                                </li>
+                                {# {/if} #}
+                            </ul>
+                        </li>
+
+                        {# {* PARTNERS *} #}
+                        {# {* {$smarty.session|var_dump} *} #}
+                        {# {if isset($smarty.session) AND $smarty.session.user.role eq 'Admin'}  #}
+                        <li class="nav-item has-treeview mb-4">
+                            <a href="" class="nav-link">
+                                <i class="nav-icon fas fa-photo-video"></i>
+                                <p>
+                                    Nos partenaires
+                                    <i class="fas fa-angle-left right"></i>
+                                    {# {* Permet de rajouter un badge à la fin *} #}
+                                    <span class="badge badge-info right"></span>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="" class="nav-link">
+                                        <i class="nav-icon far fa-circle"></i>
+                                        <p>
+                                            Liste des partenaires
+                                            {# {* Permet de rajouter un badge à la fin *} #}
+                                            <span class="badge badge-info right"></span>
+                                        </p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="" class="nav-link">
+                                        <i class="nav-icon far fa-circle"></i>
+                                        <p>
+                                            Ajouter un partenaire
+                                            {# {* Permet de rajouter un badge à la fin *} #}
+                                            <span class="badge badge-info right"></span>
+                                        </p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        {# {/if} #}
+
+
+                        {# {* SLIDER *} #}
+                        {# {* {$smarty.session|var_dump} *} #}
+                        {# {if isset($smarty.session) AND $smarty.session.user.role eq 'Admin'}  #}
+                        <li class="nav-item has-treeview mb-4">
+                            <a href="" class="nav-link">
+                                <i class="nav-icon fas fa-photo-video"></i>
+                                <p>
+                                    Contenu numérique
+                                    <i class="fas fa-angle-left right"></i>
+                                    {# {* Permet de rajouter un badge à la fin *} #}
+                                    <span class="badge badge-info right"></span>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="" class="nav-link">
+                                        <i class="nav-icon far fa-circle"></i>
+                                        <p>
+                                            Sliders photos
+                                            {# {* Permet de rajouter un badge à la fin *} #}
+                                            <span class="badge badge-info right"></span>
+                                        </p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="" class="nav-link">
+                                        <i class="nav-icon far fa-circle"></i>
+                                        <p>
+                                            Vidéo / Home_page
+                                            {# {* Permet de rajouter un badge à la fin *} #}
+                                            <span class="badge badge-info right"></span>
+                                        </p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="" class="nav-link">
+                                        <i class="nav-icon far fa-circle"></i>
+                                        <p>
+                                            Vidéo YouTube
+                                            {# {* Permet de rajouter un badge à la fin *} #}
+                                            <span class="badge badge-info right"></span>
+                                        </p>
+                                    </a>
+                                </li>                             
+                            </ul>
+                        </li>
+                        {# {/if} #}
+
+
+
+                        {# {* NEWSLETTER *} #}
+                        {# {if isset($smarty.session) AND $smarty.session.user.role eq 'Admin'} #}
+                        <li class="nav-item has-treeview mb-4">
+                            <a href="" class="nav-link">
+                                <i class="nav-icon fas fa-envelope-open-text"></i>
+                                <p>
+                                    Newsletter
+                                    <i class="fas fa-angle-left right"></i>
+                                    {# {* Permet de rajouter un badge à la fin *} #}
+                                    <span class="badge badge-info right"></span>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="" class="nav-link">
+                                        <i class="nav-icon far fa-circle"></i>
+                                        <p>
+                                            Liste des abonnées
+                                            {# {* Permet de rajouter un badge à la fin *} #}
+                                            <span class="badge badge-info right"></span>
+                                        </p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="" class="nav-link">
+                                        <i class="nav-icon far fa-circle"></i>
+                                        <p>
+                                            Ajouter une newsletter
+                                            {# {* Permet de rajouter un badge à la fin *} #}
+                                            <span class="badge badge-info right"></span>
+                                        </p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="" class="nav-link">
+                                        <i class="nav-icon far fa-circle"></i>
+                                        <p>
+                                            Envoyer newsletters
+                                            {# {* Permet de rajouter un badge à la fin *} #}
+                                            <span class="badge badge-info right"></span>
+                                        </p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        {# {/if} #}
+
+
+                        {# {* GALERIE *} #}
+                        {# {* {$smarty.session|var_dump} *} #}
+                        {# {if isset($smarty.session) AND $smarty.session.user.role eq 'Admin'} #}
+                        <li class="nav-item has-treeview mb-4">
+                            <a href="" class="nav-link">
+                                <i class="nav-icon far fa-image"></i>
+                                <p>
+                                    Galerie
+                                    <i class="fas fa-angle-left right"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="" class="nav-link">
+                                        <i class="nav-icon far fa-circle"></i>
+                                        <p>
+                                            Liste des photos
+                                            {# {* Permet de rajouter un badge à la fin *} #}
+                                            <span class="badge badge-info right"></span>
+                                        </p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="" class="nav-link">
+                                        <i class="nav-icon far fa-circle"></i>
+                                        <p>
+                                            Liste des tags
+                                            {# {* Permet de rajouter un badge à la fin *} #}
+                                            <span class="badge badge-info right"></span>
+                                        </p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="" class="nav-link">
+                                        <i class="nav-icon far fa-circle"></i>
+                                        <p>
+                                            Ajouter une photo
+                                            {# {* Permet de rajouter un badge à la fin *} #}
+                                            <span class="badge badge-info right"></span>
+                                        </p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        {# {/if} #}
+
+                        
+
+                        {# {* ARTICLE *} #}
+                        {# {* {$smarty.session|var_dump} *} #}
+                        {# {if isset($smarty.session) AND $smarty.session.user.role eq 'Admin'}  #}
+                        <li class="nav-item has-treeview mb-4">
+                            <a href="" class="nav-link">
+                                <i class="nav-icon far fa-newspaper"></i>
+                                <p>
+                                    Article
+                                    <i class="fas fa-angle-left right"></i>
+                                    {# {* Permet de rajouter un badge à la fin *} #}
+                                    <span class="badge badge-info right"></span>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="" class="nav-link">
+                                        <i class="nav-icon far fa-circle"></i>
+                                        <p>
+                                            Liste des articles
+                                            {# {* Permet de rajouter un badge à la fin *} #}
+                                            <span class="badge badge-info right"></span>
+                                        </p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="" class="nav-link">
+                                        <i class="nav-icon far fa-circle"></i>
+                                        <p>
+                                            Catégorie article
+                                            {# {* Permet de rajouter un badge à la fin *} #}
+                                            <span class="badge badge-info right"></span>
+                                        </p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="" class="nav-link">
+                                        <i class="nav-icon far fa-circle"></i>
+                                        <p>
+                                            Ajouter un article
+                                            {# {* Permet de rajouter un badge à la fin *} #}
+                                            <span class="badge badge-info right"></span>
+                                        </p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        {# {/if} #}
+
+                        {# {* MAILBOX *} #}
+                        {# {* {$smarty.session|var_dump} *} #}
+                        {# {if isset($smarty.session) AND $smarty.session.user.role eq 'Admin'}  #}
+                        <li class="nav-item has-treeview mb-4">
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon far fa-envelope"></i>
+                                <p>
+                                    Mail
+                                    <i class="fas fa-angle-left right"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="{site_url(" users/mailbox.tpl")}" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Boite de réception</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{site_url(" users/compose")}" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Rédiger</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{site_url(" users/read-mail")}" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Lire</p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        {# {/if} #}
+
+
+
+                        {# {* <li class="nav-item has-treeview">
+            <a href="#" class="nav-link">
+                <i class="nav-icon fas fa-book"></i>
+                <p>
+                Pages
+                <i class="fas fa-angle-left right"></i>
+                </p>
+            </a>
+            <ul class="nav nav-treeview">
+                <li class="nav-item">
+                <a href="pages/examples/invoice.html" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Invoice</p>
+                </a>
+                </li>
+                <li class="nav-item">
+                <a href="pages/examples/profile.html" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Profile</p>
+                </a>
+                </li>
+                <li class="nav-item">
+                <a href="pages/examples/e_commerce.html" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>E-commerce</p>
+                </a>
+                </li>
+                <li class="nav-item">
+                <a href="pages/examples/projects.html" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Projects</p>
+                </a>
+                </li>
+                <li class="nav-item">
+                <a href="pages/examples/project_add.html" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Project Add</p>
+                </a>
+                </li>
+                <li class="nav-item">
+                <a href="pages/examples/project_edit.html" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Project Edit</p>
+                </a>
+                </li>
+                <li class="nav-item">
+                <a href="pages/examples/project_detail.html" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Project Detail</p>
+                </a>
+                </li>
+                <li class="nav-item">
+                <a href="pages/examples/contacts.html" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Contacts</p>
+                </a>
+                </li>
+
+            </ul>
+            </li>
+
+            <li class="nav-item has-treeview">
+            <a href="#" class="nav-link">
+                <i class="nav-icon far fa-plus-square"></i>
+                <p>
+                Extras
+                <i class="fas fa-angle-left right"></i>
+                </p>
+            </a>
+            <ul class="nav nav-treeview">
+                <li class="nav-item">
+                <a href="pages/examples/login.html" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Login</p>
+                </a>
+                </li>
+                <li class="nav-item">
+                <a href="pages/examples/register.html" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Register</p>
+                </a>
+                </li>
+                <li class="nav-item">
+                <a href="pages/examples/forgot-password.html" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Forgot Password</p>
+                </a>
+                </li>
+                <li class="nav-item">
+                <a href="pages/examples/recover-password.html" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Recover Password</p>
+                </a>
+                </li>
+                <li class="nav-item">
+                <a href="pages/examples/lockscreen.html" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Lockscreen</p>
+                </a>
+                </li>
+                <li class="nav-item">
+                <a href="pages/examples/legacy-user-menu.html" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Legacy User Menu</p>
+                </a>
+                </li>
+                <li class="nav-item">
+                <a href="pages/examples/language-menu.html" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Language Menu</p>
+                </a>
+                </li>
+                <li class="nav-item">
+                <a href="pages/examples/404.html" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Error 404</p>
+                </a>
+                </li>
+                <li class="nav-item">
+                <a href="pages/examples/500.html" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Error 500</p>
+                </a>
+                </li>
+                <li class="nav-item">
+                <a href="pages/examples/pace.html" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Pace</p>
+                </a>
+                </li>
+                <li class="nav-item">
+                <a href="pages/examples/blank.html" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Blank Page</p>
+                </a>
+                </li>
+                <li class="nav-item">
+                <a href="starter.html" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Starter Page</p>
+                </a>
+                </li>
+            </ul>
+            </li> *} #}
+
+                        {# {* <li class="nav-header">MISCELLANEOUS</li>
+            <li class="nav-item">
+            <a href="https://adminlte.io/docs/3.0" class="nav-link">
+                <i class="nav-icon fas fa-file"></i>
+                <p>Documentation</p>
+            </a>
+            </li>
+            <li class="nav-header">MULTI LEVEL EXAMPLE</li>
+            <li class="nav-item">
+            <a href="#" class="nav-link">
+                <i class="fas fa-circle nav-icon"></i>
+                <p>Level 1</p>
+            </a>
+            </li>
+            <li class="nav-item has-treeview">
+            <a href="#" class="nav-link">
+                <i class="nav-icon fas fa-circle"></i>
+                <p>
+                Level 1
+                <i class="right fas fa-angle-left"></i>
+                </p>
+            </a>
+            <ul class="nav nav-treeview">
+                <li class="nav-item">
+                <a href="#" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Level 2</p>
+                </a>
+                </li>
+                <li class="nav-item has-treeview">
+                <a href="#" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>
+                    Level 2
+                    <i class="right fas fa-angle-left"></i>
+                    </p>
+                </a>
+                <ul class="nav nav-treeview">
+                    <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="far fa-dot-circle nav-icon"></i>
+                        <p>Level 3</p>
+                    </a>
+                    </li>
+                    <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="far fa-dot-circle nav-icon"></i>
+                        <p>Level 3</p>
+                    </a>
+                    </li>
+                    <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="far fa-dot-circle nav-icon"></i>
+                        <p>Level 3</p>
+                    </a>
+                    </li>
+                </ul>
+                </li>
+                <li class="nav-item">
+                <a href="#" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Level 2</p>
+                </a>
+                </li>
+            </ul>
+            </li>
+            <li class="nav-item">
+            <a href="#" class="nav-link">
+                <i class="fas fa-circle nav-icon"></i>
+                <p>Level 1</p>
+            </a>
+            </li>
+            <li class="nav-header">LABELS</li>
+            <li class="nav-item">
+            <a href="#" class="nav-link">
+                <i class="nav-icon far fa-circle text-danger"></i>
+                <p class="text">Important</p>
+            </a>
+            </li>
+            <li class="nav-item">
+            <a href="#" class="nav-link">
+                <i class="nav-icon far fa-circle text-warning"></i>
+                <p>Warning</p>
+            </a>
+            </li>
+            <li class="nav-item">
+            <a href="#" class="nav-link">
+                <i class="nav-icon far fa-circle text-info"></i>
+                <p>Informational</p>
+            </a>
+            </li> *} #}
+                    </ul>
+                </nav>
+                <!-- /.sidebar-menu -->
+            </div>
+            <!-- /.sidebar -->
+        </aside>
+
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper bg-white">
+            <!-- Content Header (Page header) -->
+            <div class="content-header">
+                <div class="container-fluid">
+                    <div class="row mb-2">
+                        {# <div class="col-sm-6">
+                            <h1 class="m-0 text-dark">Dashboard</h1>
+                        </div>     #}
+                    </div>
+                        <!-- /.row -->
+
+
+{% endblock %}

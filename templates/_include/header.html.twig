@@ -21,8 +21,8 @@
 
                 {% if app.user != null %}
                 <span class="">Bonjour</span>
-                <a href="{{ path('home_page') }}" title="profile">
-                    {{ app.user.name }} {{ app.user.firstName }}
+                <a href="{{ path('dashboard') }}" title="profile">
+                    {{ app.user.firstName }} {{ app.user.name }}
                     <i class="fas fa-users-cog ml-3"></i>
                 </a>
                 |
