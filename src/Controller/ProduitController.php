@@ -7,7 +7,9 @@ use App\Entity\Produit;
 use App\Entity\ProduitType as EntityProduitType;
 use App\Form\ProduitSearchType;
 use App\Form\ProduitType;
+use App\Form\ReservationType;
 use App\Repository\ProduitRepository;
+use DateTime;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -119,13 +121,29 @@ class ProduitController extends AbstractController
     }
 
      /**
-     * @Route("/{id}/reservation", name="produit_reservation", methods={"GET"})
+     * @Route("/{id}/reservation", name="produit_reservation", methods={"GET","POST"})
      */
-    public function reservation(Produit $produit, ProduitRepository $produitRepository): Response
+    public function reservation(Request $request, Produit $produit): Response
     {
+        $form = $this->createForm(ReservationType::class);
+        $form->handleRequest($request);
+
+        //todo : check que quantite est <= à disponibilite
+        if ($form->isSubmitted() && $form->isValid()) {
+            $data = $form->getData();
+            $user = $this->getUser();
+            $data['user_id'] = $user->getId();
+            $data['produit_id'] = $produit->getId();
+            $data['createdAt'] = new DateTime('NOW');
+            dd($data);
+            //TODO : mettre dans le panier ! (quand on aura un panier LOL)
+        }
+
+        //$form->remove('quantite');
+
         return $this->render('produit/evenement/reservation.html.twig', [
             'produit' => $produit,
-            'produits' => $produitRepository->findAll(),
+            'form' => $form->createView()
         ]);
     }
 }

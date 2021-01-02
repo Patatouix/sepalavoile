@@ -8,6 +8,9 @@
 {% endblock %}
 
 {% block body %}
+
+    {{ include('produit/evenement/_modal_reservation.html.twig', {'button_label': 'Update'}) }}
+
     <div class="container">
         <div class="row">
             <div class="col-12 col-md-8">
@@ -26,15 +29,24 @@
 
     <script>
         //construction du tableau à fournir au calendrier pour afficher les créneaux
-        //ce tableau sera ensuite utilisé par le fichier js spécifique à cette page (assets/fullcalendar.js)
+        //ce tableau sera ensuite utilisé par le fichier js spécifique à cette page (assets/reservation.js)
         let creneaux = [];
         let creneau = {};
+        let reservable;
         {% for creneau in produit.creneaux %}
+            reservable = {{ creneau.achats|length < produit.objectif ? 'true' : 'false' }};
             creneau = {
                 start: '{{ creneau.debut|date('Y-m-d H:i:s') }}',
-                end: '{{ creneau.debut|date('Y-m-d H:i:s') }}',
+                end: '{{ creneau.fin|date('Y-m-d H:i:s') }}',
+                reservable: reservable,
+                //on réécris le debut et la fin dans des attributs "customs" pour pouvoir accéder plus tard à ces données
+                //(le start et end ci-dessus seront transformés en objets JS et il est à priori difficile de réobtenir un format Y-m-d à partir de ces objets)
+                debut: '{{ creneau.debut|date('Y-m-d H:i:s') }}',
+                fin: '{{ creneau.fin|date('Y-m-d H:i:s') }}',
+                creneauId: '{{ creneau.id }}',
+                places: {{ produit.objectif }} - {{ creneau.achats|length }},
                 //couleur selon la disponibilité
-                color: '{{ creneau.achats|length == produit.objectif ? 'red' : 'green' }}'
+                color: reservable ? 'green' : 'red',
             }
             creneaux.push(creneau);
         {% endfor %}
