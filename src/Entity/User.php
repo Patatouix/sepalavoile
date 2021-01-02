@@ -93,6 +93,11 @@ class User implements UserInterface
      */
     private $achats;
 
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     */
+    private $numTel;
+
     public function __construct()
     {
         $this->achats = new ArrayCollection();
@@ -322,6 +327,18 @@ class User implements UserInterface
                 $achat->setUser(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getNumTel(): ?string
+    {
+        return $this->numTel;
+    }
+
+    public function setNumTel(?string $numTel): self
+    {
+        $this->numTel = $numTel;
 
         return $this;
     }

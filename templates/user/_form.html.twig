@@ -1,4 +1,118 @@
 {{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
+    <div id="user_form" class="container bg-light rounded">
+            <div class="row bg-light border-bottom border-right border-left">
+                <div class="col-3 text-left pl-4 pr-4 my-auto">
+                    <i class="fad fa-inbox-in mr-2"></i> {# {{ form_label(form.imageFile) }}
+                    {{ form_widget(form.imageFile) }} #}
+                </div>
+                <div class="col-9 mt-5 pb-4 border-left-form">
+                    <div class="col-12 mt-5">
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group">
+                                <div class="row mb-3">
+                                    <div class="col-12 col-md-1 p-0 text-center"><i class="fad fa-user-alt "></i></div>
+                                    <div class="col-12 col-md-4">{{ form_label(form.firstname) }}</div>
+                                    <div class="col-12 col-md-7 p-0">{{ form_widget(form.firstname, {'attr': {'placeholder': 'Prénom'}}) }}</div>
+                                </div>
+                            </li>
+                            <li class="list-group">
+                                <div class="row mb-3">
+                                    <div class="col-12 col-md-1 p-0 text-center"><i class="fal fa-user-alt"></i></div>
+                                    <div class="col-12 col-md-4">{{ form_label(form.name) }}</div>
+                                    <div class="col-12 col-md-7 p-0">{{ form_widget(form.name, {'attr': {'placeholder': 'Nom'}}) }}</div>
+                                </div>
+                            </li>
+                            <li class="list-group">
+                                <div class="row mb-3">
+                                    <div class="col-12 col-md-1 p-0 text-center"><i class="fad fa-envelope-open-text"></i></div>
+                                    <div class="col-12 col-md-4">{{ form_label(form.email) }}</div>
+                                    <div class="col-12 col-md-7 p-0">{{ form_widget(form.email, {'attr': {'placeholder': 'E-mail'}}) }}</div>
+                                </div>
+                            </li>
+                            <li class="list-group">
+                                <div class="row mb-3">
+                                    <div class="col-12 col-md-1 p-0 text-center"><i class="fad fa-phone"></i></div>
+                                    <div class="col-12 col-md-4">{{ form_label(form.numTel) }}</div>
+                                    <div class="col-12 col-md-7 p-0">{{ form_widget(form.numTel, {'attr': {'placeholder': 'Téléphone'}}) }}</div>
+                                </div>
+                            </li>
+                            <li class="list-group">
+                                <div class="row mb-3">
+                                    <div class="col-12 col-md-1 p-0 text-center"><i class="fad fa-smile-plus"></i></div>
+                                    <div class="col-12 col-md-4">{{ form_label(form.pseudo) }}</div>
+                                    <div class="col-12 col-md-7 p-0">{{ form_widget(form.pseudo, {'attr': {'placeholder': 'Pseudo'}}) }}</div>
+                                </div>
+                            </li>
+                            <li class="list-group">
+                                <div class="row mb-3">
+                                    <div class="col-12 col-md-1 p-0 text-center"><i class="fad fa-road"></i></div>
+                                    <div class="col-12 col-md-4">{{ form_label(form.adresse) }}</div>
+                                    <div class="col-12 col-md-7 p-0">{{ form_widget(form.adresse, {'attr': {'placeholder': 'Adresse'}}) }}</div>
+                                </div>
+                            </li>
+                            <li class="list-group">
+                                <div class="row mb-3">
+                                    <div class="col-12 col-md-1 p-0 text-center"><i class="fad fa-mailbox"></i></div>
+                                    <div class="col-12 col-md-4">{{ form_label(form.codePostal) }}</div>
+                                    <div class="col-12 col-md-7 p-0">{{ form_widget(form.codePostal, {'attr': {'placeholder': 'Code postal'}}) }}</div>
+                                </div>
+                            </li>
+                            <li class="list-group">
+                                <div class="row mb-3">
+                                    <div class="col-12 col-md-1 p-0 text-center"><i class="fad fa-map-marked"></i></div>
+                                    <div class="col-12 col-md-4">{{ form_label(form.ville) }}</div>
+                                    <div class="col-12 col-md-7 p-0">{{ form_widget(form.ville, {'attr': {'placeholder': 'Ville'}}) }}</div>
+                                </div>
+                            </li>
+                            <li class="list-group">
+                                <div class="row mb-3">
+                                    <div class="col-12 col-md-1 p-0 text-center"><i class="fad fa-user-check"></i></div>
+                                    {# <div class="col-12 col-md-4 font-weight-bold">Compte</div> #}
+                                    <div class="col-12 offset-md-4 col-md-7 p-0 font-weight-bold">{{ form_widget(form.isVerified) }}</div>
+                                </div>
+                            </li>
+                            {% if form.password is defined %}
+                            
+                            <li class="list-group mt-4">
+                                <div class="row">
+                                    <div class="col-5">
+                                        <div class="row">
+                                            <div class="col-12 col-md-2 p-0 text-center"><i class="fad fa-key"></i></div>
+                                            <div class="col-12 col-md-8 ml-2 font-weight-bold">Mot de passe</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-7 m-0 p-0">
+                                        <div class="col-12 p-0 text-muted">
+                                            {{ form_row(form.password.first) }}
+                                        </div>
+                                        <div class="col-12 p-0 text-muted">
+                                            {{ form_row(form.password.second) }}
+                                        </di>
+                                    </div>
+                                </div>
+                            </li>
+                            {% endif %}
+
+                            {# <li class="list-group">
+                                <div class="row mb-3">
+                                    <div class="col-1 p-0 text-center"><i class="fad fa-envelope-open-text"></i></div>
+                                    <div class="col-4">{{ form_label(form.roles) }}</div>
+                                    <div class="col-2 p-0">{{ form_widget(form.roles, {'attr': {'placeholder': 'Roles'}}) }}</div>
+                                </div>
+                            </li> #}
+                            
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-12 text-right p-4"> 
+                    <a href="{{ path('user_index') }}" class="btn btn-secondary">Annuler</a>
+                    <button class="btn btn-style">{{ button_label|default('Valider') }}</button>
+                </div>
+            </div>
+        </div>
 {{ form_end(form) }}
+
+
+
+
+

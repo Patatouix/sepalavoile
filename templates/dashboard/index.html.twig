@@ -1,0 +1,21 @@
+{% extends 'base_dashboard.html.twig' %}
+
+{% block stylesheets %}
+{{ parent() }}
+{# {{ encore_entry_link_tags('dashboard') }} #}
+{% endblock %}
+
+
+{% block title %}Dashboard{% endblock %}
+
+{% block body %}
+
+<div class="container text-center mt-5">
+<h1>
+    Un projet de tour du monde à la voile
+</h1>
+
+<img src="{{ asset('/images/logo.svg') }}" class="img-fluid w-50 mt-5" alt="Avatar du profil">
+</div>
+
+{% endblock %}
