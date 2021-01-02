@@ -1,0 +1,60 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Réservation{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('reservation') }}
+{% endblock %}
+
+{% block body %}
+
+    {{ include('produit/evenement/_modal_reservation.html.twig', {'button_label': 'Update'}) }}
+
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <h1>{{ produit.nom }}</h1>
+                <div id="calendar"></div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    <script>
+        //construction du tableau à fournir au calendrier pour afficher les créneaux
+        //ce tableau sera ensuite utilisé par le fichier js spécifique à cette page (assets/reservation.js)
+        let creneaux = [];
+        let creneau = {};
+        let reservable;
+        let placesReservees = 0;
+        {% for creneau in produit.creneaux %}
+            //pour chaque creneau, on calcule le total de places réservées
+            {% for reservation in creneau.achats %}
+                placesReservees += {{ reservation.quantite }};
+            {% endfor %}
+            reservable = placesReservees < {{ produit.objectif }} ? true : false;
+            creneau = {
+                start: '{{ creneau.debut|date('Y-m-d H:i:s') }}',
+                end: '{{ creneau.fin|date('Y-m-d H:i:s') }}',
+                reservable: reservable,
+                //on réécris le debut et la fin dans des attributs "customs" pour pouvoir accéder plus tard à ces données
+                //(le start et end ci-dessus seront transformés en objets JS et il est à priori difficile de réobtenir un format Y-m-d à partir de ces objets)
+                debut: '{{ creneau.debut|date('Y-m-d H:i:s') }}',
+                fin: '{{ creneau.fin|date('Y-m-d H:i:s') }}',
+                creneauId: '{{ creneau.id }}',
+                places: {{ produit.objectif }} - placesReservees,
+                //couleur selon la disponibilité
+                color: reservable ? 'green' : 'red',
+            }
+            creneaux.push(creneau);
+            //reset pour la boucle suivante
+            placesReservees = 0;
+        {% endfor %}
+    </script>
+
+    {{ encore_entry_script_tags('reservation') }}
+{% endblock %}

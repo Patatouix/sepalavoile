@@ -2,13 +2,19 @@
 
 namespace App\Controller;
 
+use App\Data\ProduitSearchData;
+use App\Entity\Creneau;
 use App\Entity\Produit;
+use App\Entity\ProduitType as EntityProduitType;
+use App\Form\ProduitSearchType;
 use App\Form\ProduitType;
+use App\Form\ReservationType;
 use App\Repository\ProduitRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
 /**
  * @Route("/produit")
@@ -18,10 +24,15 @@ class ProduitController extends AbstractController
     /**
      * @Route("/", name="produit_index", methods={"GET"})
      */
-    public function index(ProduitRepository $produitRepository): Response
+    public function index(ProduitRepository $produitRepository, Request $request)
     {
+        $data = new ProduitSearchData();
+        $form = $this->createForm(ProduitSearchType::class, $data);
+        $form->handleRequest($request);
+        $produits = $produitRepository->findSearch($data);
         return $this->render('produit/index.html.twig', [
-            'produits' => $produitRepository->findAll(),
+            'produits' => $produits,
+            'form' => $form->createView()
         ]);
     }
 
@@ -51,9 +62,27 @@ class ProduitController extends AbstractController
     /**
      * @Route("/{id}", name="produit_show", methods={"GET"})
      */
-    public function show(Produit $produit): Response
+    public function show(Produit $produit, ProduitType $produitType): Response
     {
-        return $this->render('produit/show.html.twig', [
+        $produitTypeSlug = $produit->getProduitType()->getSlug();
+
+        //sélection du bon template suivant le type de produit
+        switch ($produitTypeSlug) {
+            case EntityProduitType::PRODUIT_TYPE_EVENT_SLUG:
+                $templateFolder = EntityProduitType::PRODUIT_TYPE_EVENT_SLUG;
+                break;
+            case EntityProduitType::PRODUIT_TYPE_DONATION_SLUG:
+                $templateFolder = EntityProduitType::PRODUIT_TYPE_DONATION_SLUG;
+                break;
+            case EntityProduitType::PRODUIT_TYPE_ADHESION_SLUG:
+                $templateFolder = EntityProduitType::PRODUIT_TYPE_ADHESION_SLUG;
+                break;
+            default:
+                $templateFolder = 'default';
+                break;
+        }
+
+        return $this->render('produit/' . $templateFolder . '/show.html.twig', [
             'produit' => $produit,
         ]);
     }
@@ -90,5 +119,66 @@ class ProduitController extends AbstractController
         }
 
         return $this->redirectToRoute('produit_index');
+    }
+
+     /**
+     * @Route("/{id}/reservation", name="produit_reservation", methods={"GET","POST"})
+     * @IsGranted("ROLE_USER")
+     */
+    public function reservation(Request $request, Produit $produit): Response
+    {
+        $form = $this->createForm(ReservationType::class);
+        $form->handleRequest($request);
+
+        //todo : check que quantite est <= à disponibilite
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $data = $form->getData();
+
+            $creneauId = $data['creneau_id'];
+            $creneau = $this->getDoctrine()
+                ->getRepository(Creneau::class)
+                ->find($creneauId);
+
+            $placesReservees = 0;
+            foreach ($creneau->getAchats() as $reservation) {
+                $placesReservees += $reservation->getQuantite();
+            }
+            $placesDisponibles = $produit->getObjectif() - $placesReservees;
+
+            //si assez de places disponibles
+            if ($placesDisponibles >= $data['quantite']) {
+                //on met dans le panier (session)
+                $session = $request->getSession();
+                $panier = $session->get('panier', []);
+                //$panier = [];
+                $panier[EntityProduitType::PRODUIT_TYPE_EVENT_NAME][$produit->getId()][$data['creneau_id']] = [
+                    'quantite' => $data['quantite'],
+                    'montant' => $produit->getPrix(),
+                    'produit_nom' => $produit->getNom(),
+                    'creneau_debut' => $creneau->getDebut(),
+                    'creneau_fin' => $creneau->getFin()
+                ];
+                //dd($panier[EntityProduitType::PRODUIT_TYPE_EVENT_NAME][$produit->getId()]);
+                //dd($panier);
+                $session->set('panier', $panier);
+
+                $this->addFlash(
+                    'success',
+                    'Votre réservation a été ajoutée au panier !'
+                );
+            } else {
+                //sinon on ne fait rien et on met msg d'erreur
+                $this->addFlash(
+                    'success',
+                    'Pas assez de places disponibles ! Recommencez votre réservation, sans tricher cette fois !'
+                );
+            }
+        }
+
+        return $this->render('produit/evenement/reservation.html.twig', [
+            'produit' => $produit,
+            'form' => $form->createView()
+        ]);
     }
 }

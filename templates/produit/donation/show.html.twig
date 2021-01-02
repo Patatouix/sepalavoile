@@ -20,12 +20,12 @@
                 <td>{{ produit.description }}</td>
             </tr>
             <tr>
-                <th>DateDebut</th>
-                <td>{{ produit.dateDebut ? produit.dateDebut|date('Y-m-d H:i:s') : '' }}</td>
+                <th>DebutPublication</th>
+                <td>{{ produit.debutPublication ? produit.debutPublication|date('Y-m-d H:i:s') : '' }}</td>
             </tr>
             <tr>
-                <th>DateFin</th>
-                <td>{{ produit.dateFin ? produit.dateFin|date('Y-m-d H:i:s') : '' }}</td>
+                <th>FinPublication</th>
+                <td>{{ produit.finPublication ? produit.finPublication|date('Y-m-d H:i:s') : '' }}</td>
             </tr>
             <tr>
                 <th>Adresse</th>
@@ -65,6 +65,8 @@
     <a href="{{ path('produit_index') }}">back to list</a>
 
     <a href="{{ path('produit_edit', {'id': produit.id}) }}">edit</a>
+
+    <a href="{{ path('produit_reservation', {'id': produit.id}) }}">Donner</a>
 
     {{ include('produit/_delete_form.html.twig') }}
 {% endblock %}

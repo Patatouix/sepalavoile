@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\ProduitRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -30,12 +32,12 @@ class Produit
     /**
      * @ORM\Column(type="datetime", nullable=true)
      */
-    private $dateDebut;
+    private $debutPublication;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
      */
-    private $dateFin;
+    private $finPublication;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
@@ -77,6 +79,28 @@ class Produit
      */
     private $updatedAt;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=ProduitType::class, inversedBy="produits")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $produitType;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Creneau::class, mappedBy="produit", orphanRemoval=true)
+     */
+    private $creneaux;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Achat::class, mappedBy="produit")
+     */
+    private $achats;
+
+    public function __construct()
+    {
+        $this->creneaux = new ArrayCollection();
+        $this->achats = new ArrayCollection();
+    }
+
     public function getId(): ?int
     {
         return $this->id;
@@ -106,26 +130,26 @@ class Produit
         return $this;
     }
 
-    public function getDateDebut(): ?\DateTimeInterface
+    public function getDebutPublication(): ?\DateTimeInterface
     {
-        return $this->dateDebut;
+        return $this->debutPublication;
     }
 
-    public function setDateDebut(?\DateTimeInterface $dateDebut): self
+    public function setDebutPublication(?\DateTimeInterface $debutPublication): self
     {
-        $this->dateDebut = $dateDebut;
+        $this->debutPublication = $debutPublication;
 
         return $this;
     }
 
-    public function getDateFin(): ?\DateTimeInterface
+    public function getFinPublication(): ?\DateTimeInterface
     {
-        return $this->dateFin;
+        return $this->finPublication;
     }
 
-    public function setDateFin(?\DateTimeInterface $dateFin): self
+    public function setFinPublication(?\DateTimeInterface $finPublication): self
     {
-        $this->dateFin = $dateFin;
+        $this->finPublication = $finPublication;
 
         return $this;
     }
@@ -222,6 +246,78 @@ class Produit
     public function setUpdatedAt(?\DateTimeInterface $updatedAt): self
     {
         $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    public function getProduitType(): ?ProduitType
+    {
+        return $this->produitType;
+    }
+
+    public function setProduitType(?ProduitType $produitType): self
+    {
+        $this->produitType = $produitType;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Creneau[]
+     */
+    public function getCreneaux(): Collection
+    {
+        return $this->creneaux;
+    }
+
+    public function addCreneaux(Creneau $creneaux): self
+    {
+        if (!$this->creneaux->contains($creneaux)) {
+            $this->creneaux[] = $creneaux;
+            $creneaux->setProduit($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCreneaux(Creneau $creneaux): self
+    {
+        if ($this->creneaux->removeElement($creneaux)) {
+            // set the owning side to null (unless already changed)
+            if ($creneaux->getProduit() === $this) {
+                $creneaux->setProduit(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Achat[]
+     */
+    public function getAchats(): Collection
+    {
+        return $this->achats;
+    }
+
+    public function addAchat(Achat $achat): self
+    {
+        if (!$this->achats->contains($achat)) {
+            $this->achats[] = $achat;
+            $achat->setProduit($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAchat(Achat $achat): self
+    {
+        if ($this->achats->removeElement($achat)) {
+            // set the owning side to null (unless already changed)
+            if ($achat->getProduit() === $this) {
+                $achat->setProduit(null);
+            }
+        }
 
         return $this;
     }

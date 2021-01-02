@@ -14,8 +14,8 @@ class ProduitType extends AbstractType
         $builder
             ->add('nom')
             ->add('description')
-            ->add('dateDebut')
-            ->add('dateFin')
+            ->add('debutPublication')
+            ->add('finPublication')
             ->add('adresse')
             ->add('codePostal')
             ->add('ville')
