@@ -63,13 +63,14 @@ class PanierController extends AbstractController
                         $achat->setMontant($reservation['montant']);
                         $achat->setCreatedAt(new DateTime('NOW'));
                         $achat->setCreneau($creneau);
-                        //dd($achat);
                         $entityManager->persist($achat);
                         $entityManager->flush();
                     }
                 }
             }
         }
+        $panier = [];
+        $session->set('panier', $panier);
         $this->addFlash(
             'success',
             'Vos achats ont bien été enregistrés !'

@@ -140,24 +140,40 @@ class ProduitController extends AbstractController
                 ->getRepository(Creneau::class)
                 ->find($creneauId);
 
-            $session = $request->getSession();
-            $panier = $session->get('panier', []);
-            //$panier = [];
-            $panier[EntityProduitType::PRODUIT_TYPE_EVENT_NAME][$produit->getId()][$data['creneau_id']] = [
-                'quantite' => $data['quantite'],
-                'montant' => $produit->getPrix(),
-                'produit_nom' => $produit->getNom(),
-                'creneau_debut' => $creneau->getDebut(),
-                'creneau_fin' => $creneau->getFin()
-            ];
-            //dd($panier[EntityProduitType::PRODUIT_TYPE_EVENT_NAME][$produit->getId()]);
-            //dd($panier);
-            $session->set('panier', $panier);
+            $placesReservees = 0;
+            foreach ($creneau->getAchats() as $reservation) {
+                $placesReservees += $reservation->getQuantite();
+            }
+            $placesDisponibles = $produit->getObjectif() - $placesReservees;
 
-            $this->addFlash(
-                'success',
-                'Votre réservation a été ajoutée au panier !'
-            );
+            //si assez de places disponibles
+            if ($placesDisponibles >= $data['quantite']) {
+                //on met dans le panier (session)
+                $session = $request->getSession();
+                $panier = $session->get('panier', []);
+                //$panier = [];
+                $panier[EntityProduitType::PRODUIT_TYPE_EVENT_NAME][$produit->getId()][$data['creneau_id']] = [
+                    'quantite' => $data['quantite'],
+                    'montant' => $produit->getPrix(),
+                    'produit_nom' => $produit->getNom(),
+                    'creneau_debut' => $creneau->getDebut(),
+                    'creneau_fin' => $creneau->getFin()
+                ];
+                //dd($panier[EntityProduitType::PRODUIT_TYPE_EVENT_NAME][$produit->getId()]);
+                //dd($panier);
+                $session->set('panier', $panier);
+
+                $this->addFlash(
+                    'success',
+                    'Votre réservation a été ajoutée au panier !'
+                );
+            } else {
+                //sinon on ne fait rien et on met msg d'erreur
+                $this->addFlash(
+                    'success',
+                    'Pas assez de places disponibles ! Recommencez votre réservation, sans tricher cette fois !'
+                );
+            }
         }
 
         return $this->render('produit/evenement/reservation.html.twig', [

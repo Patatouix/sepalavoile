@@ -13,12 +13,9 @@
 
     <div class="container">
         <div class="row">
-            <div class="col-12 col-md-8">
+            <div class="col">
                 <h1>{{ produit.nom }}</h1>
                 <div id="calendar"></div>
-            </div>
-            <div class="col-12 col-md-4 border-left">
-                <h2>Mes réservations</h2>
             </div>
         </div>
     </div>
@@ -33,8 +30,13 @@
         let creneaux = [];
         let creneau = {};
         let reservable;
+        let placesReservees = 0;
         {% for creneau in produit.creneaux %}
-            reservable = {{ creneau.achats|length < produit.objectif ? 'true' : 'false' }};
+            //pour chaque creneau, on calcule le total de places réservées
+            {% for reservation in creneau.achats %}
+                placesReservees += {{ reservation.quantite }};
+            {% endfor %}
+            reservable = placesReservees < {{ produit.objectif }} ? true : false;
             creneau = {
                 start: '{{ creneau.debut|date('Y-m-d H:i:s') }}',
                 end: '{{ creneau.fin|date('Y-m-d H:i:s') }}',
@@ -44,11 +46,13 @@
                 debut: '{{ creneau.debut|date('Y-m-d H:i:s') }}',
                 fin: '{{ creneau.fin|date('Y-m-d H:i:s') }}',
                 creneauId: '{{ creneau.id }}',
-                places: {{ produit.objectif }} - {{ creneau.achats|length }},
+                places: {{ produit.objectif }} - placesReservees,
                 //couleur selon la disponibilité
                 color: reservable ? 'green' : 'red',
             }
             creneaux.push(creneau);
+            //reset pour la boucle suivante
+            placesReservees = 0;
         {% endfor %}
     </script>
 

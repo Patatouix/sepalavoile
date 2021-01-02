@@ -16,6 +16,7 @@ class ReservationType extends AbstractType
                 'label' => 'Nombre de places',
             ])
             ->add('creneau_id', IntegerType::class, [
+                'label' => false,
                 'attr' => ['style' => 'display: none']
             ])
         ;

@@ -93,8 +93,15 @@
         let creneaux = [];
         let creneau = {};
         let reservable;
+        let placesReservees = 0;
         {% for creneau in produit.creneaux %}
-            reservable = {{ creneau.achats|length < produit.objectif ? 'true' : 'false' }};
+            //pour chaque creneau, on calcule le total de places réservées
+            {% for reservation in creneau.achats %}
+                placesReservees += {{ reservation.quantite }};
+            {% endfor %}
+            reservable = placesReservees < {{ produit.objectif }} ? true : false;
+            //reset pour la boucle suivante
+            placesReservees = 0;
             creneau = {
                 start: '{{ creneau.debut|date('Y-m-d H:i:s') }}',
                 end: '{{ creneau.fin|date('Y-m-d H:i:s') }}',
