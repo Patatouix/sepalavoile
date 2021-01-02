@@ -3,17 +3,18 @@
 namespace App\Controller;
 
 use App\Data\ProduitSearchData;
+use App\Entity\Creneau;
 use App\Entity\Produit;
 use App\Entity\ProduitType as EntityProduitType;
 use App\Form\ProduitSearchType;
 use App\Form\ProduitType;
 use App\Form\ReservationType;
 use App\Repository\ProduitRepository;
-use DateTime;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
 /**
  * @Route("/produit")
@@ -122,6 +123,7 @@ class ProduitController extends AbstractController
 
      /**
      * @Route("/{id}/reservation", name="produit_reservation", methods={"GET","POST"})
+     * @IsGranted("ROLE_USER")
      */
     public function reservation(Request $request, Produit $produit): Response
     {
@@ -130,16 +132,33 @@ class ProduitController extends AbstractController
 
         //todo : check que quantite est <= à disponibilite
         if ($form->isSubmitted() && $form->isValid()) {
-            $data = $form->getData();
-            $user = $this->getUser();
-            $data['user_id'] = $user->getId();
-            $data['produit_id'] = $produit->getId();
-            $data['createdAt'] = new DateTime('NOW');
-            dd($data);
-            //TODO : mettre dans le panier ! (quand on aura un panier LOL)
-        }
 
-        //$form->remove('quantite');
+            $data = $form->getData();
+
+            $creneauId = $data['creneau_id'];
+            $creneau = $this->getDoctrine()
+                ->getRepository(Creneau::class)
+                ->find($creneauId);
+
+            $session = $request->getSession();
+            $panier = $session->get('panier', []);
+            //$panier = [];
+            $panier[EntityProduitType::PRODUIT_TYPE_EVENT_NAME][$produit->getId()][$data['creneau_id']] = [
+                'quantite' => $data['quantite'],
+                'montant' => $produit->getPrix(),
+                'produit_nom' => $produit->getNom(),
+                'creneau_debut' => $creneau->getDebut(),
+                'creneau_fin' => $creneau->getFin()
+            ];
+            //dd($panier[EntityProduitType::PRODUIT_TYPE_EVENT_NAME][$produit->getId()]);
+            //dd($panier);
+            $session->set('panier', $panier);
+
+            $this->addFlash(
+                'success',
+                'Votre réservation a été ajoutée au panier !'
+            );
+        }
 
         return $this->render('produit/evenement/reservation.html.twig', [
             'produit' => $produit,
