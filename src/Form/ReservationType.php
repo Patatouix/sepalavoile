@@ -4,11 +4,8 @@ namespace App\Form;
 
 use phpDocumentor\Reflection\Types\Integer;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
-use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class ReservationType extends AbstractType
 {
@@ -18,7 +15,9 @@ class ReservationType extends AbstractType
             ->add('quantite', IntegerType::class, [
                 'label' => 'Nombre de places',
             ])
-            ->add('creneau_id', HiddenType::class)
+            ->add('creneau_id', IntegerType::class, [
+                'attr' => ['style' => 'display: none']
+            ])
         ;
     }
 }
