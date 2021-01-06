@@ -4,6 +4,7 @@ namespace App\DataFixtures;
 
 use App\Entity\Achat;
 use App\Entity\Creneau;
+use App\Entity\Media;
 use App\Entity\Produit;
 use App\Entity\ProduitType;
 use App\Entity\User;
@@ -115,6 +116,15 @@ class AppFixtures extends Fixture
         $produitAdhesion->setSlug(ProduitType::PRODUIT_TYPE_ADHESION_SLUG);
         $manager->persist($produitAdhesion);
 
+        // medias
+        $media = new Media();
+        $media->setCreatedAt(new DateTime('NOW'));
+        $media->setNom('default-placeholder.png');
+        $media->setUrl('https://www.événementiel.net/wp-content/uploads/2014/02/default-placeholder.png');
+        $media->setDescription('Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat aperiam doloremque, dolores voluptates obcaecati nihil ipsam voluptatibus vero exercitationem in, debitis sapiente. Alias ullam culpa sint vel esse, numquam in?');
+        $media->setTitre('Image par défaut pour nos entités');
+        $manager->persist($media);
+
         //produits de type event
 
         for ($i = 1; $i <= 20; $i++) {
@@ -129,6 +139,7 @@ class AppFixtures extends Fixture
             $produit->setPrix($i);
             $produit->setObjectif($i + 2);
             $produit->setCreatedAt(new DateTime('NOW'));
+            $produit->addMedia($media);
             $produit->setProduitType($produitEvent);
             $manager->persist($produit);
 
@@ -167,6 +178,7 @@ class AppFixtures extends Fixture
             $produit->setPrix($i);
             $produit->setObjectif($i + 5);
             $produit->setCreatedAt(new DateTime('NOW'));
+            $produit->addMedia($media);
             $produit->setProduitType($produitDon);
             $manager->persist($produit);
         }
@@ -185,6 +197,7 @@ class AppFixtures extends Fixture
             $produit->setPrix($i);
             $produit->setObjectif($i + 5);
             $produit->setCreatedAt(new DateTime('NOW'));
+            $produit->addMedia($media);
             $produit->setProduitType($produitAdhesion);
             $manager->persist($produit);
         }

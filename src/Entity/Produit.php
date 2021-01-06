@@ -95,10 +95,16 @@ class Produit
      */
     private $achats;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=Media::class, mappedBy="produits")
+     */
+    private $medias;
+
     public function __construct()
     {
         $this->creneaux = new ArrayCollection();
         $this->achats = new ArrayCollection();
+        $this->medias = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -317,6 +323,33 @@ class Produit
             if ($achat->getProduit() === $this) {
                 $achat->setProduit(null);
             }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Media[]
+     */
+    public function getMedias(): Collection
+    {
+        return $this->medias;
+    }
+
+    public function addMedia(Media $media): self
+    {
+        if (!$this->medias->contains($media)) {
+            $this->medias[] = $media;
+            $media->addProduit($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMedia(Media $media): self
+    {
+        if ($this->medias->removeElement($media)) {
+            $media->removeProduit($this);
         }
 
         return $this;
