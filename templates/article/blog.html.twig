@@ -1,56 +1,95 @@
 {% extends "carousel.html.twig" %}
 
-
 {% block content %}
 
-    {# ========== SECTION TEXTE ========== #}
+
     <div class="container">
-        <div class="titresection">
+        <div class="titresection mb-5">
             <h2>notre blog</h2>
         </div>
-    
-        <div class="body-blog mb-5">
-            <!-- Row -->
-            <div class="row">
-                <section class="col-md-8 contenu pt-4" role="main">
-                    <!-- Row -->
-                    <div class="row mb-5">
-                        <!-- Article -->
-                        {% for article in articles %}                       
-                        <article class="articlestyle shadow">
-                            <span class="imgWrap">
-                                <a href="">
-                                    {# <img id='articleImage' class="img-fluid" alt="Photo de l'article" src="{{ article.filename ? asset('/images/photoarticle/' ~ article.filename) : asset('/images/logo.svg') }}"> #}
-                                </a>
-                            </span>
-                            <p class="meta">
-                                Publié le <strong>{{ article.createdAt|date('d/m/Y') }}</strong> par <strong>{{ article.author }}</strong> dans la rubrique 
-                                {# {% for category in article.categories %}
-                                    <a href="#">{{ category.name }}</a> - 
-                                {% endfor %} #}
-                                {{ article.nbVues }} vues
-                            </p>
-                            <h1>{{ article.title }}</h1>
-                            <p class="excerpt">
-                                {# {{ article.content|u.truncate(230, '...')|raw }} ... #}
-                            </p>
-                            <div class="lire-bouton">
-                                <a href="{{ path('article_show', {'id': article.id}) }}" class="btn-lire shadow-box">Lire l'article</a>
-                            </div>
-                            <hr>
-                        </article>
+    </div>
+    <div class="container body-blog mb-5">
+        <!-- Row -->
+        <div class="row">
+            <section class="col-md-8 contenu pt-4" role="main">
+
+                <!-- Row -->
+                <div class="row mb-5">
+                    <!-- Article -->
+                        {% for article in articles %}
+                                {% if categoryId == null %}
+                                    <article class="articlestyle shadow">
+                                        <span class="imgWrap">
+                                            <a href="{{ path('article_show', {'id': article.id}) }}">
+                                            
+                                                {# VERSION DYNAMIQUE #}
+                                                {# <img id='articleImage' class="img-fluid" alt="Photo de l'article" src="{{ article.filename ? asset('/images/photoarticle/' ~ article.filename) : asset('/images/logo.svg') }}"> #}
+                                                
+                                                {# VERSION STATIQUE #}
+                                                <img id='articleImage' class="img-fluid" alt="Photo de l'article" src="{{ asset('/images/logo.svg') }}">
+
+                                            </a>
+                                        </span>
+                                        <p class="meta">
+                                            Publié le <strong>{{ article.createdAt|date('d/m/Y') }}</strong> par <strong>{{ article.author }}</strong> dans la rubrique 
+                                            {% for category in article.articleCategories %}
+                                                <a href="{{ path('blog', { 'categoryId': category.id }) }}">{{ category.name }}</a> - 
+                                            {% endfor %}
+                                            {{ article.nbVues}} vues
+                                        </p>
+                                        <h1>{{ article.title }}</h1>
+                                        <p class="excerpt">
+                                            {{ article.content|u.truncate(230, '...')|raw }}
+                                        </p>
+                                        <div class="lire-bouton">
+                                            <a href="{{ path('article_show', {'id': article.id}) }}" class="btn-lire shadow-box">Lire l'article</a>
+                                        </div>
+                                        <hr>
+                                    </article>
+                                {% else %}                            
+                                    {% for category in article.articleCategories  %}
+                                        {% if categoryId == category.id  %}
+
+                                            <article class="articlestyle shadow">
+                                                <span class="imgWrap">
+                                                    <a href="">
+                                                        {# <img id='articleImage' class="img-fluid" alt="Photo de l'article" src="{{ article.filename ? asset('/images/photoarticle/' ~ article.filename) : asset('/images/logo.svg') }}"> #}
+                                                        <img id='articleImage' class="img-fluid" alt="Photo de l'article" src="{{ asset('/images/logo.svg') }}">
+                                                    </a>
+                                                </span>
+                                                <p class="meta">
+                                                    Publié le <strong>{{ article.createdAt|date('d/m/Y') }}</strong> par <strong>{{ article.author }}</strong> dans la rubrique 
+                                                    {% for category in article.articleCategories %}
+                                                        <a href="#">{{ category.name }}</a> - 
+                                                    {% endfor %}
+                                                    {{ article.nbVues}} vues
+                                                </p>
+                                                <h1>{{ article.title }}</h1>
+                                                <p class="excerpt">
+                                                    {{ article.content|u.truncate(230, '...')|raw }}
+                                                </p>
+                                                <div class="lire-bouton">
+                                                    <a href="{{ path('article_show', {'id': article.id}) }}" class="btn-lire shadow-box">Lire l'article</a>
+                                                </div>
+                                                <hr>
+                                            </article>
+
+                                        {% endif %}
+                                    {% endfor %}
+                                {% endif %}
+                                
                         {% endfor %}
-                        <!-- Fin Article -->
 
-                        {# {{ knp_pagination_render(article) }} #}
+                    <!-- Fin Article -->
 
-                    </div>
-                    <!-- Fin Row -->
-                </section>
-                {% include "article/aside_article.html.twig" %}
-            </div>
-            <!-- Fin Row -->
+                    {{ knp_pagination_render(articles) }}
+
+                </div>
+                <!-- Fin Row -->
+            </section>
+            {% include "article/aside_article.html.twig" %}
         </div>
+        <!-- Fin Row -->
     </div>
 
 {% endblock %}

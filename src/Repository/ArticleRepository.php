@@ -33,19 +33,33 @@ class ArticleRepository extends ServiceEntityRepository
         ;
     }
 
-    /**
-    * @return Article[] Returns an array of Article objects
-    */    
-    public function findByArticleCategories($articleCategorie)
-    {
-        return $this->createQueryBuilder('article')
-            ->andWhere('article.articleCategories = :category')
-            ->setParameter('category', $articleCategorie)
-            ->orderBy('article.createdAt', 'DESC')
-            ->getQuery()
-            ->getResult()
-        ;
-    }
+    // /**
+    // * @return Article[] Returns an array of Article objects
+    // */    
+    // public function findByArticleCategories($articleCategorie)
+    // {
+    //     return $this->createQueryBuilder('article')
+    //         ->andWhere('article.articleCategories = :category')
+    //         ->setParameter('category', $articleCategorie)
+    //         ->orderBy('article.createdAt', 'DESC')
+    //         ->getQuery()
+    //         ->getResult()
+    //     ;
+    // }
+
+    // /**
+    // * @return Article[] Returns an array of Article objects
+    // */    
+    // public function findByCategory($category)
+    // {
+    //     return $this->createQueryBuilder('article')
+    //         ->andWhere('article.categories = :category')
+    //         ->setParameter('category', $category)
+    //         ->orderBy('article.createdAT', 'DESC')
+    //         ->getQuery()
+    //         ->getResult()
+    //     ;
+    // }
 
     // /**
     //  * @return Article[] Returns an array of Article objects

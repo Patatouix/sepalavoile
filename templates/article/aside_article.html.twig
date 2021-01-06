@@ -24,13 +24,17 @@
                 <div class="widget shadow">
                     <h2 class="text-right">Catégories</h2>
                     <ul class="list-group">
-                        {% for article_categorie in article_categories %}
+                        <li>
+                            <a href="{{ path('blog') }}">Toutes les articles</a>
+                            <span class="orange">
+                                ({{ article|length }})
+                            </span>
+                        </li>
+                        {% for category in category %}
                             <li>
-                                {# <a href="{{ path('showByarticle_categorie', { 'article_categorieId': article_categorie.id }) }}"> #}
-                                    {{ article_categorie.name }}
-                                {# </a> #}
+                                <a href="{{ path('blog', { 'categoryId': category.id }) }}">{{ category.name }}</a>
                                 <span class="orange">
-                                    ({{ article_categorie.articles|length }})
+                                    ({{ category.articles|length }})
                                 </span>
                             </li>
                         {% endfor %}
@@ -42,16 +46,16 @@
                 <div class="widget shadow">
                     <h2 class="text-right">Top vues</h2>
                     <div class="topv">
-                        {# {% for articleBestView in articleBestView %}
+                        {% for articleBestView in articleBestView %}
                         <div class="mb15 mt15">
-                            <a href="../pages/article-blog-soling.html">{{ articleBestView.title }}</a> - <span class="meta">Publié
-                                le {{ articleBestView.createdAt|date('d/m/Y') }} - {{ articleBestView.nombrevu }} vues</span>
+                            <a href="{{ path('article_show', {'id': articleBestView.id}) }}">{{ articleBestView.title }}</a> - <span class="meta">Publié
+                                le {{ articleBestView.createdAt|date('d/m/Y') }} - {{ articleBestView.nbVues }} vues</span>
                         </div>
                         <span class="imgWrap">
-                            <a href="../pages/article-blog-soling.html"><img src="{{ articleBestView.filename ? asset('/images/photoarticle/' ~ articleBestView.filename) : asset('/images/logo.svg') }}"
-                                    width="100%"></a>
+                            {# <a href="../pages/article-blog-soling.html"><img src="{{ articleBestView.filename ? asset('/images/photoarticle/' ~ articleBestView.filename) : asset('/images/logo.svg') }}" width="100%"></a> #}
+                            <a href="{{ path('article_show', {'id': articleBestView.id}) }}"><img src="{{ asset('/images/logo.svg') }}" width="100%"></a>
                         </span>                            
-                        {% endfor %} #}
+                        {% endfor %}
                     </div>
                 </div>
                 <!-- Fin widget -->

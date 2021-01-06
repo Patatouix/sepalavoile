@@ -1,58 +1,101 @@
-{% extends 'base.html.twig' %}
-
-{% block title %}Article{% endblock %}
-
 {% block body %}
-    <h1>Article</h1>
-
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ article.id }}</td>
-            </tr>
-            <tr>
-                <th>Title</th>
-                <td>{{ article.title }}</td>
-            </tr>
-            <tr>
-                <th>Content</th>
-                <td>{{ article.content }}</td>
-            </tr>
-            <tr>
-                <th>Author</th>
-                <td>{{ article.author }}</td>
-            </tr>
-            <tr>
-                <th>CreatedAt</th>
-                <td>{{ article.createdAt ? article.createdAt|date('Y-m-d H:i:s') : '' }}</td>
-            </tr>
-            <tr>
-                <th>UpdatedAt</th>
-                <td>{{ article.updatedAt ? article.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
-            </tr>
-            <tr>
-                <th>NbVues</th>
-                <td>{{ article.nbVues }}</td>
-            </tr>
-            <tr>
-                <th>PublishedDateStart</th>
-                <td>{{ article.publishedDateStart ? article.publishedDateStart|date('Y-m-d H:i:s') : '' }}</td>
-            </tr>
-            <tr>
-                <th>PublishedDateEnd</th>
-                <td>{{ article.publishedDateEnd ? article.publishedDateEnd|date('Y-m-d H:i:s') : '' }}</td>
-            </tr>
-            <tr>
-                <th>IsPublished</th>
-                <td>{{ article.isPublished ? 'Yes' : 'No' }}</td>
-            </tr>
-        </tbody>
-    </table>
-
-    <a href="{{ path('article_index') }}">back to list</a>
-
-    <a href="{{ path('article_edit', {'id': article.id}) }}">edit</a>
-
-    {{ include('article/_delete_form.html.twig') }}
+        <div id="show_article" class="container bg-light rounded">
+            <div class="row border-bottom py-3 px-5">
+                <div class="col-6">
+                    <h1 class="text-uppercase text-left m-0">
+                        {{ article.title }}
+                    </h1>
+                </div>
+                <div class="col-6 text-right my-auto">
+                    <span class="text-muted mr-2 font-italic">
+                        Modifier l'article :
+                    </span>
+                    <a href="{{ path('article_edit', {'id': article.id}) }}">
+                        <i class="fad fa-edit"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="row bg-white">
+                <div class="col-3 text-center my-auto">
+                    <i class="fad fa-inbox-in mr-4"></i>
+                    {# <img id='articleImage' class="img-fluid" alt="Photo de l'événement" src="{{ article.filename ? asset('/images/article/' ~ article.filename) : asset('/images/logo.svg') }}"> #}
+                </div>
+                <div class="col-9 my-5 pl-3 border-left-form">
+                    <div class="col-12">
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group">
+                                <div class="row mb-3">
+                                    <div class="col-1 p-0 text-center"><i class="fad fa-id-badge"></i></div>
+                                    <div class="col-3">Id article :</div>
+                                    <div class="col-8 p-0">{{ article.id }}</div>
+                                </div>
+                            </li>
+                            <li class="list-group">
+                                <div class="row mb-3">
+                                    <div class="col-1 p-0 text-center"><i class="fad fa-heading"></i></div>
+                                    <div class="col-3">Titre de l'article :</div>
+                                    <div class="col-8 p-0">{{ article.title }}</div>
+                                </div>
+                            </li>
+                            <li class="list-group">
+                                <div class="row mb-3">
+                                    <div class="col-1 p-0 text-center"><i class="fad fa-file-edit"></i></div>
+                                    <div class="col-3">Contenu de l'article :</div>
+                                    <div class="col-8 p-0 pr-5">{{ article.content|raw }}</div>
+                                </div>
+                            </li>
+                            <li class="list-group">
+                                <div class="row mb-3">
+                                    <div class="col-1 p-0 text-center"><i class="fal fa-user-alt"></i></div>
+                                    <div class="col-3">Auteur :</div>
+                                    <div class="col-8 p-0 break-word">{{ article.author }}</div>
+                                </div>
+                            </li>
+                            <li class="list-group">
+                                <div class="row mb-3">
+                                    <div class="col-1 p-0 text-center"><i class="fad fa-tags"></i></div>
+                                    <div class="col-3">Catégorie :</div>
+                                    {# <div class="col-8 p-0 break-word">{{ article.articleCategories }}</div> #}
+                                </div>
+                            </li>
+                            <li class="list-group">
+                                <div class="row mb-3">
+                                    <div class="col-1 p-0 text-center"><i class="fal fa-user-alt"></i></div>
+                                    <div class="col-3">Date de création :</div>
+                                    <div class="col-8 p-0 break-word">{{ article.createdAt ? article.createdAt|date('Y-m-d H:i:s') : '' }}</div>
+                                </div>
+                            </li>
+                            <li class="list-group">
+                                <div class="row mb-3">
+                                    <div class="col-1 p-0 text-center"><i class="fal fa-user-alt"></i></div>
+                                    <div class="col-3">Date de modification :</div>
+                                    <div class="col-8 p-0 break-word">{{ article.updatedAt ? article.updatedAt|date('Y-m-d H:i:s') : '' }}</div>
+                                </div>
+                            </li>
+                            <li class="list-group">
+                                <div class="row mb-3">
+                                    <div class="col-1 p-0 text-center"><i class="fal fa-user-alt"></i></div>
+                                    <div class="col-3">Date de début de publication :</div>
+                                    <div class="col-8 p-0 break-word">{{ article.publishedDateStart ? article.publishedDateStart|date('Y-m-d H:i:s') : '' }}</div>
+                                </div>
+                            </li>
+                            <li class="list-group">
+                                <div class="row mb-3">
+                                    <div class="col-1 p-0 text-center"><i class="fal fa-user-alt"></i></div>
+                                    <div class="col-3">Date de fin de publication :</div>
+                                    <div class="col-8 p-0 break-word">{{ article.publishedDateEnd ? article.publishedDateEnd|date('Y-m-d H:i:s') : '' }}</div>
+                                </div>
+                            </li>
+                            <li class="list-group">
+                                <div class="row mb-3">
+                                    <div class="col-1 p-0 text-center"><i class="fal fa-user-alt"></i></div>
+                                    <div class="col-3">Article publié :</div>
+                                    <div class="col-8 p-0 break-word">{{ article.isPublished ? 'Yes' : 'No' }}</div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
 {% endblock %}

@@ -13,7 +13,7 @@ class ArticleCategorieType extends AbstractType
     {
         $builder
             ->add('name')
-            ->add('Articles')
+            // ->add('Articles')
         ;
     }
 

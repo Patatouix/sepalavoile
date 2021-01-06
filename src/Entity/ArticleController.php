@@ -2,15 +2,13 @@
 
 namespace App\Entity;
 
-use App\Repository\ArticleRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
+use App\Repository\ArticleControllerRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass=ArticleRepository::class)
+ * @ORM\Entity(repositoryClass=ArticleControllerRepository::class)
  */
-class Article
+class ArticleController
 {
     /**
      * @ORM\Id
@@ -20,7 +18,7 @@ class Article
     private $id;
 
     /**
-     * @ORM\Column(type="text")
+     * @ORM\Column(type="string", length=255)
      */
     private $title;
 
@@ -28,11 +26,6 @@ class Article
      * @ORM\Column(type="text")
      */
     private $content;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $author;
 
     /**
      * @ORM\Column(type="datetime")
@@ -45,9 +38,9 @@ class Article
     private $updatedAt;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $nbVues = 0;
+    private $nbVues;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
@@ -60,19 +53,9 @@ class Article
     private $publishedDateEnd;
 
     /**
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(type="boolean", nullable=true)
      */
     private $isPublished;
-
-    /**
-     * @ORM\ManyToMany(targetEntity=ArticleCategorie::class, mappedBy="Articles")
-     */
-    private $articleCategories;
-
-    public function __construct()
-    {
-        $this->articleCategories = new ArrayCollection();
-    }
 
     public function getId(): ?int
     {
@@ -103,18 +86,6 @@ class Article
         return $this;
     }
 
-    public function getAuthor(): ?string
-    {
-        return $this->author;
-    }
-
-    public function setAuthor(string $author): self
-    {
-        $this->author = $author;
-
-        return $this;
-    }
-
     public function getCreatedAt(): ?\DateTimeInterface
     {
         return $this->createdAt;
@@ -139,12 +110,12 @@ class Article
         return $this;
     }
 
-    public function getNbVues(): ?int
+    public function getNbVues(): ?string
     {
         return $this->nbVues;
     }
 
-    public function setNbVues(int $nbVues): self
+    public function setNbVues(?string $nbVues): self
     {
         $this->nbVues = $nbVues;
 
@@ -180,36 +151,9 @@ class Article
         return $this->isPublished;
     }
 
-    public function setIsPublished(bool $isPublished): self
+    public function setIsPublished(?bool $isPublished): self
     {
         $this->isPublished = $isPublished;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|ArticleCategorie[]
-     */
-    public function getArticleCategories(): Collection
-    {
-        return $this->articleCategories;
-    }
-
-    public function addArticleCategory(ArticleCategorie $articleCategory): self
-    {
-        if (!$this->articleCategories->contains($articleCategory)) {
-            $this->articleCategories[] = $articleCategory;
-            $articleCategory->addArticle($this);
-        }
-
-        return $this;
-    }
-
-    public function removeArticleCategory(ArticleCategorie $articleCategory): self
-    {
-        if ($this->articleCategories->removeElement($articleCategory)) {
-            $articleCategory->removeArticle($this);
-        }
 
         return $this;
     }
