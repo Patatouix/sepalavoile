@@ -42,24 +42,6 @@
 .btn {
     font-size: 1rem;
 }
-.btn-style {
-    background-color: #ff8300;
-    color: white;
-    border-color: #ff8300;
-    font-family: 'Open Sans', sans-serif;
-    font-variant: small-caps;
-    /* font-size: 1em; */
-    font-weight: bold;
-}
-
-.btn-style:hover {
-    background-color: #d2d2d2;
-    color: white;
-    -webkit-box-shadow: 4px 7px 14px -3px rgba(0, 0, 0, 0.40);
-    -moz-box-shadow: 4px 7px 14px -3px rgba(0, 0, 0, 0.40);
-    box-shadow: 4px 4px 14px -3px rgba(0, 0, 0, 0.40);
-    transition-duration: .1s;
-}
 
 tbody td {
     vertical-align: middle !important;
