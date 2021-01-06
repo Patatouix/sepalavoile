@@ -91,4 +91,14 @@ class ArticleCategorieController extends AbstractController
 
         return $this->redirectToRoute('article_categorie_index');
     }
+
+    
+    public function allCategorieFooter(ArticleCategorieRepository $articleCategorieRepository): Response
+    {
+        $allCategory = $articleCategorieRepository -> findBy([],['name' => 'asc']);
+
+        return $this->render('_include/allCategorieFooter.html.twig', [
+            'category' => $allCategory,
+        ]);
+    }
 }

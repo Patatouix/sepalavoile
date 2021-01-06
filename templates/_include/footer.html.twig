@@ -29,7 +29,7 @@
                         <div class="sommaire text-center footerib">
                             <ul class="list-group">
                                 <li><a href="{{ path('home_page') }}">Accueil</a></li>
-                                <li><a href="BLOG">Blog</a></li>
+                                <li><a href="{{ path('blog') }}">Blog</a></li>
                                 <li><a href="{{ path('association') }}">L'association</a></li>
                                 <li><a href="#">Notre aventure</a>
                                     <ul class="sousmenusommaire list-group">
@@ -49,11 +49,7 @@
                     <div class="col-6 col-md-3">
                         <h2>Catégorie blog</h2>
                         <div class="articleblog text-center footerib">
-                            {# <ul class="list-group">
-                                {% for category in category %}
-                                    <li><a href="#">{{ category.name }}</a></li>
-                                {% endfor %}                                
-                            </ul> #}
+                            {{ render (controller('App\\Controller\\ArticleCategorieController::allCategorieFooter'))}}
                         </div>
                     </div>
                     <div class="col-12 col-sm-6 col-md-3">
