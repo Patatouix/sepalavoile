@@ -19,6 +19,7 @@ import './styles/lequipe.css';
 import './styles/lebateau.css';
 import './styles/nospartenaires.css';
 import './styles/dashboard.css';
+import './styles/blog.css';
 
 // start the Stimulus application
 import './bootstrap';

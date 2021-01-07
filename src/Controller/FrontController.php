@@ -2,6 +2,9 @@
 
 namespace App\Controller;
 
+use App\Entity\Article;
+use App\Repository\ArticleCategorieRepository;
+use App\Repository\ArticleRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -12,10 +15,14 @@ class FrontController extends AbstractController
     /**
      * @Route("/", name="home_page")
      */
-    public function index(): Response
+    public function index(ArticleCategorieRepository $articleCategorieRepository, ArticleRepository $articleRepository): Response
     {
+        $articleBestView = $this->getDoctrine()->getRepository(Article::class)->findBynombreVuDesc();
+
         return $this->render('front/home_page.html.twig', [
             'controller_name' => 'FrontController',
+            'articleBestView'   => $articleBestView,
+            'article' => $articleRepository->findBy([],['createdAt' => 'desc']),
         ]);
     }
 
