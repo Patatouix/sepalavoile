@@ -39,7 +39,7 @@ class ProduitController extends AbstractController
     /**
      * @Route("/new", name="produit_new", methods={"GET","POST"})
      */
-    public function new(Request $request): Response
+    /*public function new(Request $request): Response
     {
         $produit = new Produit();
         $form = $this->createForm(ProduitType::class, $produit);
@@ -57,7 +57,7 @@ class ProduitController extends AbstractController
             'produit' => $produit,
             'form' => $form->createView(),
         ]);
-    }
+    }*/
 
     /**
      * @Route("/{id}", name="produit_show", methods={"GET"})
@@ -66,23 +66,7 @@ class ProduitController extends AbstractController
     {
         $produitTypeSlug = $produit->getProduitType()->getSlug();
 
-        //sélection du bon template suivant le type de produit
-        switch ($produitTypeSlug) {
-            case EntityProduitType::PRODUIT_TYPE_EVENT_SLUG:
-                $templateFolder = EntityProduitType::PRODUIT_TYPE_EVENT_SLUG;
-                break;
-            case EntityProduitType::PRODUIT_TYPE_DONATION_SLUG:
-                $templateFolder = EntityProduitType::PRODUIT_TYPE_DONATION_SLUG;
-                break;
-            case EntityProduitType::PRODUIT_TYPE_ADHESION_SLUG:
-                $templateFolder = EntityProduitType::PRODUIT_TYPE_ADHESION_SLUG;
-                break;
-            default:
-                $templateFolder = 'default';
-                break;
-        }
-
-        return $this->render('produit/' . $templateFolder . '/show.html.twig', [
+        return $this->render('produit/' . $produitTypeSlug . '/show.html.twig', [
             'produit' => $produit,
         ]);
     }
@@ -130,49 +114,34 @@ class ProduitController extends AbstractController
         $form = $this->createForm(ReservationType::class);
         $form->handleRequest($request);
 
-        //todo : check que quantite est <= à disponibilite
         if ($form->isSubmitted() && $form->isValid()) {
 
             $data = $form->getData();
 
-            $creneauId = $data['creneau_id'];
             $creneau = $this->getDoctrine()
                 ->getRepository(Creneau::class)
-                ->find($creneauId);
-
-            $placesReservees = 0;
-            foreach ($creneau->getAchats() as $reservation) {
-                $placesReservees += $reservation->getQuantite();
-            }
-            $placesDisponibles = $produit->getObjectif() - $placesReservees;
+                ->find($data['creneau_id']);
 
             //si assez de places disponibles
-            if ($placesDisponibles >= $data['quantite']) {
+            if ($creneau->placesDisponibles() >= $data['quantite']) {
                 //on met dans le panier (session)
                 $session = $request->getSession();
                 $panier = $session->get('panier', []);
-                //$panier = [];
                 $panier[EntityProduitType::PRODUIT_TYPE_EVENT_NAME][$produit->getId()][$data['creneau_id']] = [
                     'quantite' => $data['quantite'],
                     'montant' => $produit->getPrix(),
                     'produit_nom' => $produit->getNom(),
                     'creneau_debut' => $creneau->getDebut(),
-                    'creneau_fin' => $creneau->getFin()
+                    'creneau_fin' => $creneau->getFin(),
+                    'prix' => $produit->getPrix()
                 ];
-                //dd($panier[EntityProduitType::PRODUIT_TYPE_EVENT_NAME][$produit->getId()]);
-                //dd($panier);
                 $session->set('panier', $panier);
 
-                $this->addFlash(
-                    'success',
-                    'Votre réservation a été ajoutée au panier !'
-                );
+                $this->addFlash('success', 'Votre réservation a été ajoutée au panier !');
+
+            //sinon on ne fait rien et on met msg d'erreur
             } else {
-                //sinon on ne fait rien et on met msg d'erreur
-                $this->addFlash(
-                    'success',
-                    'Pas assez de places disponibles ! Recommencez votre réservation, sans tricher cette fois !'
-                );
+                $this->addFlash('success','Pas assez de places disponibles ! Recommencez votre réservation, sans tricher cette fois !');
             }
         }
 

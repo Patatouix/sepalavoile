@@ -36,11 +36,9 @@ class PanierController extends AbstractController
         $session = $request->getSession();
         $panier = $session->get('panier', []);
 
+        //panier vide
         if(!$panier) {
-            $this->addFlash(
-                'success',
-                'Panier vide !'
-            );
+            $this->addFlash('success','Panier vide !');
             return $this->redirectToRoute('panier_index');
         }
 
@@ -48,14 +46,16 @@ class PanierController extends AbstractController
 
         foreach ($panier as $typeProduit => $produits) {
             foreach ($produits as $idProduit => $achatsProduit) {
-                $produit = $this->getDoctrine()
-                    ->getRepository(Produit::class)
-                    ->find($idProduit);
+
+                $produit = $this->getDoctrine()->getRepository(Produit::class)->find($idProduit);
+
                 if ($typeProduit == ProduitType::PRODUIT_TYPE_EVENT_NAME) {
+
                     foreach ($achatsProduit as $creneauId => $reservation) {
-                        $creneau = $this->getDoctrine()
-                            ->getRepository(Creneau::class)
-                            ->find($creneauId);
+
+                        $creneau = $this->getDoctrine()->getRepository(Creneau::class)->find($creneauId);
+
+                        //todo : check si les places dispos sont toujours là
                         $achat = new Achat();
                         $achat->setUser($this->getUser());
                         $achat->setProduit($produit);
@@ -69,12 +69,10 @@ class PanierController extends AbstractController
                 }
             }
         }
+
         $panier = [];
         $session->set('panier', $panier);
-        $this->addFlash(
-            'success',
-            'Vos achats ont bien été enregistrés !'
-        );
+        $this->addFlash('success','Vos achats ont bien été enregistrés! Merci pour votre confiance !');
 
         return $this->redirectToRoute('home_page');
     }

@@ -107,24 +107,6 @@ FOOTER gris
     color: #525252;
 }
 
-.btn-style {
-    background-color: #ff8300;
-    color: white;
-    font-family: 'Open Sans', sans-serif;
-    font-variant: small-caps;
-    font-size: .9em;
-    font-weight: bold;
-}
-
-.btn-style:hover {
-    background-color: #d2d2d2;
-    color: white;
-    -webkit-box-shadow: 4px 7px 14px -3px rgba(0, 0, 0, 0.40);
-    -moz-box-shadow: 4px 7px 14px -3px rgba(0, 0, 0, 0.40);
-    box-shadow: 4px 4px 14px -3px rgba(0, 0, 0, 0.40);
-    transition-duration: .1s;
-}
-
 /*-------------PLAN DU SITE------------*/
 
 .modal-plan-du-site h6 {

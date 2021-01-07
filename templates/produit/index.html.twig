@@ -1,61 +1,47 @@
-{% extends 'base.html.twig' %}
+{% extends 'carousel.html.twig' %}
 
 {% block title %}Produit index{% endblock %}
 
-{% block body %}
-    <h1>Produit index</h1>
+{% block content %}
+    <div class="container">
+        <h1 class="titresection">Nos produits</h1>
 
-    {{ form_start(form) }}
-        <button type="submit" class="btn btn-primary">Filtrer</button>
-    {{ form_end(form) }}
+        {{ form_start(form, {attr: {class: 'my-4'}}) }}
+            <div class="row">
+                <div class="col-12 col-sm-4 col-md-2">
+                    {{ form_row(form.produitTypes) }}
+                </div>
+                <div class="col-12 col-sm-4 col-md-2">
+                    {{ form_row(form.q) }}
+                </div>
+                <div class="col-12 col-sm-4 col-md-2">
+                    {{ form_row(form.min) }}</div>
+                <div class="col-12 col-sm-6 col-md-2">
+                    {{ form_row(form.max) }}
+                </div>
+                <div class="col-12 col-sm-6 col-md-4">
+                    <button type="submit" class="btn btn-style btn-block">Filtrer</button>
+                </div>
+            </div>
+        {{ form_end(form) }}
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Nom</th>
-                <th>Description</th>
-                <th>DebutPublication</th>
-                <th>FinPublication</th>
-                <th>Adresse</th>
-                <th>CodePostal</th>
-                <th>Ville</th>
-                <th>Prix</th>
-                <th>Objectif</th>
-                <th>Duree</th>
-                <th>CreatedAt</th>
-                <th>UpdatedAt</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for produit in produits %}
-            <tr>
-                <td>{{ produit.id }}</td>
-                <td>{{ produit.nom }}</td>
-                <td>{{ produit.description }}</td>
-                <td>{{ produit.debutPublication ? produit.debutPublication|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ produit.finPublication ? produit.finPublication|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ produit.adresse }}</td>
-                <td>{{ produit.codePostal }}</td>
-                <td>{{ produit.ville }}</td>
-                <td>{{ produit.prix }}</td>
-                <td>{{ produit.objectif }}</td>
-                <td>{{ produit.duree }}</td>
-                <td>{{ produit.createdAt ? produit.createdAt|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ produit.updatedAt ? produit.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
-                <td>
-                    <a href="{{ path('produit_show', {'id': produit.id}) }}">show</a>
-                    <a href="{{ path('produit_edit', {'id': produit.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="14">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-
-    <a href="{{ path('produit_new') }}">Create new</a>
+        <div class="row">
+            {% for produit in produits %}
+                <div class="col-12 col-sm-6 col-md-4">
+                    <a href="{{ path('produit_show', {'id': produit.id}) }}" class="btn">
+                        <div class="card mb-4">
+                            <img src="{{ produit.getMedias|first.url }}" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ produit.nom }}</h5>
+                                <p class="card-text">{{ produit.description|slice(0,100) }}...</p>
+                                <p class="card-text">{{ produit.prix }} €</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            {% else %}
+                no records found
+            {% endfor %}
+        </div>
+    </div>
 {% endblock %}

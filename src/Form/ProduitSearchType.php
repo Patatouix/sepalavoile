@@ -9,6 +9,8 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use App\Entity\ProduitType;
 use App\Data\ProduitSearchData;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 class ProduitSearchType extends AbstractType
 {
@@ -23,6 +25,27 @@ class ProduitSearchType extends AbstractType
                 'choice_value' => 'slug',
                 'expanded' => true,
                 'multiple' => true
+            ])
+            ->add('q', TextType::class, [
+                'label' => false,
+                'required' => false,
+                'attr' => [
+                    'placeholder' => 'Rechercher'
+                ]
+            ])
+            ->add('min', NumberType::class, [
+                'label' => false,
+                'required' => false,
+                'attr' => [
+                    'placeholder' => 'Prix min'
+                ]
+            ])
+            ->add('max', NumberType::class, [
+                'label' => false,
+                'required' => false,
+                'attr' => [
+                    'placeholder' => 'Prix max'
+                ]
             ])
         ;
     }

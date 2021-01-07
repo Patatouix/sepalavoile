@@ -5,6 +5,7 @@
 //import du coeur et des plugins nécessaires de FullCalendar
 import { Calendar } from '@fullcalendar/core';
 import dayGridPlugin from '@fullcalendar/daygrid';
+import frLocale from '@fullcalendar/core/locales/fr';
 
 //construction du calendrier au chargement du DOM
 document.addEventListener('DOMContentLoaded', function() {
@@ -13,6 +14,7 @@ document.addEventListener('DOMContentLoaded', function() {
     var calendar = new Calendar(calendarEl, {
         plugins: [ dayGridPlugin ],
         initialView: 'dayGridMonth',
+        locale: frLocale,
         events: creneaux,  //la variable creneaux a été construite dans le fichier de template _creneaux_for_calendar
         eventDidMount: function(info) {
           //dans cette fonction on peut modifier le rendu du creneau
@@ -34,6 +36,11 @@ document.addEventListener('DOMContentLoaded', function() {
           hour: '2-digit',
           minute: '2-digit',
           meridiem: false
+        },
+        validRange: function(nowDate) {
+          return {
+            start: nowDate,
+          };
         }
     });
 
@@ -51,8 +58,8 @@ $('#modal_reservation').on('show.bs.modal', function (event) {
   // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
   // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
   var modal = $(this)
-  modal.find('.creneau-debut').text('Début : ' + debut)
-  modal.find('.creneau-fin').text('Fin : ' + fin)
+  modal.find('.creneau-debut').text('Début : Le ' + debut)
+  modal.find('.creneau-fin').text('Fin : Le ' + fin)
   modal.find('#reservation_creneau_id').val(creneauId);
   modal.find('#reservation_quantite').attr('max', places);
 })

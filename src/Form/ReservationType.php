@@ -14,6 +14,7 @@ class ReservationType extends AbstractType
         $builder
             ->add('quantite', IntegerType::class, [
                 'label' => 'Nombre de places',
+                'attr' => ['min' => 0]
             ])
             ->add('creneau_id', IntegerType::class, [
                 'label' => false,

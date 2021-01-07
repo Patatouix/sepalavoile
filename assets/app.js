@@ -17,7 +17,6 @@ import './styles/leparcours.css';
 import './styles/leprojet.css';
 import './styles/lequipe.css';
 import './styles/lebateau.css';
-import './styles/onparledenous.css';
 import './styles/nospartenaires.css';
 import './styles/dashboard.css';
 

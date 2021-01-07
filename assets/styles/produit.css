@@ -1,0 +1,47 @@
+.subheader {
+    background-color: #ff8300;
+    font-family: 'Pathway Gothic One', sans-serif;
+}
+
+.fondslide {
+    margin-bottom: 0px;
+    padding-bottom: 0px!important
+}
+
+.img-produit {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.text-produit {
+    font-family: 'Open Sans', sans-serif;
+}
+
+#mapid {
+    height: 180px;
+}
+
+.sticky-footer {
+    position: -webkit-sticky;
+    position: sticky;
+    bottom: 0px;
+    z-index: 1020;
+    background-color: white;
+}
+
+.btn-darkgrey-inverse {
+    background-color: white;
+    color: rgba(128, 128, 128, 0.94);
+    font-family: 'Open Sans', sans-serif;
+    font-variant: small-caps;
+    font-weight: bold;
+    border: 1px solid rgba(128, 128, 128, 0.94);
+}
+
+.btn-darkgrey {
+    background-color: rgba(128, 128, 128, 0.94);
+    color: white;
+    font-family: 'Open Sans', sans-serif;
+    font-variant: small-caps;
+    font-weight: bold;
+}

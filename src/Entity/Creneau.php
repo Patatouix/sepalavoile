@@ -115,4 +115,18 @@ class Creneau
 
         return $this;
     }
+
+    public function placesDisponibles(): ?int
+    {
+        $capacite = $this->getProduit()->getObjectif();
+
+        $placesReservees = 0;
+
+        $reservations = $this->getAchats();
+        foreach ($reservations as $reservation) {
+            $placesReservees += $reservation->getQuantite();
+        }
+
+        return ($capacite - $placesReservees);
+    }
 }
