@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{% extends 'carousel.html.twig' %}
 
 {% block title %}Réservation{% endblock %}
 
@@ -7,14 +7,14 @@
     {{ encore_entry_link_tags('reservation') }}
 {% endblock %}
 
-{% block body %}
+{% block content %}
 
     {{ include('produit/evenement/_modal_reservation.html.twig', {'button_label': 'Update'}) }}
 
     <div class="container">
-        <div class="row">
+        <div class="row mb-5">
             <div class="col">
-                <h1>{{ produit.nom }}</h1>
+                <h1 class="titresection">Réservations de {{ produit.nom }}</h1>
                 <div id="calendar"></div>
             </div>
         </div>
@@ -29,30 +29,21 @@
         //ce tableau sera ensuite utilisé par le fichier js spécifique à cette page (assets/reservation.js)
         let creneaux = [];
         let creneau = {};
-        let reservable;
-        let placesReservees = 0;
         {% for creneau in produit.creneaux %}
-            //pour chaque creneau, on calcule le total de places réservées
-            {% for reservation in creneau.achats %}
-                placesReservees += {{ reservation.quantite }};
-            {% endfor %}
-            reservable = placesReservees < {{ produit.objectif }} ? true : false;
             creneau = {
                 start: '{{ creneau.debut|date('Y-m-d H:i:s') }}',
                 end: '{{ creneau.fin|date('Y-m-d H:i:s') }}',
-                reservable: reservable,
+                reservable: {{ creneau.placesDisponibles }} ? true : false,
                 //on réécris le debut et la fin dans des attributs "customs" pour pouvoir accéder plus tard à ces données
                 //(le start et end ci-dessus seront transformés en objets JS et il est à priori difficile de réobtenir un format Y-m-d à partir de ces objets)
-                debut: '{{ creneau.debut|date('Y-m-d H:i:s') }}',
-                fin: '{{ creneau.fin|date('Y-m-d H:i:s') }}',
+                debut: '{{ creneau.debut|date('d/m/Y à H:i:s') }}',
+                fin: '{{ creneau.fin|date('d/m/Y à H:i:s') }}',
                 creneauId: '{{ creneau.id }}',
-                places: {{ produit.objectif }} - placesReservees,
+                places: {{ creneau.placesDisponibles }},
                 //couleur selon la disponibilité
-                color: reservable ? 'green' : 'red',
+                color: {{ creneau.placesDisponibles }} ? 'green' : 'red',
             }
             creneaux.push(creneau);
-            //reset pour la boucle suivante
-            placesReservees = 0;
         {% endfor %}
     </script>
 

@@ -29,3 +29,20 @@ body {
     box-shadow: 4px 4px 14px -3px rgba(0, 0, 0, 0.40);
     transition-duration: .1s;
 }
+
+.btn-darkgrey-inverse {
+    background-color: white;
+    color: rgba(128, 128, 128, 0.94);
+    font-family: 'Open Sans', sans-serif;
+    font-variant: small-caps;
+    font-weight: bold;
+    border: 1px solid rgba(128, 128, 128, 0.94);
+}
+
+.btn-darkgrey {
+    background-color: rgba(128, 128, 128, 0.94);
+    color: white;
+    font-family: 'Open Sans', sans-serif;
+    font-variant: small-caps;
+    font-weight: bold;
+}

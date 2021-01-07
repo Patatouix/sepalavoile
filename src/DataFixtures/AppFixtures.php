@@ -130,7 +130,7 @@ class AppFixtures extends Fixture
         for ($i = 1; $i <= 20; $i++) {
             $produit = new Produit();
             $produit->setNom('Event ' . $i);
-            $produit->setDescription('Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat aperiam doloremque, dolores voluptates obcaecati nihil ipsam voluptatibus vero exercitationem in, debitis sapiente. Alias ullam culpa sint vel esse, numquam in?');
+            $produit->setDescription('Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat aperiam doloremque, dolores voluptates obcaecati nihil ipsam voluptatibus vero exercitationem in, debitis sapiente. Alias ullam culpa sint vel esse, numquam in?<br><br>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat aperiam doloremque, dolores voluptates obcaecati nihil ipsam voluptatibus vero exercitationem in, debitis sapiente. Alias ullam culpa sint vel esse, numquam in?<br><br>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat aperiam doloremque, dolores voluptates obcaecati nihil ipsam voluptatibus vero exercitationem in, debitis sapiente. Alias ullam culpa sint vel esse, numquam in?');
             $produit->setDebutPublication(new DateTime('2021-01-' . $i . ' 08:' . $i . ':30'));
             $produit->setFinPublication(new DateTime('2021-02-' . $i . ' 18:' . $i . ':50'));
             $produit->setAdresse($i . ' rue du Verboté');
@@ -147,8 +147,8 @@ class AppFixtures extends Fixture
             for ($j = 1; $j <= 4; $j++) {
                 $creneau = new Creneau();
                 $creneau->setProduit($produit);
-                $creneau->setDebut(new DateTime('2021-01-' . $j . ' 08:' . $j . ':30'));
-                $creneau->setFin(new DateTime('2021-01-' . $j . ' 18:' . $j . ':30'));
+                $creneau->setDebut(new DateTime('2021-01-' . ($j + 10). ' 08:' . $j . ':30'));
+                $creneau->setFin(new DateTime('2021-01-' . ($j + 10). ' 18:' . $j . ':30'));
                 $manager->persist($creneau);
 
                 for ($k = 1; $k <= 3; $k++) {
@@ -168,7 +168,7 @@ class AppFixtures extends Fixture
 
         for ($i = 1; $i <= 5; $i++) {
             $produit = new Produit();
-            $produit->setNom('Event ' . $i);
+            $produit->setNom('Campagne de don ' . $i);
             $produit->setDescription('Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat aperiam doloremque, dolores voluptates obcaecati nihil ipsam voluptatibus vero exercitationem in, debitis sapiente. Alias ullam culpa sint vel esse, numquam in?');
             $produit->setDebutPublication(new DateTime('2021-01-' . $i . ' 08:' . $i . ':30'));
             $produit->setFinPublication(new DateTime('2021-02-' . $i . ' 18:' . $i . ':50'));
@@ -187,7 +187,7 @@ class AppFixtures extends Fixture
 
         for ($i = 1; $i <= 5; $i++) {
             $produit = new Produit();
-            $produit->setNom('Event ' . $i);
+            $produit->setNom('Campagne d\'adhésion ' . $i);
             $produit->setDescription('Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat aperiam doloremque, dolores voluptates obcaecati nihil ipsam voluptatibus vero exercitationem in, debitis sapiente. Alias ullam culpa sint vel esse, numquam in?');
             $produit->setDebutPublication(new DateTime('2021-01-' . $i . ' 08:' . $i . ':30'));
             $produit->setFinPublication(new DateTime('2021-02-' . $i . ' 18:' . $i . ':50'));
