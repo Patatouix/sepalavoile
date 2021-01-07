@@ -38,18 +38,35 @@ class ArticleController extends AbstractController
         // Permet d'afficher la liste des catégories
         $allCategory = $articleCategorieRepository -> findBy([],['name' => 'asc']);
 
+        $articles = $articleRepository->findBy([],['createdAt' => 'desc']);
+
+        //garder uniquement les articles qui correspondent à notre categorie dans l'url (car nuls en querybuilder)
+        $articlesToKeep = [];
+        if($categoryId ) {
+            foreach ($articles as $article) {
+                $categories = $article->getArticleCategories();
+                foreach($categories as $categorie) {
+                    if($categoryId == $categorie->getId()){
+                        $articlesToKeep[] = $article;
+                    }
+                }
+            };
+        } else {
+            $articlesToKeep = $articles;
+        }
+
         // Permet de gerer la pagination dans les pages du blog
         $articles = $paginator->paginate(
-            $articleRepository->findBy([],['createdAt' => 'desc']), /* query NOT result */
+            $articlesToKeep, /* query NOT result */
             $request->query->getInt('page', 1), /*numéro page par défaut*/
             4 /*limite d'article par page*/
         );
 
         // Permet d'afficher les articles catégories
-        $categories = $articleCategorieRepository -> findAll();
+        $categories = $articleCategorieRepository->findAll();
         // pour afficher dans le ASIDE le nombre complet d'article
         // sans tenir compte de la pagination
-        $article = $articleRepository -> findAll();
+        $article = $articleRepository->findAll();
         
         return $this->render('article/blog.html.twig', [
             'articles'          => $articles,
@@ -74,7 +91,7 @@ class ArticleController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-            $article -> setCreatedAt( new DateTime('NOW'));
+            $article->setCreatedAt( new DateTime('NOW'));
 
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($article);
@@ -126,6 +143,9 @@ class ArticleController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            $article->setUpdatedAt( new DateTime('NOW'));
+
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('article_index');

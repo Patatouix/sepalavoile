@@ -40,8 +40,13 @@
                             <div class="row">
                                 {% for articleRandom in articleRandom|slice(0, 3) %}                                    
                                     <div class="col-md-4 col-sm-4 col-xs-4">
+
                                         {# <span class="imgWrap"><a href="{{ path('article_show', {'id': articleRandom.id}) }}"><img src="{{ articleRandom.filename ? asset('/images/photoarticle/' ~ articleRandom.filename) : asset('/images/logo.svg') }}" width="100%"></a></span> #}
-                                        <span class="imgWrap"><a href="{{ path('article_show', {'id': articleRandom.id}) }}"><img src="{{ asset('/images/logo.svg') }}" width="100%"></a></span>
+                                        <span class="imgWrap"><a href="{{ path('article_show', {'id': articleRandom.id}) }}"><img class="mb-2 mt-2" src="{{ asset('/images/logo.svg') }}" width="100%"></a></span>
+                                        <a href="{{ path('article_show', {'id': articleRandom.id}) }}">{{ articleRandom.title }}</a>
+                                        <hr class="mt-1 mb-1">
+                                        <span class="meta text-muted font-italic font-weight-light">Publié
+                                        le {{ articleRandom.createdAt|date('d/m/Y') }} - {{ articleRandom.nbVues }} vues</span>
                                     </div>
                                 {% endfor %}
                             </div>
