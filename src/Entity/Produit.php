@@ -354,4 +354,18 @@ class Produit
 
         return $this;
     }
+
+    public function getTotalDonationProduit(): ?int
+    {
+        if ($this->getProduitType()->getNom() != ProduitType::PRODUIT_TYPE_DONATION_NAME) {
+            return null;
+        }
+
+        $totalDonation = 0;
+        foreach ($this->getAchats() as $achat) {
+            $totalDonation += $achat->getMontant();
+        }
+
+        return $totalDonation;
+    }
 }

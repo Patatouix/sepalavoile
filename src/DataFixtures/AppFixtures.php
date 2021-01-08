@@ -151,6 +151,7 @@ class AppFixtures extends Fixture
                 $creneau->setFin(new DateTime('2021-01-' . ($j + 10). ' 18:' . $j . ':30'));
                 $manager->persist($creneau);
 
+                //réservations
                 for ($k = 1; $k <= 3; $k++) {
                     $achat = new Achat();
                     $achat->setProduit($produit);
@@ -169,18 +170,29 @@ class AppFixtures extends Fixture
         for ($i = 1; $i <= 5; $i++) {
             $produit = new Produit();
             $produit->setNom('Campagne de don ' . $i);
-            $produit->setDescription('Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat aperiam doloremque, dolores voluptates obcaecati nihil ipsam voluptatibus vero exercitationem in, debitis sapiente. Alias ullam culpa sint vel esse, numquam in?');
+            $produit->setDescription('Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat aperiam doloremque, dolores voluptates obcaecati nihil ipsam voluptatibus vero exercitationem in, debitis sapiente. Alias ullam culpa sint vel esse, numquam in?<br><br>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat aperiam doloremque, dolores voluptates obcaecati nihil ipsam voluptatibus vero exercitationem in, debitis sapiente. Alias ullam culpa sint vel esse, numquam in?<br><br>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat aperiam doloremque, dolores voluptates obcaecati nihil ipsam voluptatibus vero exercitationem in, debitis sapiente. Alias ullam culpa sint vel esse, numquam in?');
             $produit->setDebutPublication(new DateTime('2021-01-' . $i . ' 08:' . $i . ':30'));
             $produit->setFinPublication(new DateTime('2021-02-' . $i . ' 18:' . $i . ':50'));
             $produit->setAdresse($i . ' rue du Verboté');
             $produit->setCodePostal('90350');
             $produit->setVille('Belfort');
             $produit->setPrix($i);
-            $produit->setObjectif($i + 5);
+            $produit->setObjectif($i + 100);
             $produit->setCreatedAt(new DateTime('NOW'));
             $produit->addMedia($media);
             $produit->setProduitType($produitDon);
             $manager->persist($produit);
+
+            //donations
+            for ($k = 1; $k <= 3; $k++) {
+                $achat = new Achat();
+                $achat->setProduit($produit);
+                $achat->setCreatedAt(new DateTime('NOW'));
+                $achat->setMontant($k);
+                $achat->setQuantite(1);
+                $achat->setUser($userArray[array_rand($userArray)]);
+                $manager->persist($achat);
+            }
         }
 
         //produits de type adhesion
@@ -188,18 +200,30 @@ class AppFixtures extends Fixture
         for ($i = 1; $i <= 5; $i++) {
             $produit = new Produit();
             $produit->setNom('Campagne d\'adhésion ' . $i);
-            $produit->setDescription('Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat aperiam doloremque, dolores voluptates obcaecati nihil ipsam voluptatibus vero exercitationem in, debitis sapiente. Alias ullam culpa sint vel esse, numquam in?');
+            $produit->setDescription('Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat aperiam doloremque, dolores voluptates obcaecati nihil ipsam voluptatibus vero exercitationem in, debitis sapiente. Alias ullam culpa sint vel esse, numquam in?<br><br>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat aperiam doloremque, dolores voluptates obcaecati nihil ipsam voluptatibus vero exercitationem in, debitis sapiente. Alias ullam culpa sint vel esse, numquam in?<br><br>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat aperiam doloremque, dolores voluptates obcaecati nihil ipsam voluptatibus vero exercitationem in, debitis sapiente. Alias ullam culpa sint vel esse, numquam in?');
             $produit->setDebutPublication(new DateTime('2021-01-' . $i . ' 08:' . $i . ':30'));
             $produit->setFinPublication(new DateTime('2021-02-' . $i . ' 18:' . $i . ':50'));
             $produit->setAdresse($i . ' rue du Verboté');
             $produit->setCodePostal('90350');
             $produit->setVille('Belfort');
             $produit->setPrix($i);
+            $produit->setDuree($i);
             $produit->setObjectif($i + 5);
             $produit->setCreatedAt(new DateTime('NOW'));
             $produit->addMedia($media);
             $produit->setProduitType($produitAdhesion);
             $manager->persist($produit);
+
+            //adhesions
+            for ($k = 1; $k <= 3; $k++) {
+                $achat = new Achat();
+                $achat->setProduit($produit);
+                $achat->setCreatedAt(new DateTime('NOW'));
+                $achat->setMontant($k);
+                $achat->setQuantite(1);
+                $achat->setUser($userArray[array_rand($userArray)]);
+                $manager->persist($achat);
+            }
         }
 
         $manager->flush();
