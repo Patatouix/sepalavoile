@@ -19,6 +19,8 @@
 
     {{ include('produit/evenement/_modal_disponibilite.html.twig', {'button_label': 'Update'}) }}
 
+    {% set percentage = produit.achats|length / produit.objectif * 100 %}
+
     <div class="container my-5">
         <div class="row align-items-center">
             <div class="col-12 col-lg-4"><img src="{{ produit.medias|first.url }}" class="img-produit"></div>
@@ -28,8 +30,11 @@
             </div>
             <div class="col-12 col-lg-2">
                 <h3 class="titresection">Tarifs</h3>
-                <p class="text-produit text-center">{{ produit.prix }} € / personne</p>
+                <p class="text-produit text-center">{{ produit.prix }} € pour {{ produit.duree }} mois</p>
                 <h3 class="titresection">Progression</h3>
+                <div class="progression-bar mb-2 text-center" style="background: linear-gradient(to right, #ff8300 {{ percentage }}%, white {{ percentage }}%);">
+                    <span>{{ percentage|round }} %</span>
+                </div>
                 <p class="text-produit text-center">{{ produit.achats|length }} / {{ produit.objectif }} adhérents</p>
             </div>
         </div>
@@ -37,7 +42,7 @@
 
     <div class="container-fluid sticky-footer border py-3">
         <a href="{{ path('produit_index') }}" class="btn btn-darkgrey" >Revenir aux produits</a>
-        <a href="{{ path('produit_reservation', {'id': produit.id}) }}" class="btn btn-darkgrey float-right">Adhérer</a>
+        <a href="{{ path('produit_adhesion', {'id': produit.id}) }}" class="btn btn-darkgrey float-right">Adhérer</a>
     </div>
 
 {% endblock %}

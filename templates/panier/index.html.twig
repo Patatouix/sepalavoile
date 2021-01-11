@@ -22,9 +22,9 @@
             </thead>
             <tbody>
                 {% for typeProduit, produits in panier %}
-                    {% for produitId, produitData in produits %}
-                        {% if (typeProduit == constant('App\\Entity\\ProduitType::PRODUIT_TYPE_EVENT_NAME')) %}
-                            {% for creneau, reservation in produitData %}
+                    {% for produitId, achat in produits %}
+                        {% if typeProduit == constant('App\\Entity\\ProduitType::PRODUIT_TYPE_EVENT_NAME') %}
+                            {% for creneau, reservation in achat %}
                                 {% set total = total + reservation.prix * reservation.quantite %}
                                 <tr>
                                     <td>{{ typeProduit }}</td>
@@ -34,6 +34,15 @@
                                     <td>{{ reservation.prix * reservation.quantite }} €</td>
                                 </tr>
                             {% endfor %}
+                        {% elseif typeProduit == constant('App\\Entity\\ProduitType::PRODUIT_TYPE_DONATION_NAME') or typeProduit == constant('App\\Entity\\ProduitType::PRODUIT_TYPE_ADHESION_NAME') %}
+                            {% set total = total + achat.montant %}
+                            <tr>
+                                <td>{{ typeProduit }}</td>
+                                <td>{{ achat.produit_nom }}</td>
+                                <td></td>
+                                <td>{{ achat.quantite }}</td>
+                                <td>{{ achat.montant }} €</td>
+                            </tr>
                         {% endif %}
                     {% endfor %}
                 {% endfor %}
