@@ -10,22 +10,22 @@
 
 
         <!-- Navbar -->
-        <nav class="main-header navbar navbar-expand navbar-white navbar-light sticky-top">
+        <nav class="main-header navbar-expand navbar-white navbar-light sticky-top py-2">
             <!-- Left navbar links -->
             <div class="navbar-nav">
                 <div class="nav-item">
                     <a class="nav-link" data-widget="pushmenu" href="#"><i class="fas fa-bars"></i></a>
                 </div>
-                <div class="nav-item d-none d-sm-inline-block">
+                <div class="nav-item d-sm-inline-block">
                     <a href="{{ path('home_page') }}" class="nav-link">Retour au site</a>
                 </div>
                 {# <div class="nav-item d-none d-sm-inline-block">
                     <a href="" class="nav-link">Contact</a>
                 </div> #}
-            </div>
-            <div class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
-                    <a href="{{ path('app_logout') }}"> <button type="button" class="btn btn-style mt-1">Se
+            <div class="d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
+                    <a href="{{ path('app_logout') }}"> <button type="button" class="btn btn-style mt-1 mr-2">Se
                         Déconnecter</button></a>
+            </div>
             </div>
         </nav>
         <!-- /.navbar -->
@@ -64,7 +64,8 @@
                                     Utilisateurs
                                     <i class="fas fa-angle-left right"></i>
                                     {# {* Permet de rajouter un badge à la fin *} #}
-                                    <span class="badge badge-info right"></span>
+                                    {# <span class="badge badge-info right" style="background-color : #ff8300">{{ users|length }}</span> #}
+
                                 </p>
                             </a>
                             <ul class="nav nav-treeview">
@@ -167,12 +168,12 @@
                                     Nos partenaires
                                     <i class="fas fa-angle-left right"></i>
                                     {# {* Permet de rajouter un badge à la fin *} #}
-                                    <span class="badge badge-info right"></span>
+                                    <span class="badge badge-info right" style="background-color : #ff8300">{{ partners|length }}</span>
                                 </p>
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="" class="nav-link">
+                                    <a href="{{ path('partners_index') }}" class="nav-link">
                                         <i class="nav-icon far fa-circle"></i>
                                         <p>
                                             Liste des partenaires
@@ -182,7 +183,7 @@
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="" class="nav-link">
+                                    <a href="{{ path('partners_new') }}" class="nav-link">
                                         <i class="nav-icon far fa-circle"></i>
                                         <p>
                                             Ajouter un partenaire
@@ -352,7 +353,7 @@
                                     Article
                                     <i class="fas fa-angle-left right"></i>
                                     {# {* Permet de rajouter un badge à la fin *} #}
-                                    <span class="badge badge-info right"></span>
+                                    {# <span class="badge badge-info right" style="background-color : #ff8300">{{ articles|length }}</span> #}
                                 </p>
                             </a>
                             <ul class="nav nav-treeview">

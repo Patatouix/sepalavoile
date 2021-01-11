@@ -318,13 +318,14 @@
                 </div>
                 <div class="row d-flex justify-content-around">
                     {# BOUCLE SUR LES PARTENAIRES #}
-                    {# {% for partner in partners %}
+                    {% for partner in partners %}
                     <div class="col-12 col-sm-6 col-lg-4 mb-5 text-center partenaires partenaires-hover">
                         <a href="{{ partner.website }}" target="_blank">
-                            <img src="{{ asset('/images/partners/' ~ partner.fileName ) }}" alt="">
+                            <img src="{{ partner.media.nom ? asset('/images/partners/' ~ partner.media.nom) : asset('/images/logo.svg') }}" alt="">
+                            {# <img src="{{ asset('/images/logo.svg' ) }}" alt=""> #}
                         </a>
                     </div>
-                    {% endfor %} #}
+                    {% endfor %}
                     {# FIN DE LA BOUCLE SUR LES PARTENAIRES #}
                 </div>
             </div>

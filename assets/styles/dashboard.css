@@ -35,8 +35,14 @@
     font-size: 25px;
 }
 
-
-
+/* ====MMENU==== */
+/* ============== */
+.navbardashboard {
+    color: black;
+    font-family: 'Open Sans', sans-serif;
+    letter-spacing: -0.6px;
+    font-weight: 500;
+}
 /* ====BOUTON==== */
 /* ============== */
 .btn {
