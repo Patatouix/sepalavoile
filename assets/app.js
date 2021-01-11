@@ -20,6 +20,7 @@ import './styles/lebateau.css';
 import './styles/nospartenaires.css';
 import './styles/dashboard.css';
 import './styles/blog.css';
+import './styles/galerie.css';
 
 // start the Stimulus application
 import './bootstrap';
