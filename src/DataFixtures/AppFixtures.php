@@ -181,6 +181,37 @@ class AppFixtures extends Fixture
         $mediaAcal->setDescription('ACAL');
         $mediaAcal->setTitre('ACAL');
         $manager->persist($mediaAcal);
+        
+        // MEDIA TYPE YOUTUBE
+        $mediaYoutube1 = new Media();
+        $mediaYoutube1->setCreatedAt(new DateTime('NOW'));
+        $mediaYoutube1->setNom('Vlog #3');
+        $mediaYoutube1->setUrl('https://www.youtube.com/embed/lAxDV7KQV6I');
+        $mediaYoutube1->setDescription('Navigations 2019');
+        $mediaYoutube1->setTitre('Navigations 2019');
+        $mediaYoutube1->setFacebookLink('https://www.facebook.com/dialog/share?app_id=87741124305&href=https%3A//www.youtube.com/watch%3Fv%3DpwMJ_hzBp8M%26feature%3Demb_share&display=popup');
+        $mediaYoutube1->setType('video');
+        $manager->persist($mediaYoutube1);
+
+        $mediaYoutube2 = new Media();
+        $mediaYoutube2->setCreatedAt(new DateTime('NOW'));
+        $mediaYoutube2->setNom('Vlog #2');
+        $mediaYoutube2->setUrl('https://www.youtube.com/embed/W8BpET1Juhk');
+        $mediaYoutube2->setDescription('Remontée du bateau, Porto - La Vendée');
+        $mediaYoutube2->setTitre('Remontée du bateau, Porto - La Vendée');
+        $mediaYoutube1->setFacebookLink('https://www.facebook.com/dialog/share?app_id=87741124305&href=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DW8BpET1Juhk%26feature%3Demb_share&display=popup');
+        $mediaYoutube2->setType('video');
+        $manager->persist($mediaYoutube2);
+
+        $mediaYoutube3 = new Media();
+        $mediaYoutube3->setCreatedAt(new DateTime('NOW'));
+        $mediaYoutube3->setNom('Vlog #1');
+        $mediaYoutube3->setUrl('https://www.youtube.com/embed/pwMJ_hzBp8M');
+        $mediaYoutube3->setDescription('Découverte du bateau par l\'équipe projet');
+        $mediaYoutube3->setTitre('Découverte du bateau par l\'équipe projet');
+        $mediaYoutube1->setFacebookLink('https://www.facebook.com/dialog/share?app_id=87741124305&href=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DlAxDV7KQV6I%26feature%3Demb_share&display=popup');
+        $mediaYoutube3->setType('video');
+        $manager->persist($mediaYoutube3);
 
         // Les Partenaires
         $partnersAiragri = new Partners();

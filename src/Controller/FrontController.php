@@ -3,8 +3,10 @@
 namespace App\Controller;
 
 use App\Entity\Article;
+use App\Entity\Media;
 use App\Repository\ArticleCategorieRepository;
 use App\Repository\ArticleRepository;
+use App\Repository\MediaRepository;
 use App\Repository\PartnersRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -16,16 +18,17 @@ class FrontController extends AbstractController
     /**
      * @Route("/", name="home_page")
      */
-    public function index(ArticleRepository $articleRepository, PartnersRepository $partnersRepository): Response
+    public function index(ArticleRepository $articleRepository, PartnersRepository $partnersRepository, MediaRepository $mediaRepository): Response
     {
         $articleBestView = $this->getDoctrine()->getRepository(Article::class)->findBynombreVuDesc();
-        
+        $media = $this->getDoctrine()->getRepository(Media::class)->findBy(['type' => 'video'], ['createdAt' => 'desc']);
 
         return $this->render('front/home_page.html.twig', [
             'controller_name' => 'FrontController',
             'articleBestView'   => $articleBestView,
             'article' => $articleRepository->findBy([],['createdAt' => 'desc']),
             'partners'          => $partnersRepository -> findAll(),
+            'media' => $media,
         ]);
     }
 
