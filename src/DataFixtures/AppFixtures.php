@@ -125,7 +125,7 @@ class AppFixtures extends Fixture
         $media->setDescription('Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat aperiam doloremque, dolores voluptates obcaecati nihil ipsam voluptatibus vero exercitationem in, debitis sapiente. Alias ullam culpa sint vel esse, numquam in?');
         $media->setTitre('Image par défaut pour nos entités');
         $manager->persist($media);
-        
+
         $mediaAiragri = new Media();
         $mediaAiragri->setCreatedAt(new DateTime('NOW'));
         $mediaAiragri->setNom('sponsor-airagri.jpg');
@@ -133,7 +133,7 @@ class AppFixtures extends Fixture
         $mediaAiragri->setDescription('AIRAGRI');
         $mediaAiragri->setTitre('AIRAGRI');
         $manager->persist($mediaAiragri);
-        
+
         $mediaPicvert = new Media();
         $mediaPicvert->setCreatedAt(new DateTime('NOW'));
         $mediaPicvert->setNom('sponsor-picvert.jpg');
@@ -141,7 +141,7 @@ class AppFixtures extends Fixture
         $mediaPicvert->setDescription('PICVERT');
         $mediaPicvert->setTitre('PICVERT');
         $manager->persist($mediaPicvert);
-        
+
         $mediaDivatec = new Media();
         $mediaDivatec->setCreatedAt(new DateTime('NOW'));
         $mediaDivatec->setNom('sponsor-divatec.jpg');
@@ -149,7 +149,7 @@ class AppFixtures extends Fixture
         $mediaDivatec->setDescription('DIVATEC');
         $mediaDivatec->setTitre('DIVATEC');
         $manager->persist($mediaDivatec);
-        
+
         $mediaDalmard = new Media();
         $mediaDalmard->setCreatedAt(new DateTime('NOW'));
         $mediaDalmard->setNom('sponsor-dalmard.jpg');
@@ -157,7 +157,7 @@ class AppFixtures extends Fixture
         $mediaDalmard->setDescription('DALMARD MARINE');
         $mediaDalmard->setTitre('DALMARD MARINE');
         $manager->persist($mediaDalmard);
-        
+
         $mediaIej = new Media();
         $mediaIej->setCreatedAt(new DateTime('NOW'));
         $mediaIej->setNom('sponsor-iej.jpg');
@@ -165,7 +165,7 @@ class AppFixtures extends Fixture
         $mediaIej->setDescription('IEJ');
         $mediaIej->setTitre('IEJ');
         $manager->persist($mediaIej);
-        
+
         $mediaVieuxCampeur = new Media();
         $mediaVieuxCampeur->setCreatedAt(new DateTime('NOW'));
         $mediaVieuxCampeur->setNom('sponsor-vieuxcampeur.jpg');
@@ -173,7 +173,7 @@ class AppFixtures extends Fixture
         $mediaVieuxCampeur->setDescription('AUX VIEUX CAMPEUR');
         $mediaVieuxCampeur->setTitre('AUX VIEUX CAMPEUR');
         $manager->persist($mediaVieuxCampeur);
-        
+
         $mediaAcal = new Media();
         $mediaAcal->setCreatedAt(new DateTime('NOW'));
         $mediaAcal->setNom('sponsor-acal.jpg');
@@ -181,7 +181,7 @@ class AppFixtures extends Fixture
         $mediaAcal->setDescription('ACAL');
         $mediaAcal->setTitre('ACAL');
         $manager->persist($mediaAcal);
-        
+
         // MEDIA TYPE YOUTUBE
         $mediaYoutube1 = new Media();
         $mediaYoutube1->setCreatedAt(new DateTime('NOW'));
@@ -199,7 +199,7 @@ class AppFixtures extends Fixture
         $mediaYoutube2->setUrl('https://www.youtube.com/embed/W8BpET1Juhk');
         $mediaYoutube2->setDescription('Remontée du bateau, Porto - La Vendée');
         $mediaYoutube2->setTitre('Remontée du bateau, Porto - La Vendée');
-        $mediaYoutube1->setFacebookLink('https://www.facebook.com/dialog/share?app_id=87741124305&href=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DW8BpET1Juhk%26feature%3Demb_share&display=popup');
+        $mediaYoutube2->setFacebookLink('https://www.facebook.com/dialog/share?app_id=87741124305&href=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DW8BpET1Juhk%26feature%3Demb_share&display=popup');
         $mediaYoutube2->setType('video');
         $manager->persist($mediaYoutube2);
 
@@ -209,9 +209,141 @@ class AppFixtures extends Fixture
         $mediaYoutube3->setUrl('https://www.youtube.com/embed/pwMJ_hzBp8M');
         $mediaYoutube3->setDescription('Découverte du bateau par l\'équipe projet');
         $mediaYoutube3->setTitre('Découverte du bateau par l\'équipe projet');
-        $mediaYoutube1->setFacebookLink('https://www.facebook.com/dialog/share?app_id=87741124305&href=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DlAxDV7KQV6I%26feature%3Demb_share&display=popup');
+        $mediaYoutube3->setFacebookLink('https://www.facebook.com/dialog/share?app_id=87741124305&href=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DlAxDV7KQV6I%26feature%3Demb_share&display=popup');
         $mediaYoutube3->setType('video');
         $manager->persist($mediaYoutube3);
+
+        //Galerie
+        $mediaGalerie1 = new Media();
+        $mediaGalerie1->setCreatedAt(new DateTime('NOW'));
+        $mediaGalerie1->setNom('paysage-2.jpg');
+        $mediaGalerie1->setUrl('');
+        $mediaGalerie1->setDescription('paysage-2.jpg');
+        $mediaGalerie1->setTitre('');
+        $mediaGalerie1->setFacebookLink('');
+        $mediaGalerie1->setType('galerie');
+        $manager->persist($mediaGalerie1);
+
+        $mediaGalerie2 = new Media();
+        $mediaGalerie2->setCreatedAt(new DateTime('NOW'));
+        $mediaGalerie2->setNom('paysage-3.jpg');
+        $mediaGalerie2->setUrl('');
+        $mediaGalerie2->setDescription('paysage-3.jpg');
+        $mediaGalerie2->setTitre('');
+        $mediaGalerie2->setFacebookLink('');
+        $mediaGalerie2->setType('galerie');
+        $manager->persist($mediaGalerie2);
+
+        $mediaGalerie3 = new Media();
+        $mediaGalerie3->setCreatedAt(new DateTime('NOW'));
+        $mediaGalerie3->setNom('paysage-6.jpg');
+        $mediaGalerie3->setUrl('');
+        $mediaGalerie3->setDescription('paysage-6.jpg');
+        $mediaGalerie3->setTitre('');
+        $mediaGalerie3->setFacebookLink('');
+        $mediaGalerie3->setType('galerie');
+        $manager->persist($mediaGalerie3);
+
+        $mediaGalerie3 = new Media();
+        $mediaGalerie3->setCreatedAt(new DateTime('NOW'));
+        $mediaGalerie3->setNom('paysage-21.jpg');
+        $mediaGalerie3->setUrl('');
+        $mediaGalerie3->setDescription('paysage-21.jpg');
+        $mediaGalerie3->setTitre('');
+        $mediaGalerie3->setFacebookLink('');
+        $mediaGalerie3->setType('galerie');
+        $manager->persist($mediaGalerie3);
+
+        $mediaGalerie4 = new Media();
+        $mediaGalerie4->setCreatedAt(new DateTime('NOW'));
+        $mediaGalerie4->setNom('paysage-8.jpg');
+        $mediaGalerie4->setUrl('');
+        $mediaGalerie4->setDescription('paysage-8.jpg');
+        $mediaGalerie4->setTitre('');
+        $mediaGalerie4->setFacebookLink('');
+        $mediaGalerie4->setType('galerie');
+        $manager->persist($mediaGalerie4);
+
+        $mediaGalerie5 = new Media();
+        $mediaGalerie5->setCreatedAt(new DateTime('NOW'));
+        $mediaGalerie5->setNom('paysage-9.jpg');
+        $mediaGalerie5->setUrl('');
+        $mediaGalerie5->setDescription('paysage-9.jpg');
+        $mediaGalerie5->setTitre('');
+        $mediaGalerie5->setFacebookLink('');
+        $mediaGalerie5->setType('galerie');
+        $manager->persist($mediaGalerie5);
+
+        $mediaGalerie6 = new Media();
+        $mediaGalerie6->setCreatedAt(new DateTime('NOW'));
+        $mediaGalerie6->setNom('paysage-10.jpg');
+        $mediaGalerie6->setUrl('');
+        $mediaGalerie6->setDescription('paysage-10.jpg');
+        $mediaGalerie6->setTitre('');
+        $mediaGalerie6->setFacebookLink('');
+        $mediaGalerie6->setType('galerie');
+        $manager->persist($mediaGalerie6);
+
+        $mediaGalerie7 = new Media();
+        $mediaGalerie7->setCreatedAt(new DateTime('NOW'));
+        $mediaGalerie7->setNom('paysage-11.jpg');
+        $mediaGalerie7->setUrl('');
+        $mediaGalerie7->setDescription('paysage-11.jpg');
+        $mediaGalerie7->setTitre('');
+        $mediaGalerie7->setFacebookLink('');
+        $mediaGalerie7->setType('galerie');
+        $manager->persist($mediaGalerie7);
+
+        $mediaGalerie8 = new Media();
+        $mediaGalerie8->setCreatedAt(new DateTime('NOW'));
+        $mediaGalerie8->setNom('paysage-13.jpg');
+        $mediaGalerie8->setUrl('');
+        $mediaGalerie8->setDescription('paysage-13.jpg');
+        $mediaGalerie8->setTitre('');
+        $mediaGalerie8->setFacebookLink('');
+        $mediaGalerie8->setType('galerie');
+        $manager->persist($mediaGalerie8);
+
+        $mediaGalerie9 = new Media();
+        $mediaGalerie9->setCreatedAt(new DateTime('NOW'));
+        $mediaGalerie9->setNom('paysage-16.jpg');
+        $mediaGalerie9->setUrl('');
+        $mediaGalerie9->setDescription('paysage-16.jpg');
+        $mediaGalerie9->setTitre('');
+        $mediaGalerie9->setFacebookLink('');
+        $mediaGalerie9->setType('galerie');
+        $manager->persist($mediaGalerie9);
+
+        $mediaGalerie10 = new Media();
+        $mediaGalerie10->setCreatedAt(new DateTime('NOW'));
+        $mediaGalerie10->setNom('paysage-18.jpg');
+        $mediaGalerie10->setUrl('');
+        $mediaGalerie10->setDescription('paysage-18.jpg');
+        $mediaGalerie10->setTitre('');
+        $mediaGalerie10->setFacebookLink('');
+        $mediaGalerie10->setType('galerie');
+        $manager->persist($mediaGalerie10);
+
+        $mediaGalerie11 = new Media();
+        $mediaGalerie11->setCreatedAt(new DateTime('NOW'));
+        $mediaGalerie11->setNom('paysage-21.jpg');
+        $mediaGalerie11->setUrl('');
+        $mediaGalerie11->setDescription('paysage-21.jpg');
+        $mediaGalerie11->setTitre('');
+        $mediaGalerie11->setFacebookLink('');
+        $mediaGalerie11->setType('galerie');
+        $manager->persist($mediaGalerie11);
+
+        $mediaGalerie12 = new Media();
+        $mediaGalerie12->setCreatedAt(new DateTime('NOW'));
+        $mediaGalerie12->setNom('paysage-27.jpg');
+        $mediaGalerie12->setUrl('');
+        $mediaGalerie12->setDescription('paysage-27.jpg');
+        $mediaGalerie12->setTitre('');
+        $mediaGalerie12->setFacebookLink('');
+        $mediaGalerie12->setType('galerie');
+        $manager->persist($mediaGalerie12);
+
 
         // Les Partenaires
         $partnersAiragri = new Partners();
@@ -238,11 +370,11 @@ class AppFixtures extends Fixture
         $partnersDalmard->setMedia($mediaDalmard);
         $manager->persist($partnersDalmard);
 
-        $partners = new Partners();
-        $partners->setName('IEJ');
-        $partners->setWebSite('https://iej.eu/strasbourg/');
-        $partners->setMedia($mediaIej);
-        $manager->persist($partners);
+        $partnersIej = new Partners();
+        $partnersIej->setName('IEJ');
+        $partnersIej->setWebSite('https://iej.eu/strasbourg/');
+        $partnersIej->setMedia($mediaIej);
+        $manager->persist($partnersIej);
 
         $partnersmediaVieuxCampeur = new Partners();
         $partnersmediaVieuxCampeur->setName('AU VIEUX CAMPEUR');
@@ -255,6 +387,7 @@ class AppFixtures extends Fixture
         $partnersAcal->setWebSite('http://www.acal67.com/voile-acal-strasbourg/');
         $partnersAcal->setMedia($mediaAcal);
         $manager->persist($partnersAcal);
+
 
         //produits de type event
 
