@@ -37,10 +37,10 @@ class FrontController extends AbstractController
     // @IsGranted("ROLE_ADMIN")
     // ou
     // /admin devant la route
-    
+
     /**
      * @Route("/association", name="association")
-    
+
      */
     public function association(): Response
     {
