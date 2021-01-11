@@ -15,6 +15,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\Form\Extension\Core\Type\RangeType;
 
 /**
  * @Route("/produit")
@@ -146,6 +148,88 @@ class ProduitController extends AbstractController
         }
 
         return $this->render('produit/evenement/reservation.html.twig', [
+            'produit' => $produit,
+            'form' => $form->createView()
+        ]);
+    }
+
+     /**
+     * @Route("/{id}/donation", name="produit_donation", methods={"GET","POST"})
+     * @IsGranted("ROLE_USER")
+     */
+    public function donation(Request $request, Produit $produit): Response
+    {
+        $form = $this->createFormBuilder()
+            ->add('montant', RangeType::class, [
+                'label' => 'Je souhaite donner : ',
+                'attr' => [
+                    'min' => $produit->getPrix(),
+                    'max' => 100,
+                    'step' => 1,
+                    'value' => $produit->getPrix()
+                ]
+            ])
+            ->getForm();
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $data = $form->getData();
+            //on met dans le panier (session)
+            $session = $request->getSession();
+            $panier = $session->get('panier', []);
+            $panier[EntityProduitType::PRODUIT_TYPE_DONATION_NAME][$produit->getId()] = [
+                'quantite' => 1,
+                'montant' => $data['montant'],
+                'produit_nom' => $produit->getNom(),
+            ];
+            $session->set('panier', $panier);
+            $this->addFlash('success', 'Votre donation a été ajoutée au panier !');
+            return $this->redirectToRoute('produit_show', ['id' => $produit->getId()]);
+        }
+
+        return $this->render('produit/donation/donation.html.twig', [
+            'produit' => $produit,
+            'form' => $form->createView()
+        ]);
+    }
+
+     /**
+     * @Route("/{id}/adhesion", name="produit_adhesion", methods={"GET","POST"})
+     * @IsGranted("ROLE_USER")
+     */
+    public function adhesion(Request $request, Produit $produit): Response
+    {
+        $form = $this->createFormBuilder()
+            ->add('montant', RangeType::class, [
+                'label' => 'Montant de mon adhésion : ',
+                'attr' => [
+                    'min' => $produit->getPrix(),
+                    'max' => 100,
+                    'step' => 1,
+                    'value' => $produit->getPrix()
+                ]
+            ])
+            ->getForm();
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $data = $form->getData();
+            //on met dans le panier (session)
+            $session = $request->getSession();
+            $panier = $session->get('panier', []);
+            $panier[EntityProduitType::PRODUIT_TYPE_ADHESION_NAME][$produit->getId()] = [
+                'quantite' => 1,
+                'montant' => $data['montant'],
+                'produit_nom' => $produit->getNom(),
+            ];
+            $session->set('panier', $panier);
+            $this->addFlash('success', 'Votre adhésion a été ajoutée au panier !');
+            return $this->redirectToRoute('produit_show', ['id' => $produit->getId()]);
+        }
+
+        return $this->render('produit/adhesion/adhesion.html.twig', [
             'produit' => $produit,
             'form' => $form->createView()
         ]);

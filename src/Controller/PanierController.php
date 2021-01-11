@@ -66,6 +66,16 @@ class PanierController extends AbstractController
                         $entityManager->persist($achat);
                         $entityManager->flush();
                     }
+                } elseif ($typeProduit == ProduitType::PRODUIT_TYPE_ADHESION_NAME || $typeProduit == ProduitType::PRODUIT_TYPE_DONATION_NAME) {
+
+                    $achat = new Achat();
+                    $achat->setUser($this->getUser());
+                    $achat->setProduit($produit);
+                    $achat->setQuantite(1);
+                    $achat->setMontant($achatsProduit['montant']);
+                    $achat->setCreatedAt(new DateTime('NOW'));
+                    $entityManager->persist($achat);
+                    $entityManager->flush();
                 }
             }
         }

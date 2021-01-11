@@ -12,12 +12,14 @@
     <div class="container-fluid">
         <div class="row subheader text-center">
             <div class="col-12 col-md-4 text-white p-4 border-right"><h4 class="mb-0"><i class="fas fa-heart mr-3"></i>DONATION</h4></div>
-            <div class="col-12 col-md-4 text-white p-4 border-right"><h4 class="mb-0"><i class="fas fa-clock mr-3"></i>JUSQU'AU {{ produit.finPublication|date('y-m-d') }}</h4></div>
+            <div class="col-12 col-md-4 text-white p-4 border-right"><h4 class="mb-0"><i class="fas fa-clock mr-3"></i>JUSQU'AU {{ produit.finPublication|date('d/m/Y') }}</h4></div>
             <div class="col-12 col-md-4 text-white p-4"><h4 class="mb-0"><i class="fas fa-hand-holding-usd mr-3"></i></i>{{ produit.objectif }} €</h4></div>
         </div>
     </div>
 
     {{ include('produit/evenement/_modal_disponibilite.html.twig', {'button_label': 'Update'}) }}
+
+    {% set percentage = produit.totalDonationProduit / produit.objectif * 100 %}
 
     <div class="container my-5">
         <div class="row align-items-center">
@@ -27,9 +29,12 @@
                 <p class="text-produit">{{ produit.description|raw }}</p>
             </div>
             <div class="col-12 col-lg-2">
-                <h3 class="titresection">Tarifs</h3>
-                <p class="text-produit text-center">{{ produit.prix }} € minimum</p>
+                <h3 class="titresection">Participez</h3>
+                <p class="text-produit text-center">A partir de {{ produit.prix }} €</p>
                 <h3 class="titresection">Progression</h3>
+                <div class="progression-bar mb-2 text-center" style="background: linear-gradient(to right, #ff8300 {{ percentage }}%, white {{ percentage }}%);">
+                    <span>{{ percentage|round }} %</span>
+                </div>
                 <p class="text-produit text-center">{{ produit.totalDonationProduit }} / {{ produit.objectif }} €</p>
             </div>
         </div>
@@ -37,7 +42,7 @@
 
     <div class="container-fluid sticky-footer border py-3">
         <a href="{{ path('produit_index') }}" class="btn btn-darkgrey" >Revenir aux produits</a>
-        <a href="{{ path('produit_reservation', {'id': produit.id}) }}" class="btn btn-darkgrey float-right">Donner !</a>
+        <a href="{{ path('produit_donation', {'id': produit.id}) }}" class="btn btn-darkgrey float-right">Donner !</a>
         <a href="https://www.helloasso.com/associations/sep-a-la-voile/collectes/sep-a-la-voile" class="btn btn-darkgrey-inverse float-right mr-3" target="_blank">Donner sur HelloAsso</a>
     </div>
 
