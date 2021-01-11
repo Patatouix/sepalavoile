@@ -1,0 +1,49 @@
+{% extends "carousel.html.twig" %}
+
+{% block content %}
+
+{# ===== SECTION TEXTE ===== #}
+<div class="container mb-5">
+    <div class="titresection">
+        <h2>galerie photo</h2>
+    </div>
+    <!-- Grid row -->
+    <div class="row">
+
+        <!-- Grid column -->
+        <div class="col-md-12 d-flex justify-content-center mb-5">
+                <button type="button" class="btn btn-outline-black waves-effect filter" data-rel="all">Toutes</button>
+                {# {% for galerietag in galerietags %}
+                    <button type="button" class="btn btn-outline-black waves-effect filter" data-rel="{{ galerietag.id }}">{{ galerietag.name }}</button>
+                {% endfor %} #}
+        </div>
+        <!-- Grid column -->
+
+    </div>
+    <!-- Grid row -->
+    <div class="gallery" id="gallery">
+        {# {% for galeriephoto in galeriephotos %}
+
+        <div class="mb-3 pics animation all{% for galerietag in galeriephoto.galleryCategory %} {{ galerietag.id }} {% endfor %}">
+            <a href="{{ asset('/images/galleryPhoto/' ~ galeriephoto.filename) }}" data-lightbox="permet-de-relier-les-images-enseble-dans-l-agalerie">
+                <img class="img-fluid" src="{{ galeriephoto.filename ? asset('/images/galleryPhoto/' ~ galeriephoto.filename) : asset('/images/logo.svg') }}" alt="{{ galeriephoto.descriptionALT}}">
+            </a>
+        </div>
+        {% endfor %} #}
+
+        {% for galerie in galerie %}
+            <div class="mb-3 pics animation all">
+                    <a href="{{ asset('/images/galleryPhoto/' ~ galerie.nom) }}" data-lightbox="permet-de-relier-les-images-enseble-dans-l-agalerie">
+                        <img class="img-fluid" src="{{ galerie.nom ? asset('/images/galleryPhoto/' ~ galerie.nom) : asset('/images/logo.svg') }}" alt="{{ galerie.description}}">
+                    </a>
+            </div>
+        {% endfor %}
+    </div>
+    <div class="container mt-5">
+    {# {{ knp_pagination_render(galeriephotos) }} #}
+    </div>
+
+
+</div>
+
+{% endblock %}
