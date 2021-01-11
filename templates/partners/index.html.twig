@@ -1,0 +1,142 @@
+{% extends 'base_dashboard.html.twig' %}
+
+{% block title %}Dashboard / Liste des partenaires{% endblock %}
+
+{% block body %}
+    <div id="partners-list" class="container-fluid">
+        <h1>Liste des partenaires</h1>
+        <div class="col-12  mt-5 mb-3">
+            <a href="{{ path('partners_new') }}" class="btn btn-style">Nouveau partenaire</a>
+        </div>
+        <div class="table-responsive card px-2 py-2">
+            <table id="example1" class="table table-bordered table-striped  mx-2 my-2">
+                <thead>
+                    <tr class="text-center">
+                        <th>Id du partenaire</th>
+                        <th>Action</th>
+                        <th>Nom du partenaire</th>
+                        <th>Site internet du partenaire</th>
+                        <th>Logo du partenaire</th>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr class="text-center">
+                        <th>Id du partenaire</th>
+                        <th>Action</th>
+                        <th>Nom du partenaire</th>
+                        <th>Site internet du partenaire</th>
+                        <th>Logo du partenaire</th>
+                    </tr>
+                </tfoot>
+                <tbody>
+                    {% for partner in partners %}
+                        <tr class="text-center">
+                            <td>{{ partner.id }}</td>
+                            <td>
+                                {# Modal pour afficher un partenaire #}
+                                <a href="" type="button" class="m-0" data-toggle="modal" data-target="#showPartnersModal{{ partner.id }}">
+                                    <i class="fad fa-eye mr-1"></i>
+                                </a>
+                                <div class="modal fade text-left" id="showPartnersModal{{ partner.id }}" tabindex="-1" role="dialog" aria-labelledby="showPartnersModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-xl" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h6 class="modal-title text-uppercase font-weight-bold">Consulter</h6>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body font-weight-normal p-0">
+                                                {% include "partners/show.html.twig" %}
+
+                                                <div class="modal-footer"> 
+                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                {# Fin de la modal afficher un partenaire #}
+
+                                <a href="{{ path('partners_edit', {'id': partner.id}) }}">
+                                    <i class="fad fa-edit px-2 border-left border-right"></i>
+                                </a>
+
+                                {# Modal pour supprimer un partenaire #}
+                                <a href="" type="button" class="m-0" data-toggle="modal" data-target="#deletePartnersModal{{ partner.id }}">
+                                    <i class="fad fa-trash-alt ml-1"></i>
+                                </a>
+                                <div class="modal fade text-left" id="deletePartnersModal{{ partner.id }}" tabindex="-1" role="dialog" aria-labelledby="deletePartnersModallLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-lg" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h6 class="modal-title text-uppercase font-weight-bold">Supprimer</h6>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body font-weight-normal">
+                                                <div class="row bg-white">
+                                                    <div class="col-4 text-center my-auto">
+                                                        {# <img id='eventImage' class="img-fluid" alt="Photo de l'événement" src="{{ partner.filename ? asset('/images/partners/' ~ partner.filename) : asset('/images/logo.svg') }}"> #}
+                                                    </div>
+                                                    <div class="col-8 my-5 pl-5 border-left-profil ">
+                                                        <div class="col-12">
+                                                            <ul class="list-group list-group-flush">
+                                                                <li class="list-group">
+                                                                    <div class="row mb-3">
+                                                                        <div class="col-1 p-0 text-center"><i class="fad fa-id-badge"></i></div>
+                                                                        <div class="col-4">Id du profil :</div>
+                                                                        <div class="col-7 p-0">{{ partner.id }}</div>
+                                                                    </div>
+                                                                </li>
+                                                                <li class="list-group">
+                                                                    <div class="row mb-3">
+                                                                        <div class="col-1 p-0 text-center"><i class="fad fa-calendar-check"></i></div>
+                                                                        <div class="col-4">Prénom :</div>
+                                                                        <div class="col-7 p-0">{{ partner.name }}</div>
+                                                                    </div>
+                                                                </li>
+                                                                <li class="list-group">
+                                                                    <div class="row mb-3">
+                                                                        <div class="col-1 p-0 text-center"><i class="fad fa-calendar-check"></i></div>
+                                                                        <div class="col-4">Site web :</div>
+                                                                        <div class="col-7 p-0">{{ partner.webSite }}</div>
+                                                                    </div>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer"> 
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                                                {% include "partners/_delete_form.html.twig" %}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                {# Fin de la modal supprimer expérience #}
+                            
+                            </td>
+                            <td>
+                                {{ partner.name }}
+                            </td>
+                            <td>
+                                {{ partner.website }}
+                            </td>
+                            <td>
+                                <img id='partnerImage' class="img-fluid w-25" alt="Logo du partenaire" src="{{ partner.media.nom ? asset('/images/partners/' ~ partner.media.nom) : asset('/images/logo.svg') }}">
+                                                                
+                            </td>                            
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="9">Pas d'enregistrement trouvé</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}

@@ -59,9 +59,15 @@ class Media
      */
     private $produits;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Partners::class, mappedBy="media")
+     */
+    private $partners;
+
     public function __construct()
     {
         $this->produits = new ArrayCollection();
+        $this->partners = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -176,4 +182,35 @@ class Media
 
         return $this;
     }
+
+    /**
+     * @return Collection|Partners[]
+     */
+    public function getPartners(): Collection
+    {
+        return $this->partners;
+    }
+
+    public function addPartner(Partners $partner): self
+    {
+        if (!$this->partners->contains($partner)) {
+            $this->partners[] = $partner;
+            $partner->setMedia($this);
+        }
+
+        return $this;
+    }
+
+    public function removePartner(Partners $partner): self
+    {
+        if ($this->partners->removeElement($partner)) {
+            // set the owning side to null (unless already changed)
+            if ($partner->getMedia() === $this) {
+                $partner->setMedia(null);
+            }
+        }
+
+        return $this;
+    }
+
 }

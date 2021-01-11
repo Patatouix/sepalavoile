@@ -5,6 +5,7 @@ namespace App\DataFixtures;
 use App\Entity\Achat;
 use App\Entity\Creneau;
 use App\Entity\Media;
+use App\Entity\Partners;
 use App\Entity\Produit;
 use App\Entity\ProduitType;
 use App\Entity\User;
@@ -124,6 +125,105 @@ class AppFixtures extends Fixture
         $media->setDescription('Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat aperiam doloremque, dolores voluptates obcaecati nihil ipsam voluptatibus vero exercitationem in, debitis sapiente. Alias ullam culpa sint vel esse, numquam in?');
         $media->setTitre('Image par défaut pour nos entités');
         $manager->persist($media);
+        
+        $mediaAiragri = new Media();
+        $mediaAiragri->setCreatedAt(new DateTime('NOW'));
+        $mediaAiragri->setNom('sponsor-airagri.jpg');
+        $mediaAiragri->setUrl('');
+        $mediaAiragri->setDescription('AIRAGRI');
+        $mediaAiragri->setTitre('AIRAGRI');
+        $manager->persist($mediaAiragri);
+        
+        $mediaPicvert = new Media();
+        $mediaPicvert->setCreatedAt(new DateTime('NOW'));
+        $mediaPicvert->setNom('sponsor-picvert.jpg');
+        $mediaPicvert->setUrl('');
+        $mediaPicvert->setDescription('PICVERT');
+        $mediaPicvert->setTitre('PICVERT');
+        $manager->persist($mediaPicvert);
+        
+        $mediaDivatec = new Media();
+        $mediaDivatec->setCreatedAt(new DateTime('NOW'));
+        $mediaDivatec->setNom('sponsor-divatec.jpg');
+        $mediaDivatec->setUrl('');
+        $mediaDivatec->setDescription('DIVATEC');
+        $mediaDivatec->setTitre('DIVATEC');
+        $manager->persist($mediaDivatec);
+        
+        $mediaDalmard = new Media();
+        $mediaDalmard->setCreatedAt(new DateTime('NOW'));
+        $mediaDalmard->setNom('sponsor-dalmard.jpg');
+        $mediaDalmard->setUrl('');
+        $mediaDalmard->setDescription('DALMARD MARINE');
+        $mediaDalmard->setTitre('DALMARD MARINE');
+        $manager->persist($mediaDalmard);
+        
+        $mediaIej = new Media();
+        $mediaIej->setCreatedAt(new DateTime('NOW'));
+        $mediaIej->setNom('sponsor-iej.jpg');
+        $mediaIej->setUrl('');
+        $mediaIej->setDescription('IEJ');
+        $mediaIej->setTitre('IEJ');
+        $manager->persist($mediaIej);
+        
+        $mediaVieuxCampeur = new Media();
+        $mediaVieuxCampeur->setCreatedAt(new DateTime('NOW'));
+        $mediaVieuxCampeur->setNom('sponsor-vieuxcampeur.jpg');
+        $mediaVieuxCampeur->setUrl('');
+        $mediaVieuxCampeur->setDescription('AUX VIEUX CAMPEUR');
+        $mediaVieuxCampeur->setTitre('AUX VIEUX CAMPEUR');
+        $manager->persist($mediaVieuxCampeur);
+        
+        $mediaAcal = new Media();
+        $mediaAcal->setCreatedAt(new DateTime('NOW'));
+        $mediaAcal->setNom('sponsor-acal.jpg');
+        $mediaAcal->setUrl('');
+        $mediaAcal->setDescription('ACAL');
+        $mediaAcal->setTitre('ACAL');
+        $manager->persist($mediaAcal);
+
+        // Les Partenaires
+        $partnersAiragri = new Partners();
+        $partnersAiragri->setName('AIRAGRI');
+        $partnersAiragri->setWebSite('http://alban-dev-online.ovh/');
+        $partnersAiragri->setMedia($mediaAiragri);
+        $manager->persist($partnersAiragri);
+
+        $partnersPicvert = new Partners();
+        $partnersPicvert->setName('PICVERT');
+        $partnersPicvert->setWebSite('https://picvert.com');
+        $partnersPicvert->setMedia($mediaPicvert);
+        $manager->persist($partnersPicvert);
+
+        $partnersDivatec = new Partners();
+        $partnersDivatec->setName('DIVATEC');
+        $partnersDivatec->setWebSite('https://www.divatec.eu/');
+        $partnersDivatec->setMedia($mediaDivatec);
+        $manager->persist($partnersDivatec);
+
+        $partnersDalmard = new Partners();
+        $partnersDalmard->setName('DALMARD MARINE');
+        $partnersDalmard->setWebSite('https://www.dalmardmarine.com/');
+        $partnersDalmard->setMedia($mediaDalmard);
+        $manager->persist($partnersDalmard);
+
+        $partners = new Partners();
+        $partners->setName('IEJ');
+        $partners->setWebSite('https://iej.eu/strasbourg/');
+        $partners->setMedia($mediaIej);
+        $manager->persist($partners);
+
+        $partnersmediaVieuxCampeur = new Partners();
+        $partnersmediaVieuxCampeur->setName('AU VIEUX CAMPEUR');
+        $partnersmediaVieuxCampeur->setWebSite('https://www.auvieuxcampeur.fr/');
+        $partnersmediaVieuxCampeur->setMedia($mediaVieuxCampeur);
+        $manager->persist($partnersmediaVieuxCampeur);
+
+        $partnersAcal = new Partners();
+        $partnersAcal->setName('ACAL');
+        $partnersAcal->setWebSite('http://www.acal67.com/voile-acal-strasbourg/');
+        $partnersAcal->setMedia($mediaAcal);
+        $manager->persist($partnersAcal);
 
         //produits de type event
 
