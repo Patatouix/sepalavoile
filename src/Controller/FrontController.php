@@ -18,10 +18,11 @@ class FrontController extends AbstractController
     /**
      * @Route("/", name="home_page")
      */
-    public function index(ArticleRepository $articleRepository, PartnersRepository $partnersRepository, MediaRepository $mediaRepository): Response
+    public function index(ArticleRepository $articleRepository, PartnersRepository $partnersRepository): Response
     {
         $articleBestView = $this->getDoctrine()->getRepository(Article::class)->findBynombreVuDesc();
         $media = $this->getDoctrine()->getRepository(Media::class)->findBy(['type' => 'video'], ['createdAt' => 'desc']);
+        $galerie = $this->getDoctrine()->getRepository(Media::class)->findBy(['type' => 'galerie'], ['createdAt' => 'desc']);
 
         return $this->render('front/home_page.html.twig', [
             'controller_name' => 'FrontController',
@@ -29,6 +30,7 @@ class FrontController extends AbstractController
             'article' => $articleRepository->findBy([],['createdAt' => 'desc']),
             'partners'          => $partnersRepository -> findAll(),
             'media' => $media,
+            'galerie' => $galerie,
         ]);
     }
 
@@ -99,6 +101,19 @@ class FrontController extends AbstractController
     {
         return $this->render('front/lebateau.html.twig', [
             'controller_name' => 'FrontController',
+        ]);
+    }
+
+    /**
+     * @Route("/galerie", name="galerie")
+     */
+    public function galerie(): Response
+    {
+        $galerie = $this->getDoctrine()->getRepository(Media::class)->findBy(['type' => 'galerie'], ['createdAt' => 'desc']);
+
+        return $this->render('front/galerie.html.twig', [
+            'controller_name' => 'FrontController',
+            'galerie' => $galerie,
         ]);
     }
 
