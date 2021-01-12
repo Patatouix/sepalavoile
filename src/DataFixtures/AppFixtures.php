@@ -3,6 +3,8 @@
 namespace App\DataFixtures;
 
 use App\Entity\Achat;
+use App\Entity\Article;
+use App\Entity\ArticleCategorie;
 use App\Entity\Creneau;
 use App\Entity\Media;
 use App\Entity\Partners;
@@ -387,6 +389,25 @@ class AppFixtures extends Fixture
         $partnersAcal->setWebSite('http://www.acal67.com/voile-acal-strasbourg/');
         $partnersAcal->setMedia($mediaAcal);
         $manager->persist($partnersAcal);
+
+        //Catégorie
+
+        for ($i = 1; $i <= 5; $i++) {
+            $categorie = new ArticleCategorie();
+            $categorie->setName('Categorie' . $i);
+            $manager->persist($categorie);
+                for ($j = 1; $j <= 5; $j++) {
+                    $article = new Article();
+                    $article->setTitle('title' . $j);
+                    $article->setContent('Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat aperiam doloremque, dolores voluptates obcaecati nihil ipsam voluptatibus vero exercitationem in, debitis sapiente. Alias ullam culpa sint vel esse, numquam in?<br><br>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat aperiam doloremque, dolores voluptates obcaecati nihil ipsam voluptatibus vero exercitationem in, debitis sapiente. Alias ullam culpa sint vel esse, numquam in?<br><br>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat aperiam doloremque, dolores voluptates obcaecati nihil ipsam voluptatibus vero exercitationem in, debitis sapiente. Alias ullam culpa sint vel esse, numquam in?');
+                    $article->setAuthor('Author' . $j);
+                    $article->setCreatedAt(new DateTime('NOW'));
+                    $article->setIsPublished(true);
+                    $article->addArticleCategory($categorie);
+                    $manager->persist($article);
+
+                }
+        }
 
 
         //produits de type event
