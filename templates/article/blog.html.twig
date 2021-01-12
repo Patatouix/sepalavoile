@@ -16,15 +16,15 @@
                 <!-- Row -->
                 <div class="row mb-5">
                     <!-- Article -->
-                        {% for article in articles %}
+                        {% for article in articlesPaginate %}
                                 {% if categoryId == null %}
                                     <article class="articlestyle shadow">
                                         <span class="imgWrap">
                                             <a href="{{ path('article_show', {'id': article.id}) }}">
-                                            
+
                                                 {# VERSION DYNAMIQUE #}
                                                 {# <img id='articleImage' class="img-fluid" alt="Photo de l'article" src="{{ article.filename ? asset('/images/photoarticle/' ~ article.filename) : asset('/images/logo.svg') }}"> #}
-                                                
+
                                                 {# VERSION STATIQUE #}
                                                 <img id='articleImage' class="img-fluid" alt="Photo de l'article" src="{{ asset('/images/logo.svg') }}">
 
@@ -46,7 +46,7 @@
                                         </div>
                                         <hr>
                                     </article>
-                                {% else %}                            
+                                {% else %}
                                     {% for category in article.articleCategories  %}
                                         {% if categoryId == category.id  %}
 
@@ -77,12 +77,12 @@
                                         {% endif %}
                                     {% endfor %}
                                 {% endif %}
-                                
+
                         {% endfor %}
 
                     <!-- Fin Article -->
 
-                    {{ knp_pagination_render(articles) }}
+                    {{ knp_pagination_render(articlesPaginate) }}
 
                 </div>
                 <!-- Fin Row -->

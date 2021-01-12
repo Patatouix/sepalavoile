@@ -55,7 +55,7 @@ class ArticleController extends AbstractController
         }
 
         // Permet de gerer la pagination dans les pages du blog
-        $articles = $paginator->paginate(
+        $articlesPaginate = $paginator->paginate(
             $articlesToKeep, /* query NOT result */
             $request->query->getInt('page', 1), /*numéro page par défaut*/
             4 /*limite d'article par page*/
@@ -68,12 +68,12 @@ class ArticleController extends AbstractController
         $article = $articleRepository->findAll();
         
         return $this->render('article/blog.html.twig', [
-            'articles'          => $articles,
+            'articlesPaginate'  => $articlesPaginate,
             'category'          => $allCategory,
             'articleBestView'   => $articleBestView,
             'categories'        => $categories,
             'categoryId'        => $categoryId,
-            'article'           => $article,
+            'articles'          => $articles,
 
         ]);
     }
