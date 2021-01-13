@@ -1,0 +1,113 @@
+{% block body %}
+        <div id="show_user" class="container bg-light rounded">
+            <div class="row border-bottom py-3 px-5">
+                <div class="col-6">
+                    <h1 class="text-uppercase text-left m-0">
+                        Profil de : {{ user.firstName }}&nbsp&nbsp{{ user.name }}
+                    </h1>
+                </div>
+                <div class="col-6 text-right my-auto">
+                    <span class="text-muted mr-2 font-italic">
+                        Modifier le profil :
+                    </span>
+                    <a href="{{ path('user_edit', {'id': user.id}) }}">
+                        <i class="fad fa-user-edit"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="row bg-white">
+                <div class="col-4 text-center my-auto">
+                    <i class="fad fa-inbox-in mr-4"></i>
+                    {# <img id='userImage' class="" alt="Photo de l'événement" src="{{ user.filename ? asset('/images/user/' ~ user.filename) : asset('/images/logo.svg') }}"> #}
+                </div>
+                <div class="col-8 my-5 pl-5 border-left-profil border-left-form">
+                    <div class="col-12">
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group">
+                                <div class="row mb-3">
+                                    <div class="col-1 p-0 text-center"><i class="fad fa-id-card-alt"></i></div>
+                                    <div class="col-4">Id du profil :</div>
+                                    <div class="col-7 p-0">{{ user.id }}</div>
+                                </div>
+                            </li>
+                            <li class="list-group">
+                                <div class="row mb-3">
+                                    <div class="col-1 p-0 text-center"><i class="fad fa-user-alt"></i></div>
+                                    <div class="col-4">Prénom :</div>
+                                    <div class="col-7 p-0">{{ user.firstname }}</div>
+                                </div>
+                            </li>
+                            <li class="list-group">
+                                <div class="row mb-3">
+                                    <div class="col-1 p-0 text-center"><i class="fal fa-user-alt"></i></div>
+                                    <div class="col-4">Nom :</div>
+                                    <div class="col-7 p-0">{{ user.name }}</div>
+                                </div>
+                            </li>
+                            <li class="list-group">
+                                <div class="row mb-3">
+                                    <div class="col-1 p-0 text-center"><i class="fad fa-envelope-open-text"></i></div>
+                                    <div class="col-4">E-mail :</div>
+                                    <div class="col-7 p-0">{{ user.email }}</div>
+                                </div>
+                            </li>
+                            <li class="list-group">
+                                <div class="row mb-3">
+                                    <div class="col-1 p-0 text-center"><i class="fad fa-phone"></i></div>
+                                    <div class="col-4">Numéro de téléphone</div>
+                                    <div class="col-7 p-0">{{ user.numTel }}</div>
+                                </div>
+                            </li>
+                            <li class="list-group">
+                                <div class="row mb-3">
+                                    <div class="col-1 p-0 text-center"><i class="fad fa-smile-plus"></i></div>
+                                    <div class="col-4">Pseudo :</div>
+                                    <div class="col-7 p-0">{{ user.pseudo }}</div>
+                                </div>
+                            </li>
+                            <li class="list-group">
+                                <div class="row mb-3">
+                                    <div class="col-1 p-0 text-center"><i class="fad fa-road"></i></div>
+                                    <div class="col-4">Adresse</div>
+                                    <div class="col-7 p-0">{{ user.adresse }}</div>
+                                </div>
+                            </li>
+                            <li class="list-group">
+                                <div class="row mb-3">
+                                    <div class="col-1 p-0 text-center"><i class="fad fa-mailbox"></i></div>
+                                    <div class="col-4">Code postal</div>
+                                    <div class="col-7 p-0">{{ user.codePostal }}</div>
+                                </div>
+                            </li>
+                            <li class="list-group">
+                                <div class="row mb-3">
+                                    <div class="col-1 p-0 text-center"><i class="fad fa-map-marked"></i></div>
+                                    <div class="col-4">Ville</div>
+                                    <div class="col-7 p-0">{{ user.ville }}</div>
+                                </div>
+                            </li>
+                            <li class="list-group">
+                                <div class="row mb-3">
+                                    <div class="col-1 p-0 text-center"><i class="fad fa-user-check"></i></div>
+                                    <div class="col-4">Utilisateur vérifié ?</div>
+                                    <div class="col-7 p-0">
+                                        {% if user.isVerified == 1 %}
+                                        <span class="text-success">Oui</span>
+                                        {% else %}
+                                        <span class=="text-danger">Non</span>
+                                        {% endif %}
+                                </div>
+                            </li>
+                            <li class="list-group">
+                                <div class="row mb-3">
+                                    <div class="col-1 p-0 text-center"><i class="fad fa-user-tag"></i></div>
+                                    <div class="col-4">Rôle :</div>
+                                    <div class="col-7 p-0">{{ user.roles ? user.roles|json_encode : '' }}</div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+{% endblock %}
