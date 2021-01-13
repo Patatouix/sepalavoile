@@ -75,10 +75,12 @@ class UserController extends AbstractController
             return $this->render('user/show_admin.html.twig', [
                 'user' => $user,
             ]);
-        } else {
+        } elseif ($this->isGranted('ROLE_USER')) {
             return $this->render('user/show_user.html.twig', [
                 'user' => $user,
             ]);
+        } else {
+            return $this->redirectToRoute('home_page');
         }
     }
 
