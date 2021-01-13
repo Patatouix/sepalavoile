@@ -66,7 +66,7 @@ class ArticleController extends AbstractController
         // pour afficher dans le ASIDE le nombre complet d'article
         // sans tenir compte de la pagination
         $article = $articleRepository->findAll();
-        
+
         return $this->render('article/blog.html.twig', [
             'articlesPaginate'  => $articlesPaginate,
             'category'          => $allCategory,
