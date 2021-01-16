@@ -54,7 +54,7 @@
                         <span class="imgWrap font-italic">
                             {# <a href="../pages/article-blog-soling.html"><img src="{{ articleBestView.filename ? asset('/images/photoarticle/' ~ articleBestView.filename) : asset('/images/logo.svg') }}" width="100%"></a> #}
                             <a href="{{ path('article_show', {'id': articleBestView.id}) }}"><img src="{{ asset('/images/logo.svg') }}" width="100%"></a>
-                        </span>                            
+                        </span>
                         {% endfor %}
                     </div>
                 </div>
