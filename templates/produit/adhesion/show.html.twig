@@ -1,0 +1,53 @@
+{% extends 'carousel.html.twig' %}
+
+{% block title %}Produit{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('produit') }}
+{% endblock %}
+
+{% block content %}
+
+    <div class="container-fluid">
+        <div class="row subheader text-center">
+            <div class="col-12 col-md-4 text-white p-4 border-right"><h4 class="mb-0"><i class="fas fa-edit mr-3" style="color:white"></i>ADHESION</h4></div>
+            <div class="col-12 col-md-4 text-white p-4 border-right"><h4 class="mb-0"><i class="fas fa-hourglass-half mr-3"></i>{{ produit.duree}} MOIS</h4></div>
+            <div class="col-12 col-md-4 text-white p-4"><h4 class="mb-0"><i class="fas fa-user-plus mr-3"></i></i>{{ produit.objectif }} ADHERENTS</h4></div>
+        </div>
+    </div>
+
+    {{ include('produit/evenement/_modal_disponibilite.html.twig', {'button_label': 'Update'}) }}
+
+    {% set percentage = produit.achats|length / produit.objectif * 100 %}
+
+    <div class="container my-5">
+        <div class="row align-items-center">
+            <div class="col-12 col-lg-4"><img src="{{ produit.medias|first.url }}" class="img-produit"></div>
+            <div class="col-12 col-lg-6">
+                <h1 class="titresection">{{ produit.nom }}</h1>
+                <p class="text-produit">{{ produit.description|raw }}</p>
+            </div>
+            <div class="col-12 col-lg-2">
+                <h3 class="titresection">Tarifs</h3>
+                <p class="text-produit text-center">{{ produit.prix }} € pour {{ produit.duree }} mois</p>
+                <h3 class="titresection">Progression</h3>
+                <div class="progression-bar mb-2 text-center" style="background: linear-gradient(to right, #ff8300 {{ percentage }}%, white {{ percentage }}%);">
+                    <span>{{ percentage|round }} %</span>
+                </div>
+                <p class="text-produit text-center">{{ produit.achats|length }} / {{ produit.objectif }} adhérents</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid sticky-footer border py-3">
+        <a href="{{ path('produit_index') }}" class="btn btn-darkgrey" >Revenir aux produits</a>
+        <a href="{{ path('produit_adhesion', {'id': produit.id}) }}" class="btn btn-darkgrey float-right">Adhérer</a>
+    </div>
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('produit') }}
+{% endblock %}

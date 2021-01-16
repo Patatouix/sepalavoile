@@ -1,0 +1,48 @@
+body {
+    background-color: white;
+}
+
+.titresection {
+    text-align: center;
+    font-size: 2em;
+    color: black;
+    font-family: 'Pathway Gothic One', sans-serif;
+    text-transform: uppercase;
+    margin-top: 40px;
+    margin-bottom: 40px;
+}
+
+.btn-style {
+    background-color: #ff8300;
+    color: white;
+    font-family: 'Open Sans', sans-serif;
+    font-variant: small-caps;
+    font-size: 1em;
+    font-weight: bold;
+}
+
+.btn-style:hover {
+    background-color: #d2d2d2;
+    color: white;
+    -webkit-box-shadow: 4px 7px 14px -3px rgba(0, 0, 0, 0.40);
+    -moz-box-shadow: 4px 7px 14px -3px rgba(0, 0, 0, 0.40);
+    box-shadow: 4px 4px 14px -3px rgba(0, 0, 0, 0.40);
+    transition-duration: .1s;
+}
+
+.btn-darkgrey-inverse {
+    background-color: white;
+    color: rgba(128, 128, 128, 0.94);
+    font-family: 'Open Sans', sans-serif;
+    font-variant: small-caps;
+    font-weight: bold;
+    border: 1px solid rgba(128, 128, 128, 0.94);
+}
+
+.btn-darkgrey {
+    background-color: rgba(128, 128, 128, 0.94);
+    color: white;
+    font-family: 'Open Sans', sans-serif;
+    font-variant: small-caps;
+    font-weight: bold;
+}

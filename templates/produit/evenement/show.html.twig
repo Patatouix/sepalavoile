@@ -1,0 +1,78 @@
+{% extends 'carousel.html.twig' %}
+
+{% block title %}Produit{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('disponibilite') }}
+    {{ encore_entry_link_tags('produit') }}
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+        integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+        crossorigin=""/>
+{% endblock %}
+
+{% block content %}
+
+    <div class="container-fluid">
+        <div class="row subheader text-center">
+            <div class="col-12 col-md-4 text-white p-4 border-right"><h4 class="mb-0"><i class="fas fa-calendar-alt mr-3"></i>EVENEMENT</h4></div>
+            <div class="col-12 col-md-4 text-white p-4 border-right"><h4 class="mb-0"><i class="fas fa-map-marker-alt mr-3"></i>{{ produit.ville|upper }}</h4></div>
+            <div class="col-12 col-md-4 text-white p-4"><h4 class="mb-0"><i class="fas fa-users mr-3"></i>{{ produit.objectif }} PARTICIPANTS</h4></div>
+        </div>
+    </div>
+
+    {{ include('produit/evenement/_modal_disponibilite.html.twig', {'button_label': 'Update'}) }}
+
+    <div class="container my-5">
+        <div class="row align-items-center">
+            <div class="col-12 col-lg-4"><img src="{{ produit.medias|first.url }}" class="img-produit"></div>
+            <div class="col-12 col-lg-6">
+                <h1 class="titresection">{{ produit.nom }}</h1>
+                <p class="text-produit">{{ produit.description|raw }}</p>
+            </div>
+            <div class="col-12 col-lg-2">
+                <h3 class="titresection">Tarifs</h3>
+                <p class="text-produit text-center">{{ produit.prix }} € / personne</p>
+                <h3></h3>
+                <h3 class="titresection">Localisation</h3>
+                <div id="mapid"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid sticky-footer border py-3">
+        <a href="{{ path('produit_index') }}" class="btn btn-darkgrey" >Revenir aux produits</a>
+        <a href="{{ path('produit_reservation', {'id': produit.id}) }}" class="btn btn-darkgrey float-right">Réserver</a>
+        <button type="button" class="btn btn-darkgrey-inverse float-right mr-3" data-toggle="modal" data-target="#modal_disponibilite">
+            Voir dispos
+        </button>
+    </div>
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+        integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+        crossorigin=""></script>
+
+    <script>
+        //construction du tableau à fournir au calendrier pour afficher les créneaux
+        //ce tableau sera ensuite utilisé par le fichier js spécifique à cette page (assets/disponibilite.js)
+        let creneaux = [];
+        let creneau = {};
+        {% for creneau in produit.creneaux %}
+            creneau = {
+                start: '{{ creneau.debut|date('Y-m-d H:i:s') }}',
+                end: '{{ creneau.fin|date('Y-m-d H:i:s') }}',
+                //couleur selon la disponibilité
+                color: {{ creneau.placesDisponibles }} ? 'green' : 'red',
+            }
+            creneaux.push(creneau);
+        {% endfor %}
+    </script>
+
+    {{ encore_entry_script_tags('disponibilite') }}
+    {{ encore_entry_script_tags('produit') }}
+{% endblock %}

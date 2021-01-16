@@ -1,0 +1,287 @@
+/*------------ SLIDE VIDEO ------------*/
+/*-------------- SECTION --------------*/
+.degrade {
+    height: 50px;
+}
+
+.fondslide {
+    display: flex;
+    justify-content: center;
+    /* Pour centrer le conteneur */
+    margin-bottom: 40px;
+}
+
+.container-video {
+    width: 100%;
+}
+
+.bloc-degrade {
+    width: 100%;
+    height: 100px;
+    background-image: url(../../public/images/bg-slide-repeat.png);
+    background-repeat: repeat-x;
+    opacity: 1;
+    position: absolute;
+    z-index: 1;
+}
+
+.conteneur-titre h1 {
+    font-size: 3.5em;
+    font-family: 'Pathway Gothic One', sans-serif;
+    text-transform: uppercase;
+    text-align: right;
+    margin-top: 15px;
+}
+
+
+
+/*-------- MEDIA QUERIES --------*/
+
+/* Extra small devices (portrait phones, less than 576px) */
+@media (max-width: 575.98px) {
+    p {
+        font-size: 1.3em;
+    }
+    h6 {
+        font-size: 1.5em;
+    }
+    
+    .card .card-body h5 {
+        font-size: 2em;
+    }
+}
+
+/* Small devices (landscape phones, less than 768px) */
+@media (max-width: 767.98px) {
+
+    .borderleft {
+        border-left: 0px;
+        padding-left: 0;
+        padding-right: 0;
+        padding-bottom: 0;
+        padding-top: 0;
+    }
+
+    .bloc-degrade {
+        width: 100%;
+        height: 46px;
+        background-image: url(../../public/images/bg-slide-repeat.png);
+        background-repeat: repeat-x;
+        opacity: 1;
+        position: absolute;
+        z-index: 1;
+    }
+
+    .fa-bars {
+        color: #ff8300;
+        font-size: 30px;
+    }
+
+    .conteneur-titre h1 {
+        font-size: 2em;
+        font-family: 'Pathway Gothic One', sans-serif;
+        text-transform: uppercase;
+        text-align: center;
+        margin-top: 5px;
+        margin-right: 0px;
+    }
+}
+
+/* Medium devices (tablets, less than 992px) */
+@media (max-width: 991.98px) {
+
+    .logo img {
+        position: absolute;
+        top: 57px;
+        height: 100px;
+        width: 100px;
+
+    }
+    .logo-responsive {
+        top: 3px;
+    }
+
+    .menuindex {
+        position: relative;
+        z-index: 20;
+    }
+}
+
+/* Large devices (desktops, less than 1200px) */
+@media (max-width: 1199.98px) {
+    .logo-responsive {
+        display: none;
+    }
+}
+
+
+/*-------------------------------------------------
+SECTION
+-------------------------------------------------*/
+.pr-10 {
+    padding-right: 150px;
+}
+
+.pl-10 {
+    padding-left: 150px;
+}
+
+.bloc-txt {
+    width: 45%;
+    font-family: 'Open Sans', sans-serif;
+    text-align: justify;
+    font-variant: small-caps;
+    font-size: 0.9em;
+}
+
+.bloc-txt h6 {
+    text-align: right;
+    font-weight: 600;
+    font-variant: small-caps;
+}
+
+.bg-lightgrey {
+    background-color: #f2f2f2;
+}
+
+/*-------------------------------------------------
+SECTION NOS ARTICLES
+-------------------------------------------------*/
+#section-blog {
+    font-family: 'Open Sans', sans-serif;
+    font-variant: small-caps;
+}
+
+.nav-link {
+    font-family: 'Open Sans', sans-serif;
+    font-variant: small-caps;
+    color: #ff8300;
+}
+
+.nav-link:hover {
+    font-family: 'Open Sans', sans-serif;
+    font-variant: small-caps;
+    color: #c2c2c2;
+}
+/* .card .container-img {
+    max-height: 196.75px !important;
+    max-width: 348px !important;    
+} */
+.card-article img {
+    margin-top: 16px;
+    max-height: 189.83px !important;
+    max-width: 100% !important;    
+}
+
+
+/*-------------------------------------------------
+SECTION NOS VIDÉO
+-------------------------------------------------*/
+.shadow-vlog {
+    -webkit-box-shadow: 4px 7px 14px -3px rgba(0, 0, 0, 0.70);
+    -moz-box-shadow: 4px 7px 14px -3px rgba(0, 0, 0, 0.70);
+    box-shadow: 4px 4px 14px -3px rgba(0, 0, 0, 0.70);
+}
+
+.shadow-vlog:hover {
+    transform: scale(1.03);
+    z-index: 2;
+    transition-duration: .1s;
+}
+
+.fa-facebook-f {
+    color: #fff;
+    background-color: rgb(59, 89, 152);
+    font-size: 20px;
+    padding: 8px 12px;
+    border-radius: 4px;
+}
+
+.fa-facebook-f:hover {
+    -webkit-box-shadow: 4px 5px 5px -3px rgba(0, 0, 0, 0.90);
+    -moz-box-shadow: 4px 5px 5px -3px rgba(0, 0, 0, 0.90);
+    box-shadow: 4px 5px 5px -3px rgba(0, 0, 0, 0.90);
+    transition-duration: .1s;
+    transform: scale(1.05);
+}
+
+.fa-times {
+    font-size: 1.5em;
+    color: rgb(82, 82, 82);
+}
+
+.btn-vlog {
+    color: rgb(82, 82, 82);
+    font-family: 'Open Sans', sans-serif;
+    font-variant: small-caps;
+    font-size: .9em;
+    font-weight: bold;
+}
+
+.btn-vlog:hover {
+    background-color: #494949;
+    color: white;
+    -webkit-box-shadow: 4px 7px 14px -3px rgba(0, 0, 0, 0.40);
+    -moz-box-shadow: 4px 7px 14px -3px rgba(0, 0, 0, 0.40);
+    box-shadow: 4px 4px 14px -3px rgba(0, 0, 0, 0.40);
+    transition-duration: .2s;
+}
+
+.parlez-en {
+    color: rgb(82, 82, 82);
+    font-family: 'Open Sans', sans-serif;
+    font-size: 1em;
+    font-weight: bold;
+    font-variant: small-caps;
+}
+
+.footer-vlog {
+    background-color: rgb(29, 29, 29);
+    margin-top: -1px;
+}
+
+/*-------------------------------------------------
+--------------------SECTION GALERIE--------------------
+-------------------------------------------------*/
+.fa-arrow-right, .fa-arrow-left {
+    color: #ff8300;
+}
+
+@media (min-width: 768px) {
+    .carousel-multi-item-2 .col-md-3 {
+    float: left;
+    width: 25%;
+    max-width: 100%; } }
+    
+    .carousel-multi-item-2 .card img {
+    border-radius: 2px; }
+
+    /*-------------------------------------------------
+--------------------SECTION AIS--------------------
+-------------------------------------------------*/
+
+
+
+/*-------------------------------------------------
+-----------------SECTION PARTENAIRE----------------
+-------------------------------------------------*/
+.partenaires {
+    opacity: .4;
+    filter: grayscale(100%);
+    padding: 0px;
+}
+
+.partenaires-hover:hover {
+    opacity: 1;
+    filter: none;
+    transition-duration: .5s;
+}
+
+/* Medium devices (tablets, less than 992px) */
+@media (max-width: 991.98px) {
+
+    .partenaires {
+        opacity: 1;
+        filter: none;
+    }
+}

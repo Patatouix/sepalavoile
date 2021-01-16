@@ -1,0 +1,70 @@
+{# {{ form_start(form) }}
+    {{ form_widget(form) }}
+    <button class="btn">{{ button_label|default('Save') }}</button>
+{{ form_end(form) }} #}
+
+
+{{ form_start(form) }}
+    <div id="form-new-article" class="container bg-light rounded">            
+        <div class="row bg-light border-bottom border-right border-left">
+            
+            <div class="col-12 mt-5 pb-4 px-5">
+                <div class="col-12 mt-5">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group">
+                            <div class="row mb-5">
+                                <div class="col-1 p-0 text-center"><i class="fad fa-id-badge"></i></div>
+                                <div class="col-4">{{ form_label(form.title) }}</div>
+                                <div class="col-7 p-0">{{ form_widget(form.title, {'attr': {'placeholder': 'Titre de l\'article'}}) }}</div>
+                            </div>
+                        </li>
+                        <li class="list-group">
+                            <div class="row mb-5">
+                                <div class="col-1 p-0 text-center"><i class="fad fa-smile-plus"></i></div>
+                                <div class="col-4">{{ form_label(form.author) }}</div>
+                                <div class="col-7 p-0">{{ form_widget(form.author) }}</div>
+                            </div>
+                        </li>
+                        <li class="list-group">
+                            <div class="row mb-5">
+                                <div class="col-1 p-0 text-center"><i class="fad fa-folders"></i></div>
+                                <div class="col-4 font-weight-bold">{{ form_label(form.articleCategories) }}</div>
+                                <div class="col-7 p-0">{{ form_widget(form.articleCategories) }}</div>
+                            </div>
+                        </li>
+                        <li class="list-group">
+                            <div class="row mb-5">
+                                <div class="col-1 p-0 text-center"><i class="fad fa-inbox-in mr-2"></i></div>
+                                {# <div class="col-4">{{ form_label(form.imageFile) }}</div>
+                                <div class="col-7 p-0">{{ form_widget(form.imageFile) }}</div> #}
+                            </div>
+                        </li>
+                        <li class="list-group">
+                            <div class="row mb-1">
+                                <div class="col-1 p-0 text-center"><i class="fad fa-folders"></i></div>
+                                <div class="col-9 mb-4">{{ form_label(form.content) }}</div>
+                                <div class="col-12 p-0">{{ form_widget(form.content) }}</div>
+                            </div>
+                        </li>
+                        <li class="list-group">
+                            <div class="row mb-5">
+                                <div class="col-1 p-0 text-center"><i class="fad fa-inbox-in mr-2"></i></div>
+                                <div class="col-4">{{ form_label(form.isPublished) }}</div>
+                                <div class="col-7 p-0">{{ form_widget(form.isPublished) }}</div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-12 text-right p-4"> 
+                <a href="{{ path('article_index') }}" class="btn btn-secondary">Annuler</a>
+                <button class="btn btn-style">{{ button_label|default('Valider') }}</button>
+            </div>
+        </div>
+    </div>
+{{ form_end(form) }}
+
+
+
+
+

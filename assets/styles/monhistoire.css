@@ -1,0 +1,159 @@
+.mon-histoire {
+    font-size: 1em;
+    font-family: "Open Sans";
+    font-variant: small-caps;
+    text-align: justify;
+    -moz-transform: scale(0.8, 1);
+    -webkit-transform: scale(0.8, 1);
+    -ms-transform: scale(0.8, 1);
+}
+
+
+/*-------------------------------------------------
+SECTION
+-------------------------------------------------*/
+.pr-10 {
+    padding-right: 150px;
+}
+
+.pl-10 {
+    padding-left: 150px;
+}
+
+.bloc-txt {
+    width: 45%;
+    font-family: 'Open Sans', sans-serif;
+    text-align: justify;
+    font-variant: small-caps;
+    font-size: 0.9em;
+}
+
+.bloc-txt h6 {
+    text-align: right;
+    font-weight: 600;
+    font-variant: small-caps;
+}
+
+.bg-lightgrey {
+    background-color: #f2f2f2;
+}
+
+button,
+[type="button"],
+[type="reset"],
+[type="submit"] {
+  -webkit-appearance: none;
+}
+
+.shadow-box:hover {
+    -webkit-box-shadow: 4px 7px 14px -3px rgba(0, 0, 0, 0.40);
+    -moz-box-shadow: 4px 7px 14px -3px rgba(0, 0, 0, 0.40);
+    box-shadow: 4px 4px 14px -3px rgba(0, 0, 0, 0.40);
+    transition-duration: .2s;
+}
+
+.card {
+    font-variant: small-caps;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 0.8em;
+}
+
+.card h5 {
+    font-weight: bold;
+    font-size: 1.1em;
+}
+
+.partenaires {
+    opacity: .4;
+    filter: grayscale(100%);
+    padding: 0px;
+}
+
+.partenaires-hover:hover {
+    opacity: 1;
+    filter: none;
+    transition-duration: .5s;
+}
+
+/* Medium devices (tablets, less than 992px) */
+@media (max-width: 991.98px) {
+
+    .partenaires {
+        opacity: 1;
+        filter: none;
+    }
+}
+
+
+.shadow-vlog {
+    -webkit-box-shadow: 4px 7px 14px -3px rgba(0, 0, 0, 0.70);
+    -moz-box-shadow: 4px 7px 14px -3px rgba(0, 0, 0, 0.70);
+    box-shadow: 4px 4px 14px -3px rgba(0, 0, 0, 0.70);
+}
+
+.shadow-vlog:hover {
+    transform: scale(1.03);
+    z-index: 2;
+    transition-duration: .1s;
+}
+
+.fa-facebook-f {
+    color: #fff;
+    background-color: rgb(59, 89, 152);
+    font-size: 20px;
+    padding: 8px 12px;
+    border-radius: 4px;
+}
+
+.fa-facebook-f:hover {
+    -webkit-box-shadow: 4px 5px 5px -3px rgba(0, 0, 0, 0.90);
+    -moz-box-shadow: 4px 5px 5px -3px rgba(0, 0, 0, 0.90);
+    box-shadow: 4px 5px 5px -3px rgba(0, 0, 0, 0.90);
+    transition-duration: .1s;
+    transform: scale(1.05);
+}
+
+.fa-times {
+    font-size: 1.5em;
+    color: rgb(82, 82, 82);
+}
+
+.btn-vlog {
+    color: rgb(82, 82, 82);
+    font-family: 'Open Sans', sans-serif;
+    font-variant: small-caps;
+    font-size: .9em;
+    font-weight: bold;
+}
+
+.btn-vlog:hover {
+    background-color: #494949;
+    color: white;
+    -webkit-box-shadow: 4px 7px 14px -3px rgba(0, 0, 0, 0.40);
+    -moz-box-shadow: 4px 7px 14px -3px rgba(0, 0, 0, 0.40);
+    box-shadow: 4px 4px 14px -3px rgba(0, 0, 0, 0.40);
+    transition-duration: .2s;
+}
+
+.parlez-en {
+    color: rgb(82, 82, 82);
+    font-family: 'Open Sans', sans-serif;
+    font-size: 1em;
+    font-weight: bold;
+    font-variant: small-caps;
+}
+
+.footer-vlog {
+    background-color: rgb(29, 29, 29);
+    margin-top: -1px;
+}
+
+.l-association {
+    font-size: 1em;
+    font-family: "Open Sans";
+    font-variant: small-caps;
+    text-align: justify;
+    -moz-transform: scale(0.8, 1);
+    -webkit-transform: scale(0.8, 1);
+    -ms-transform: scale(0.8, 1);
+}

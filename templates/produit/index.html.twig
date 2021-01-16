@@ -1,0 +1,47 @@
+{% extends 'carousel.html.twig' %}
+
+{% block title %}Produit index{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <h1 class="titresection">Nos produits</h1>
+
+        {{ form_start(form, {attr: {class: 'my-4'}}) }}
+            <div class="row">
+                <div class="col-12 col-sm-4 col-md-2">
+                    {{ form_row(form.produitTypes) }}
+                </div>
+                <div class="col-12 col-sm-4 col-md-2">
+                    {{ form_row(form.q) }}
+                </div>
+                <div class="col-12 col-sm-4 col-md-2">
+                    {{ form_row(form.min) }}</div>
+                <div class="col-12 col-sm-6 col-md-2">
+                    {{ form_row(form.max) }}
+                </div>
+                <div class="col-12 col-sm-6 col-md-4">
+                    <button type="submit" class="btn btn-style btn-block">Filtrer</button>
+                </div>
+            </div>
+        {{ form_end(form) }}
+
+        <div class="row">
+            {% for produit in produits %}
+                <div class="col-12 col-sm-6 col-md-4">
+                    <a href="{{ path('produit_show', {'id': produit.id}) }}" class="btn">
+                        <div class="card mb-4">
+                            <img src="{{ produit.getMedias|first.url }}" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ produit.nom }}</h5>
+                                <p class="card-text">{{ produit.description|slice(0,100) }}...</p>
+                                <p class="card-text">{{ produit.prix }} €</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            {% else %}
+                no records found
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

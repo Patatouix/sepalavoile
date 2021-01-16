@@ -1,0 +1,64 @@
+{% extends "carousel.html.twig" %}
+
+{% block content %}
+    <!-- ==================== SECTION TEXTE ===================== -->
+    <div class="container">
+        <div class="titresection">
+            <h2>notre blog</h2>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- Row -->
+        <div class="row">
+            <section class="col-md-8 contenu mb-5" role="main">
+                <!-- Row -->
+                <div class="row">
+                    <!-- Article -->
+                    <article class="articlestyle m-top-articlestyle shadow">
+                        {# <img src="{{ article.filename ? asset('/images/photoarticle/' ~ article.filename) : asset('/images/logo.svg') }}" width="100%"> #}
+                        <img src="{{ asset('/images/logo.svg') }}" width="100%">
+                        <p class="meta">
+                            Publié le <strong>{{ article.createdAt|date('d/m/Y') }}</strong> par <strong>{{ article.author }}</strong> dans la rubrique 
+                            {% for category in article.articleCategories %}
+                                <a href="#">{{ category.name }}</a> - 
+                            {% endfor %}
+                            {{ article.nbVues}} vues
+                        </p>
+                        <h1>{{ article.title }}</h1>
+                        <hr>
+                        {{ article.content|raw }}
+                        <hr>
+
+                        <aside class="mt60">
+                            <h2>Laisser un commentaire</h2>
+                            <p>ici plugin commentaire....</p>
+                        </aside>
+
+                        <aside class="mt60">
+                            <h2>Articles les plus récents</h2>
+                            <div class="row">
+                                {% for articleRandom in articleRandom|slice(0, 3) %}                                    
+                                    <div class="col-md-4 col-sm-4 col-xs-4">
+
+                                        {# <span class="imgWrap"><a href="{{ path('article_show', {'id': articleRandom.id}) }}"><img src="{{ articleRandom.filename ? asset('/images/photoarticle/' ~ articleRandom.filename) : asset('/images/logo.svg') }}" width="100%"></a></span> #}
+                                        <span class="imgWrap"><a href="{{ path('article_show', {'id': articleRandom.id}) }}"><img class="mb-2 mt-2" src="{{ asset('/images/logo.svg') }}" width="100%"></a></span>
+                                        <a href="{{ path('article_show', {'id': articleRandom.id}) }}">{{ articleRandom.title }}</a>
+                                        <hr class="mt-1 mb-1">
+                                        <span class="meta text-muted font-italic font-weight-light">Publié
+                                        le {{ articleRandom.createdAt|date('d/m/Y') }} - {{ articleRandom.nbVues }} vues</span>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </aside>
+                    </article>
+                    <!-- Fin Article -->
+                </div>
+                <!-- Fin Row -->
+            </section>
+            {% include "article/aside_article.html.twig" %}
+        </div>
+        <!-- Fin Row -->
+    </div>
+    <!-- Fin container -->
+{% endblock %}

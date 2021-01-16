@@ -1,0 +1,575 @@
+<!-- FOOTER -->
+
+<footer>
+        <!-- FOOTER ORANGE -->
+        <div class="bg-footer-orange pb-3">
+            <div class="container pt-3">
+                <div class="titrefooterorange">
+                    <h2>Pour partager et nous soutenir</h2>
+                </div>
+                <div class="row mb-3 mt-5">
+                    <div class="col-12 col-md-4 col-lg-4 text-center sousmenufooterorange"><a
+                            href="https://www.helloasso.com/associations/sep-a-la-voile/collectes/sep-a-la-voile"
+                            target="_blank">Faire un don</a></div>
+                    <div class="col-12 col-md-4 col-lg-4 text-center sousmenufooterorange"><a
+                            href="https://www.helloasso.com/associations/sep-a-la-voile/collectes/sep-a-la-voile" target="_blank">Devenir membre de l'association</a></div>
+                    {# <div class="col-12 col-md-3 col-lg-3 text-center sousmenufooterorange"><a
+                            href="RESERVER UN BAPTEME">Réserver un baptême</a></div> #}
+                    <div class="col-12 col-md-4 col-lg-4 text-center sousmenufooterorange"><a
+                            href="NOS EVENEMENTS">Nos événements</a></div>
+                </div>
+            </div>
+        </div>
+        <!-- FOOTER GRIS -->
+        <div class="bg-footer-gris footer-gris pb-1">
+            <div class="container">
+                <div class="row">
+                    <div class="col-6 col-md-3 ">
+                        <h2>Sommaire</h2>
+                        <div class="sommaire text-center footerib">
+                            <ul class="list-group">
+                                <li><a href="{{ path('home_page') }}">Accueil</a></li>
+                                <li><a href="{{ path('blog') }}">Blog</a></li>
+                                <li><a href="{{ path('association') }}">L'association</a></li>
+                                <li><a href="#">Notre aventure</a>
+                                    <ul class="sousmenusommaire list-group">
+                                        <li><a href="{{ path('monhistoire') }}">Mon histoire</a></li>
+                                        <li><a href="{{ path('leprojet') }}">Le projet</a></li>
+                                        <li><a href="{{ path('leparcours') }}">Le parcours</a></li>
+                                        <li><a href="{{ path('lequipe') }}">L'équipe</a></li>
+                                        <li><a href="{{ path('lebateau') }}">Le bateau</a></li>
+                                        <li><a href="{{ path('galerie') }}">La galerie photo</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="{{ path('nospartenaires') }}">Nos partenaires</a></li>
+                                <li><a href="{{ path('onparledenous') }}">On parle de nous</a></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="col-6 col-md-3">
+                        <h2>Catégorie blog</h2>
+                        <div class="articleblog text-center footerib">
+                            {{ render (controller('App\\Controller\\ArticleCategorieController::allCategorieFooter'))}}
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-6 col-md-3">
+                        <h2>Nous suivre</h2>
+                        <ul class="list-group list-group-horizontal d-flex justify-content-center mt-3 ">
+                            <li class="list-group-item mx-1 border-0 no-bg"><a class="fb"
+                                    href="https://www.facebook.com/SEPalavoile/" target="_blank"></a></li>
+                            <li class="list-group-item mx-1 border-0 no-bg"><a class="inst"
+                                    href="https://www.instagram.com/sepalavoile/?hl=fr" target="_blank"></a></li>
+                            <li class="list-group-item mx-1 border-0 no-bg"><a class="yt"
+                                    href="https://www.youtube.com/channel/UCJ2l2tGkwyvrMzswiOUlj7A" target="_blank"></a>
+                            </li>
+                        </ul>
+                        <div>
+                            <div class="nouscontacter">
+                                <h2>Nous contacter</h2>
+                            </div>
+                            <div class="contact">
+                                <div class="col text-center">E-mail : <a
+                                        href="mailto:contact@sepalavoile.com">contact@sepalavoile.fr</a>
+                                </div>
+                                <div class="col text-center">Tél : <a href="tel:+33645107692">+33 06 45 10 76 92</a>
+                                </div>
+                                <div class="text-center mt-3">
+                                    <a class="pictocontact" data-toggle="modal" data-target="#contactModal"></a>                                    
+                                </div>
+                                <div class="modal fade text-body" data-backdrop="static" id="contactModal" tabindex="-1" role="dialog" aria-labelledby="contactModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-xl">
+                                        <div class="modal-content">
+                                        <div class="modal-header bg-light">
+                                            <h5 class="modal-title" id="contactModalLabel">Nous contacter</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body px-5">
+                                            {# {% for message in app.flashes('success') %}
+                                            <div class="alert alert-success">
+                                                {{ message }}
+                                            </div>
+                                            {% endfor %} #}
+                                            
+                                            {# {% if not form.vars.valid %}
+                                            <div class="alert alert-danger">
+                                                Vérifier votre adresse e-mail
+                                            </div>                
+                                            {% endif %} #}
+                                            <div id="contactForm" class="mt-4">
+                                                {# {{ form_start(form) }}
+                                                <div class="row">
+                                                    <div class="col-5 contact-widget-section2 wow animated fadeInLeft" data-wow-delay=".2s">
+                                                        <div class="find-widget">
+                                                            E-mail : <div class="ml-5"><a href="mailto:contact@sepalavoile.com">contact@sepalavoile.fr</a>
+                                                            </div>
+                                                        </div>
+                                                        <div class="find-widget">
+                                                            Tél : <div class="ml-5"><a href="tel:+33645107692">+33 06 45 10 76 92</a></div>
+                                                        </div>
+                                                        <div class="find-widget">
+                                                            Adresse : <div class="ml-5"> 84 rue Gambetta <br> 79100 THOUARS <br> France</div>
+                                                        </div>
+                                                        <iframe class="mt-3"
+                                                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2721.853469312246!2d-0.21212818411642706!3d46.98421263875603!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4807908348db347f%3A0x472f085b63d8afa5!2s84%20Rue%20Gambetta%2C%2079100%20Thouars!5e0!3m2!1sfr!2sfr!4v1573854871468!5m2!1sfr!2sfr"
+                                                            width="100%" height="50%" frameborder="0" style="border:0;" allowfullscreen=""></iframe>
+                                                    </div>
+                                                    <div class="col-7">
+                                                        <div class="row mb-3">
+                                                            <div class="col">{{ form_row(form.firstname) }}</div>
+                                                            <div class="col">{{ form_row(form.lastname) }}</div>
+                                                        </div>
+                                                        <div class="row mb-3">
+                                                            <div class="col">{{ form_row(form.email) }}</div>
+                                                            <div class="col">{{ form_row(form.phone) }}</div>
+                                                        </div>
+                                                        {{ form_rest(form) }}
+                                                        <div class="form-group text-right mt-5">
+                                                            <button class="btn btn-secondary p-1 mr-2" data-dismiss="modal">Fermer</button>
+                                                            <button class="btn btn-style p-2">Envoyer</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                {{ form_end(form) }} #}
+                                            </div>
+                                        </div>
+                                        <!-- <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                            <button type="button" class="btn btn-primary">Save changes</button>
+                                        </div> -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-6 col-md-3 text-center">
+                        <h2>Newsletter</h2>
+                        <form>
+                            <div class="form-group">
+                                <input type="email" class="form-control" id="exampleInputEmail1"
+                                    aria-describedby="emailHelp" placeholder="Entrer email">
+                            </div>
+                            <button type="submit" class="btn btn-sm btn-style">Envoyer</button>
+                        </form>
+                        <!-- Aide utilisateur -->
+                        <div class="mt-4">                        
+                                <a href="DOCUMENT AIDE UTILISATEUR" download="aide_utilisateur.pdf">
+                                <p class="link-download">Aide utilisateur</p>
+                                </a>                            
+                        </div>                     
+                        <!-- Plan du site -->
+                        <div>
+                            <!-- Bouton -->
+                            <button type="button" class="btn btn-mentions-cookies-plandusite" data-toggle="modal"
+                                data-target="#plandusite">Plan du site</button>
+                            <!-- FORMULAIRE -->
+                            <div class="modal fade" id="plandusite" tabindex="-1" role="dialog"
+                                aria-labelledby="plandusite" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-scrollable modal-xl" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title">Plan du site</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <h3 class="mb-5">Plan du site</h3>
+                                            <div class="row modal-plan-du-site">
+                                                <div class="col text-center">
+                                                    <a href="ACCUEIL">
+                                                        <h6 class="py-2">Accueil</h6>
+                                                    </a>
+                                                </div>
+                                                <div class="col text-center">
+                                                    <a href="BLOG">
+                                                        <h6 class="py-2">Blog</h6>
+                                                    </a>
+                                                </div>
+                                                <div class="col text-center">
+                                                    <a href="ASSOCIATION">
+                                                        <h6 class="py-2">L'association</h6>
+                                                    </a>
+                                                </div>
+                                                <div class="col text-center">
+                                                    <a>
+                                                        <h6 class="py-2">Notre aventure</h6>
+                                                    </a>
+                                                    <ul class="list-group">
+                                                        <li class="my-1 py-2"><a href="MON HISTOIRE">Mon
+                                                                histoire</a></li>
+                                                        <li class="my-1 py-2"><a href="LE PROJET">Le
+                                                                projet</a></li>
+                                                        <li class="my-1 py-2"><a href="LE PARCOURS">Le
+                                                                parcours</a></li>
+                                                        <li class="my-1 py-2"><a href="L'EQUIPE">L'équipe</a>
+                                                        </li>
+                                                        <li class="my-1 py-2"><a href="LE BATEAU">Le
+                                                                bateau</a></li>
+                                                    </ul>
+                                                </div>
+                                                <div class="col text-center">
+                                                    <a href="NOS PARTENAIRES">
+                                                        <h6 class="py-2">Nos partenaires</h6>
+                                                    </a>
+                                                </div>
+                                                <div class="col text-center">
+                                                    <a href="ON PARLE DE NOUS">
+                                                        <h6 class="py-2">On parle de nous</h6>
+                                                    </a>
+                                                </div>
+                                                <div class="col text-center">
+                                                    <a>
+                                                        <h6 class="py-2">Participer</h6>
+                                                    </a>
+                                                    <ul class="list-group">
+                                                        <li class="my-1 py-2"><a
+                                                                href="https://www.helloasso.com/associations/sep-a-la-voile/collectes/sep-a-la-voile">Faire
+                                                                un don</a></li>
+                                                        <li class="my-1 py-2"><a
+                                                                href="https://www.photosautourdumonde.com">Acheter des
+                                                                photos</a></li>
+                                                        <li class="my-1 py-2"><a
+                                                                href="RESERVER UN BAPTEME">Réserver un
+                                                                baptême</a></li>
+                                                        <li class="my-1 py-2"><a
+                                                                href="NOS EVENEMENTS">Nos événements</a></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-style"
+                                                data-dismiss="modal">Fermer</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- MENTIONS LEGALES -->
+                        <div>
+                            <!-- Bouton -->
+                            <button type="button" class="btn btn-mentions-cookies-plandusite" data-toggle="modal"
+                                data-target="#mentionslegales">
+                                Mentions légales
+                            </button>
+                            <!-- FORMULAIRE -->
+                            <div class="modal fade" id="mentionslegales" tabindex="-1" role="dialog"
+                                aria-labelledby="mentionslegales" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-scrollable" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title">Mention légales</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <h3 class="mb-4">Mentions légales</h3>
+                                            <br>
+                                            Merci de lire avec attention les différentes modalités d’utilisation du
+                                            présent site avant d’y parcourir ses pages. En vous connectant sur ce site,
+                                            vous acceptez sans réserves les présentes modalités. Aussi, conformément à
+                                            l’article n°6 de la Loi n°2004-575 du 21 Juin 2004 pour la confiance dans
+                                            l’économie numérique, les responsables du présent site internet
+                                            www.sepalavoile.com sont :
+
+                                            <p style="color: #b51a00;"><span style="color: rgb(0, 0, 0);"><b>Editeur du
+                                                        Site : </b></span></p>
+                                            SEPàlavoile
+                                            Numéro de SIRET : 830 117 636
+                                            Responsable editorial : Alban JAILLAIS
+                                            84 rue Gambetta 79100 THOUARS
+                                            Téléphone :0645107692 - Fax : 0645107692
+                                            Email : contact@sepalavoile.com
+                                            Site Web : www.sepalavoile.com
+                                            <br>
+                                            <p style="color: #b51a00;"><b><span style="color: rgb(0, 0, 0);">Hébergement
+                                                        :</span> </b></p>
+                                            Hébergeur : OVH
+                                            2 rue Kellermann - 59100 Roubaix
+                                            Site Web : https://www.ovh.com
+                                            <br>
+                                            <p style="color: #b51a00;"><span
+                                                    style="color: rgb(0, 0, 0);"><b>Développement</b><b> : </b></span>
+                                            </p>
+                                            Alban JAILLAIS
+                                            Adresse : 57 rue de la ville, 67460 Souffelweyersheim
+                                            Site Web : photosautourdumonde.com
+                                            <br>
+                                            <p style="color: #b51a00;"><span style="color: rgb(0, 0, 0);"><b>Conditions
+                                                        d’utilisation : </b></span></p>
+                                            Ce site www.sepalavoile.com est proposé en différents langages web (HTML,
+                                            HTML5, Javascript, CSS, etc…) pour un meilleur confort d'utilisation et un
+                                            graphisme plus agréable, nous vous recommandons de recourir à des
+                                            navigateurs modernes comme Internet explorer, Safari, Firefox, Google
+                                            Chrome, etc…
+                                            Les mentions légales ont été générées sur le site Générateur de mentions
+                                            légales, offert par Welye.
+
+                                            <span style="color: #323333;">SEPàlavoile<b> </b></span>met en œuvre tous
+                                            les moyens dont elle dispose, pour assurer une information fiable et une
+                                            mise à jour fiable de ses sites internet. Toutefois, des erreurs ou
+                                            omissions peuvent survenir. L'internaute devra donc s'assurer de
+                                            l'exactitude des informations auprès de , et signaler toutes modifications
+                                            du site qu'il jugerait utile. n'est en aucun cas responsable de
+                                            l'utilisation faite de ces informations, et de tout préjudice direct ou
+                                            indirect pouvant en découler.
+
+                                            <b>Cookies</b> : Le site www.sepalavoile.com peut-être amené à vous demander
+                                            l’acceptation des cookies pour des besoins de statistiques et d'affichage.
+                                            Un cookies est une information déposée sur votre disque dur par le serveur
+                                            du site que vous visitez. Il contient plusieurs données qui sont stockées
+                                            sur votre ordinateur dans un simple fichier texte auquel un serveur accède
+                                            pour lire et enregistrer des informations . Certaines parties de ce site ne
+                                            peuvent être fonctionnelles sans l’acceptation de cookies.
+
+                                            <b>Liens hypertextes :</b> Les sites internet de peuvent offrir des liens
+                                            vers d’autres sites internet ou d’autres ressources disponibles sur
+                                            Internet. SEPàlavoile ne dispose d'aucun moyen pour contrôler les sites en
+                                            connexion avec ses sites internet. ne répond pas de la disponibilité de tels
+                                            sites et sources externes, ni ne la garantit. Elle ne peut être tenue pour
+                                            responsable de tout dommage, de quelque nature que ce soit, résultant du
+                                            contenu de ces sites ou sources externes, et notamment des informations,
+                                            produits ou services qu’ils proposent, ou de tout usage qui peut être fait
+                                            de ces éléments. Les risques liés à cette utilisation incombent pleinement à
+                                            l'internaute, qui doit se conformer à leurs conditions d'utilisation.
+
+                                            Les utilisateurs, les abonnés et les visiteurs des sites internet de ne
+                                            peuvent mettre en place un hyperlien en direction de ce site sans
+                                            l'autorisation expresse et préalable de SEPàlavoile.
+
+                                            Dans l'hypothèse où un utilisateur ou visiteur souhaiterait mettre en place
+                                            un hyperlien en direction d’un des sites internet de SEPàlavoile, il lui
+                                            appartiendra d'adresser un email accessible sur le site afin de formuler sa
+                                            demande de mise en place d'un hyperlien. SEPàlavoile se réserve le droit
+                                            d’accepter ou de refuser un hyperlien sans avoir à en justifier sa décision.
+                                            <br>
+                                            <p style="color: #b51a00;"><span style="color: rgb(0, 0, 0);"><b>Services
+                                                        fournis : </b></span></p>
+                                            <p style="color: #323333;">L'ensemble des activités de la société ainsi que
+                                                ses informations sont présentés sur notre site www.sepalavoile.com.</p>
+                                            <p style="color: #323333;">SEPàlavoile s’efforce de fournir sur le site
+                                                www.sepalavoile.com des informations aussi précises que possible. les
+                                                renseignements figurant sur le site www.sepalavoile.com ne sont pas
+                                                exhaustifs et les photos non contractuelles. Ils sont donnés sous
+                                                réserve de modifications ayant été apportées depuis leur mise en ligne.
+                                                Par ailleurs, tous les informations indiquées sur le site
+                                                www.sepalavoile.com<span style="color: #000000;"><b> </b></span>sont
+                                                données à titre indicatif, et sont susceptibles de changer ou d’évoluer
+                                                sans préavis. </p>
+                                            <br>
+                                            <p style="color: #b51a00;"><span style="color: rgb(0, 0, 0);"><b>Limitation
+                                                        contractuelles sur les données : </b></span></p>
+                                            Les informations contenues sur ce site sont aussi précises que possible et
+                                            le site remis à jour à différentes périodes de l’année, mais peut toutefois
+                                            contenir des inexactitudes ou des omissions. Si vous constatez une lacune,
+                                            erreur ou ce qui parait être un dysfonctionnement, merci de bien vouloir le
+                                            signaler par email, à l’adresse contact@sepalavoile.fr, en décrivant le
+                                            problème de la manière la plus précise possible (page posant problème, type
+                                            d’ordinateur et de navigateur utilisé, …).
+
+                                            Tout contenu téléchargé se fait aux risques et périls de l'utilisateur et
+                                            sous sa seule responsabilité. En conséquence, ne saurait être tenu
+                                            responsable d'un quelconque dommage subi par l'ordinateur de l'utilisateur
+                                            ou d'une quelconque perte de données consécutives au téléchargement. <span
+                                                style="color: #323333;">De plus, l’utilisateur du site s’engage à
+                                                accéder au site en utilisant un matériel récent, ne contenant pas de
+                                                virus et avec un navigateur de dernière génération mis-à-jour</span>
+
+                                            Les liens hypertextes mis en place dans le cadre du présent site internet en
+                                            direction d'autres ressources présentes sur le réseau Internet ne sauraient
+                                            engager la responsabilité de SEPàlavoile.
+                                            <br>
+                                            <p style="color: #b51a00;"><span style="color: rgb(0, 0, 0);"><b>Propriété
+                                                        intellectuelle :</b></span></p>
+                                            Tout le contenu du présent sur le site www.sepalavoile.com, incluant, de
+                                            façon non limitative, les graphismes, images, textes, vidéos, animations,
+                                            sons, logos, gifs et icônes ainsi que leur mise en forme sont la propriété
+                                            exclusive de la société à l'exception des marques, logos ou contenus
+                                            appartenant à d'autres sociétés partenaires ou auteurs.
+
+                                            Toute reproduction, distribution, modification, adaptation, retransmission
+                                            ou publication, même partielle, de ces différents éléments est strictement
+                                            interdite sans l'accord exprès par écrit de SEPàlavoile. Cette
+                                            représentation ou reproduction, par quelque procédé que ce soit, constitue
+                                            une contrefaçon sanctionnée par les articles L.335-2 et suivants du Code de
+                                            la propriété intellectuelle. Le non-respect de cette interdiction constitue
+                                            une contrefaçon pouvant engager la responsabilité civile et pénale du
+                                            contrefacteur. En outre, les propriétaires des Contenus copiés pourraient
+                                            intenter une action en justice à votre encontre.
+                                            <br>
+                                            <p style="color: #b51a00;"><span style="color: rgb(0, 0, 0);"><b>Déclaration
+                                                        à la CNIL : </b></span></p>
+                                            Conformément à la loi 78-17 du 6 janvier 1978 (modifiée par la loi 2004-801
+                                            du 6 août 2004 relative à la protection des personnes physiques à l'égard
+                                            des traitements de données à caractère personnel) relative à l'informatique,
+                                            aux fichiers et aux libertés, ce site n'a pas fait l'objet d'une déclaration
+                                            auprès de la Commission nationale de l'informatique et des libertés
+                                            www.cnil.fr.
+                                            <br>
+                                            <p style="color: #b51a00;"><span style="color: rgb(0, 0, 0);"><b>Litiges :
+                                                    </b></span></p>
+                                            Les présentes conditions du site www.sepalavoile.com sont régies par les
+                                            lois françaises et toute contestation ou litiges qui pourraient naître de
+                                            l'interprétation ou de l'exécution de celles-ci seront de la compétence
+                                            exclusive des tribunaux dont dépend le siège social de la société. La langue
+                                            de référence, pour le règlement de contentieux éventuels, est le français.
+                                            <br>
+                                            <p style="color: #b51a00;"><span style="color: rgb(0, 0, 0);"><b>Données
+                                                        personnelles :</b></span></p>
+                                            De manière générale, vous n’êtes pas tenu de nous communiquer vos données
+                                            personnelles lorsque vous visitez notre site Internet www.sepalavoile.com.
+
+                                            Cependant, ce principe comporte certaines exceptions. En effet, pour
+                                            certains services proposés par notre site, vous pouvez être amenés à nous
+                                            communiquer certaines données telles que : votre nom, votre fonction, le nom
+                                            de votre société, votre adresse électronique, et votre numéro de téléphone.
+                                            Tel est le cas lorsque vous remplissez le formulaire qui vous est proposé en
+                                            ligne, dans la rubrique « contact ». Dans tous les cas, vous pouvez refuser
+                                            de fournir vos données personnelles. Dans ce cas, vous ne pourrez pas
+                                            utiliser les services du site, notamment celui de solliciter des
+                                            renseignements sur notre société, ou de recevoir les lettres d’information.
+
+                                            Enfin, nous pouvons collecter de manière automatique certaines informations
+                                            vous concernant lors d’une simple navigation sur notre site Internet,
+                                            notamment : des informations concernant l’utilisation de notre site, comme
+                                            les zones que vous visitez et les services auxquels vous accédez, votre
+                                            adresse IP, le type de votre navigateur, vos temps d'accès. De telles
+                                            informations sont utilisées exclusivement à des fins de statistiques
+                                            internes, de manière à améliorer la qualité des services qui vous sont
+                                            proposés. Les bases de données sont protégées par les dispositions de la loi
+                                            du 1er juillet 1998 transposant la directive 96/9 du 11 mars 1996 relative à
+                                            la protection juridique des bases de données.
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-style"
+                                                data-dismiss="modal">Fermer</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- GESTION DES COOKIES -->
+                        <div>
+                            <!-- Bouton -->
+                            <button type="button" class="btn btn-mentions-cookies-plandusite" data-toggle="modal"
+                                data-target="#gestiondescookies">
+                                Gestion des cookies
+                            </button>
+                            <!-- FORMULAIRE -->
+                            <div class="modal fade" id="gestiondescookies" tabindex="-1" role="dialog"
+                                aria-labelledby="gestiondescookies" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-scrollable" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="gestiondescookies">Gestion des cookies</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <h3 class="mt-5 mb-5">Gestion des cookies</h3>
+                                            PREMIER MODÈLE
+                                            applicable en cas d'utilisation de cookies soumis au consentement préalable
+                                            de l'utilisateur
+
+                                            Phase 1 - Message succinct d'information
+                                            La mention suivante doit apparaître de façon très visible lors d'une
+                                            première visite d'un internaute, sans action de la part de cet internaute,
+                                            par exemple sous forme de bandeau, de mini-fenêtre apparaissant au premier
+                                            plan sur la page (info-bulle), ou de texte en sur-impression (cadre
+                                            lumineux).
+                                            *****
+                                            En poursuivant votre navigation sur ce site, vous acceptez l'utilisation de
+                                            traceurs (cookies) afin de _____ [préciser la finalité poursuivie, par
+                                            exemple: réaliser des statistiques anonymes de visites, vous proposer des
+                                            contenus et services adaptés à vos centres d'intérêts et vous permettre de
+                                            partager des informations sur les réseaux sociaux].
+                                            > Pour en savoir plus et paramétrer les traceurs, cliquez sur ce lien [ce
+                                            texte doit comporter un lien actif].
+                                            *****
+                                            Phase 2 - Informations détaillées et possibilités de paramétrage des
+                                            traceurs
+                                            Les mentions suivantes figurent en principe sur une page dédiée aux
+                                            traceurs.
+                                            *****
+                                            Le site que vous visitez utilise des traceurs (cookies). Ainsi, le site est
+                                            susceptible d'accéder à des informations déjà stockées dans votre équipement
+                                            terminal de communications électroniques et d'y inscrire des informations.
+                                            Les traceurs utilisés par le site relèvent de deux catégories :
+                                            - traceurs dits strictement nécessaires, qui ne nécessitent pas votre
+                                            consentement préalable,
+                                            - autres traceurs soumis à votre consentement préalable.
+                                            1 - Traceurs exemptés de consentement préalable
+                                            Nous utilisons ces traceurs pour _____ [préciser la finalité, par exemple :
+                                            permettre et faciliter la navigation sur le site notamment en mémorisant vos
+                                            préférences de navigation définies au cours de votre session / fournir les
+                                            services que vous demandez expressément tels... [préciser de quels services
+                                            il s'agit] / réaliser des statistiques anonymes de visites].
+                                            Ces traceurs ne peuvent pas, techniquement, être désactivés depuis le site.
+                                            Vous pouvez néanmoins vous opposer à l'utilisation de ces traceurs,
+                                            exclusivement en paramétrant votre navigateur. Ce paramétrage dépend du
+                                            navigateur que vous utilisez, mais il est en général simple à réaliser : en
+                                            principe, vous pouvez soit activer une fonction de navigation privée soit
+                                            uniquement interdire ou restreindre les traceurs (cookies). Attention, il se
+                                            peut que des traceurs aient été enregistrés sur votre périphérique avant le
+                                            paramétrage de votre navigateur : dans ce cas, effacez votre historique de
+                                            navigation, toujours en utilisant le paramétrage de votre navigateur.
+                                            2 - Traceurs soumis à votre consentement préalable
+                                            Le site utilise des traceurs sous notre contrôle et d'autres placés sous le
+                                            contrôle de tiers [si applicable ; sinon, adapter l'ensemble du paragraphe],
+                                            qui sont soumis à votre consentement préalable.
+                                            2.1 - Traceurs sous notre contrôle
+                                            Nous utilisons ces traceurs pour _____ [préciser la finalité, éventuellement
+                                            par sous-catégories de traceurs].
+                                            Le tableau ci-dessous liste les traceurs sous notre contrôle qui sont soumis
+                                            à votre consentement préalable.
+                                            _____ [insérer un tableau comportant 3 colonnes : désignation du traceur,
+                                            objectif poursuivi, durée de validité].
+                                            Vous pouvez vous opposer à l'utilisation de ces traceurs en paramétrant
+                                            votre navigateur _____ [si applicable : ou en utilisant les fonctions
+                                            proposées par le site].
+                                            2.2 - Traceurs sous le contrôle de tiers
+                                            Ces traceurs sont utilisés pour _____ [préciser la finalité, éventuellement
+                                            par sous-catégories de traceurs].
+                                            Le tableau ci-dessous liste les traceurs sous le contrôle de tiers qui sont
+                                            soumis à votre consentement préalable.
+                                            _____ [insérer un tableau comportant 4 colonnes : désignation du traceur,
+                                            objectif poursuivi, durée de validité, tiers responsable].
+                                            Vous pouvez vous opposer à l'utilisation de ces traceurs en paramétrant
+                                            votre navigateur _____ [si applicable : ou en utilisant les fonctions
+                                            proposées par le site / ou en vous rapprochant du tiers concerné
+                                            conformément aux indications figurant dans le tableau qui précède].
+
+                                            L'utilisation des traceurs est régie par l'article 32 II de la loi n° 78-17
+                                            du 6 janvier 1978, transposant l'article 5.3 de la directive 2002/58/CE du
+                                            parlement européen et du conseil du 12 juillet 2002 modifiée par la
+                                            directive 2009/136/CE.
+                                            Pour en savoir plus sur les cookies et traceurs, nous vous invitons à
+                                            consulter le site de la CNIL : www.cnil.fr.
+                                            *****
+
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-style"
+                                                data-dismiss="modal">Fermer</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- FOOTER GRIS FONCE -->
+        <div class="bg-mention-grey">
+            <div class="container">
+                <p class="mb-0">2019 _ COPYRIGHT _ SEPALAVOILE _ Assoc loi 1901 n° 830 117 636</p>
+            </div>
+        </div>
+    </footer>

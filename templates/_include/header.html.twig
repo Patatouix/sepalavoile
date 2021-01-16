@@ -1,0 +1,211 @@
+<!-- MENU LANGUE -->
+<header>
+    {% block stylesheets %}
+    {# {{ parent() }} #}
+    {# {{ encore_entry_link_tags('header') }} #}
+    {% endblock %}
+    <div class="container">
+        {% for message in app.flashes('success') %}
+        <div class="alert alert-success text-center mt-3">
+            {{ message }}
+        </div>
+        {% endfor %}
+        
+        {# {% if not form.vars.valid %}
+        <div class="alert alert-danger text-center">
+            Vérifier votre adresse e-mail
+        </div>                
+        {% endif %} #}
+        <ul class="nav justify-content-end  mt-3 mb-2">
+            <li class="nav-item login">
+
+                {% if app.user != null %}
+                <span class="">Bonjour</span>
+                {% if is_granted('ROLE_ADMIN') %}
+                <a href="{{ path('dashboard') }}" title="profile">
+                    {{ app.user.firstName }} {{ app.user.name }}
+                    <i class="fas fa-users-cog ml-3"></i>
+                </a>
+                {% else %}
+                <a href="{{ path('user_show', {'id': app.user.id }) }}" title="profile">
+                    {{ app.user.firstName }} {{ app.user.name }}
+                    <i class="fas fa-users-cog ml-3"></i>
+                </a>
+                {% endif %}
+                |
+                <a href="{{ path('app_logout') }}" title="Se déconnecter">
+                    <i class="fas fa-sign-out-alt"></i>
+                </a>
+                |
+                <a href="{{ path('panier_index') }}" title="Panier"><i class="fas fa-shopping-basket"></i></a>
+                {% else %}
+                <a href="{{ path('app_register') }}" title="Créer un compte"><i class="fas fa-user-plus"></i></a>
+                |
+
+                {#<a href="{{ path('app_login') }}" title="Se connecter"><i class="fas fa-sign-in-alt"></i></a> #}
+
+                {# Modal pour se connecter #}
+                <a href="" type="button" class="m-0" data-toggle="modal" data-target="#connexionModal">
+                    <i class="fas fa-sign-in-alt"></i>
+                </a>
+                <div class="modal fade text-left" id="connexionModal" tabindex="-1" role="dialog"
+                    aria-labelledby="connexionModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body font-weight-normal p-0">
+                                {# {{ path('video_show', {'id': video.id}) }} #}
+                                {# {% include "security/login.html.twig" %} #}
+
+                                <form method="post" action="{{ path('app_login')}}">
+                                    {# {% if error %}
+                                        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                                        {% endif %} #}
+
+                                    {# {% if app.user %}
+                                            <div class="mb-3">
+                                                You are logged in as {{ app.user.username }}, <a href="{{ path('app_logout') }}">Logout</a>
+                                            </div>
+                                        {% endif %} #}
+                                    <div class="">
+                                        <div class="col-12 px-5 bg-light rounded">
+
+                                            <h1 class="h3 mb-3 font-weight-normal text-center pt-4">Connectez-vous</h1>
+                                            <label for="inputEmail">E-mail</label>
+                                            <input type="email" value="
+                                                    {# {{ last_username }}                                                     #}
+                                                    " name="email" id="inputEmail" class="form-control" required
+                                                autofocus>
+                                            <label for="inputPassword">Mot de passe</label>
+                                            <input type="password" name="password" id="inputPassword"
+                                                class="form-control" required>
+
+                                            <input type="hidden" name="_csrf_token"
+                                                value="{{ csrf_token('authenticate') }}">
+
+
+                                            {# Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
+                                                See https://symfony.com/doc/current/security/remember_me.html #}
+
+                                            <!-- <div class="checkbox mb-3">
+                                                    <label>
+                                                        <input type="checkbox" name="_remember_me" class="mr-2 mt-3">Se souvenir de moi
+                                                    </label>
+                                                </div> -->
+
+                                            <div class="col-12 text-right p-0">
+                                                <button class="btn btn-lg btn-style mt-2 mb-5" type="submit">
+                                                    Connexion
+                                                </button>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </form>
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {# Fin de la modal se connecter #}
+
+                {% endif %}
+            </li>
+            {# <li class="nav-item menulang fr">
+                <a class="nav-link  active-lang" href="PAGE ACCUEIL EN FRANCAIS">FR</a>
+            </li>
+            <li class="nav-item menulang en menulangborder">
+                <a class="nav-link" href="PAGE ACCUEIL EN ANGLAIS">EN</a>
+            </li> #}
+        </ul>
+    </div>
+</header>
+<!-- MENU -->
+<nav>
+    <div class="container menuindex">
+        <a href="{{ path('home_page') }}" class="logo logo-responsive d-none d-md-inline"><img
+                src="{{ asset('/images/logo.svg') }}" alt="LOGO SEPALAVOILE" /></a>
+        <nav class="navbar navbar-expand-md navbar-light">
+            <a href="{{ path('home_page') }}" class="d-md-none"><img style="width: 90px"
+                    src="{{ asset('/images/logo.svg') }}" alt="LOGO SEPALAVOILE" /></a>
+            <button class="navbar-toggler ml-auto styleboutton" type="button" data-toggle="collapse"
+                data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <i class="fas fa-bars"></i>
+            </button>
+            <div class="collapse navbar-collapse mb-2" id="navbarSupportedContent">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item mainNavBar pl-2 pr-2 m-0">
+                        <a class="nav-link text-center" href="{{ path('blog') }}"><span
+                                class="menutitre">Blog</span></a>
+                    </li>
+                    <li class="nav-item mainNavBar borderleft pl-2 pr-2 m-0">
+                        <a class="nav-link text-center" href="{{ path('association') }}">
+                            <span class=" menutitre">
+                                L'association
+                            </span>
+                        </a>
+                    </li>
+                    <li class="nav-item dropdown mainNavBar borderleft pl-2 pr-2 m-0">
+                        <a class="nav-link text-center dropdown-toggle" href="" id="navbarDropdown" role="button"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <span class="menutitre notreaventure">
+                                Notre aventure
+                            </span>
+                        </a>
+                        <div class="dropdown-menu  border-0" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item sousmenu text-center" href="{{ path('monhistoire') }}">
+                                Mon histoire
+                            </a>
+                            <a class="dropdown-item sousmenu text-center" href="{{ path('leprojet') }}">
+                                Le projet
+                            </a>
+                            <a class="dropdown-item sousmenu text-center" href="{{ path('leparcours') }}">
+                                Le parcours
+                            </a>
+                            <a class="dropdown-item sousmenu text-center" href="{{ path('lequipe') }}">
+                                L'équipe
+                            </a>
+                            <a class="dropdown-item sousmenu text-center" href="{{ path('lebateau') }}">
+                                Le bateau
+                            </a>
+                            <a class="dropdown-item sousmenu text-center" href="{{ path('galerie') }}">
+                                La galerie photo
+                            </a>
+                        </div>
+                    </li>
+                    <li class="nav-item mainNavBar borderleft pl-2 pr-2 m-0">
+                        <a class="nav-link text-center" href="{{ path('nospartenaires') }}"><span class=" menutitre">Nos
+                                partenaires</span></a> </li>
+                    <li class="nav-item mainNavBar borderleft pl-2 pr-2 m-0">
+                        <a class="nav-link text-center" href="{{ path('onparledenous') }}"><span class="menutitre">On
+                                parle de
+                                nous</span></a>
+                    </li>
+                    <li class="nav-item mainNavBar borderleft pl-2 pr-2 m-0">
+                        <a class="nav-link text-center" href=""><span class="menutitre">Vos
+                                expériences</span></a>
+                    </li>
+                    <li class="nav-item dropdown mainNavBar borderleft pl-2 pr-2 m-0">
+                        <a class="nav-link text-center dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span
+                                class="menutitre participer">Participer</span></a>
+                        <div class="dropdown-menu dropdown-menu-right  border-0" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item sousmenu text-center"
+                                href="{{ path('produit_index', {produitTypes: constant('App\\Entity\\ProduitType::PRODUIT_TYPE_DONATION_SLUG')}) }}">Faire un don</a>
+                            <a class="dropdown-item sousmenu text-center" href="{{ path('produit_index', {produitTypes: constant('App\\Entity\\ProduitType::PRODUIT_TYPE_ADHESION_SLUG')}) }}">Devenir membre</a>
+                            <a class="dropdown-item sousmenu text-center" href="{{ path('produit_index', {produitTypes: constant('App\\Entity\\ProduitType::PRODUIT_TYPE_EVENT_SLUG')}) }}">Nos
+                                événements</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+</nav>

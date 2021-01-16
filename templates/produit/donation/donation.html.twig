@@ -1,0 +1,50 @@
+{% extends 'carousel.html.twig' %}
+
+{% block title %}Donation{% endblock %}
+
+
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('produit') }}
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                {% set percentage = produit.totalDonationProduit / produit.objectif * 100 %}
+                <br><br>
+                <h1 class="titresection">{{ produit.nom }}</h1>
+                <div class="progression-bar mb-2 text-center" style="background: linear-gradient(to right, #ff8300 {{ percentage }}%, white {{ percentage }}%);">
+                    <span>{{ produit.totalDonationProduit }} € ({{ percentage|round }} %)</span>
+                </div>
+            </div>
+        </div>
+        <div class="row pb-5">
+            <div class="col text-left">
+                <span class="text-produit text-left">0 €</span>
+            </div>
+             <div class="col text-center">
+                <span class="text-produit text-left">Jusqu'au {{ produit.finPublication|date('d/m/Y') }}</span>
+            </div>
+            <div class="col text-right">
+                <span class="text-produit text-right">{{ produit.objectif }} €</span>
+            </div>
+        </div>
+        <div class="row py-5 mb-5">
+            <div class="col">
+                {{ form_start(form) }}
+                    {{ form_label(form.montant) }}
+                    <span class="rangeInputValue">{{ produit.prix }} €</span>
+                    {{ form_widget(form.montant) }}
+                    <button class="btn btn-style mt-4">Ajouter au panier</button>
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('produit') }}
+{% endblock %}

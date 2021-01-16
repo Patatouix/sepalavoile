@@ -1,0 +1,88 @@
+<!-- Sidebar -->
+            <aside class="col-md-4 hidden-sm hidden-xs pt-4" role="complementary">
+                <!-- widget -->
+                <div class="widget shadow">
+                    <div class="text-center">
+                        <img src="{{ asset('/images/alban.jpg') }}" width="140px" class="img-circle">
+                        <ul class="list-group list-group-horizontal d-flex justify-content-center mt-3 ">
+                            <li class="list-group-item mx-1 border-0 no-bg"><a class="fb"
+                                    href="https://www.facebook.com/SEPalavoile/" target="_blank"></a></li>
+                            <li class="list-group-item mx-1 border-0 no-bg"><a class="inst"
+                                    href="https://www.instagram.com/sepalavoile/?hl=fr" target="_blank"></a></li>
+                            <li class="list-group-item mx-1 border-0 no-bg"><a class="yt"
+                                    href="https://www.youtube.com/channel/UCJ2l2tGkwyvrMzswiOUlj7A" target="_blank"></a>
+                            </li>
+                        </ul>
+                        <h2 class="vert mb20">Alban JAILLAIS</h2>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
+                            labore et dolore magna aliqua. Ut enim ad minim veniam.</p>
+                    </div>
+                </div>
+                <!-- Fin widget -->
+
+                <!-- widget -->
+                <div class="widget shadow">
+                    <h2 class="text-right">Catégories</h2>
+                    <ul class="list-group">
+                        <li>
+                            <a href="{{ path('blog') }}">Toutes les articles</a>
+                            <span class="orange">
+                                ({{ articles|length }})
+                            </span>
+                        </li>
+                        {% for category in category %}
+                            <li>
+                                <a href="{{ path('blog', { 'categoryId': category.id }) }}">{{ category.name }}</a>
+                                <span class="orange">
+                                    ({{ category.articles|length }})
+                                </span>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <!-- Fin widget -->
+
+                <!-- widget TOP VUES-->
+                <div class="widget shadow">
+                    <h2 class="text-right">Top vues</h2>
+                    <div class="topv">
+                        {% for articleBestView in articleBestView %}
+                        <div class="mb15 mt15">
+                            <a href="{{ path('article_show', {'id': articleBestView.id}) }}">{{ articleBestView.title }}</a> - <span class="meta">Publié
+                                le {{ articleBestView.createdAt|date('d/m/Y') }} - {{ articleBestView.nbVues }} vues</span>
+                        </div>
+                        <span class="imgWrap font-italic">
+                            {# <a href="../pages/article-blog-soling.html"><img src="{{ articleBestView.filename ? asset('/images/photoarticle/' ~ articleBestView.filename) : asset('/images/logo.svg') }}" width="100%"></a> #}
+                            <a href="{{ path('article_show', {'id': articleBestView.id}) }}"><img src="{{ asset('/images/logo.svg') }}" width="100%"></a>
+                        </span>
+                        {% endfor %}
+                    </div>
+                </div>
+                <!-- Fin widget -->
+
+                <!-- widget DERNIERS COMMENTAIRES-->
+                <div class="widget shadow">
+                    <h2 class="text-right">Derniers commentaires</h2>
+                    <div class="topv">
+                        <div class="mb15 mt15">
+                            <a href="#">L'achat d'un Soling pour réaliser des baptêmes et la réalisation de régate</a> -
+                            <span class="meta">Publié
+                                le 19 novembre 2019 - 125 vues</span>
+                        </div>
+                        <blockquote>
+                            <a href="#">“labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+                                exercitation ullamco ...”</a>
+                        </blockquote>
+                        <div class="mb15 mt15">
+                            <a href="#">Prise en main du bateau à Porto</a> - <span class="meta">Publié
+                                le 8 décembre 2017 - 125 vues</span>
+                        </div>
+                        <blockquote>
+                            <a href="#">“labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+                                exercitation ullamco ...”</a>
+                        </blockquote>
+                    </div>
+                </div>
+                <!-- Fin widget -->
+            </aside>
+            <!-- Fin Sidebar -->

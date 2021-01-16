@@ -1,0 +1,90 @@
+/* =====LISTE UTILISATEURS===== */
+/* ============================ */
+
+/* =====GENERAL===== */
+.border-left-form {
+    border-left: 2px solid #ff8300;
+}
+
+.mt-50 {
+    margin-top: 50px;
+}
+
+/* ====FONTAWESOME==== */
+/* =================== */
+.fad, .fal, .fa, .fab {
+    color: #ff8300;
+    font-size: 25px;
+}
+.fa-eye {
+    color: blue;
+    font-size: 25px;
+}
+.fa-user-edit {
+    color: green;
+    font-size: 25px;
+}
+
+.fa-edit {
+    color: green;
+    font-size: 25px;
+}
+
+.fa-trash-alt {
+    color: red;
+    font-size: 25px;
+}
+
+/* ====MMENU==== */
+/* ============== */
+.navbardashboard {
+    color: black;
+    font-family: 'Open Sans', sans-serif;
+    letter-spacing: -0.6px;
+    font-weight: 500;
+}
+/* ====BOUTON==== */
+/* ============== */
+.btn {
+    font-size: 1rem;
+}
+
+tbody td {
+    vertical-align: middle !important;
+}
+
+tbody td img {
+    max-height: 100px;
+}
+
+
+/*----------------------------------------------- tableau ---------------------------------------------*/
+/* thead th{
+    text-align: center !important;
+    background-color: white !important;
+    border-bottom: rgba(33, 33, 33, 0.5) thin solid !important;
+    box-shadow: none !important;
+
+#badge {
+    color: #059994;
+    font-size: 35px;
+    text-shadow: 2px 4px 2px #9494948a; 
+}
+
+tbody td{
+    text-align: center !important;
+    vertical-align: middle !important;
+    border: none !important;
+    box-shadow: none !important;
+}
+
+tbody tr:nth-child(even) {
+    background-color: rgba(255, 255, 255, 0.5);
+    box-shadow: none !important;
+} */
+
+
+/* MODIFICATION DU LABEL POUR SELECT FILE */
+.custom-file-input ~ .custom-file-label::after {
+    content: "Choisir...";
+}

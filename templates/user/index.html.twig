@@ -1,0 +1,168 @@
+{% extends 'base_dashboard.html.twig' %}
+
+
+{% block title %}Dashboard / Liste des utilisateurs{% endblock %}
+
+{% block body %}
+    <div id="user-list" class="container-fluid">
+        <h1>Liste des utilisateurs</h1>
+        <div class="col-12  mt-5 mb-3">
+            <a href="{{ path('user_new') }}" class="btn btn-style">Nouvel utilisateur</a>
+        </div>
+        <div class="table-responsive card px-2 py-2">
+            <table id="example1" class="table table-bordered table-striped  mx-2 my-2">
+                <thead>
+                    <tr class="text-center">
+                        <th>N°&nbsp;Id</th>
+                        <th width="10%">Action</th>
+                        <th>Prénom</th>
+                        <th>Nom</th>
+                        <th>E-mail</th>
+                        <th>N°&nbsp;téléphone</th>
+                        <th>Pseudo</th>
+                        <th>Avatar</th>
+                        <th>Adresse</th>
+                        <th>Code&nbsp;Postal</th>
+                        <th>Ville</th>
+                        <th>Compte&nbsp;vérifié</th>
+                        <th>Rôle</th>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr class="text-center">
+                        <th>N°&nbsp;Id</th>
+                        <th width="10%">Action</th>
+                        <th>Prénom</th>
+                        <th>Nom</th>
+                        <th>E-mail</th>
+                        <th>N°&nbsp;téléphone</th>
+                        <th>Pseudo</th>
+                        <th>Avatar</th>
+                        <th>Adresse</th>
+                        <th>Code&nbsp;Postal</th>
+                        <th>Ville</th>
+                        <th>Compte&nbsp;vérifié</th>
+                        <th>Rôle</th>
+                    </tr>
+                </tfoot>
+                <tbody>
+                    {% for user in users %}
+                        <tr class="text-center">
+                            <td>{{ user.id }}</td>
+                            <td>
+                                {# Modal pour voir un utilisateur #}
+                                    <a href="" type="button" class="m-0" data-toggle="modal" data-target="#showUserModal{{ user.id }}">
+                                        <i class="fad fa-eye"></i>
+                                    </a>
+                                    <div class="modal fade text-left" id="showUserModal{{ user.id }}" tabindex="-1" role="dialog" aria-labelledby="showUserModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog modal-xl" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h6 class="modal-title text-uppercase font-weight-bold">Consulter</h6>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body font-weight-normal p-0">
+                                                    {% include "user/show.html.twig" %}
+
+                                                    <div class="modal-footer"> 
+                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                {# Fin de la modal voir un utilisateur #}
+
+                                {# Lien pour modifier un utilisateur #}
+                                <a href="{{ path('user_edit', {'id': user.id}) }}">
+                                    <i class="fad fa-user-edit px-2 py-2"></i>
+                                </a>
+                                {# Fin lien pour modifier un utilisateur #}
+
+                                {# Modal pour supprimer un utilisateur #}
+                                    <a href="" type="button" class="m-0" data-toggle="modal" data-target="#deleteuserModal{{ user.id }}">
+                                        <i class="fad fa-trash-alt"></i>
+                                    </a>
+                                    <div class="modal fade text-left" id="deleteuserModal{{ user.id }}" tabindex="-1" role="dialog" aria-labelledby="deleteuserModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog modal-lg" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title text-uppercase font-weight-bold">Voulez-vous supprimer cet utilisateur : {{ user.firstname }} {{ user.name }}</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body font-weight-normal">
+                                                    <div class="col font-weight-bold">
+                                                        Nom de l'image : {{ user.name }}
+                                                    </div>
+                                                    <div class="modal-body font-weight-normal">
+                                                        <div class="col">
+                                                        </div>
+                                                        <div class="col">
+                                                        </div>
+                                                        <div class="col">
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal-footer"> 
+                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                                                        {% include "user/_delete_form.html.twig" %}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                {# Fin de la modal supprimer un utilisateur #}
+
+                            </td>
+                            <td>
+                                {{ user.firstName }}
+                            </td>
+                            <td>
+                                {{ user.name }}
+                            </td>
+                            <td>
+                                {{ user.email }}
+                            </td>
+                            <td>
+                                {{ user.numTel }}
+                            </td>
+                            <td>
+                                {{ user.pseudo }}
+                            </td>                
+                            <td>
+                                avatar
+                                {# <img id='userImage' class="img-fluid" alt="avatar de profil" src="{{ user.filename ? asset('/images/user/' ~ user.filename) : asset('/images/avatar.png') }}"> #}
+                            </td>
+                            <td>
+                                {{ user.adresse }}
+                            </td>
+                            <td>
+                                {{ user.codePostal }}
+                            </td>
+                            <td>
+                                {{ user.ville }}
+                            </td>
+                            <td>
+                                {% if user.isVerified == 1 %}
+                                <span class="alert alert-success">Oui</span>
+                                {% else %}
+                                <span class="alert alert-danger">Non</span>
+                                {% endif %}
+                            </td>
+                            <td>
+                                {{ user.roles ? user.roles|json_encode : '' }}
+                            </td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="9">Pas d'enregistrement trouvé</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,66 @@
+{% extends 'carousel.html.twig' %}
+
+{% block title %}Hello PanierController!{% endblock %}
+
+{% block content %}
+
+{% set total = 0 %}
+
+<div class="container mb-5">
+    <h1 class="titresection">Mon panier</h1>
+    {% if (panier is empty) %}
+        <p class="text-center">Votre panier est vide.</p>
+    {% else %}
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Type</th>
+                    <th>Produit</th>
+                    <th>Détails</th>
+                    <th>Quantité</th>
+                    <th>Sous-total</th>
+            </thead>
+            <tbody>
+                {% for typeProduit, produits in panier %}
+                    {% for produitId, achat in produits %}
+                        {% if typeProduit == constant('App\\Entity\\ProduitType::PRODUIT_TYPE_EVENT_NAME') %}
+                            {% for creneau, reservation in achat %}
+                                {% set total = total + reservation.prix * reservation.quantite %}
+                                <tr>
+                                    <td>{{ typeProduit }}</td>
+                                    <td>{{ reservation.produit_nom }}</td>
+                                    <td>Du {{ reservation.creneau_debut|date('d/m/Y H:i:s') }} au {{ reservation.creneau_fin|date('d/m/Y H:i:s') }}</td>
+                                    <td>{{ reservation.quantite }}</td>
+                                    <td>{{ reservation.prix * reservation.quantite }} €</td>
+                                </tr>
+                            {% endfor %}
+                        {% elseif typeProduit == constant('App\\Entity\\ProduitType::PRODUIT_TYPE_DONATION_NAME') or typeProduit == constant('App\\Entity\\ProduitType::PRODUIT_TYPE_ADHESION_NAME') %}
+                            {% set total = total + achat.montant %}
+                            <tr>
+                                <td>{{ typeProduit }}</td>
+                                <td>{{ achat.produit_nom }}</td>
+                                <td></td>
+                                <td>{{ achat.quantite }}</td>
+                                <td>{{ achat.montant }} €</td>
+                            </tr>
+                        {% endif %}
+                    {% endfor %}
+                {% endfor %}
+            </tbody>
+            <tfoot>
+                <tr>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th>{{ total }} €</th>
+                </tr>
+            </tfoot>
+        </table>
+        <div class="row my-5 justify-content-center">
+            <a class="btn btn-style" href="{{ path('panier_validate') }}">Valider mes achats</a>
+        </div>
+        <p><strong>Paiement</strong> : veuillez envoyer votre chèque au 31, rue des Bornes, 67200 Strabourg. Vos achats ne seront confirmés qu'après réception de votre paiement.</p>
+    {% endif %}
+</div>
+{% endblock %}

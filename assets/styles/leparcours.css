@@ -1,0 +1,29 @@
+/*---------------------------------------------------------------
+------------------------- PAGE LE PARCOURS-----------------------
+-----------------------------------------------------------------
+---------------------------------------------------------------*/
+
+.titreparcours h2 {
+    font-size: 2em;
+    font-family: 'Pathway Gothic One', sans-serif;
+    text-transform: uppercase;
+    color: black;
+}
+
+.titreparcours span {
+    font-size: 2em;
+    color: #ff8300;
+}
+
+.titreparcours p {
+    font-family: "Open Sans";
+    font-size: 1em;
+    font-variant: small-caps;
+}
+
+.list-destination {
+    list-style: none;
+    font-family: "Open Sans";
+    font-size: .8em;
+    font-variant: small-caps;
+}
