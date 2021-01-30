@@ -432,8 +432,8 @@ class AppFixtures extends Fixture
             for ($j = 1; $j <= 4; $j++) {
                 $creneau = new Creneau();
                 $creneau->setProduit($produit);
-                $creneau->setDebut(new DateTime('2021-01-' . ($j + 10). ' 08:' . $j . ':30'));
-                $creneau->setFin(new DateTime('2021-01-' . ($j + 10). ' 18:' . $j . ':30'));
+                $creneau->setDebut(new DateTime('2021-02-' . ($j + 10). ' 08:' . $j . ':30'));
+                $creneau->setFin(new DateTime('2021-02-' . ($j + 10). ' 18:' . $j . ':30'));
                 $manager->persist($creneau);
 
                 //réservations
