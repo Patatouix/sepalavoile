@@ -3,6 +3,8 @@
 namespace App\Form;
 
 use App\Entity\Produit;
+use App\Entity\ProduitType as ProduitTypeEntity;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -22,8 +24,13 @@ class ProduitType extends AbstractType
             ->add('prix')
             ->add('objectif')
             ->add('duree')
-            ->add('createdAt')
-            ->add('updatedAt')
+            ->add('produitType', EntityType::class, [
+                'label' => 'Type de produit :',
+                'choice_label' => 'nom',
+                'class' => ProduitTypeEntity::class
+            ])
+            //->add('createdAt')
+            //->add('updatedAt')
         ;
     }
 
