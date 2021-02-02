@@ -1,4 +1,105 @@
 {{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
+    <div id="form-new-produit" class="container bg-light rounded">
+        <div class="row bg-light border-bottom border-right border-left">
+            <div class="col-12 mt-5 pb-4 px-5">
+                <div class="col-12 mt-5">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group">
+                            <div class="row mb-5">
+                                <div class="col-1 p-0 text-center"><i class="fad fa-inbox-in mr-2"></i></div>
+                                <div class="col-4 font-weight-bold">{{ form_label(form.medias) }}</div>
+                                <div class="col-7 p-0">{{ form_widget(form.medias) }}</div>
+                            </div>
+                        </li>
+                        <li class="list-group">
+                            <div class="row mb-5">
+                                <div class="col-1 p-0 text-center"><i class="fad fa-heading"></i></div>
+                                <div class="col-4">{{ form_label(form.nom) }}</div>
+                                <div class="col-7 p-0">{{ form_widget(form.nom, {'attr': {'placeholder': 'Nom du produit'}}) }}</div>
+                            </div>
+                        </li>
+                        <li class="list-group">
+                            <div class="row mb-5">
+                                <div class="col-1 p-0 text-center"><i class="fad fa-file-edit"></i></div>
+                                <div class="col-4">{{ form_label(form.description) }}</div>
+                                <div class="col-7 p-0">{{ form_widget(form.description) }}</div>
+                            </div>
+                        </li>
+                        <li class="list-group">
+                            <div class="row mb-5">
+                                <div class="col-1 p-0 text-center"><i class="fad fa-map-marker-alt"></i></div>
+                                <div class="col-4 font-weight-bold">{{ form_label(form.adresse) }}</div>
+                                <div class="col-7 p-0">{{ form_widget(form.adresse) }}</div>
+                            </div>
+                        </li>
+                        <li class="list-group">
+                            <div class="row mb-5">
+                                <div class="col-1 p-0 text-center"><i class="fad fa-map-marker-alt"></i></div>
+                                <div class="col-4 font-weight-bold">{{ form_label(form.codePostal) }}</div>
+                                <div class="col-7 p-0">{{ form_widget(form.codePostal) }}</div>
+                            </div>
+                        </li>
+                        <li class="list-group">
+                            <div class="row mb-5">
+                                <div class="col-1 p-0 text-center"><i class="fad fa-map-marker-alt"></i></div>
+                                <div class="col-4 font-weight-bold">{{ form_label(form.ville) }}</div>
+                                <div class="col-7 p-0">{{ form_widget(form.ville) }}</div>
+                            </div>
+                        </li>
+                        <li class="list-group">
+                            <div class="row mb-5">
+                                <div class="col-1 p-0 text-center"><i class="fad fa-money-bill"></i></div>
+                                <div class="col-4 font-weight-bold">{{ form_label(form.prix) }}</div>
+                                <div class="col-7 p-0">{{ form_widget(form.prix) }}</div>
+                            </div>
+                        </li>
+                        <li class="list-group">
+                            <div class="row mb-5">
+                                <div class="col-1 p-0 text-center"><i class="fad fa-users"></i></div>
+                                <div class="col-4 font-weight-bold">{{ form_label(form.limiteParticipation) }}</div>
+                                <div class="col-7 p-0">{{ form_widget(form.limiteParticipation) }}</div>
+                            </div>
+                        </li>
+                        <li class="list-group">
+                            <div class="row mb-5">
+                                <div class="col-1 p-0 text-center"><i class="fad fa-hourglass"></i></div>
+                                <div class="col-4 font-weight-bold">{{ form_label(form.duree) }}</div>
+                                <div class="col-7 p-0">{{ form_widget(form.duree) }}</div>
+                            </div>
+                        </li>
+                        <li class="list-group">
+                            <div class="row mb-5">
+                                <div class="col-1 p-0 text-center"><i class="fad fa-clock"></i></div>
+                                <div class="col-4 mb-4 font-weight-bold">{{ form_label(form.debutVente) }}</div>
+                                <div class="col-7 p-0">{{ form_widget(form.debutVente) }}</div>
+                            </div>
+                        </li>
+                        <li class="list-group">
+                            <div class="row mb-5">
+                                <div class="col-1 p-0 text-center"><i class="fad fa-clock"></i></div>
+                                <div class="col-4 font-weight-bold">{{ form_label(form.finVente) }}</div>
+                                <div class="col-7 p-0">{{ form_widget(form.finVente) }}</div>
+                            </div>
+                        </li>
+                        <li class="list-group">
+                            <div class="row mb-1">
+                                <div class="col-1 p-0 text-center"><i class="fad fa-shopping-cart"></i></div>
+                                <div class="col-4 font-weight-bold">{{ form_label(form.produitType) }}</div>
+                                <div class="col-7 p-0">{{ form_widget(form.produitType) }}</div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-12 text-right p-4">
+                <a href="{{ path('admin_produit_index') }}" class="btn btn-secondary">Annuler</a>
+                <button class="btn btn-style">{{ button_label|default('Valider') }}</button>
+            </div>
+        </div>
+    </div>
 {{ form_end(form) }}
+
+
+
+
+

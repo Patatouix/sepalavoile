@@ -6,6 +6,7 @@ use App\Entity\Achat;
 use App\Entity\Creneau;
 use App\Entity\Produit;
 use App\Entity\ProduitType;
+use App\Entity\Reservation;
 use DateTime;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -44,39 +45,37 @@ class PanierController extends AbstractController
 
         $entityManager = $this->getDoctrine()->getManager();
 
-        foreach ($panier as $typeProduit => $produits) {
-            foreach ($produits as $idProduit => $achatsProduit) {
+        if(isset($panier['reservations'])) {
+            foreach ($panier['reservations'] as $idProduit => $reservationsProduit) {
 
-                $produit = $this->getDoctrine()->getRepository(Produit::class)->find($idProduit);
+                foreach ($reservationsProduit as $creneauId => $reservation) {
 
-                if ($typeProduit == ProduitType::PRODUIT_TYPE_EVENT_NAME) {
+                    $creneau = $this->getDoctrine()->getRepository(Creneau::class)->find($creneauId);
 
-                    foreach ($achatsProduit as $creneauId => $reservation) {
-
-                        $creneau = $this->getDoctrine()->getRepository(Creneau::class)->find($creneauId);
-
-                        //todo : check si les places dispos sont toujours là
-                        $achat = new Achat();
-                        $achat->setUser($this->getUser());
-                        $achat->setProduit($produit);
-                        $achat->setQuantite($reservation['quantite']);
-                        $achat->setMontant($reservation['montant']);
-                        $achat->setCreatedAt(new DateTime('NOW'));
-                        $achat->setCreneau($creneau);
-                        $entityManager->persist($achat);
-                        $entityManager->flush();
-                    }
-                } elseif ($typeProduit == ProduitType::PRODUIT_TYPE_ADHESION_NAME || $typeProduit == ProduitType::PRODUIT_TYPE_DONATION_NAME) {
-
-                    $achat = new Achat();
+                    //todo : check si les places dispos sont toujours là
+                    $achat = new Reservation();
                     $achat->setUser($this->getUser());
-                    $achat->setProduit($produit);
-                    $achat->setQuantite(1);
-                    $achat->setMontant($achatsProduit['montant']);
+                    $achat->setQuantitePlaces($reservation['quantite']);
+                    $achat->setPrixPaye($reservation['prixPaye']);
                     $achat->setCreatedAt(new DateTime('NOW'));
+                    $achat->setCreneau($creneau);
                     $entityManager->persist($achat);
                     $entityManager->flush();
                 }
+            }
+        }
+        if(isset($panier['achats'])) {
+            foreach ($panier['achats'] as $idProduit => $achatProduit) {
+
+                $produit = $this->getDoctrine()->getRepository(Produit::class)->find($idProduit);
+
+                $achat = new Achat();
+                $achat->setUser($this->getUser());
+                $achat->setProduit($produit);
+                $achat->setPrixPaye($achatProduit['prixPaye']);
+                $achat->setCreatedAt(new DateTime('NOW'));
+                $entityManager->persist($achat);
+                $entityManager->flush();
             }
         }
 

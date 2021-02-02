@@ -4,6 +4,8 @@ namespace App\Form;
 
 use App\Entity\Article;
 use App\Entity\ArticleCategorie;
+use App\Entity\Media;
+use App\Form\Type\MediaEntityType;
 use Doctrine\DBAL\Types\BooleanType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
@@ -46,6 +48,13 @@ class ArticleType extends AbstractType
                 'class' => ArticleCategorie::class,
                 'multiple' => true,
                 'expanded' => true,
+                'by_reference' => false,
+            ])
+            ->add('medias', MediaEntityType::class, [
+                'label' => 'Médias associés :',
+                'class' => Media::class,
+                'choice_label' => 'nom',
+                'multiple' => true,
                 'by_reference' => false,
             ])
         ;

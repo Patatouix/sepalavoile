@@ -11,55 +11,65 @@
     {% if (panier is empty) %}
         <p class="text-center">Votre panier est vide.</p>
     {% else %}
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th>Type</th>
-                    <th>Produit</th>
-                    <th>Détails</th>
-                    <th>Quantité</th>
-                    <th>Sous-total</th>
-            </thead>
-            <tbody>
-                {% for typeProduit, produits in panier %}
-                    {% for produitId, achat in produits %}
-                        {% if typeProduit == constant('App\\Entity\\ProduitType::PRODUIT_TYPE_EVENT_NAME') %}
-                            {% for creneau, reservation in achat %}
-                                {% set total = total + reservation.prix * reservation.quantite %}
+        {% if panier['achats'] is defined %}
+            <h5 style="color: #ff8300; font-weight: bold">ACHATS</h5>
+            <div class="table-responsive">
+                <table class="table table-striped mb-5">
+                    <thead>
+                        <tr>
+                            <th style="width: 30%">Produit</th>
+                            <th style="width: 30%">Type</th>
+                            <th style="width: 15%"></th>
+                            <th class="text-right" style="width: 25%">Sous-total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for achat in panier['achats'] %}
+                            {% set total = total + achat.prixPaye %}
+                            <tr>
+                                <td>{{ achat.produit_nom }}</td>
+                                <td>{{ achat.produit_type }}</td>
+                                <td></td>
+                                <td class="text-right">{{ achat.prixPaye }} €</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        {% endif %}
+        {% if panier['reservations'] is defined %}
+            <h5 style="color: #ff8300; font-weight: bold">RESERVATIONS</h5>
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th style="width: 30%">Produit</th>
+                            <th style="width: 30%">Créneau</th>
+                            <th style="width: 15%">Quantité</th>
+                            <th class="text-right" style="width: 25%">Sous-total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for reservationsProduit in panier['reservations'] %}
+                            {% for reservation in reservationsProduit %}
+                                {% set total = total + reservation.quantite * reservation.prixPaye %}
                                 <tr>
-                                    <td>{{ typeProduit }}</td>
                                     <td>{{ reservation.produit_nom }}</td>
-                                    <td>Du {{ reservation.creneau_debut|date('d/m/Y H:i:s') }} au {{ reservation.creneau_fin|date('d/m/Y H:i:s') }}</td>
+                                    <td>{{ reservation.creneau_debut|date('d/m/Y H:i:s') }}</td>
                                     <td>{{ reservation.quantite }}</td>
-                                    <td>{{ reservation.prix * reservation.quantite }} €</td>
+                                    <td class="text-right">{{ reservation.quantite * reservation.prixPaye }} €</td>
                                 </tr>
                             {% endfor %}
-                        {% elseif typeProduit == constant('App\\Entity\\ProduitType::PRODUIT_TYPE_DONATION_NAME') or typeProduit == constant('App\\Entity\\ProduitType::PRODUIT_TYPE_ADHESION_NAME') %}
-                            {% set total = total + achat.montant %}
-                            <tr>
-                                <td>{{ typeProduit }}</td>
-                                <td>{{ achat.produit_nom }}</td>
-                                <td></td>
-                                <td>{{ achat.quantite }}</td>
-                                <td>{{ achat.montant }} €</td>
-                            </tr>
-                        {% endif %}
-                    {% endfor %}
-                {% endfor %}
-            </tbody>
-            <tfoot>
-                <tr>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th>{{ total }} €</th>
-                </tr>
-            </tfoot>
-        </table>
-        <div class="row my-5 justify-content-center">
-            <!-- <a class="btn btn-style" href="{{ path('panier_validate') }}">Valider mes achats</a>-->
-            <button type="button" id="checkout-button" class="btn btn-style">Valider mes achats</button>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        {% endif %}
+        <div class="row mt-5 mb-4 justify-content-center">
+            <h5 class="font-weight-bold">TOTAL : <span style="color: #ff8300;">{{ total }} €</span></h5>
+        </div>
+        <div class="row mb-5 justify-content-center">
+            <button type="button" id="checkout-button" class="btn btn-style">Valider mon panier</button>
         </div>
     {% endif %}
 </div>

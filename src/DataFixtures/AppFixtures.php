@@ -10,6 +10,7 @@ use App\Entity\Media;
 use App\Entity\Partners;
 use App\Entity\Produit;
 use App\Entity\ProduitType;
+use App\Entity\Reservation;
 use App\Entity\User;
 use DateTime;
 use Doctrine\Bundle\FixturesBundle\Fixture;
@@ -416,13 +417,13 @@ class AppFixtures extends Fixture
             $produit = new Produit();
             $produit->setNom('Event ' . $i);
             $produit->setDescription('Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat aperiam doloremque, dolores voluptates obcaecati nihil ipsam voluptatibus vero exercitationem in, debitis sapiente. Alias ullam culpa sint vel esse, numquam in?<br><br>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat aperiam doloremque, dolores voluptates obcaecati nihil ipsam voluptatibus vero exercitationem in, debitis sapiente. Alias ullam culpa sint vel esse, numquam in?<br><br>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat aperiam doloremque, dolores voluptates obcaecati nihil ipsam voluptatibus vero exercitationem in, debitis sapiente. Alias ullam culpa sint vel esse, numquam in?');
-            $produit->setDebutPublication(new DateTime('2021-01-' . $i . ' 08:' . $i . ':30'));
-            $produit->setFinPublication(new DateTime('2021-02-' . $i . ' 18:' . $i . ':50'));
+            $produit->setDebutVente(new DateTime('2021-01-' . $i . ' 08:' . $i . ':30'));
+            $produit->setFinVente(new DateTime('2021-02-' . $i . ' 18:' . $i . ':50'));
             $produit->setAdresse($i . ' rue du Verboté');
             $produit->setCodePostal('90350');
             $produit->setVille('Belfort');
             $produit->setPrix($i);
-            $produit->setObjectif($i + 2);
+            $produit->setLimiteParticipation($i + 5);
             $produit->setCreatedAt(new DateTime('NOW'));
             $produit->addMedia($media);
             $produit->setProduitType($produitEvent);
@@ -438,12 +439,11 @@ class AppFixtures extends Fixture
 
                 //réservations
                 for ($k = 1; $k <= 3; $k++) {
-                    $achat = new Achat();
-                    $achat->setProduit($produit);
+                    $achat = new Reservation();
                     $achat->setCreneau($creneau);
                     $achat->setCreatedAt(new DateTime('NOW'));
-                    $achat->setMontant($k);
-                    $achat->setQuantite(1);
+                    $achat->setPrixPaye($i);
+                    $achat->setQuantitePlaces($k);
                     $achat->setUser($userArray[array_rand($userArray)]);
                     $manager->persist($achat);
                 }
@@ -456,13 +456,13 @@ class AppFixtures extends Fixture
             $produit = new Produit();
             $produit->setNom('Campagne de don ' . $i);
             $produit->setDescription('Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat aperiam doloremque, dolores voluptates obcaecati nihil ipsam voluptatibus vero exercitationem in, debitis sapiente. Alias ullam culpa sint vel esse, numquam in?<br><br>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat aperiam doloremque, dolores voluptates obcaecati nihil ipsam voluptatibus vero exercitationem in, debitis sapiente. Alias ullam culpa sint vel esse, numquam in?<br><br>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat aperiam doloremque, dolores voluptates obcaecati nihil ipsam voluptatibus vero exercitationem in, debitis sapiente. Alias ullam culpa sint vel esse, numquam in?');
-            $produit->setDebutPublication(new DateTime('2021-01-' . $i . ' 08:' . $i . ':30'));
-            $produit->setFinPublication(new DateTime('2021-02-' . $i . ' 18:' . $i . ':50'));
+            $produit->setDebutVente(new DateTime('2021-01-' . $i . ' 08:' . $i . ':30'));
+            $produit->setFinVente(new DateTime('2021-02-' . $i . ' 18:' . $i . ':50'));
             $produit->setAdresse($i . ' rue du Verboté');
             $produit->setCodePostal('90350');
             $produit->setVille('Belfort');
             $produit->setPrix($i);
-            $produit->setObjectif($i + 100);
+            $produit->setLimiteParticipation($i + 100);
             $produit->setCreatedAt(new DateTime('NOW'));
             $produit->addMedia($media);
             $produit->setProduitType($produitDon);
@@ -473,8 +473,7 @@ class AppFixtures extends Fixture
                 $achat = new Achat();
                 $achat->setProduit($produit);
                 $achat->setCreatedAt(new DateTime('NOW'));
-                $achat->setMontant($k);
-                $achat->setQuantite(1);
+                $achat->setPrixPaye($i + $k);
                 $achat->setUser($userArray[array_rand($userArray)]);
                 $manager->persist($achat);
             }
@@ -486,14 +485,14 @@ class AppFixtures extends Fixture
             $produit = new Produit();
             $produit->setNom('Campagne d\'adhésion ' . $i);
             $produit->setDescription('Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat aperiam doloremque, dolores voluptates obcaecati nihil ipsam voluptatibus vero exercitationem in, debitis sapiente. Alias ullam culpa sint vel esse, numquam in?<br><br>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat aperiam doloremque, dolores voluptates obcaecati nihil ipsam voluptatibus vero exercitationem in, debitis sapiente. Alias ullam culpa sint vel esse, numquam in?<br><br>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat aperiam doloremque, dolores voluptates obcaecati nihil ipsam voluptatibus vero exercitationem in, debitis sapiente. Alias ullam culpa sint vel esse, numquam in?');
-            $produit->setDebutPublication(new DateTime('2021-01-' . $i . ' 08:' . $i . ':30'));
-            $produit->setFinPublication(new DateTime('2021-02-' . $i . ' 18:' . $i . ':50'));
+            $produit->setDebutVente(new DateTime('2021-01-' . $i . ' 08:' . $i . ':30'));
+            $produit->setFinVente(new DateTime('2021-02-' . $i . ' 18:' . $i . ':50'));
             $produit->setAdresse($i . ' rue du Verboté');
             $produit->setCodePostal('90350');
             $produit->setVille('Belfort');
             $produit->setPrix($i);
             $produit->setDuree($i);
-            $produit->setObjectif($i + 5);
+            $produit->setLimiteParticipation($i + 5);
             $produit->setCreatedAt(new DateTime('NOW'));
             $produit->addMedia($media);
             $produit->setProduitType($produitAdhesion);
@@ -504,8 +503,7 @@ class AppFixtures extends Fixture
                 $achat = new Achat();
                 $achat->setProduit($produit);
                 $achat->setCreatedAt(new DateTime('NOW'));
-                $achat->setMontant($k);
-                $achat->setQuantite(1);
+                $achat->setPrixPaye($i + $k);
                 $achat->setUser($userArray[array_rand($userArray)]);
                 $manager->persist($achat);
             }
