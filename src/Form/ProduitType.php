@@ -18,13 +18,13 @@ class ProduitType extends AbstractType
         $builder
             ->add('nom')
             ->add('description')
-            ->add('debutPublication')
-            ->add('finPublication')
+            ->add('debutVente')
+            ->add('finVente')
             ->add('adresse')
             ->add('codePostal')
             ->add('ville')
             ->add('prix')
-            ->add('objectif')
+            ->add('limiteParticipation')
             ->add('duree')
             ->add('produitType', EntityType::class, [
                 'label' => 'Type de produit :',

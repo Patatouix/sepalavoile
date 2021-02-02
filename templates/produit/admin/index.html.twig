@@ -123,16 +123,16 @@
                             {{ produit.prix }}
                         </td>
                         <td class="text-center">
-                            {{ produit.objectif }}
+                            {{ produit.limiteParticipation }}
                         </td>
                         <td class="text-center">
                             {{ produit.duree }}
                         </td>
                         <td class="text-center">
-                            {{ produit.debutPublication ? produit.debutPublication|date('Y-m-d H:i:s') : '' }}
+                            {{ produit.debutVente ? produit.debutVente|date('Y-m-d H:i:s') : '' }}
                         </td>
                         <td class="text-center">
-                            {{ produit.finPublication ? produit.finPublication|date('Y-m-d H:i:s') : '' }}
+                            {{ produit.finVente ? produit.finVente|date('Y-m-d H:i:s') : '' }}
                         </td>
                         <td class="text-center">
                             {{ produit.createdAt|date('Y-m-d H:i:s') }}

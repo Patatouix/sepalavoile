@@ -29,46 +29,45 @@ class CheckoutController extends AbstractController
         $produitsData = array();
 
         //construire le tableau de produits à partir du panier de la session, dans un format attendu par Stripes
-        foreach ($panier as $typeProduit => $produits) {
-            foreach ($produits as $idProduit => $achatsProduit) {
+        if(isset($panier['reservations'])) {
+            foreach ($panier['reservations'] as $idProduit => $produitReservations) {
+                foreach ($produitReservations as $idCreneau => $reservation) {
 
-                $produit = $this->getDoctrine()->getRepository(Produit::class)->find($idProduit);
-
-                if ($typeProduit == ProduitType::PRODUIT_TYPE_EVENT_NAME) {
-
-                    foreach ($achatsProduit as $creneauId => $reservation) {
-
-                        $creneau = $this->getDoctrine()->getRepository(Creneau::class)->find($creneauId);
-
-                        $produitData = [
-                            'price_data' => [
-                                'currency' => 'eur',
-                                'product_data' => [
-                                    'name' => $produit->getNom() . ' - ' . ($creneau->getDebut())->format('d/m/Y'),
-                                ],
-                                'unit_amount' => ($reservation['montant'] * 100),
-                            ],
-                            'quantity' => $reservation['quantite'],
-                        ];
-                        $produitsData[] = $produitData;
-                    }
-                } elseif ($typeProduit == ProduitType::PRODUIT_TYPE_ADHESION_NAME || $typeProduit == ProduitType::PRODUIT_TYPE_DONATION_NAME) {
+                    $produit = $this->getDoctrine()->getRepository(Produit::class)->find($idProduit);
+                    $creneau = $this->getDoctrine()->getRepository(Creneau::class)->find($idCreneau);
 
                     $produitData = [
                         'price_data' => [
                             'currency' => 'eur',
                             'product_data' => [
-                                'name' => $produit->getNom(),
+                                'name' => $produit->getNom() . ' - ' . ($creneau->getDebut())->format('d/m/Y H:i:s'),
                             ],
-                            'unit_amount' => ($achatsProduit['montant'] * 100),
+                            'unit_amount' => ($reservation['prixPaye'] * 100),
                         ],
-                        'quantity' => 1,
+                        'quantity' => $reservation['quantite'],
                     ];
                     $produitsData[] = $produitData;
                 }
             }
         }
+        if(isset($panier['achats'])) {
+            foreach ($panier['achats'] as $idProduit => $achat) {
 
+                $produit = $this->getDoctrine()->getRepository(Produit::class)->find($idProduit);
+
+                $produitData = [
+                    'price_data' => [
+                        'currency' => 'eur',
+                        'product_data' => [
+                            'name' => $produit->getNom(),
+                        ],
+                        'unit_amount' => ($achat['prixPaye'] * 100),
+                    ],
+                    'quantity' => 1,
+                ];
+                $produitsData[] = $produitData;
+            }
+        }
         //créer la session de paiement avec les produits du panier
         $session = Session::create([
             'payment_method_types' => ['card'],

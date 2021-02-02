@@ -154,17 +154,16 @@ class ProduitController extends AbstractController
                 ->find($data['creneau_id']);
 
             //si assez de places disponibles
-            if ($creneau->placesDisponibles() >= $data['quantite']) {
+            if ($creneau->placesDisponibles() >= $data['quantitePlaces']) {
                 //on met dans le panier (session)
                 $session = $request->getSession();
                 $panier = $session->get('panier', []);
-                $panier[EntityProduitType::PRODUIT_TYPE_EVENT_NAME][$produit->getId()][$data['creneau_id']] = [
-                    'quantite' => $data['quantite'],
-                    'montant' => $produit->getPrix(),
+                $panier['reservations'][$produit->getId()][$data['creneau_id']] = [
+                    'quantite' => $data['quantitePlaces'],
+                    'prixPaye' => $produit->getPrix(),
                     'produit_nom' => $produit->getNom(),
                     'creneau_debut' => $creneau->getDebut(),
-                    'creneau_fin' => $creneau->getFin(),
-                    'prix' => $produit->getPrix()
+                    'creneau_fin' => $creneau->getFin()
                 ];
                 $session->set('panier', $panier);
 
@@ -189,7 +188,7 @@ class ProduitController extends AbstractController
     public function donation(Request $request, Produit $produit): Response
     {
         $form = $this->createFormBuilder()
-            ->add('montant', RangeType::class, [
+            ->add('prixPaye', RangeType::class, [
                 'label' => 'Je souhaite donner : ',
                 'attr' => [
                     'min' => $produit->getPrix(),
@@ -207,9 +206,9 @@ class ProduitController extends AbstractController
             //on met dans le panier (session)
             $session = $request->getSession();
             $panier = $session->get('panier', []);
-            $panier[EntityProduitType::PRODUIT_TYPE_DONATION_NAME][$produit->getId()] = [
-                'quantite' => 1,
-                'montant' => $data['montant'],
+            $panier['achats'][$produit->getId()] = [
+                'prixPaye' => $data['prixPaye'],
+                'produit_type' => EntityProduitType::PRODUIT_TYPE_DONATION_NAME,
                 'produit_nom' => $produit->getNom(),
             ];
             $session->set('panier', $panier);
@@ -230,7 +229,7 @@ class ProduitController extends AbstractController
     public function adhesion(Request $request, Produit $produit): Response
     {
         $form = $this->createFormBuilder()
-            ->add('montant', RangeType::class, [
+            ->add('prixPaye', RangeType::class, [
                 'label' => 'Montant de mon adhésion : ',
                 'attr' => [
                     'min' => $produit->getPrix(),
@@ -248,9 +247,9 @@ class ProduitController extends AbstractController
             //on met dans le panier (session)
             $session = $request->getSession();
             $panier = $session->get('panier', []);
-            $panier[EntityProduitType::PRODUIT_TYPE_ADHESION_NAME][$produit->getId()] = [
-                'quantite' => 1,
-                'montant' => $data['montant'],
+            $panier['achats'][$produit->getId()] = [
+                'prixPaye' => $data['prixPaye'],
+                'produit_type' => EntityProduitType::PRODUIT_TYPE_ADHESION_NAME,
                 'produit_nom' => $produit->getNom(),
             ];
             $session->set('panier', $panier);

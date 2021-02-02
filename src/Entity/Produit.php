@@ -32,12 +32,12 @@ class Produit
     /**
      * @ORM\Column(type="datetime", nullable=true)
      */
-    private $debutPublication;
+    private $debutVente;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
      */
-    private $finPublication;
+    private $finVente;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
@@ -62,7 +62,7 @@ class Produit
     /**
      * @ORM\Column(type="integer", nullable=true)
      */
-    private $objectif;
+    private $limiteParticipation;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
@@ -136,26 +136,26 @@ class Produit
         return $this;
     }
 
-    public function getDebutPublication(): ?\DateTimeInterface
+    public function getDebutVente(): ?\DateTimeInterface
     {
-        return $this->debutPublication;
+        return $this->debutVente;
     }
 
-    public function setDebutPublication(?\DateTimeInterface $debutPublication): self
+    public function setDebutVente(?\DateTimeInterface $debutVente): self
     {
-        $this->debutPublication = $debutPublication;
+        $this->debutVente = $debutVente;
 
         return $this;
     }
 
-    public function getFinPublication(): ?\DateTimeInterface
+    public function getFinVente(): ?\DateTimeInterface
     {
-        return $this->finPublication;
+        return $this->finVente;
     }
 
-    public function setFinPublication(?\DateTimeInterface $finPublication): self
+    public function setFinVente(?\DateTimeInterface $finVente): self
     {
-        $this->finPublication = $finPublication;
+        $this->finVente = $finVente;
 
         return $this;
     }
@@ -208,14 +208,14 @@ class Produit
         return $this;
     }
 
-    public function getObjectif(): ?int
+    public function getLimiteParticipation(): ?int
     {
-        return $this->objectif;
+        return $this->limiteParticipation;
     }
 
-    public function setObjectif(?int $objectif): self
+    public function setLimiteParticipation(?int $limiteParticipation): self
     {
-        $this->objectif = $objectif;
+        $this->limiteParticipation = $limiteParticipation;
 
         return $this;
     }
@@ -355,17 +355,23 @@ class Produit
         return $this;
     }
 
-    public function getTotalDonationProduit(): ?int
+    public function getParticipation(): ?int
     {
-        if ($this->getProduitType()->getNom() != ProduitType::PRODUIT_TYPE_DONATION_NAME) {
-            return null;
+        if ($this->getProduitType()->getNom() == ProduitType::PRODUIT_TYPE_DONATION_NAME) {
+            $participation = 0;
+            foreach ($this->getAchats() as $achat) {
+                $participation += $achat->getPrixPaye();
+            }
+        } elseif ($this->getProduitType()->getNom() == ProduitType::PRODUIT_TYPE_ADHESION_NAME) {
+            $participation = count($this->getAchats());
         }
 
-        $totalDonation = 0;
-        foreach ($this->getAchats() as $achat) {
-            $totalDonation += $achat->getMontant();
-        }
+        return $participation;
+    }
 
-        return $totalDonation;
+    public function getPercentageParticipation()
+    {
+        $percentage = ( $this->getParticipation() / $this->getLimiteParticipation() ) * 100;
+        return $percentage;
     }
 }

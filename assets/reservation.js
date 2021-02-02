@@ -49,17 +49,16 @@ document.addEventListener('DOMContentLoaded', function() {
 
 //remplissage de la modale avec les valeurs du créneau cliqué
 $('#modal_reservation').on('show.bs.modal', function (event) {
-  console.log('click !')
-  var creneau = $(event.relatedTarget) // Button that triggered the modal
-  var debut = creneau.data('debut')
-  var fin = creneau.data('fin')
-  var creneauId = creneau.data('creneauId')
+  var creneau = $(event.relatedTarget); // Button that triggered the modal
+  var debut = creneau.data('debut');
+  var fin = creneau.data('fin');
+  var creneauId = creneau.data('creneauId');
   var places = creneau.data('places'); // Extract info from data-* attributes
   // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
   // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
-  var modal = $(this)
-  modal.find('.creneau-debut').text('Début : Le ' + debut)
-  modal.find('.creneau-fin').text('Fin : Le ' + fin)
+  var modal = $(this);
+  modal.find('.creneau-debut').text('Début : Le ' + debut);
+  modal.find('.creneau-fin').text('Fin : Le ' + fin);
   modal.find('#reservation_creneau_id').val(creneauId);
-  modal.find('#reservation_quantite').attr('max', places);
+  modal.find('#reservation_quantitePlaces').attr('max', places);
 })

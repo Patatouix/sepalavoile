@@ -46,7 +46,7 @@
                             </li>
                             <li class="list-group">
                                 <div class="row mb-3">
-                                    <div class="col-1 p-0 text-center"><i class="fal fa-user-alt"></i></div>
+                                    <div class="col-1 p-0 text-center"><i class="fad fa-shopping-cart"></i></div>
                                     <div class="col-3">Type du produit :</div>
                                     <div class="col-8 p-0 break-word">{{ produit.produitType.nom }}</div>
                                 </div>
@@ -60,49 +60,49 @@
                             </li>
                             <li class="list-group">
                                 <div class="row mb-3">
-                                    <div class="col-1 p-0 text-center"><i class="fal fa-user-alt"></i></div>
+                                    <div class="col-1 p-0 text-center"><i class="fad fa-money-bill"></i></div>
                                     <div class="col-3">Prix :</div>
                                     <div class="col-8 p-0 break-word">{{ produit.prix }}</div>
                                 </div>
                             </li>
                             <li class="list-group">
                                 <div class="row mb-3">
-                                    <div class="col-1 p-0 text-center"><i class="fal fa-user-alt"></i></div>
+                                    <div class="col-1 p-0 text-center"><i class="fad fa-users"></i></div>
                                     <div class="col-3">Limite de participation :</div>
-                                    <div class="col-8 p-0 break-word">{{ produit.objectif }}</div>
+                                    <div class="col-8 p-0 break-word">{{ produit.limiteParticipation }}</div>
                                 </div>
                             </li>
                             <li class="list-group">
                                 <div class="row mb-3">
-                                    <div class="col-1 p-0 text-center"><i class="fal fa-user-alt"></i></div>
+                                    <div class="col-1 p-0 text-center"><i class="fad fa-hourglass"></i></div>
                                     <div class="col-3">Durée :</div>
                                     <div class="col-8 p-0 break-word">{{ produit.duree }}</div>
                                 </div>
                             </li>
                             <li class="list-group">
                                 <div class="row mb-3">
-                                    <div class="col-1 p-0 text-center"><i class="fal fa-user-alt"></i></div>
+                                    <div class="col-1 p-0 text-center"><i class="fad fa-clock"></i></div>
                                     <div class="col-3">Début de la vente :</div>
-                                    <div class="col-8 p-0 break-word">{{ produit.debutPublication ? produit.debutPublication|date('Y-m-d H:i:s') : '' }}</div>
+                                    <div class="col-8 p-0 break-word">{{ produit.debutVente ? produit.debutVente|date('Y-m-d H:i:s') : '' }}</div>
                                 </div>
                             </li>
                             <li class="list-group">
                                 <div class="row mb-3">
-                                    <div class="col-1 p-0 text-center"><i class="fal fa-user-alt"></i></div>
+                                    <div class="col-1 p-0 text-center"><i class="fad fa-clock"></i></div>
                                     <div class="col-3">Fin de la vente :</div>
-                                    <div class="col-8 p-0 break-word">{{ produit.finPublication ? produit.finPublication|date('Y-m-d H:i:s') : '' }}</div>
+                                    <div class="col-8 p-0 break-word">{{ produit.finVente ? produit.finVente|date('Y-m-d H:i:s') : '' }}</div>
                                 </div>
                             </li>
                             <li class="list-group">
                                 <div class="row mb-3">
-                                    <div class="col-1 p-0 text-center"><i class="fal fa-user-alt"></i></div>
+                                    <div class="col-1 p-0 text-center"><i class="fad fa-tools"></i></div>
                                     <div class="col-3">Date de création :</div>
                                     <div class="col-8 p-0 break-word">{{ produit.createdAt|date('Y-m-d H:i:s') }}</div>
                                 </div>
                             </li>
                             <li class="list-group">
                                 <div class="row mb-3">
-                                    <div class="col-1 p-0 text-center"><i class="fal fa-user-alt"></i></div>
+                                    <div class="col-1 p-0 text-center"><i class="fad fa-tools"></i></div>
                                     <div class="col-3">Date de modification :</div>
                                     <div class="col-8 p-0 break-word">{{ produit.updatedAt ? produit.updatedAt|date('Y-m-d H:i:s') : '' }}</div>
                                 </div>
