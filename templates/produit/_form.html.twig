@@ -63,22 +63,29 @@
                         <li class="list-group">
                             <div class="row mb-5">
                                 <div class="col-1 p-0 text-center"><i class="fad fa-folders"></i></div>
-                                <div class="col-4 mb-4">{{ form_label(form.debutPublication) }}</div>
+                                <div class="col-4 mb-4 font-weight-bold">{{ form_label(form.debutPublication) }}</div>
                                 <div class="col-7 p-0">{{ form_widget(form.debutPublication) }}</div>
                             </div>
                         </li>
                         <li class="list-group">
                             <div class="row mb-5">
                                 <div class="col-1 p-0 text-center"><i class="fad fa-inbox-in mr-2"></i></div>
-                                <div class="col-4">{{ form_label(form.finPublication) }}</div>
+                                <div class="col-4 font-weight-bold">{{ form_label(form.finPublication) }}</div>
                                 <div class="col-7 p-0">{{ form_widget(form.finPublication) }}</div>
+                            </div>
+                        </li>
+                        <li class="list-group">
+                            <div class="row mb-5">
+                                <div class="col-1 p-0 text-center"><i class="fad fa-inbox-in mr-2"></i></div>
+                                <div class="col-4 font-weight-bold">{{ form_label(form.produitType) }}</div>
+                                <div class="col-7 p-0">{{ form_widget(form.produitType) }}</div>
                             </div>
                         </li>
                         <li class="list-group">
                             <div class="row mb-1">
                                 <div class="col-1 p-0 text-center"><i class="fad fa-inbox-in mr-2"></i></div>
-                                <div class="col-4">{{ form_label(form.produitType) }}</div>
-                                <div class="col-7 p-0">{{ form_widget(form.produitType) }}</div>
+                                <div class="col-4 font-weight-bold">{{ form_label(form.medias) }}</div>
+                                <div class="col-7 p-0">{{ form_widget(form.medias) }}</div>
                             </div>
                         </li>
                     </ul>

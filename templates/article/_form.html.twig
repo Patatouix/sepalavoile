@@ -40,7 +40,7 @@
                             </div>
                         </li>
                         <li class="list-group">
-                            <div class="row mb-1">
+                            <div class="row mb-5">
                                 <div class="col-1 p-0 text-center"><i class="fad fa-folders"></i></div>
                                 <div class="col-9 mb-4">{{ form_label(form.content) }}</div>
                                 <div class="col-12 p-0">{{ form_widget(form.content) }}</div>
@@ -53,10 +53,17 @@
                                 <div class="col-7 p-0">{{ form_widget(form.isPublished) }}</div>
                             </div>
                         </li>
+                        <li class="list-group">
+                            <div class="row mb-1">
+                                <div class="col-1 p-0 text-center"><i class="fad fa-inbox-in mr-2"></i></div>
+                                <div class="col-4">{{ form_label(form.medias) }}</div>
+                                <div class="col-7 p-0">{{ form_widget(form.medias) }}</div>
+                            </div>
+                        </li>
                     </ul>
                 </div>
             </div>
-            <div class="col-12 text-right p-4"> 
+            <div class="col-12 text-right p-4">
                 <a href="{{ path('article_index') }}" class="btn btn-secondary">Annuler</a>
                 <button class="btn btn-style">{{ button_label|default('Valider') }}</button>
             </div>
