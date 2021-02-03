@@ -1,0 +1,16 @@
+{% extends 'base_dashboard.html.twig' %}
+
+{% block title %}Nouveau sondage{% endblock %}
+
+{% block body %}
+    <div class="container px-0">
+        <div class="col-12 mt-5 border-right border-left border-top p-0">
+            <h1 class="py-3 pl-5 bg-light border-bottom">
+                Créer un nouveau sondage :
+            </h1>
+        </div>
+        {{ include('sondage/_form.html.twig') }}
+
+        <a href="{{ path('sondage_index') }}">back to list</a>
+    </div>
+{% endblock %}

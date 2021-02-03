@@ -64,4 +64,24 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         ;
     }
     */
+
+
+
+    public function findByMonth()
+    {
+        return $this->createQueryBuilder('u')
+        ->select(' COUNT(u.name) as count, MONTH(u.createdAt) AS month')
+        ->groupBy('month')
+        ->getQuery()
+        ->getResult();
+
+        /*$em = $this->getEntityManager();
+        $query = $em->createQuery("SELECT count(u) FROM App\\Entity\\User");
+        $result = $query->getResult();
+        return $result;*/
+    }
 }
+// SELECT count(name),MONTH(created_at) as month
+// FROM `user`
+// GROUP BY MONTH
+// ORDER BY MONTH(created_at)

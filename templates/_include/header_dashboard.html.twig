@@ -17,11 +17,11 @@
                     <a class="nav-link" data-widget="pushmenu" href="#"><i class="fas fa-bars"></i></a>
                 </div>
                 <div class="nav-item d-sm-inline-block">
+                    <a href="{{ path('dashboard') }}" class="nav-link">Retour au dashboard</a>
+                </div>
+                <div class="nav-item d-sm-inline-block">
                     <a href="{{ path('home_page') }}" class="nav-link">Retour au site</a>
                 </div>
-                {# <div class="nav-item d-none d-sm-inline-block">
-                    <a href="" class="nav-link">Contact</a>
-                </div> #}
             <div class="d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
                     <a href="{{ path('app_logout') }}"> <button type="button" class="btn btn-style mt-1 mr-2">Se
                         Déconnecter</button></a>
@@ -124,9 +124,9 @@
                         {# {* EVENEMENT *} #}
                         <li class="nav-item has-treeview mb-4">
                             <a href="" class="nav-link">
-                                <i class="nav-icon far fa-calendar-alt"></i>
+                                <i class="nav-icon fas fa-shopping-cart"></i>
                                 <p>
-                                    Événements
+                                    Produits
                                     <i class="fas fa-angle-left right"></i>
                                     {# {* Permet de rajouter un badge à la fin *} #}
                                     <span class="badge badge-info right"></span>
@@ -134,27 +134,35 @@
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="" class="nav-link">
+                                    <a href="{{ path('admin_produit_index') }}" class="nav-link">
                                         <i class="nav-icon far fa-circle"></i>
                                         <p>
-                                            Liste des événements
+                                            Liste des produits
                                             {# {* Permet de rajouter un badge à la fin *} #}
                                             <span class="badge badge-info right"></span>
                                         </p>
                                     </a>
                                 </li>
-                                {# {if isset($smarty.session) AND $smarty.session.user.role eq 'Admin' OR $smarty.session.user.role eq 'Moderateur'} #}
                                 <li class="nav-item">
-                                    <a href="" class="nav-link">
+                                    <a href="{{ path('admin_achat_index') }}" class="nav-link">
                                         <i class="nav-icon far fa-circle"></i>
                                         <p>
-                                            Ajouter
+                                            Liste des achats
                                             {# {* Permet de rajouter un badge à la fin *} #}
                                             <span class="badge badge-info right"></span>
                                         </p>
                                     </a>
                                 </li>
-                                {# {/if} #}
+                                <li class="nav-item">
+                                    <a href="{{ path('admin_reservation_index') }}" class="nav-link">
+                                        <i class="nav-icon far fa-circle"></i>
+                                        <p>
+                                            Liste des réservations
+                                            {# {* Permet de rajouter un badge à la fin *} #}
+                                            <span class="badge badge-info right"></span>
+                                        </p>
+                                    </a>
+                                </li>
                             </ul>
                         </li>
 
@@ -240,7 +248,7 @@
                                             <span class="badge badge-info right"></span>
                                         </p>
                                     </a>
-                                </li>                             
+                                </li>
                             </ul>
                         </li>
                         {# {/if} #}
@@ -341,7 +349,53 @@
                         </li>
                         {# {/if} #}
 
-                        
+                        {# {* SONDAGE *} #}
+                        {# {* {$smarty.session|var_dump} *} #}
+                        {# {if isset($smarty.session) AND $smarty.session.user.role eq 'Admin'} #}
+                        <li class="nav-item has-treeview mb-4">
+                            <a href="" class="nav-link">
+                                <i class="nav-icon far fa-poll"></i>
+                                <p>
+                                    Nos sondages
+                                    <i class="fas fa-angle-left right"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="" class="nav-link">
+                                        <i class="nav-icon far fa-circle"></i>
+                                        <p>
+                                            Liste des sondages
+                                            {# {* Permet de rajouter un badge à la fin *} #}
+                                            <span class="badge badge-info right"></span>
+                                        </p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{ path('sondage_new') }}" class="nav-link">
+                                        <i class="nav-icon far fa-circle"></i>
+                                        <p>
+                                            Nouveau sondage
+                                            {# {* Permet de rajouter un badge à la fin *} #}
+                                            <span class="badge badge-info right"></span>
+                                        </p>
+                                    </a>
+                                </li>
+                                {# <li class="nav-item">
+                                    <a href="" class="nav-link">
+                                        <i class="nav-icon far fa-circle"></i>
+                                        <p> #}
+                                            {# Ajouter une photo #}
+                                            {# {* Permet de rajouter un badge à la fin *} #}
+                                            {# <span class="badge badge-info right"></span>
+                                        </p>
+                                    </a>
+                                </li> #}
+                            </ul>
+                        </li>
+                        {# {/if} #}
+
+
 
                         {# {* ARTICLE *} #}
                         {# {* {$smarty.session|var_dump} *} #}

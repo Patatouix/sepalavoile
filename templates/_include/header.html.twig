@@ -10,11 +10,11 @@
             {{ message }}
         </div>
         {% endfor %}
-        
+
         {# {% if not form.vars.valid %}
         <div class="alert alert-danger text-center">
             Vérifier votre adresse e-mail
-        </div>                
+        </div>
         {% endif %} #}
         <ul class="nav justify-content-end  mt-3 mb-2">
             <li class="nav-item login">
@@ -181,8 +181,10 @@
                         </div>
                     </li>
                     <li class="nav-item mainNavBar borderleft pl-2 pr-2 m-0">
-                        <a class="nav-link text-center" href="{{ path('nospartenaires') }}"><span class=" menutitre">Nos
-                                partenaires</span></a> </li>
+                        <a class="nav-link text-center" href="{{ path('nospartenaires') }}">
+                            <span class=" menutitre">Nos partenaires</span>
+                        </a>
+                    </li>
                     <li class="nav-item mainNavBar borderleft pl-2 pr-2 m-0">
                         <a class="nav-link text-center" href="{{ path('onparledenous') }}"><span class="menutitre">On
                                 parle de
@@ -201,7 +203,11 @@
                                 href="{{ path('produit_index', {produitTypes: constant('App\\Entity\\ProduitType::PRODUIT_TYPE_DONATION_SLUG')}) }}">Faire un don</a>
                             <a class="dropdown-item sousmenu text-center" href="{{ path('produit_index', {produitTypes: constant('App\\Entity\\ProduitType::PRODUIT_TYPE_ADHESION_SLUG')}) }}">Devenir membre</a>
                             <a class="dropdown-item sousmenu text-center" href="{{ path('produit_index', {produitTypes: constant('App\\Entity\\ProduitType::PRODUIT_TYPE_EVENT_SLUG')}) }}">Nos
-                                événements</a>
+                                événements
+                            </a>
+                            <a class="dropdown-item sousmenu text-center" href="{{ path('sondage_index') }}">
+                                Les sondages
+                            </a>
                         </div>
                     </li>
                 </ul>

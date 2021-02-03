@@ -1,21 +1,545 @@
 {% extends 'base_dashboard.html.twig' %}
 
 {% block stylesheets %}
-{{ parent() }}
-{# {{ encore_entry_link_tags('dashboard') }} #}
+	{{ parent() }}
+	{# {{ encore_entry_link_tags('dashboard') }} #}
 {% endblock %}
 
-
-{% block title %}Dashboard{% endblock %}
+{% block title %}Dashboard
+{% endblock %}
 
 {% block body %}
 
-<div class="container text-center mt-5">
-<h1>
-    Un projet de tour du monde à la voile
-</h1>
+	<div class="container text-center mt-5">
+		<h1>
+			Un projet de tour du monde à la voile
+		</h1>
+		<div class="col-4 offset-4">
+			<img src="{{ asset('/images/logo.svg') }}" class="img-fluid w-50 mt-5" alt="Avatar du profil">
+		</div>
+		{# DEBUT Bouton de séléctions du "menu" #}
+		<ul class="nav nav-tabs" id="myTab" role="tablist">
+			<li class="nav-item" role="presentation">
+				<a class="nav-link active" id="activitesRecentes-tab" data-toggle="tab" href="#activitesRecentes" role="tab" aria-controls="activitesRecentes" aria-selected="true">Activités récentes</a>
+			</li>
+			<li class="nav-item" role="presentation">
+				<a class="nav-link" id="statistiques-tab" data-toggle="tab" href="#statistiques" role="tab" aria-controls="statistiques" aria-selected="false">Statistiques</a>
+			</li>
+		</ul>
+		{# FIN Bouton de séléctions du "menu" #}
 
-<img src="{{ asset('/images/logo.svg') }}" class="img-fluid w-50 mt-5" alt="Avatar du profil">
-</div>
+		<div class="tab-content" id="myTabContent">
+			{# DEBUT de l'affichage des activtés récentes #}
+			<div class="tab-pane fade show active" id="activitesRecentes" role="tabpanel" aria-labelledby="activitesRecentes-tab">
+				<div class="row mt-5">
+					<div class="col-12 col-md-6 mb-md-0">
+						<div class="accordion" id="accordion1">
+							<div class="card bg-orange">
+								<div class="card-header p-0" id="headingOne">
+									<h2 class="mb-0">
+										<button class="btn btn-link btn-block text-left text-white" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+											<i class="fad fa-blog text-white mr-3"></i><span class="font-weight-bold">Blog</span>
+										</button>
+									</h2>
+								</div>
+
+								<div id="collapseOne" class="collapse show bg-white" aria-labelledby="headingOne" data-parent="#accordion1">
+                                        <div class="card-body">
+                                            <h4 class="card-title mb-2"><u>Derniers articles publiés :</u></h4>
+                                            {% for article in articles|slice(0, 3) %}
+                                                <a href="{{ path('article_show', {'id': article.id}) }}" class="text-dark"><p class="card-text text-left ml-3 mb-1">Le <strong>{{ article.createdAt|date('d/m/Y') }}</strong> à {{ article.createdAt|date('H:i') }} : <span><strong>{{ article.title }} </strong></span> _ Nombre de vu : {{ article.nbVues }}</p></a>
+                                            {% endfor %}
+                                        </div>
+								</div>
+							</div>
+							<div class="card">
+								<div id="collapseOne" class="collapse show bg-white" aria-labelledby="headingTwo" data-parent="#accordion1">
+									<div class="card-body">
+                                            <h4 class="card-title mb-2"><u>Articles les plus consultés :</u></h4>
+                                            {% for articleBestView in articleBestView|slice(0, 3) %}
+                                                <a href="{{ path('article_show', {'id': articleBestView.id}) }}" class="text-dark"><p class="card-text text-left ml-3 mb-1">Le <strong>{{ articleBestView.createdAt|date('d/m/Y') }}</strong> à {{ articleBestView.createdAt|date('H:i') }} : <span><strong>{{ articleBestView.title }}</strong></span> _ Nombre de vu : {{ articleBestView.nbVues }}</p></a>
+                                            {% endfor %}
+                                        </div>
+								</div>
+							</div>
+							<div class="card">
+								<div id="collapseOne" class="collapse show bg-white" aria-labelledby="headingTwo" data-parent="#accordion1">
+									<div class="card-body">
+                                            <h4 class="card-title mb-2"><u>Commentaires récents :</u></h4>
+                                            {# {% for  in |slice(0, 3) %}
+                                                <a href="{{ path('article_show', {'id': article.id}) }}" class="text-dark"><p class="card-text text-left ml-3 mb-1">Le <strong>{{ article.createdAt|date('d/m/Y') }}</strong> à {{ article.createdAt|date('H:i') }} : <span><strong>{{ article.title }}</strong></span></p></a>
+                                            {% endfor %} #}
+                                        </div>
+								</div>
+							</div>
+							{# <div class="card">
+								<div id="collapseOne" class="collapse bg-white" aria-labelledby="headingThree" data-parent="#accordion1">
+									<div class="card-body">
+										And lastly, the placeholder content for the third and final accordion panel. This panel is hidden by default.
+									</div>
+								</div>
+							</div> #}
+						</div>
+					</div>
+					<div class="col-12 col-md-6">
+						<div class="accordion" id="accordion2">
+							<div class="card bg-orange">
+								<div class="card-header p-0" id="headingOne">
+									<h2 class="mb-0">
+										<button class="btn btn-link btn-block text-left text-white" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseOne">
+											<i class="fad fa-calendar-alt text-white mr-3"></i><span class="font-weight-bold">Événements</span>
+										</button>
+									</h2>
+								</div>
+								<div id="collapseTwo" class="collapse show bg-white" aria-labelledby="headingOne" data-parent="#accordion2">
+									<div class="card-body">
+                                        <h4 class="card-title mb-2"><u>Événements réservables :</u></h4>
+                                        {# {% for user in users|slice(0, 5) %}
+                                            <a href="{{ path('user_show', {'id': user.id}) }}" class="text-dark"><p class="card-text text-left ml-3 mb-1"><strong>{{ user.firstName }} {{ user.name }}</strong> : inscrit le <strong>{{ user.createdAt|date('d/m/Y') }}</strong> à {{ user.createdAt|date('H:i') }}<span></span></p></a>
+                                        {% endfor %} #}
+                                    </div>
+								</div>
+							</div>
+							<div class="card">
+								<div id="collapseTwo" class="collapse show bg-white" aria-labelledby="headingTwo" data-parent="#accordion2">
+									<div class="card-body">
+                                        <h4 class="card-title mb-2"><u>Dernières réservations :</u></h4>
+                                        {# {% for achat in achats|slice(0, 5) %}
+                                            <a href="{{ path('user_show', {'id': achat.user.id}) }}" class="text-dark"><p class="card-text text-left ml-3 mb-1"><strong>{{ achat.user.firstName }} {{ achat.user.name }}</strong></p></a>
+                                        {% endfor %} #}
+                                    </div>
+								</div>
+							</div>
+							{# <div class="card">
+								<div id="collapseTwo" class="collapse bg-white" aria-labelledby="headingThree" data-parent="#accordion2">
+									<div class="card-body">
+										And lastly, the placeholder content for the third and final accordion panel. This panel is hidden by default.
+									</div>
+								</div>
+							</div> #}
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-12 col-md-6 mb-md-0">
+						<div class="accordion" id="accordion3">
+							<div class="card bg-orange">
+								<div class="card-header p-0" id="headingOne">
+									<h2 class="mb-0">
+										<button class="btn btn-link btn-block text-left text-white" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseOne">
+											<i class="fad fa-heart text-white mr-3"></i><span class="font-weight-bold">Adhésions et Dons</span>
+										</button>
+									</h2>
+								</div>
+
+								<div id="collapseThree" class="collapse show bg-white" aria-labelledby="headingOne" data-parent="#accordion3">
+									<div class="card-body">
+                                        <h4 class="card-title mb-2"><u>Campagnes actives :</u></h4>
+                                        {# {% for user in users|slice(0, 5) %}
+                                            <a href="{{ path('user_show', {'id': user.id}) }}" class="text-dark"><p class="card-text text-left ml-3 mb-1"><strong>{{ user.firstName }} {{ user.name }}</strong> : inscrit le <strong>{{ user.createdAt|date('d/m/Y') }}</strong> à {{ user.createdAt|date('H:i') }}<span></span></p></a>
+                                        {% endfor %} #}
+                                    </div>
+								</div>
+							</div>
+							<div class="card">
+								<div id="collapseThree" class="collapse show bg-white" aria-labelledby="headingTwo" data-parent="#accordion3">
+									<div class="card-body">
+                                        <h4 class="card-title mb-2"><u>Participations récentes :</u></h4>
+                                        {# {% for user in users|slice(0, 5) %}
+                                            <a href="{{ path('user_show', {'id': user.id}) }}" class="text-dark"><p class="card-text text-left ml-3 mb-1"><strong>{{ user.firstName }} {{ user.name }}</strong> : inscrit le <strong>{{ user.createdAt|date('d/m/Y') }}</strong> à {{ user.createdAt|date('H:i') }}<span></span></p></a>
+                                        {% endfor %} #}
+                                    </div>
+								</div>
+							</div>
+							{# <div class="card">
+								<div id="collapseThree" class="collapse bg-white" aria-labelledby="headingThree" data-parent="#accordion3">
+									<div class="card-body">
+										And lastly, the placeholder content for the third and final accordion panel. This panel is hidden by default.
+									</div>
+								</div>
+							</div> #}
+						</div>
+					</div>
+					<div class="col-12 col-md-6">
+						<div class="accordion" id="accordion4">
+							<div class="card bg-orange">
+								<div class="card-header p-0" id="headingOne">
+									<h2 class="mb-0">
+										<button class="btn btn-link btn-block text-left text-white" type="button" data-toggle="collapse" data-target="#collapseFour" aria-expanded="true" aria-controls="collapseOne">
+											<i class="fad fa-user text-white mr-3"></i><span class="font-weight-bold">Utilisateurs</span>
+										</button>
+									</h2>
+								</div>
+
+								<div id="collapseFour" class="collapse show bg-white" aria-labelledby="headingOne" data-parent="#accordion4">
+									<div class="card-body">
+                                        <h4 class="card-title mb-2"><u>Derniers inscrits :</u></h4>
+                                        {% for user in users|slice(0, 5) %}
+                                            <a href="{{ path('user_show', {'id': user.id}) }}" class="text-dark"><p class="card-text text-left ml-3 mb-1"><strong>{{ user.firstName }} {{ user.name }}</strong> : inscrit le <strong>{{ user.createdAt|date('d/m/Y') }}</strong> à {{ user.createdAt|date('H:i') }}<span></span></p></a>
+                                        {% endfor %}
+                                    </div>
+								</div>
+							</div>
+							{# <div class="card">
+								<div id="collapseFour" class="collapse bg-white" aria-labelledby="headingTwo" data-parent="#accordion4">
+									<div class="card-body">
+										Some placeholder content for the second accordion panel. This panel is hidden by default.
+									</div>
+								</div>
+							</div> #}
+							{# <div class="card">
+								<div id="collapseFour" class="collapse bg-white" aria-labelledby="headingThree" data-parent="#accordion4">
+									<div class="card-body">
+										And lastly, the placeholder content for the third and final accordion panel. This panel is hidden by default.
+									</div>
+								</div>
+							</div> #}
+						</div>
+					</div>
+				</div>
+			</div>
+			{# FIN de l'affichage des activtés récentes #}
+
+			{# DEBUT de l'affichage des statistiques #}
+			<div class="tab-pane fade" id="statistiques" role="tabpanel" aria-labelledby="statistiques-tab">
+                <div class="row mt-5">
+					<div class="col-12 col-md-6 mb-md-0">
+						<div class="accordion" id="accordion5">
+							<div class="card bg-orange">
+								<div class="card-header p-0" id="headingOne">
+									<h2 class="mb-0">
+										<button class="btn btn-link btn-block text-left text-white" type="button" data-toggle="collapse" data-target="#collapseFive" aria-expanded="true" aria-controls="collapseOne">
+											<i class="fad fa-blog text-white mr-3"></i><span class="font-weight-bold">Nombre inscrit par mois</span>
+										</button>
+									</h2>
+								</div>
+								<div id="collapseFive" class="collapse show bg-white" aria-labelledby="headingOne" data-parent="#accordion5">
+                                        <div class="card-body">
+                                            <canvas id="nbInscrit"></canvas>
+                                        </div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-12 col-md-6">
+						<div class="accordion" id="accordion6">
+							<div class="card bg-orange">
+								<div class="card-header p-0" id="headingOne">
+									<h2 class="mb-0">
+										<button class="btn btn-link btn-block text-left text-white" type="button" data-toggle="collapse" data-target="#collapseSix" aria-expanded="true" aria-controls="collapseOne">
+											<i class="fad fa-calendar-alt text-white mr-3"></i><span class="font-weight-bold">Nombre adhérent par mois</span>
+										</button>
+									</h2>
+								</div>
+								<div id="collapseSix" class="collapse show bg-white" aria-labelledby="headingOne" data-parent="#accordion6">
+									<div class="card-body">
+                                        <canvas id="nbAdherent"></canvas>
+                                    </div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-12 col-md-6 mb-md-0">
+						<div class="accordion" id="accordion7">
+							<div class="card bg-orange">
+								<div class="card-header p-0" id="headingOne">
+									<h2 class="mb-0">
+										<button class="btn btn-link btn-block text-left text-white" type="button" data-toggle="collapse" data-target="#collapseSeven" aria-expanded="true" aria-controls="collapseOne">
+											<i class="fad fa-heart text-white mr-3"></i><span class="font-weight-bold">Montant des Dons par mois</span>
+										</button>
+									</h2>
+								</div>
+								<div id="collapseSeven" class="collapse show bg-white" aria-labelledby="headingOne" data-parent="#accordion7">
+									<div class="card-body">
+                                        <canvas id="budgetDon"></canvas>
+                                    </div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-12 col-md-6">
+						<div class="accordion" id="accordion8">
+							<div class="card bg-orange">
+								<div class="card-header p-0" id="headingOne">
+									<h2 class="mb-0">
+										<button class="btn btn-link btn-block text-left text-white" type="button" data-toggle="collapse" data-target="#collapseEight" aria-expanded="true" aria-controls="collapseOne">
+											<i class="fad fa-user text-white mr-3"></i><span class="font-weight-bold">Montant des adhésions par mois</span>
+										</button>
+									</h2>
+								</div>
+								<div id="collapseEight" class="collapse show bg-white" aria-labelledby="headingOne" data-parent="#accordion8">
+									<div class="card-body">
+                                        <canvas id="budgetAdhesion"></canvas>
+                                    </div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+            </div>
+			{# FIN de l'affichage des statistiques #}
+		</div>
+	</div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+        <script>
+            var ctx = document.getElementById('nbInscrit').getContext('2d');
+            var nbInscrit = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Aout', 'Septembre', 'Octobre', 'Novembre', 'Décembre'],
+                    datasets: [{
+                        label: 'Nouveaux inscrits',
+                        data: [
+                            {% for userByMonth in userByMonth %}
+                                {{ userByMonth.count }},
+                            {% endfor %}
+                        ],
+                        backgroundColor: [
+                            'rgba(255, 131, 0, 0.2)',
+                            'rgba(255, 131, 0, 0.2)',
+                            'rgba(255, 131, 0, 0.2)',
+                            'rgba(255, 131, 0, 0.2)',
+                            'rgba(255, 131, 0, 0.2)',
+                            'rgba(255, 131, 0, 0.2)',
+                            'rgba(255, 131, 0, 0.2)',
+                            'rgba(255, 131, 0, 0.2)',
+                            'rgba(255, 131, 0, 0.2)',
+                            'rgba(255, 131, 0, 0.2)',
+                            'rgba(255, 131, 0, 0.2)',
+                            'rgba(255, 131, 0, 0.2)'
+                        ],
+                        borderColor: [
+                            'rgba(255, 131, 0, 1)',
+                            'rgba(255, 131, 0, 1)',
+                            'rgba(255, 131, 0, 1)',
+                            'rgba(255, 131, 0, 1)',
+                            'rgba(255, 131, 0, 1)',
+                            'rgba(255, 131, 0, 1)',
+                            'rgba(255, 131, 0, 1)',
+                            'rgba(255, 131, 0, 1)',
+                            'rgba(255, 131, 0, 1)',
+                            'rgba(255, 131, 0, 1)',
+                            'rgba(255, 131, 0, 1)',
+                            'rgba(255, 131, 0, 1)'
+                        ],
+                        borderWidth: 2
+                    }]
+                },
+                options: {
+                    scales: {
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero: true
+                            }
+                        }]
+                    }
+                }
+            });
+            var ctx = document.getElementById('nbAdherent').getContext('2d');
+            var nbAdherent = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Aout', 'Septembre', 'Octobre', 'Novembre', 'Décembre'],
+                    datasets: [{
+                        label: 'Nouveaux adhérents',
+                        data: [
+                            {% for partner in partners %}
+                                {{ partner.id }},
+                            {% endfor %}
+                        ],
+                        backgroundColor: [
+                            'rgba(255, 131, 0, 0.2)',
+                            'rgba(255, 131, 0, 0.2)',
+                            'rgba(255, 131, 0, 0.2)',
+                            'rgba(255, 131, 0, 0.2)',
+                            'rgba(255, 131, 0, 0.2)',
+                            'rgba(255, 131, 0, 0.2)',
+                            'rgba(255, 131, 0, 0.2)',
+                            'rgba(255, 131, 0, 0.2)',
+                            'rgba(255, 131, 0, 0.2)',
+                            'rgba(255, 131, 0, 0.2)',
+                            'rgba(255, 131, 0, 0.2)',
+                            'rgba(255, 131, 0, 0.2)'
+                        ],
+                        borderColor: [
+                            'rgba(255, 131, 0, 1)',
+                            'rgba(255, 131, 0, 1)',
+                            'rgba(255, 131, 0, 1)',
+                            'rgba(255, 131, 0, 1)',
+                            'rgba(255, 131, 0, 1)',
+                            'rgba(255, 131, 0, 1)',
+                            'rgba(255, 131, 0, 1)',
+                            'rgba(255, 131, 0, 1)',
+                            'rgba(255, 131, 0, 1)',
+                            'rgba(255, 131, 0, 1)',
+                            'rgba(255, 131, 0, 1)',
+                            'rgba(255, 131, 0, 1)'
+                        ],
+                        borderWidth: 2
+                    }]
+                },
+                options: {
+                    scales: {
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero: true
+                            }
+                        }]
+                    }
+                }
+            });
+            var ctx = document.getElementById('budgetDon').getContext('2d');
+            var budgetDon = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Aout', 'Septembre', 'Octobre', 'Novembre', 'Décembre'],
+                    datasets: [{
+                        label: 'Total des dons par mois',
+                        data: [
+                            {% for user in users %}
+                                {{ user.id }},
+                            {% endfor %}
+                        ],
+                        backgroundColor: [
+                            'rgba(255, 131, 0, 0.2)',
+                            'rgba(255, 131, 0, 0.2)',
+                            'rgba(255, 131, 0, 0.2)',
+                            'rgba(255, 131, 0, 0.2)',
+                            'rgba(255, 131, 0, 0.2)',
+                            'rgba(255, 131, 0, 0.2)',
+                            'rgba(255, 131, 0, 0.2)',
+                            'rgba(255, 131, 0, 0.2)',
+                            'rgba(255, 131, 0, 0.2)',
+                            'rgba(255, 131, 0, 0.2)',
+                            'rgba(255, 131, 0, 0.2)',
+                            'rgba(255, 131, 0, 0.2)'
+                        ],
+                        borderColor: [
+                            'rgba(255, 131, 0, 1)',
+                            'rgba(255, 131, 0, 1)',
+                            'rgba(255, 131, 0, 1)',
+                            'rgba(255, 131, 0, 1)',
+                            'rgba(255, 131, 0, 1)',
+                            'rgba(255, 131, 0, 1)',
+                            'rgba(255, 131, 0, 1)',
+                            'rgba(255, 131, 0, 1)',
+                            'rgba(255, 131, 0, 1)',
+                            'rgba(255, 131, 0, 1)',
+                            'rgba(255, 131, 0, 1)',
+                            'rgba(255, 131, 0, 1)'
+                        ],
+                        borderWidth: 2
+                    }]
+                },
+                options: {
+                    scales: {
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero: true
+                            }
+                        }]
+                    }
+                }
+            });
+            var ctx = document.getElementById('budgetAdhesion').getContext('2d');
+            var budgetAdhesion = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Aout', 'Septembre', 'Octobre', 'Novembre', 'Décembre'],
+                    datasets: [{
+                        label: 'Nouveaux inscrits',
+                        data: [
+                            {% for user in users %}
+                                {{ user.id }},
+                            {% endfor %}
+                        ],
+                        backgroundColor: [
+                            'rgba(255, 131, 0, 0.2)',
+                            'rgba(255, 131, 0, 0.2)',
+                            'rgba(255, 131, 0, 0.2)',
+                            'rgba(255, 131, 0, 0.2)',
+                            'rgba(255, 131, 0, 0.2)',
+                            'rgba(255, 131, 0, 0.2)',
+                            'rgba(255, 131, 0, 0.2)',
+                            'rgba(255, 131, 0, 0.2)',
+                            'rgba(255, 131, 0, 0.2)',
+                            'rgba(255, 131, 0, 0.2)',
+                            'rgba(255, 131, 0, 0.2)',
+                            'rgba(255, 131, 0, 0.2)'
+                        ],
+                        borderColor: [
+                            'rgba(255, 131, 0, 1)',
+                            'rgba(255, 131, 0, 1)',
+                            'rgba(255, 131, 0, 1)',
+                            'rgba(255, 131, 0, 1)',
+                            'rgba(255, 131, 0, 1)',
+                            'rgba(255, 131, 0, 1)',
+                            'rgba(255, 131, 0, 1)',
+                            'rgba(255, 131, 0, 1)',
+                            'rgba(255, 131, 0, 1)',
+                            'rgba(255, 131, 0, 1)',
+                            'rgba(255, 131, 0, 1)',
+                            'rgba(255, 131, 0, 1)'
+                        ],
+                        borderWidth: 2
+                    }, {
+                        label: 'Nouveaux inscrits',
+                        data: [
+                            {% for user in users %}
+                                {{ user.id }},
+                            {% endfor %}
+                        ],
+                        backgroundColor: [
+                            'rgba(255, 0, 0, 0.2)',
+                            'rgba(255, 0, 128, 0.2)',
+                            'rgba(255, 0, 255, 0.2)',
+                            'rgba(128, 0, 255, 0.2)',
+                            'rgba(0, 0, 255, 0.2)',
+                            'rgba(0, 128, 255, 0.2)',
+                            'rgba(0, 255, 255, 0.2)',
+                            'rgba(0, 255, 128, 0.2)',
+                            'rgba(0, 255, 0, 0.2)',
+                            'rgba(128, 255, 0, 0.2)',
+                            'rgba(255, 255, 0, 0.2)',
+                            'rgba(255, 128, 0, 0.2)'
+                        ],
+                        borderColor: [
+                            'rgba(255, 0, 0, 0.5)',
+                            'rgba(255, 0, 128, 0.5)',
+                            'rgba(255, 0, 255, 0.5)',
+                            'rgba(128, 0, 255, 0.5)',
+                            'rgba(0, 0, 255, 0.5)',
+                            'rgba(0, 128, 255, 0.5)',
+                            'rgba(0, 255, 255, 0.5)',
+                            'rgba(0, 255, 128, 0.5)',
+                            'rgba(0, 255, 0, 0.5)',
+                            'rgba(128, 255, 0, 0.5)',
+                            'rgba(255, 255, 0, 0.5)',
+                            'rgba(255, 128, 0, 0.5)'
+                        ],
+                        borderWidth: 2
+
+                    }]
+                },
+                options: {
+                    scales: {
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero: true
+                            }
+                        }]
+                    }
+                }
+            });
+            </script>
+
+
+
 
 {% endblock %}

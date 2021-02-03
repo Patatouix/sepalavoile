@@ -10,6 +10,10 @@ use App\Entity\Media;
 use App\Entity\Partners;
 use App\Entity\Produit;
 use App\Entity\ProduitType;
+use App\Entity\Question;
+use App\Entity\Reponse;
+use App\Entity\Sondage;
+use App\Entity\Reservation;
 use App\Entity\User;
 use DateTime;
 use Doctrine\Bundle\FixturesBundle\Fixture;
@@ -45,7 +49,7 @@ class AppFixtures extends Fixture
         $userAlbanUser->setPassword($this->encoder->encodePassword($userAlbanUser, 'alban-user'));
         $userAlbanUser->setName('jaillais');
         $userAlbanUser->setFirstname('alban');
-        $userAlbanUser->setCreatedAt(new DateTime('NOW'));
+        $userAlbanUser->setCreatedAt(new DateTime('2021-05-31 00:00:30'));
         $userAlbanUser->setIsVerified(false);
         $manager->persist($userAlbanUser);
 
@@ -55,7 +59,7 @@ class AppFixtures extends Fixture
         $userFabienAdmin->setPassword($this->encoder->encodePassword($userFabienAdmin, 'fabien-admin'));
         $userFabienAdmin->setName('rohrbal');
         $userFabienAdmin->setFirstname('fabien');
-        $userFabienAdmin->setCreatedAt(new DateTime('NOW'));
+        $userFabienAdmin->setCreatedAt(new DateTime('2021-09-18 00:00:01'));
         $userFabienAdmin->setIsVerified(false);
         $manager->persist($userFabienAdmin);
 
@@ -91,14 +95,14 @@ class AppFixtures extends Fixture
 
         $userArray = [$userAlbanAdmin, $userAlbanUser, $userFabienAdmin, $userFabienUser, $userCharlesAdmin, $userCharlesUser];
 
-        for ($i = 1; $i <= 20; $i++) {
+        for ($i = 1; $i <= 12; $i++) {
             $user = new User();
             $user->setEmail('user' . $i .'@gmail.com');
             $user->setRoles(['ROLE_USER']);
             $user->setPassword($this->encoder->encodePassword($user, 'user' . $i));
             $user->setName('nom' . $i);
             $user->setFirstname('prenom' . $i);
-            $user->setCreatedAt(new DateTime('NOW'));
+            $user->setCreatedAt(new DateTime('2021-' . $i . '-' . $i . ' 18:' . $i . ':50'));
             $user->setIsVerified(false);
             $manager->persist($user);
         }
@@ -416,13 +420,13 @@ class AppFixtures extends Fixture
             $produit = new Produit();
             $produit->setNom('Event ' . $i);
             $produit->setDescription('Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat aperiam doloremque, dolores voluptates obcaecati nihil ipsam voluptatibus vero exercitationem in, debitis sapiente. Alias ullam culpa sint vel esse, numquam in?<br><br>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat aperiam doloremque, dolores voluptates obcaecati nihil ipsam voluptatibus vero exercitationem in, debitis sapiente. Alias ullam culpa sint vel esse, numquam in?<br><br>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat aperiam doloremque, dolores voluptates obcaecati nihil ipsam voluptatibus vero exercitationem in, debitis sapiente. Alias ullam culpa sint vel esse, numquam in?');
-            $produit->setDebutPublication(new DateTime('2021-01-' . $i . ' 08:' . $i . ':30'));
-            $produit->setFinPublication(new DateTime('2021-02-' . $i . ' 18:' . $i . ':50'));
+            $produit->setDebutVente(new DateTime('2021-01-' . $i . ' 08:' . $i . ':30'));
+            $produit->setFinVente(new DateTime('2021-02-' . $i . ' 18:' . $i . ':50'));
             $produit->setAdresse($i . ' rue du Verboté');
             $produit->setCodePostal('90350');
             $produit->setVille('Belfort');
             $produit->setPrix($i);
-            $produit->setObjectif($i + 2);
+            $produit->setLimiteParticipation($i + 5);
             $produit->setCreatedAt(new DateTime('NOW'));
             $produit->addMedia($media);
             $produit->setProduitType($produitEvent);
@@ -432,18 +436,17 @@ class AppFixtures extends Fixture
             for ($j = 1; $j <= 4; $j++) {
                 $creneau = new Creneau();
                 $creneau->setProduit($produit);
-                $creneau->setDebut(new DateTime('2021-01-' . ($j + 10). ' 08:' . $j . ':30'));
-                $creneau->setFin(new DateTime('2021-01-' . ($j + 10). ' 18:' . $j . ':30'));
+                $creneau->setDebut(new DateTime('2021-02-' . ($j + 10). ' 08:' . $j . ':30'));
+                $creneau->setFin(new DateTime('2021-02-' . ($j + 10). ' 18:' . $j . ':30'));
                 $manager->persist($creneau);
 
                 //réservations
                 for ($k = 1; $k <= 3; $k++) {
-                    $achat = new Achat();
-                    $achat->setProduit($produit);
+                    $achat = new Reservation();
                     $achat->setCreneau($creneau);
                     $achat->setCreatedAt(new DateTime('NOW'));
-                    $achat->setMontant($k);
-                    $achat->setQuantite(1);
+                    $achat->setPrixPaye($i);
+                    $achat->setQuantitePlaces($k);
                     $achat->setUser($userArray[array_rand($userArray)]);
                     $manager->persist($achat);
                 }
@@ -456,13 +459,13 @@ class AppFixtures extends Fixture
             $produit = new Produit();
             $produit->setNom('Campagne de don ' . $i);
             $produit->setDescription('Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat aperiam doloremque, dolores voluptates obcaecati nihil ipsam voluptatibus vero exercitationem in, debitis sapiente. Alias ullam culpa sint vel esse, numquam in?<br><br>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat aperiam doloremque, dolores voluptates obcaecati nihil ipsam voluptatibus vero exercitationem in, debitis sapiente. Alias ullam culpa sint vel esse, numquam in?<br><br>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat aperiam doloremque, dolores voluptates obcaecati nihil ipsam voluptatibus vero exercitationem in, debitis sapiente. Alias ullam culpa sint vel esse, numquam in?');
-            $produit->setDebutPublication(new DateTime('2021-01-' . $i . ' 08:' . $i . ':30'));
-            $produit->setFinPublication(new DateTime('2021-02-' . $i . ' 18:' . $i . ':50'));
+            $produit->setDebutVente(new DateTime('2021-01-' . $i . ' 08:' . $i . ':30'));
+            $produit->setFinVente(new DateTime('2021-02-' . $i . ' 18:' . $i . ':50'));
             $produit->setAdresse($i . ' rue du Verboté');
             $produit->setCodePostal('90350');
             $produit->setVille('Belfort');
             $produit->setPrix($i);
-            $produit->setObjectif($i + 100);
+            $produit->setLimiteParticipation($i + 100);
             $produit->setCreatedAt(new DateTime('NOW'));
             $produit->addMedia($media);
             $produit->setProduitType($produitDon);
@@ -473,8 +476,7 @@ class AppFixtures extends Fixture
                 $achat = new Achat();
                 $achat->setProduit($produit);
                 $achat->setCreatedAt(new DateTime('NOW'));
-                $achat->setMontant($k);
-                $achat->setQuantite(1);
+                $achat->setPrixPaye($i + $k);
                 $achat->setUser($userArray[array_rand($userArray)]);
                 $manager->persist($achat);
             }
@@ -486,14 +488,14 @@ class AppFixtures extends Fixture
             $produit = new Produit();
             $produit->setNom('Campagne d\'adhésion ' . $i);
             $produit->setDescription('Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat aperiam doloremque, dolores voluptates obcaecati nihil ipsam voluptatibus vero exercitationem in, debitis sapiente. Alias ullam culpa sint vel esse, numquam in?<br><br>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat aperiam doloremque, dolores voluptates obcaecati nihil ipsam voluptatibus vero exercitationem in, debitis sapiente. Alias ullam culpa sint vel esse, numquam in?<br><br>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat aperiam doloremque, dolores voluptates obcaecati nihil ipsam voluptatibus vero exercitationem in, debitis sapiente. Alias ullam culpa sint vel esse, numquam in?');
-            $produit->setDebutPublication(new DateTime('2021-01-' . $i . ' 08:' . $i . ':30'));
-            $produit->setFinPublication(new DateTime('2021-02-' . $i . ' 18:' . $i . ':50'));
+            $produit->setDebutVente(new DateTime('2021-01-' . $i . ' 08:' . $i . ':30'));
+            $produit->setFinVente(new DateTime('2021-02-' . $i . ' 18:' . $i . ':50'));
             $produit->setAdresse($i . ' rue du Verboté');
             $produit->setCodePostal('90350');
             $produit->setVille('Belfort');
             $produit->setPrix($i);
             $produit->setDuree($i);
-            $produit->setObjectif($i + 5);
+            $produit->setLimiteParticipation($i + 5);
             $produit->setCreatedAt(new DateTime('NOW'));
             $produit->addMedia($media);
             $produit->setProduitType($produitAdhesion);
@@ -504,12 +506,40 @@ class AppFixtures extends Fixture
                 $achat = new Achat();
                 $achat->setProduit($produit);
                 $achat->setCreatedAt(new DateTime('NOW'));
-                $achat->setMontant($k);
-                $achat->setQuantite(1);
+                $achat->setPrixPaye($i + $k);
                 $achat->setUser($userArray[array_rand($userArray)]);
                 $manager->persist($achat);
             }
         }
+
+        for($i = 1; $i <= 10; $i++){
+            $sondage = new Sondage();
+            $sondage->setTitre('Titre' . $i);
+            $sondage->setDescription('Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat aperiam doloremque, dolores voluptates obcaecati nihil ipsam voluptatibus vero exercitationem in, debitis sapiente. Alias ullam culpa sint vel esse, numquam in?');
+            $sondage->setCreatedAt(new DateTime('NOW'));
+            $manager->persist($sondage);
+
+            for($o = 1; $o <= 5; $o++){
+                $question = new Question();
+                $question->setLabel('Question' . $o);
+                $question->setSondage($sondage);
+                $question->setHelp('Aide pour repondre à la question');
+                $manager->persist($question);
+
+                for($u = 1; $u <= 3;$u++){
+                    $reponse = new Reponse();
+                    $reponse->setContenu('Lorem ipsum dolor sit amet consectetur adipisicing elit.s vero exercitationem in, debitis sapiente.in?');
+                    $reponse->setQuestion($question);
+                    $userIndex = array_rand($userArray);
+                    $user = $userArray[$userIndex];
+                    $reponse->setUser($user);
+                    unset($userArray[$userIndex]);
+                    $manager->persist($reponse);
+                }
+                $userArray = [$userAlbanAdmin, $userAlbanUser, $userFabienAdmin, $userFabienUser, $userCharlesAdmin, $userCharlesUser];
+            }
+        }
+
 
         $manager->flush();
     }
