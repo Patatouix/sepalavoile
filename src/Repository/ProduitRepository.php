@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\Produit;
 use App\Data\ProduitSearchData;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -57,6 +58,18 @@ class ProduitRepository extends ServiceEntityRepository
         }
 
         return $query->getQuery()->getResult();
+    }
+
+    public function findByMonth($type)
+    {
+        return $this->createQueryBuilder('p')
+            ->select(' COUNT(p.nom) as count, MONTH(p.createdAt) AS month')
+            ->groupBy('month')
+            ->leftJoin('App\Entity\ProduitType', 'pt', Join::WITH, 'p.produitType = pt.id')
+            ->where('pt.slug = :type')
+            ->setParameter('type', $type)
+            ->getQuery()
+            ->getResult();
     }
 
     // /**
