@@ -6,7 +6,6 @@ use App\Entity\Question;
 use App\Entity\Sondage;
 use App\Entity\Reponse;
 use App\Form\QuestionEmbeddedFormType;
-use App\Form\SondageFrontType;
 use App\Form\SondageType;
 use App\Repository\SondageRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -64,9 +63,6 @@ class SondageController extends AbstractController
             $this->addFlash('warning', 'Vous devez être connecté pour participer au sondage');
             return $this->redirectToRoute('app_login');
         }*/
-
-        $form = $this->createForm(SondageFrontType::class, $sondage);
-
 
         $questions = $sondage->getQuestions();
         $form = $this->createFormBuilder();
