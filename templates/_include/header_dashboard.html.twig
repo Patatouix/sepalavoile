@@ -124,9 +124,9 @@
                         {# {* EVENEMENT *} #}
                         <li class="nav-item has-treeview mb-4">
                             <a href="" class="nav-link">
-                                <i class="nav-icon far fa-calendar-alt"></i>
+                                <i class="nav-icon fas fa-shopping-cart"></i>
                                 <p>
-                                    Événements
+                                    Produits
                                     <i class="fas fa-angle-left right"></i>
                                     {# {* Permet de rajouter un badge à la fin *} #}
                                     <span class="badge badge-info right"></span>
@@ -134,27 +134,35 @@
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="" class="nav-link">
+                                    <a href="{{ path('admin_produit_index') }}" class="nav-link">
                                         <i class="nav-icon far fa-circle"></i>
                                         <p>
-                                            Liste des événements
+                                            Liste des produits
                                             {# {* Permet de rajouter un badge à la fin *} #}
                                             <span class="badge badge-info right"></span>
                                         </p>
                                     </a>
                                 </li>
-                                {# {if isset($smarty.session) AND $smarty.session.user.role eq 'Admin' OR $smarty.session.user.role eq 'Moderateur'} #}
                                 <li class="nav-item">
-                                    <a href="" class="nav-link">
+                                    <a href="{{ path('admin_achat_index') }}" class="nav-link">
                                         <i class="nav-icon far fa-circle"></i>
                                         <p>
-                                            Ajouter
+                                            Liste des achats
                                             {# {* Permet de rajouter un badge à la fin *} #}
                                             <span class="badge badge-info right"></span>
                                         </p>
                                     </a>
                                 </li>
-                                {# {/if} #}
+                                <li class="nav-item">
+                                    <a href="{{ path('admin_reservation_index') }}" class="nav-link">
+                                        <i class="nav-icon far fa-circle"></i>
+                                        <p>
+                                            Liste des réservations
+                                            {# {* Permet de rajouter un badge à la fin *} #}
+                                            <span class="badge badge-info right"></span>
+                                        </p>
+                                    </a>
+                                </li>
                             </ul>
                         </li>
 

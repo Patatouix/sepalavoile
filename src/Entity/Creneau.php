@@ -36,13 +36,13 @@ class Creneau
     private $produit;
 
     /**
-     * @ORM\OneToMany(targetEntity=Achat::class, mappedBy="creneau")
+     * @ORM\OneToMany(targetEntity=Reservation::class, mappedBy="creneau")
      */
-    private $achats;
+    private $reservations;
 
     public function __construct()
     {
-        $this->achats = new ArrayCollection();
+        $this->reservations = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -86,47 +86,47 @@ class Creneau
         return $this;
     }
 
-    /**
-     * @return Collection|Achat[]
-     */
-    public function getAchats(): Collection
+    public function placesDisponibles(): ?int
     {
-        return $this->achats;
+        $capacite = $this->getProduit()->getLimiteParticipation();
+
+        $placesReservees = 0;
+
+        $reservations = $this->getReservations();
+        foreach ($reservations as $reservation) {
+            $placesReservees += $reservation->getquantitePlaces();
+        }
+
+        return ($capacite - $placesReservees);
     }
 
-    public function addAchat(Achat $achat): self
+    /**
+     * @return Collection|Reservation[]
+     */
+    public function getReservations(): Collection
     {
-        if (!$this->achats->contains($achat)) {
-            $this->achats[] = $achat;
-            $achat->setCreneau($this);
+        return $this->reservations;
+    }
+
+    public function addReservation(Reservation $reservation): self
+    {
+        if (!$this->reservations->contains($reservation)) {
+            $this->reservations[] = $reservation;
+            $reservation->setCreneau($this);
         }
 
         return $this;
     }
 
-    public function removeAchat(Achat $achat): self
+    public function removeReservation(Reservation $reservation): self
     {
-        if ($this->achats->removeElement($achat)) {
+        if ($this->reservations->removeElement($reservation)) {
             // set the owning side to null (unless already changed)
-            if ($achat->getCreneau() === $this) {
-                $achat->setCreneau(null);
+            if ($reservation->getCreneau() === $this) {
+                $reservation->setCreneau(null);
             }
         }
 
         return $this;
-    }
-
-    public function placesDisponibles(): ?int
-    {
-        $capacite = $this->getProduit()->getObjectif();
-
-        $placesReservees = 0;
-
-        $reservations = $this->getAchats();
-        foreach ($reservations as $reservation) {
-            $placesReservees += $reservation->getQuantite();
-        }
-
-        return ($capacite - $placesReservees);
     }
 }

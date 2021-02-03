@@ -11,11 +11,10 @@
     <div class="container">
         <div class="row">
             <div class="col">
-                {% set percentage = produit.achats|length / produit.objectif * 100 %}
                 <br><br>
                 <h1 class="titresection">{{ produit.nom }}</h1>
-                <div class="progression-bar mb-2 text-center" style="background: linear-gradient(to right, #ff8300 {{ percentage }}%, white {{ percentage }}%);">
-                    <span>{{ produit.achats|length }} adhérents ({{ percentage|round }} %)</span>
+                <div class="progression-bar mb-2 text-center" style="background: linear-gradient(to right, #ff8300 {{ produit.percentageParticipation }}%, white {{ produit.percentageParticipation }}%);">
+                    <span>{{ produit.participation }} adhérents ({{ produit.percentageParticipation|round }} %)</span>
                 </div>
             </div>
         </div>
@@ -24,18 +23,18 @@
                 <span class="text-produit text-left">0</span>
             </div>
              <div class="col text-center">
-                <span class="text-produit text-left">Jusqu'au {{ produit.finPublication|date('d/m/Y') }}</span>
+                <span class="text-produit text-left">Jusqu'au {{ produit.finVente|date('d/m/Y') }}</span>
             </div>
             <div class="col text-right">
-                <span class="text-produit text-right">{{ produit.objectif }}</span>
+                <span class="text-produit text-right">{{ produit.limiteParticipation }}</span>
             </div>
         </div>
          <div class="row py-5 mb-5">
             <div class="col">
                 {{ form_start(form) }}
-                    {{ form_label(form.montant) }}
+                    {{ form_label(form.prixPaye) }}
                     <span class="rangeInputValue">{{ produit.prix }} €</span>
-                    {{ form_widget(form.montant) }}
+                    {{ form_widget(form.prixPaye) }}
                     <button class="btn btn-style mt-4">Ajouter au panier</button>
                 {{ form_end(form) }}
             </div>

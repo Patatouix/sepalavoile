@@ -7,7 +7,6 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass=UserProduitRepository::class)
- * @ORM\Table(name="user_produit")
  */
 class Achat
 {
@@ -21,12 +20,7 @@ class Achat
     /**
      * @ORM\Column(type="integer", nullable=true)
      */
-    private $quantite;
-
-    /**
-     * @ORM\Column(type="integer", nullable=true)
-     */
-    private $montant;
+    private $prixPaye;
 
     /**
      * @ORM\Column(type="datetime")
@@ -45,36 +39,19 @@ class Achat
      */
     private $produit;
 
-    /**
-     * @ORM\ManyToOne(targetEntity=Creneau::class, inversedBy="achats")
-     */
-    private $creneau;
-
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getQuantite(): ?int
+    public function getPrixPaye(): ?int
     {
-        return $this->quantite;
+        return $this->prixPaye;
     }
 
-    public function setQuantite(?int $quantite): self
+    public function setPrixPaye(?int $prixPaye): self
     {
-        $this->quantite = $quantite;
-
-        return $this;
-    }
-
-    public function getMontant(): ?int
-    {
-        return $this->montant;
-    }
-
-    public function setMontant(?int $montant): self
-    {
-        $this->montant = $montant;
+        $this->prixPaye = $prixPaye;
 
         return $this;
     }
@@ -111,18 +88,6 @@ class Achat
     public function setProduit(?Produit $produit): self
     {
         $this->produit = $produit;
-
-        return $this;
-    }
-
-    public function getCreneau(): ?Creneau
-    {
-        return $this->creneau;
-    }
-
-    public function setCreneau(?Creneau $creneau): self
-    {
-        $this->creneau = $creneau;
 
         return $this;
     }

@@ -1,0 +1,115 @@
+{% block body %}
+        <div id="show_produit" class="container bg-light rounded">
+            <div class="row border-bottom py-3 px-5">
+                <div class="col-6">
+                    <h1 class="text-uppercase text-left m-0">
+                        {{ produit.nom }}
+                    </h1>
+                </div>
+                <div class="col-6 text-right my-auto">
+                    <span class="text-muted mr-2 font-italic">
+                        Modifier le produit :
+                    </span>
+                    <a href="{{ path('produit_edit', {'id': produit.id}) }}">
+                        <i class="fad fa-edit"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="row bg-white">
+                <div class="col-3 text-center my-auto">
+                    <i class="fad fa-inbox-in mr-4"></i>
+                    {# <img id='produitImage' class="img-fluid" alt="Photo de l'événement" src="{{ produit.filename ? asset('/images/produit/' ~ produit.filename) : asset('/images/logo.svg') }}"> #}
+                </div>
+                <div class="col-9 my-5 pl-3 border-left-form">
+                    <div class="col-12">
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group">
+                                <div class="row mb-3">
+                                    <div class="col-1 p-0 text-center"><i class="fad fa-id-badge"></i></div>
+                                    <div class="col-3">Id produit :</div>
+                                    <div class="col-8 p-0">{{ produit.id }}</div>
+                                </div>
+                            </li>
+                            <li class="list-group">
+                                <div class="row mb-3">
+                                    <div class="col-1 p-0 text-center"><i class="fad fa-heading"></i></div>
+                                    <div class="col-3">Nom du produit :</div>
+                                    <div class="col-8 p-0">{{ produit.nom }}</div>
+                                </div>
+                            </li>
+                            <li class="list-group">
+                                <div class="row mb-3">
+                                    <div class="col-1 p-0 text-center"><i class="fad fa-file-edit"></i></div>
+                                    <div class="col-3">Description du produit :</div>
+                                    <div class="col-8 p-0 pr-5">{{ produit.description|raw }}</div>
+                                </div>
+                            </li>
+                            <li class="list-group">
+                                <div class="row mb-3">
+                                    <div class="col-1 p-0 text-center"><i class="fad fa-shopping-cart"></i></div>
+                                    <div class="col-3">Type du produit :</div>
+                                    <div class="col-8 p-0 break-word">{{ produit.produitType.nom }}</div>
+                                </div>
+                            </li>
+                            <li class="list-group">
+                                <div class="row mb-3">
+                                    <div class="col-1 p-0 text-center"><i class="fad fa-tags"></i></div>
+                                    <div class="col-3">Adresse :</div>
+                                    <div class="col-8 p-0 break-word">{{ produit.ville }}</div>
+                                </div>
+                            </li>
+                            <li class="list-group">
+                                <div class="row mb-3">
+                                    <div class="col-1 p-0 text-center"><i class="fad fa-money-bill"></i></div>
+                                    <div class="col-3">Prix :</div>
+                                    <div class="col-8 p-0 break-word">{{ produit.prix }}</div>
+                                </div>
+                            </li>
+                            <li class="list-group">
+                                <div class="row mb-3">
+                                    <div class="col-1 p-0 text-center"><i class="fad fa-users"></i></div>
+                                    <div class="col-3">Limite de participation :</div>
+                                    <div class="col-8 p-0 break-word">{{ produit.limiteParticipation }}</div>
+                                </div>
+                            </li>
+                            <li class="list-group">
+                                <div class="row mb-3">
+                                    <div class="col-1 p-0 text-center"><i class="fad fa-hourglass"></i></div>
+                                    <div class="col-3">Durée :</div>
+                                    <div class="col-8 p-0 break-word">{{ produit.duree }}</div>
+                                </div>
+                            </li>
+                            <li class="list-group">
+                                <div class="row mb-3">
+                                    <div class="col-1 p-0 text-center"><i class="fad fa-clock"></i></div>
+                                    <div class="col-3">Début de la vente :</div>
+                                    <div class="col-8 p-0 break-word">{{ produit.debutVente ? produit.debutVente|date('Y-m-d H:i:s') : '' }}</div>
+                                </div>
+                            </li>
+                            <li class="list-group">
+                                <div class="row mb-3">
+                                    <div class="col-1 p-0 text-center"><i class="fad fa-clock"></i></div>
+                                    <div class="col-3">Fin de la vente :</div>
+                                    <div class="col-8 p-0 break-word">{{ produit.finVente ? produit.finVente|date('Y-m-d H:i:s') : '' }}</div>
+                                </div>
+                            </li>
+                            <li class="list-group">
+                                <div class="row mb-3">
+                                    <div class="col-1 p-0 text-center"><i class="fad fa-tools"></i></div>
+                                    <div class="col-3">Date de création :</div>
+                                    <div class="col-8 p-0 break-word">{{ produit.createdAt|date('Y-m-d H:i:s') }}</div>
+                                </div>
+                            </li>
+                            <li class="list-group">
+                                <div class="row mb-3">
+                                    <div class="col-1 p-0 text-center"><i class="fad fa-tools"></i></div>
+                                    <div class="col-3">Date de modification :</div>
+                                    <div class="col-8 p-0 break-word">{{ produit.updatedAt ? produit.updatedAt|date('Y-m-d H:i:s') : '' }}</div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+{% endblock %}
