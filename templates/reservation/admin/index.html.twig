@@ -1,0 +1,66 @@
+{% extends 'base_dashboard.html.twig' %}
+
+{% block title %}Produit index{% endblock %}
+
+{% block body %}
+    <div id="user-list" class="container-fluid">
+        <h1>Liste des Réservations</h1>
+        <div class="table-responsive card px-2 py-2">
+            <table id="example1" class="table table-bordered table-striped mx-2 my-2">
+                <thead>
+                    <tr class="text-center">
+                        <th>Id</th>
+                        <th>Produit</th>
+                        <th>Créneau</th>
+                        <th>Utilisateur</th>
+                        <th>Quantité</th>
+                        <th>Montant</th>
+                        <th>CreatedAt</th>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr class="text-center">
+                        <th>Id</th>
+                        <th>Produit</th>
+                        <th>Créneau</th>
+                        <th>Utilisateur</th>
+                        <th>Quantité</th>
+                        <th>Montant</th>
+                        <th>CreatedAt</th>
+                    </tr>
+                </tfoot>
+                <tbody>
+                {% for reservation in reservations %}
+                    <tr>
+                        <td class="text-center">
+                            {{ reservation.id }}
+                        </td>
+                        <td class="text-center">
+                            {{ reservation.creneau.produit.nom }}
+                        </td>
+                        <td class="text-center">
+                            {{ reservation.creneau.debut|date('d/m/Y H:i:s') }}
+                        </td>
+                        <td class="text-center">
+                            {{ reservation.user.firstname }} {{ reservation.user.name }}
+                        </td>
+                        <td class="text-center">
+                            {{ reservation.quantitePlaces }}
+                        </td>
+                        <td class="text-center">
+                            {{ reservation.prixPaye * reservation.quantitePlaces }}
+                        </td>
+                        <td class="text-center">
+                            {{ reservation.createdAt|date('Y-m-d H:i:s') }}
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="7">Pas d'enregistrement trouvé</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}
