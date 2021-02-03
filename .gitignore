@@ -7,6 +7,8 @@
 /public/bundles/
 /var/
 /vendor/
+/.history/
+/.vscode
 ###< symfony/framework-bundle ###
 
 ###> symfony/phpunit-bridge ###
