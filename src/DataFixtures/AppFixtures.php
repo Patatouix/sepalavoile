@@ -10,6 +10,9 @@ use App\Entity\Media;
 use App\Entity\Partners;
 use App\Entity\Produit;
 use App\Entity\ProduitType;
+use App\Entity\Question;
+use App\Entity\Reponse;
+use App\Entity\Sondage;
 use App\Entity\Reservation;
 use App\Entity\User;
 use DateTime;
@@ -508,6 +511,35 @@ class AppFixtures extends Fixture
                 $manager->persist($achat);
             }
         }
+
+        for($i = 1; $i <= 10; $i++){
+            $sondage = new Sondage();
+            $sondage->setTitre('Titre' . $i);
+            $sondage->setDescription('Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat aperiam doloremque, dolores voluptates obcaecati nihil ipsam voluptatibus vero exercitationem in, debitis sapiente. Alias ullam culpa sint vel esse, numquam in?');
+            $sondage->setCreatedAt(new DateTime('NOW'));
+            $manager->persist($sondage);
+
+            for($o = 1; $o <= 5; $o++){
+                $question = new Question();
+                $question->setLabel('Question' . $o);
+                $question->setSondage($sondage);
+                $question->setHelp('Aide pour repondre à la question');
+                $manager->persist($question);
+
+                for($u = 1; $u <= 3;$u++){
+                    $reponse = new Reponse();
+                    $reponse->setContenu('Lorem ipsum dolor sit amet consectetur adipisicing elit.s vero exercitationem in, debitis sapiente.in?');
+                    $reponse->setQuestion($question);
+                    $userIndex = array_rand($userArray);
+                    $user = $userArray[$userIndex];
+                    $reponse->setUser($user);
+                    unset($userArray[$userIndex]);
+                    $manager->persist($reponse);
+                }
+                $userArray = [$userAlbanAdmin, $userAlbanUser, $userFabienAdmin, $userFabienUser, $userCharlesAdmin, $userCharlesUser];
+            }
+        }
+
 
         $manager->flush();
     }
