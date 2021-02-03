@@ -49,7 +49,7 @@ class AppFixtures extends Fixture
         $userAlbanUser->setPassword($this->encoder->encodePassword($userAlbanUser, 'alban-user'));
         $userAlbanUser->setName('jaillais');
         $userAlbanUser->setFirstname('alban');
-        $userAlbanUser->setCreatedAt(new DateTime('NOW'));
+        $userAlbanUser->setCreatedAt(new DateTime('2021-05-31 00:00:30'));
         $userAlbanUser->setIsVerified(false);
         $manager->persist($userAlbanUser);
 
@@ -59,7 +59,7 @@ class AppFixtures extends Fixture
         $userFabienAdmin->setPassword($this->encoder->encodePassword($userFabienAdmin, 'fabien-admin'));
         $userFabienAdmin->setName('rohrbal');
         $userFabienAdmin->setFirstname('fabien');
-        $userFabienAdmin->setCreatedAt(new DateTime('NOW'));
+        $userFabienAdmin->setCreatedAt(new DateTime('2021-09-18 00:00:01'));
         $userFabienAdmin->setIsVerified(false);
         $manager->persist($userFabienAdmin);
 
@@ -95,14 +95,14 @@ class AppFixtures extends Fixture
 
         $userArray = [$userAlbanAdmin, $userAlbanUser, $userFabienAdmin, $userFabienUser, $userCharlesAdmin, $userCharlesUser];
 
-        for ($i = 1; $i <= 20; $i++) {
+        for ($i = 1; $i <= 12; $i++) {
             $user = new User();
             $user->setEmail('user' . $i .'@gmail.com');
             $user->setRoles(['ROLE_USER']);
             $user->setPassword($this->encoder->encodePassword($user, 'user' . $i));
             $user->setName('nom' . $i);
             $user->setFirstname('prenom' . $i);
-            $user->setCreatedAt(new DateTime('NOW'));
+            $user->setCreatedAt(new DateTime('2021-' . $i . '-' . $i . ' 18:' . $i . ':50'));
             $user->setIsVerified(false);
             $manager->persist($user);
         }

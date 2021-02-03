@@ -248,7 +248,7 @@
                                             <span class="badge badge-info right"></span>
                                         </p>
                                     </a>
-                                </li>                             
+                                </li>
                             </ul>
                         </li>
                         {# {/if} #}
@@ -349,7 +349,53 @@
                         </li>
                         {# {/if} #}
 
-                        
+                        {# {* SONDAGE *} #}
+                        {# {* {$smarty.session|var_dump} *} #}
+                        {# {if isset($smarty.session) AND $smarty.session.user.role eq 'Admin'} #}
+                        <li class="nav-item has-treeview mb-4">
+                            <a href="" class="nav-link">
+                                <i class="nav-icon far fa-poll"></i>
+                                <p>
+                                    Nos sondages
+                                    <i class="fas fa-angle-left right"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="" class="nav-link">
+                                        <i class="nav-icon far fa-circle"></i>
+                                        <p>
+                                            Liste des sondages
+                                            {# {* Permet de rajouter un badge à la fin *} #}
+                                            <span class="badge badge-info right"></span>
+                                        </p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{ path('sondage_new') }}" class="nav-link">
+                                        <i class="nav-icon far fa-circle"></i>
+                                        <p>
+                                            Nouveau sondage
+                                            {# {* Permet de rajouter un badge à la fin *} #}
+                                            <span class="badge badge-info right"></span>
+                                        </p>
+                                    </a>
+                                </li>
+                                {# <li class="nav-item">
+                                    <a href="" class="nav-link">
+                                        <i class="nav-icon far fa-circle"></i>
+                                        <p> #}
+                                            {# Ajouter une photo #}
+                                            {# {* Permet de rajouter un badge à la fin *} #}
+                                            {# <span class="badge badge-info right"></span>
+                                        </p>
+                                    </a>
+                                </li> #}
+                            </ul>
+                        </li>
+                        {# {/if} #}
+
+
 
                         {# {* ARTICLE *} #}
                         {# {* {$smarty.session|var_dump} *} #}

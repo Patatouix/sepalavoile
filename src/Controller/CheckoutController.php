@@ -4,8 +4,6 @@ namespace App\Controller;
 
 use App\Entity\Creneau;
 use App\Entity\Produit;
-use App\Entity\ProduitType;
-use DateTime;
 use Stripe\Checkout\Session;
 use Stripe\Stripe;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -25,6 +23,8 @@ class CheckoutController extends AbstractController
 
         $session = $request->getSession();
         $panier = $session->get('panier', []);
+
+        $baseUrl = $request->getScheme() . '://' . $request->getHttpHost() . $request->getBasePath();
 
         $produitsData = array();
 
@@ -73,8 +73,8 @@ class CheckoutController extends AbstractController
             'payment_method_types' => ['card'],
             'line_items' => $produitsData,
             'mode' => 'payment',
-            'success_url' => 'http://127.0.0.1:8000/panier/validate',
-            'cancel_url' => 'http://127.0.0.1:8000/panier',
+            'success_url' => $baseUrl . $this->generateUrl('panier_validate'),
+            'cancel_url' => $baseUrl . $this->generateUrl('panier_index'),
           ]);
 
         return new JsonResponse(['id' => $session->id]);
