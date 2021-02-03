@@ -1,0 +1,61 @@
+{% extends 'base_dashboard.html.twig' %}
+
+{% block title %}Produit index{% endblock %}
+
+{% block body %}
+    <div id="user-list" class="container-fluid">
+        <h1>Liste des Achats</h1>
+        <div class="table-responsive card px-2 py-2">
+            <table id="example1" class="table table-bordered table-striped mx-2 my-2">
+                <thead>
+                    <tr class="text-center">
+                        <th>Id</th>
+                        <th>Produit</th>
+                        <th>Type</th>
+                        <th>Utilisateur</th>
+                        <th>Montant</th>
+                        <th>CreatedAt</th>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr class="text-center">
+                        <th>Id</th>
+                        <th>Produit</th>
+                        <th>Type</th>
+                        <th>Utilisateur</th>
+                        <th>Montant</th>
+                        <th>CreatedAt</th>
+                    </tr>
+                </tfoot>
+                <tbody>
+                {% for achat in achats %}
+                    <tr>
+                        <td class="text-center">
+                            {{ achat.id }}
+                        </td>
+                        <td class="text-center">
+                            {{ achat.produit.nom }}
+                        </td>
+                        <td class="text-center">
+                            {{ achat.produit.produitType.nom }}
+                        </td>
+                        <td class="text-center">
+                            {{ achat.user.firstname }} {{ achat.user.name }}
+                        </td>
+                        <td class="text-center">
+                            {{ achat.prixPaye }}
+                        </td>
+                        <td class="text-center">
+                            {{ achat.createdAt|date('Y-m-d H:i:s') }}
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="6">Pas d'enregistrement trouvé</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}

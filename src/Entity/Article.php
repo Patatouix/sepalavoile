@@ -69,9 +69,15 @@ class Article
      */
     private $articleCategories;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=Media::class)
+     */
+    private $medias;
+
     public function __construct()
     {
         $this->articleCategories = new ArrayCollection();
+        $this->medias = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -210,6 +216,30 @@ class Article
         if ($this->articleCategories->removeElement($articleCategory)) {
             $articleCategory->removeArticle($this);
         }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Media[]
+     */
+    public function getMedias(): Collection
+    {
+        return $this->medias;
+    }
+
+    public function addMedia(Media $media): self
+    {
+        if (!$this->medias->contains($media)) {
+            $this->medias[] = $media;
+        }
+
+        return $this;
+    }
+
+    public function removeMedia(Media $media): self
+    {
+        $this->medias->removeElement($media);
 
         return $this;
     }

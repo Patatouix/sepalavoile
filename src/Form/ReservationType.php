@@ -12,7 +12,7 @@ class ReservationType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('quantite', IntegerType::class, [
+            ->add('quantitePlaces', IntegerType::class, [
                 'label' => 'Nombre de places',
                 'attr' => ['min' => 0]
             ])

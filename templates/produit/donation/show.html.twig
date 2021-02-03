@@ -12,14 +12,12 @@
     <div class="container-fluid">
         <div class="row subheader text-center">
             <div class="col-12 col-md-4 text-white p-4 border-right"><h4 class="mb-0"><i class="fas fa-heart mr-3"></i>DONATION</h4></div>
-            <div class="col-12 col-md-4 text-white p-4 border-right"><h4 class="mb-0"><i class="fas fa-clock mr-3"></i>JUSQU'AU {{ produit.finPublication|date('d/m/Y') }}</h4></div>
-            <div class="col-12 col-md-4 text-white p-4"><h4 class="mb-0"><i class="fas fa-hand-holding-usd mr-3"></i></i>{{ produit.objectif }} €</h4></div>
+            <div class="col-12 col-md-4 text-white p-4 border-right"><h4 class="mb-0"><i class="fas fa-clock mr-3"></i>JUSQU'AU {{ produit.finVente|date('d/m/Y') }}</h4></div>
+            <div class="col-12 col-md-4 text-white p-4"><h4 class="mb-0"><i class="fas fa-hand-holding-usd mr-3"></i></i>{{ produit.limiteParticipation }} €</h4></div>
         </div>
     </div>
 
     {{ include('produit/evenement/_modal_disponibilite.html.twig', {'button_label': 'Update'}) }}
-
-    {% set percentage = produit.totalDonationProduit / produit.objectif * 100 %}
 
     <div class="container my-5">
         <div class="row align-items-center">
@@ -32,10 +30,10 @@
                 <h3 class="titresection">Participez</h3>
                 <p class="text-produit text-center">A partir de {{ produit.prix }} €</p>
                 <h3 class="titresection">Progression</h3>
-                <div class="progression-bar mb-2 text-center" style="background: linear-gradient(to right, #ff8300 {{ percentage }}%, white {{ percentage }}%);">
-                    <span>{{ percentage|round }} %</span>
+                <div class="progression-bar mb-2 text-center" style="background: linear-gradient(to right, #ff8300 {{ produit.percentageParticipation }}%, white {{ produit.percentageParticipation }}%);">
+                    <span>{{ produit.percentageParticipation|round }} %</span>
                 </div>
-                <p class="text-produit text-center">{{ produit.totalDonationProduit }} / {{ produit.objectif }} €</p>
+                <p class="text-produit text-center">{{ produit.participation }} / {{ produit.limiteParticipation }} €</p>
             </div>
         </div>
     </div>
