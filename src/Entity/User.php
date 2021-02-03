@@ -98,9 +98,15 @@ class User implements UserInterface
      */
     private $numTel;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Reponse::class, mappedBy="user")
+     */
+    private $reponses;
+
     public function __construct()
     {
         $this->achats = new ArrayCollection();
+        $this->reponses = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -339,6 +345,36 @@ class User implements UserInterface
     public function setNumTel(?string $numTel): self
     {
         $this->numTel = $numTel;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Reponse[]
+     */
+    public function getReponses(): Collection
+    {
+        return $this->reponses;
+    }
+
+    public function addReponse(Reponse $reponse): self
+    {
+        if (!$this->reponses->contains($reponse)) {
+            $this->reponses[] = $reponse;
+            $reponse->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeReponse(Reponse $reponse): self
+    {
+        if ($this->reponses->removeElement($reponse)) {
+            // set the owning side to null (unless already changed)
+            if ($reponse->getUser() === $this) {
+                $reponse->setUser(null);
+            }
+        }
 
         return $this;
     }
