@@ -110,7 +110,7 @@ class ArticleController extends AbstractController
      */
     public function show(Article $article, ArticleRepository $articleRepository, Request $request, ArticleCategorieRepository $articleCategorieRepository): Response
     {
-
+        // PERMET DE RAJOUTER +1 à chaque fois que l\'article est visité
         $article->setNbVues($article->getNbVues() + 1);
         $entityManager = $this->getDoctrine()->getManager();
         $entityManager->flush();
