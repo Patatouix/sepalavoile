@@ -108,11 +108,23 @@ class User implements UserInterface
      */
     private $reservations;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Message::class, mappedBy="expediteur")
+     */
+    private $messagesEnvoyes;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Message::class, mappedBy="destinataire")
+     */
+    private $messagesRecus;
+
     public function __construct()
     {
         $this->achats = new ArrayCollection();
         $this->reponses = new ArrayCollection();
         $this->reservations = new ArrayCollection();
+        $this->messagesEnvoyes = new ArrayCollection();
+        $this->messagesRecus = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -409,6 +421,66 @@ class User implements UserInterface
             // set the owning side to null (unless already changed)
             if ($reservation->getUser() === $this) {
                 $reservation->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Message[]
+     */
+    public function getMessagesEnvoyes(): Collection
+    {
+        return $this->messagesEnvoyes;
+    }
+
+    public function addMessagesEnvoye(Message $messagesEnvoye): self
+    {
+        if (!$this->messagesEnvoyes->contains($messagesEnvoye)) {
+            $this->messagesEnvoyes[] = $messagesEnvoye;
+            $messagesEnvoye->setExpediteur($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMessagesEnvoye(Message $messagesEnvoye): self
+    {
+        if ($this->messagesEnvoyes->removeElement($messagesEnvoye)) {
+            // set the owning side to null (unless already changed)
+            if ($messagesEnvoye->getExpediteur() === $this) {
+                $messagesEnvoye->setExpediteur(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Message[]
+     */
+    public function getMessagesRecus(): Collection
+    {
+        return $this->messagesRecus;
+    }
+
+    public function addMessagesRecu(Message $messagesRecu): self
+    {
+        if (!$this->messagesRecus->contains($messagesRecu)) {
+            $this->messagesRecus[] = $messagesRecu;
+            $messagesRecu->setDestinataire($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMessagesRecu(Message $messagesRecu): self
+    {
+        if ($this->messagesRecus->removeElement($messagesRecu)) {
+            // set the owning side to null (unless already changed)
+            if ($messagesRecu->getDestinataire() === $this) {
+                $messagesRecu->setDestinataire(null);
             }
         }
 

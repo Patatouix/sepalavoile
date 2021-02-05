@@ -7,6 +7,7 @@ use App\Entity\Article;
 use App\Entity\ArticleCategorie;
 use App\Entity\Creneau;
 use App\Entity\Media;
+use App\Entity\Message;
 use App\Entity\Partners;
 use App\Entity\Produit;
 use App\Entity\ProduitType;
@@ -105,6 +106,17 @@ class AppFixtures extends Fixture
             $user->setCreatedAt(new DateTime('2021-' . $i . '-' . $i . ' 18:' . $i . ':50'));
             $user->setIsVerified(false);
             $manager->persist($user);
+        }
+
+        //messages
+        for ($i = 1; $i <= 15; $i++) {
+            $msg = new Message();
+            $msg->setObjet('Objet ' . $i);
+            $msg->setContenu('Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat aperiam doloremque, dolores voluptates obcaecati nihil ipsam voluptatibus vero exercitationem in, debitis sapiente. Alias ullam culpa sint vel esse, numquam in?');
+            $msg->setCreatedAt(new DateTime('NOW'));
+            $msg->setExpediteur($userArray[array_rand($userArray)]);
+            $msg->setDestinataire($userArray[array_rand($userArray)]);
+            $manager->persist($msg);
         }
 
         //produitTypes
