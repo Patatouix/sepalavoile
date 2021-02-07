@@ -109,7 +109,7 @@ class AppFixtures extends Fixture
         }
 
         //messages
-        for ($i = 1; $i <= 30; $i++) {
+        for ($i = 1; $i <= 50; $i++) {
             $msg = new Message();
             $msg->setObjet('Objet ' . $i);
             $msg->setContenu('Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat aperiam doloremque, dolores voluptates obcaecati nihil ipsam voluptatibus vero exercitationem in, debitis sapiente. Alias ullam culpa sint vel esse, numquam in?<br><br>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat aperiam doloremque, dolores voluptates obcaecati nihil ipsam voluptatibus vero exercitationem in, debitis sapiente. Alias ullam culpa sint vel esse, numquam in?<br><br>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat aperiam doloremque, dolores voluptates obcaecati nihil ipsam voluptatibus vero exercitationem in, debitis sapiente. Alias ullam culpa sint vel esse, numquam in?');
@@ -454,13 +454,13 @@ class AppFixtures extends Fixture
 
                 //réservations
                 for ($k = 1; $k <= 3; $k++) {
-                    $achat = new Reservation();
-                    $achat->setCreneau($creneau);
-                    $achat->setCreatedAt(new DateTime('NOW'));
-                    $achat->setPrixPaye($i);
-                    $achat->setQuantitePlaces($k);
-                    $achat->setUser($userArray[array_rand($userArray)]);
-                    $manager->persist($achat);
+                    $reservation = new Reservation();
+                    $reservation->setCreneau($creneau);
+                    $reservation->setCreatedAt(new DateTime('NOW'));
+                    $reservation->setPrixPaye($i);
+                    $reservation->setQuantitePlaces($k);
+                    $reservation->setUser($userArray[array_rand($userArray)]);
+                    $manager->persist($reservation);
                 }
             }
         }

@@ -452,27 +452,21 @@
                             <a href="#" class="nav-link">
                                 <i class="nav-icon far fa-envelope"></i>
                                 <p>
-                                    Mail
+                                    Messages
                                     <i class="fas fa-angle-left right"></i>
                                 </p>
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="{site_url(" users/mailbox.tpl")}" class="nav-link">
+                                    <a href="{{ path('admin_message_index') }}" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Boite de réception</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="{site_url(" users/compose")}" class="nav-link">
+                                    <a href="{{ path('admin_message_new') }}" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>Rédiger</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="{site_url(" users/read-mail")}" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Lire</p>
+                                        <p>Nouveau message</p>
                                     </a>
                                 </li>
                             </ul>

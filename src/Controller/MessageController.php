@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Message;
 use App\Entity\User;
+use App\Form\MessageAdminType;
 use App\Form\MessageType;
 use App\Repository\MessageRepository;
 use DateTime;
@@ -35,23 +36,28 @@ class MessageController extends AbstractController
     }
 
     /**
-     * @Route("/new", name="message_new", methods={"GET","POST"})
+     * @Route("/message/new", name="message_new", methods={"GET","POST"})
      */
     public function new(Request $request): Response
     {
         $message = new Message();
+
         $form = $this->createForm(MessageType::class, $message);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $message->setExpediteur($this->getUser());
+            $message->setCreatedAt(new DateTime('NOW'));
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($message);
             $entityManager->flush();
 
-            return $this->redirectToRoute('message_index');
+            $this->addFlash('success', 'Votre message a bien été envoyé !');
+
+            return $this->redirectToRoute('user_show', ['id' => $this->getUser()->getId()]);
         }
 
-        return $this->render('message/new.html.twig', [
+        return $this->render('message/_form.html.twig', [
             'message' => $message,
             'form' => $form->createView(),
         ]);
@@ -70,7 +76,7 @@ class MessageController extends AbstractController
             $message->setDestinataire($destinataire);
         }
 
-        $form = $this->createForm(MessageType::class, $message);
+        $form = $this->createForm(MessageAdminType::class, $message);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

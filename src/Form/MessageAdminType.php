@@ -4,15 +4,14 @@ namespace App\Form;
 
 use App\Entity\Message;
 use App\Entity\User;
-use App\Repository\UserRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use FOS\CKEditorBundle\Form\Type\CKEditorType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 
-class MessageType extends AbstractType
+class MessageAdminType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -24,16 +23,11 @@ class MessageType extends AbstractType
                 'label' => 'Message :'
             ])
             ->add('destinataire', EntityType::class, [
-                'label' => 'Administrateur :',
+                'label' => 'Destinataire :',
                 'choice_label' => function(?User $user) {
                     return $user->getNomComplet() . ' (' . $user->getEmail() . ')';
                 },
-                'class' => User::class,
-                'query_builder' => function (UserRepository $userRepository) {
-                    return $userRepository->createQueryBuilder('u')
-                        ->where('u.roles LIKE :roles')
-                        ->setParameter('roles', '%"ROLE_ADMIN"%');
-                },
+                'class' => User::class
             ])
         ;
     }

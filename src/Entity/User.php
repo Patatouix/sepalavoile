@@ -103,7 +103,7 @@ class User implements UserInterface
      */
     private $reponses;
 
-    /*
+    /**
      * @ORM\OneToMany(targetEntity=Reservation::class, mappedBy="user")
      */
     private $reservations;
@@ -385,7 +385,7 @@ class User implements UserInterface
         return $this;
     }
 
-    /*
+    /**
      * @return Collection|Reservation[]
      */
     public function getReservations(): Collection

@@ -1,34 +1,50 @@
-{% extends 'base.html.twig' %}
-
-{% block title %}Message{% endblock %}
-
 {% block body %}
-    <h1>Message</h1>
-
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ message.id }}</td>
-            </tr>
-            <tr>
-                <th>Objet</th>
-                <td>{{ message.objet }}</td>
-            </tr>
-            <tr>
-                <th>Contenu</th>
-                <td>{{ message.contenu }}</td>
-            </tr>
-            <tr>
-                <th>CreatedAt</th>
-                <td>{{ message.createdAt ? message.createdAt|date('Y-m-d H:i:s') : '' }}</td>
-            </tr>
-        </tbody>
-    </table>
-
-    <a href="{{ path('message_index') }}">back to list</a>
-
-    <a href="{{ path('message_edit', {'id': message.id}) }}">edit</a>
-
-    {{ include('message/_delete_form.html.twig') }}
+    <div id="show_message" class="container bg-light rounded">
+        <div class="row border-bottom py-3 px-5">
+            <div class="col-12 text-right my-auto">
+                <span class="text-muted mr-2 font-italic">
+                    Répondre :
+                </span>
+                <a href="" class="repondreModal" data-expediteur-id="{{ message.expediteur.id }}">
+                    <i class="fad fa-edit"></i>
+                </a>
+            </div>
+        </div>
+        <div class="row bg-white">
+            <div class="col-12 my-5 pl-3">
+                <div class="col-12">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group">
+                            <div class="row mb-3">
+                                <div class="col-1 p-0 text-center"><i class="fad fa-clock"></i></div>
+                                <div class="col-3">Date du message :</div>
+                                <div class="col-8 p-0">{{ message.createdAt|date('d/m/Y H:i:s') }}</div>
+                            </div>
+                        </li>
+                        <li class="list-group">
+                            <div class="row mb-3">
+                                <div class="col-1 p-0 text-center"><i class="fad fa-user"></i></div>
+                                <div class="col-3">Expéditeur du message :</div>
+                                <div class="col-8 p-0 pr-5">{{ message.expediteur.nomComplet}} ({{ message.expediteur.email }})</div>
+                            </div>
+                        </li>
+                        <li class="list-group">
+                            <div class="row mb-3">
+                                <div class="col-1 p-0 text-center"><i class="fad fa-envelope-open-text"></i></div>
+                                <div class="col-3">Objet du message :</div>
+                                <div class="col-8 p-0 break-word">{{ message.objet }}</div>
+                            </div>
+                        </li>
+                        <li class="list-group">
+                            <div class="row mb-3">
+                                <div class="col-1 p-0 text-center"><i class="fad fa-comment-dots"></i></div>
+                                <div class="col-3">Contenu du message :</div>
+                                <div class="col-8 p-0 break-word">{{ message.contenu|raw }}</div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}
