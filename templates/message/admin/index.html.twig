@@ -1,0 +1,92 @@
+{% extends 'base_dashboard.html.twig' %}
+
+{% block title %}Message index{% endblock %}
+
+{% block body %}
+    <div id="user-list" class="container-fluid">
+        <h1>Liste des messages</h1>
+        <div class="col-12  mt-5 mb-4">
+            <a href="{{ path('admin_message_new') }}" class="btn btn-style">Nouveau message</a>
+        </div>
+        <div class="table-responsive card px-2 py-2">
+            <table id="example1" class="table table-bordered table-striped mx-2 my-2">
+                <thead>
+                    <tr class="text-center">
+                        <th>Id</th>
+                        <th width="10%">Actions</th>
+                        <th>Date</th>
+                        <th>Expéditeur</th>
+                        <th>Objet</th>
+                        <th>Contenu</th>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr class="text-center">
+                        <th>Id</th>
+                        <th width="10%">Actions</th>
+                        <th>Date</th>
+                        <th>Expéditeur</th>
+                        <th>Objet</th>
+                        <th>Contenu</th>
+                    </tr>
+                </tfoot>
+                <tbody>
+                {% for message in messages %}
+                    <tr>
+                        <td class="text-center">
+                            {{ message.id }}
+                        </td>
+                        <td class="text-center">
+                            {# Modal pour voir un message #}
+                            <a href="" type="button" class="m-0" data-toggle="modal" data-target="#showMessageModal{{ message.id }}">
+                                <i class="fad fa-eye"></i>
+                            </a>
+                            <div class="modal fade text-left" id="showMessageModal{{ message.id }}" tabindex="-1" role="dialog" aria-labelledby="showMessageModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-xl" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h6 class="modal-title text-uppercase font-weight-bold">Consulter</h6>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body font-weight-normal p-0">
+                                            {% include "message/admin/show.html.twig" %}
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            {# Fin de la modal voir message #}
+
+                            {# Lien pour répondre à un message #}
+                            <a href="{{ path('admin_message_new', {'destinataireId': message.expediteur.id}) }}">
+                                <i class="fad fa-reply px-2 py-2"></i>
+                            </a>
+                            {# Fin lien pour répondre à un message #}
+                        </td>
+                        <td class="text-center">
+                            {{ message.createdAt|date('d/m/Y H:i:s') }}
+                        </td>
+                        <td>
+                            {{ message.expediteur.email }}
+                        </td>
+                        <td>
+                            {{ message.objet }}
+                        </td>
+                        <td>
+                            {{ message.contenu|u.truncate(230, '...')|raw }}
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="6">Pas d'enregistrement trouvé</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}

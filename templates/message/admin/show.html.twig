@@ -1,0 +1,58 @@
+{% block body %}
+        <div id="show_message" class="container bg-light rounded">
+            <div class="row border-bottom py-3 px-5">
+                <div class="col-6">
+                    <h1 class="text-uppercase text-left m-0">
+                        Message #{{ message.id }}
+                    </h1>
+                </div>
+            </div>
+            <div class="row bg-white">
+                <div class="col-3 text-center my-auto">
+                    <i class="fad fa-inbox-in mr-4"></i>
+                    {# <img id='messageImage' class="img-fluid" alt="Photo de l'événement" src="{{ message.filename ? asset('/images/message/' ~ message.filename) : asset('/images/logo.svg') }}"> #}
+                </div>
+                <div class="col-9 my-5 pl-3 border-left-form">
+                    <div class="col-12">
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group">
+                                <div class="row mb-3">
+                                    <div class="col-1 p-0 text-center"><i class="fad fa-hashtag"></i></div>
+                                    <div class="col-3">Id message :</div>
+                                    <div class="col-8 p-0">{{ message.id }}</div>
+                                </div>
+                            </li>
+                            <li class="list-group">
+                                <div class="row mb-3">
+                                    <div class="col-1 p-0 text-center"><i class="fad fa-clock"></i></div>
+                                    <div class="col-3">Date du message :</div>
+                                    <div class="col-8 p-0">{{ message.createdAt|date('d/m/Y H:i:s') }}</div>
+                                </div>
+                            </li>
+                            <li class="list-group">
+                                <div class="row mb-3">
+                                    <div class="col-1 p-0 text-center"><i class="fad fa-user"></i></div>
+                                    <div class="col-3">Expéditeur du message :</div>
+                                    <div class="col-8 p-0 pr-5">{{ message.expediteur.nomComplet}} ({{ message.expediteur.email }})</div>
+                                </div>
+                            </li>
+                            <li class="list-group">
+                                <div class="row mb-3">
+                                    <div class="col-1 p-0 text-center"><i class="fad fa-envelope-open-text"></i></div>
+                                    <div class="col-3">Objet du message :</div>
+                                    <div class="col-8 p-0 break-word">{{ message.objet }}</div>
+                                </div>
+                            </li>
+                            <li class="list-group">
+                                <div class="row mb-3">
+                                    <div class="col-1 p-0 text-center"><i class="fad fa-comment-dots"></i></div>
+                                    <div class="col-3">Contenu du message :</div>
+                                    <div class="col-8 p-0 break-word">{{ message.contenu|raw }}</div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+{% endblock %}

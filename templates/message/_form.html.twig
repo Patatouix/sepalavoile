@@ -1,0 +1,42 @@
+{{ form_start(form) }}
+    <div id="form-new-message" class="container bg-light rounded">
+        <div class="row bg-light border-bottom border-right border-left">
+            <div class="col-12 mt-5 pb-4 px-5">
+                <div class="col-12 mt-5">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group">
+                            <div class="row mb-5">
+                                <div class="col-1 p-0 text-center"><i class="fad fa-file-edit"></i></div>
+                                <div class="col-4">{{ form_label(form.destinataire) }}</div>
+                                <div class="col-7 p-0">{{ form_widget(form.destinataire) }}</div>
+                            </div>
+                        </li>
+                        <li class="list-group">
+                            <div class="row mb-5">
+                                <div class="col-1 p-0 text-center"><i class="fad fa-inbox-in mr-2"></i></div>
+                                <div class="col-4 font-weight-bold">{{ form_label(form.objet) }}</div>
+                                <div class="col-7 p-0">{{ form_widget(form.objet) }}</div>
+                            </div>
+                        </li>
+                        <li class="list-group">
+                            <div class="row mb-1">
+                                <div class="col-1 p-0 text-center"><i class="fad fa-heading"></i></div>
+                                <div class="col-4">{{ form_label(form.contenu) }}</div>
+                                <div class="col-7 p-0">{{ form_widget(form.contenu, {'attr': {'placeholder': 'Nom du message'}}) }}</div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-12 text-right p-4">
+                <a href="{{ path('admin_message_index') }}" class="btn btn-secondary">Annuler</a>
+                <button class="btn btn-style">{{ button_label|default('Valider') }}</button>
+            </div>
+        </div>
+    </div>
+{{ form_end(form) }}
+
+
+
+
+

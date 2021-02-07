@@ -486,4 +486,9 @@ class User implements UserInterface
 
         return $this;
     }
+
+    public function getNomComplet()
+    {
+        return ucfirst($this->firstname) . ' ' . ucfirst($this->name);
+    }
 }
