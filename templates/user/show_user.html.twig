@@ -25,6 +25,7 @@
         <div class="nav nav-tabs" id="nav-tab" role="tablist">
             <a class="nav-item nav-link active" id="nav-info-tab" data-toggle="tab" href="#nav-info" role="tab" aria-controls="nav-info" aria-selected="true">Infos générales</a>
             <a class="nav-item nav-link" id="nav-achats-tab" data-toggle="tab" href="#nav-achats" role="tab" aria-controls="nav-achats" aria-selected="false">Historique des achats</a>
+            <a class="nav-item nav-link" id="nav-messagerie-tab" data-toggle="tab" href="#nav-messagerie" role="tab" aria-controls="nav-messagerie" aria-selected="false">Messagerie</a>
         </div>
     </nav>
 
@@ -34,7 +35,7 @@
                 <table class="table table-striped table-bordered" style="display: inline-table">
                     <thead>
                         <tr style="background-color: #ff8300;">
-                            <th style="color: white" colspan="4">INFOS GENERALES</th>
+                            <th style="color: white" colspan="4"><i class="fad fa-user-cog text-white mr-2"></i> INFOS GENERALES</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -72,7 +73,7 @@
                 <div class="table-responsive">
                     <table class="table table-striped mb-5">
                         <thead>
-                            <tr style="background-color: #ff8300;"><th style="color: white" colspan="5">ACHATS</th></tr>
+                            <tr style="background-color: #ff8300;"><th style="color: white" colspan="5"><i class="fad fa-shopping-cart text-white mr-2"></i> ACHATS</th></tr>
                             <tr>
                                 <th>Date</th>
                                 <th>Type</th>
@@ -93,7 +94,7 @@
                     </table>
                     <table class="table table-striped">
                         <thead>
-                            <tr style="background-color: #ff8300;"><th style="color: white" colspan="5">RESERVATIONS</th></tr>
+                            <tr style="background-color: #ff8300;"><th style="color: white" colspan="5"><i class="fad fa-calendar-times text-white mr-2"></i> RESERVATIONS</th></tr>
                             <tr>
                                 <th>Date</th>
                                 <th>Produit</th>
@@ -117,7 +118,115 @@
                 </div>
             </div>
         </div>
+
+        <!--messagerie-->
+        <div class="tab-pane fade" id="nav-messagerie" role="tabpanel" aria-labelledby="nav-messagerie-tab">
+            <div class="card-group">
+                <div class="table-responsive">
+                    <table class="table table-striped mb-5" id="messageTable">
+                        <thead>
+                            <tr style="background-color: #ff8300;">
+                                <th style="color: white">
+                                    <a class="text-decoration-none text-white" data-toggle="collapse" href="#collapseMessageForm" role="button" aria-expanded="false" aria-controls="collapseMessageForm">
+                                        <i class="fad fa-edit mr-2 text-white"></i> CONTACTER UN ADMINISTRATEUR
+                                    </a>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="collapse" id="collapseMessageForm">
+                                    {{ render (controller('App\\Controller\\MessageController::new')) }}
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table class="table table-striped mb-5">
+                        <thead>
+                            <tr style="background-color: #ff8300;">
+                                <th style="color: white" colspan="5"><i class="fad fa-envelope mr-2 text-white"></i> MESSAGES RECUS</th>
+                            </tr>
+                            <tr>
+                                <th></th>
+                                <th>Date</th>
+                                <th>Expéditeur</th>
+                                <th>Objet</th>
+                                <th>Contenu</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for message in user.messagesRecus %}
+                                <tr>
+                                    <td>
+                                        {# Modal pour voir un message #}
+                                        <a href="#" type="button" class="m-0" data-toggle="modal" data-target="#showMessageModal{{ message.id }}">
+                                            <i class="fad fa-eye"></i>
+                                        </a>
+                                        <div class="modal fade text-left" id="showMessageModal{{ message.id }}" tabindex="-1" role="dialog" aria-labelledby="showMessageModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog modal-xl" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h6 class="modal-title text-uppercase font-weight-bold">Message reçu</h6>
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body font-weight-normal p-0">
+                                                        {% include "message/show.html.twig" %}
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        {# Fin de la modal voir message #}
+
+                                        {# Lien pour répondre à un message #}
+                                        <a href="#" class="repondre" data-expediteur-id="{{ message.expediteur.id }}">
+                                            <i class="fad fa-reply px-2 py-2"></i>
+                                        </a>
+                                        {# Fin lien pour répondre à un message #}
+                                    </td>
+                                    <td>{{ message.createdAt|date('d/m/Y') }}</td>
+                                    <td>{{ message.expediteur.nomComplet }}</td>
+                                    <td>{{ message.objet }}</td>
+                                    <td>{{ message.contenu|u.truncate(230, '...')|raw }}</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
     </div>
 
 </div>
+{% endblock %}
+
+{% block javascripts %}
+
+{{ parent() }}
+
+<script>
+    $('.repondre').on('click', (e) => {
+        console.log('click')
+        $('.modal').modal('hide');
+        $('#collapseMessageForm').collapse('show');
+        $('#messageTable').get(0).scrollIntoView();
+        $('#message_destinataire option[value="' + $(e.currentTarget).data('expediteurId') + '"]').prop('selected', true);
+        e.preventDefault();
+    });
+
+     $('.repondreModal').on('click', (e) => {
+        console.log('click')
+        $('.modal').modal('hide');
+        setTimeout(function() {
+            $('#collapseMessageForm').collapse('show');
+            $('#messageTable').get(0).scrollIntoView();
+            $('#message_destinataire option[value="' + $(e.currentTarget).data('expediteurId') + '"]').prop('selected', true);
+        }, 500);
+        e.preventDefault();
+    });
+</script>
 {% endblock %}
