@@ -48,12 +48,15 @@
                     <div class="topv">
                         {% for articleBestView in articleBestView %}
                         <div class="mb15 mt15">
-                            <a href="{{ path('article_show', {'id': articleBestView.id}) }}">{{ articleBestView.title }}</a> - <span class="meta">Publié
+                            <a href="{{ path('article_show', {'id': articleBestView.id}) }}">{{ articleBestView.title }}</a> - <span class="meta font-italic">Publié
                                 le {{ articleBestView.createdAt|date('d/m/Y') }} - {{ articleBestView.nbVues }} vues</span>
                         </div>
-                        <span class="imgWrap font-italic">
-                            {# <a href="../pages/article-blog-soling.html"><img src="{{ articleBestView.filename ? asset('/images/photoarticle/' ~ articleBestView.filename) : asset('/images/logo.svg') }}" width="100%"></a> #}
-                            <a href="{{ path('article_show', {'id': articleBestView.id}) }}"><img src="{{ asset('/images/logo.svg') }}" width="100%"></a>
+                        <span class="imgWrap">
+                            {% if articleBestView.medias|first %}
+                            <img id='articleImage' class="img-fluid" alt="Photo de l'article" src="{{ asset('/uploads/' ~ articleBestView.medias|first.nom ) }}" width="100%">
+                            {% else %}
+                                <img id='articleImage' class="img-fluid" alt="Photo de l'article" src="{{ asset('/images/logo.svg') }}" width="100%">
+                            {% endif %}
                         </span>
                         {% endfor %}
                     </div>

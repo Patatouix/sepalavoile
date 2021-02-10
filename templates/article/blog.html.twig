@@ -21,13 +21,12 @@
                                     <article class="articlestyle shadow">
                                         <span class="imgWrap">
                                             <a href="{{ path('article_show', {'id': article.id}) }}">
-
-                                                {# VERSION DYNAMIQUE #}
-                                                {# <img id='articleImage' class="img-fluid" alt="Photo de l'article" src="{{ article.filename ? asset('/images/photoarticle/' ~ article.filename) : asset('/images/logo.svg') }}"> #}
-
-                                                {# VERSION STATIQUE #}
-                                                <img id='articleImage' class="img-fluid" alt="Photo de l'article" src="{{ asset('/images/logo.svg') }}">
-
+                                                {# VERSION DYNAMIQUE ILLLUSTRATIONS #}
+                                                {% if article.medias|first %}
+                                                    <img id='articleImage' class="img-fluid" alt="Photo de l'article" src="{{ asset('/uploads/' ~ article.medias|first.nom ) }}" width="100%">
+                                                {% else %}
+                                                    <img id='articleImage' class="img-fluid" alt="Photo de l'article" src="{{ asset('/images/logo.svg') }}" width="100%">
+                                                {% endif %}
                                             </a>
                                         </span>
                                         <p class="meta">
