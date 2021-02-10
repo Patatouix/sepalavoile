@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <title>{% block title %}Welcome!{% endblock %}</title>
-        
+
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <meta name="description" content="">
@@ -28,12 +28,12 @@
         {% block stylesheets %}
             {{ encore_entry_link_tags('app') }}
         {% endblock %}
-        
+
     </head>
     <body>
         {% include '_include/header.html.twig' %}
-            {% block body %}          
-                        
+            {% block body %}
+
             {% endblock %}
         {% include '_include/footer.html.twig' %}
 

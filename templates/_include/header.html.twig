@@ -4,7 +4,7 @@
     {# {{ parent() }} #}
     {# {{ encore_entry_link_tags('header') }} #}
     {% endblock %}
-    <div class="container">
+    <div class="container-fluid">
         {% for message in app.flashes('success') %}
         <div class="alert alert-success text-center mt-3">
             {{ message }}
@@ -128,10 +128,11 @@
 </header>
 <!-- MENU -->
 <nav>
-    <div class="container menuindex">
-        <a href="{{ path('home_page') }}" class="logo logo-responsive d-none d-md-inline"><img
-                src="{{ asset('/images/logo.svg') }}" alt="LOGO SEPALAVOILE" /></a>
-        <nav class="navbar navbar-expand-md navbar-light">
+    <div class="container-fluid menuindex">
+        <a href="{{ path('home_page') }}" class="logo logo-responsive d-none d-md-inline ml-5">
+            <img src="{{ asset('/images/logo.svg') }}" alt="LOGO SEPALAVOILE" class="" />
+        </a>
+        <nav class="navbar navbar-expand-md navbar-light mr-3">
             <a href="{{ path('home_page') }}" class="d-md-none"><img style="width: 90px"
                     src="{{ asset('/images/logo.svg') }}" alt="LOGO SEPALAVOILE" /></a>
             <button class="navbar-toggler ml-auto styleboutton" type="button" data-toggle="collapse"

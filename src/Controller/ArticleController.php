@@ -4,9 +4,11 @@ namespace App\Controller;
 
 use App\Entity\Article;
 use App\Entity\ArticleCategorie;
+use App\Entity\Media;
 use App\Form\ArticleType;
 use App\Repository\ArticleCategorieRepository;
 use App\Repository\ArticleRepository;
+use App\Repository\MediaRepository;
 use DateTime;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -22,9 +24,11 @@ class ArticleController extends AbstractController
      */
     public function index(ArticleRepository $articleRepository): Response
     {
+
         return $this->render('article/index.html.twig', [
             'articles' => $articleRepository->findAll(),
         ]);
+
     }
 
     /**
