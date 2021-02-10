@@ -5,6 +5,7 @@ namespace App\DataFixtures;
 use App\Entity\Achat;
 use App\Entity\Article;
 use App\Entity\ArticleCategorie;
+use App\Entity\Commentaire;
 use App\Entity\Creneau;
 use App\Entity\Media;
 use App\Entity\Message;
@@ -406,28 +407,38 @@ class AppFixtures extends Fixture
         $partnersAcal->setMedia($mediaAcal);
         $manager->persist($partnersAcal);
 
-        //Catégorie
-
+        //Catégorie d'Articles
         for ($i = 1; $i <= 5; $i++) {
             $categorie = new ArticleCategorie();
             $categorie->setName('Categorie' . $i);
             $manager->persist($categorie);
-                for ($j = 1; $j <= 5; $j++) {
-                    $article = new Article();
-                    $article->setTitle('title' . $j);
-                    $article->setContent('Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat aperiam doloremque, dolores voluptates obcaecati nihil ipsam voluptatibus vero exercitationem in, debitis sapiente. Alias ullam culpa sint vel esse, numquam in?<br><br>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat aperiam doloremque, dolores voluptates obcaecati nihil ipsam voluptatibus vero exercitationem in, debitis sapiente. Alias ullam culpa sint vel esse, numquam in?<br><br>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat aperiam doloremque, dolores voluptates obcaecati nihil ipsam voluptatibus vero exercitationem in, debitis sapiente. Alias ullam culpa sint vel esse, numquam in?');
-                    $article->setAuthor('Author' . $j);
-                    $article->setCreatedAt(new DateTime('NOW'));
-                    $article->setIsPublished(true);
-                    $article->addArticleCategory($categorie);
-                    $manager->persist($article);
 
+            //articles
+            for ($j = 1; $j <= 5; $j++) {
+                $article = new Article();
+                $article->setTitle('title' . $j);
+                $article->setContent('Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat aperiam doloremque, dolores voluptates obcaecati nihil ipsam voluptatibus vero exercitationem in, debitis sapiente. Alias ullam culpa sint vel esse, numquam in?<br><br>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat aperiam doloremque, dolores voluptates obcaecati nihil ipsam voluptatibus vero exercitationem in, debitis sapiente. Alias ullam culpa sint vel esse, numquam in?<br><br>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat aperiam doloremque, dolores voluptates obcaecati nihil ipsam voluptatibus vero exercitationem in, debitis sapiente. Alias ullam culpa sint vel esse, numquam in?');
+                $article->setAuthor('Author' . $j);
+                $article->setCreatedAt(new DateTime('NOW'));
+                $article->setIsPublished(true);
+                $article->addArticleCategory($categorie);
+                $manager->persist($article);
+
+                //commentaires
+                for ($k = 1; $k <= 3; $k++) {
+                    $commentaire = new Commentaire();
+                    $commentaire->setContenu('Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat aperiam doloremque, dolores voluptates obcaecati nihil ipsam voluptatibus vero exercitationem in, debitis sapiente. Alias ullam culpa sint vel esse, numquam in?');
+                    $commentaire->setIsPublished(rand(0,1) == 1);
+                    $commentaire->setCreatedAt(new DateTime('NOW'));
+                    $commentaire->setUpdatedAt(new DateTime('NOW'));
+                    $commentaire->setArticle($article);
+                    $commentaire->setUser($userArray[array_rand($userArray)]);
+                    $manager->persist($commentaire);
                 }
+            }
         }
 
-
         //produits de type event
-
         for ($i = 1; $i <= 20; $i++) {
             $produit = new Produit();
             $produit->setNom('Event ' . $i);
@@ -466,7 +477,6 @@ class AppFixtures extends Fixture
         }
 
         //produits de type don
-
         for ($i = 1; $i <= 5; $i++) {
             $produit = new Produit();
             $produit->setNom('Campagne de don ' . $i);
@@ -495,7 +505,6 @@ class AppFixtures extends Fixture
         }
 
         //produits de type adhesion
-
         for ($i = 1; $i <= 5; $i++) {
             $produit = new Produit();
             $produit->setNom('Campagne d\'adhésion ' . $i);
