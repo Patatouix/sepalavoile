@@ -4,8 +4,10 @@ namespace App\Controller;
 
 use App\Entity\Article;
 use App\Entity\ArticleCategorie;
+use App\Entity\Commentaire;
 use App\Entity\Media;
 use App\Form\ArticleType;
+use App\Form\CommentaireType;
 use App\Repository\ArticleCategorieRepository;
 use App\Repository\ArticleRepository;
 use App\Repository\MediaRepository;
@@ -110,7 +112,7 @@ class ArticleController extends AbstractController
     }
 
     /**
-     * @Route("/article/{id}", name="article_show", methods={"GET"})
+     * @Route("/article/{id}", name="article_show", methods={"GET", "POST"})
      */
     public function show(Article $article, ArticleRepository $articleRepository, Request $request, ArticleCategorieRepository $articleCategorieRepository): Response
     {
@@ -127,6 +129,22 @@ class ArticleController extends AbstractController
 
         $articleRandom = $articleRepository -> findBy([],['createdAt' => 'DESC']);
 
+        $commentaire = new Commentaire();
+        $form = $this->createForm(CommentaireType::class, $commentaire);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $commentaire->setCreatedAt( new DateTime('NOW'));
+            $commentaire->setArticle($article);
+            $commentaire->setUser($this->getUser());
+            //si la personne qui poste est admin, on publie directement le message
+            $commentaire->setIsPublished($this->isGranted('ROLE_ADMIN'));
+
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($commentaire);
+            $entityManager->flush();
+        }
+
         return $this->render('article/show_article.html.twig', [
             'articles'          => $articleRepository->findBy([],['createdAt' => 'desc']),
             'category'          => $allCategory,
@@ -134,6 +152,7 @@ class ArticleController extends AbstractController
             'categories'        => $categories,
             'article'           => $article,
             'articleRandom'     => $articleRandom,
+            'form'              => $form->createView(),
         ]);
     }
 
