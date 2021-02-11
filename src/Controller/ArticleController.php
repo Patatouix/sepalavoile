@@ -37,7 +37,8 @@ class ArticleController extends AbstractController
     /**
      * @Route("/blog/{categoryId}", name="blog")
      */
-    public function blog(ArticleRepository $articleRepository, Request $request, ArticleCategorieRepository $articleCategorieRepository, int $categoryId = null, PaginatorInterface $paginator): Response
+    public function blog(ArticleRepository $articleRepository, Request $request, ArticleCategorieRepository $articleCategorieRepository,
+        int $categoryId = null, PaginatorInterface $paginator, CommentaireRepository $commentaireRepository): Response
     {
         // Permet d'afficher dans le ASIDE les articles avec le plus de vue
         $articleBestView = $this->getDoctrine()->getRepository(Article::class)->findBynombreVuDesc();
@@ -74,6 +75,8 @@ class ArticleController extends AbstractController
         // sans tenir compte de la pagination
         $article = $articleRepository->findAll();
 
+        $lastComments = $commentaireRepository->findBy(['isPublished' => true], ['createdAt' => 'DESC'], 3);
+
         return $this->render('article/blog.html.twig', [
             'articlesPaginate'  => $articlesPaginate,
             'category'          => $allCategory,
@@ -81,7 +84,7 @@ class ArticleController extends AbstractController
             'categories'        => $categories,
             'categoryId'        => $categoryId,
             'articles'          => $articles,
-
+            'lastComments'      => $lastComments
         ]);
     }
 
