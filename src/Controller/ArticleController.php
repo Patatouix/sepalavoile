@@ -10,6 +10,7 @@ use App\Form\ArticleType;
 use App\Form\CommentaireType;
 use App\Repository\ArticleCategorieRepository;
 use App\Repository\ArticleRepository;
+use App\Repository\CommentaireRepository;
 use App\Repository\MediaRepository;
 use DateTime;
 use Knp\Component\Pager\PaginatorInterface;
@@ -114,7 +115,7 @@ class ArticleController extends AbstractController
     /**
      * @Route("/article/{id}", name="article_show", methods={"GET", "POST"})
      */
-    public function show(Article $article, ArticleRepository $articleRepository, Request $request, ArticleCategorieRepository $articleCategorieRepository): Response
+    public function show(Article $article, ArticleRepository $articleRepository, Request $request, ArticleCategorieRepository $articleCategorieRepository, CommentaireRepository $commentaireRepository): Response
     {
         // PERMET DE RAJOUTER +1 à chaque fois que l\'article est visité
         $article->setNbVues($article->getNbVues() + 1);
@@ -145,6 +146,9 @@ class ArticleController extends AbstractController
             $entityManager->flush();
         }
 
+        //on récupère les derniers commentaires publiés après la soumission du formulaire, pour avoir celui qu'on vient d'enregistrer
+        $lastComments = $commentaireRepository->findBy(['isPublished' => true], ['createdAt' => 'DESC'], 3);
+
         return $this->render('article/show_article.html.twig', [
             'articles'          => $articleRepository->findBy([],['createdAt' => 'desc']),
             'category'          => $allCategory,
@@ -153,6 +157,7 @@ class ArticleController extends AbstractController
             'article'           => $article,
             'articleRandom'     => $articleRandom,
             'form'              => $form->createView(),
+            'lastComments'      => $lastComments
         ]);
     }
 

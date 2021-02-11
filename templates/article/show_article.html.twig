@@ -43,7 +43,7 @@
                                     {{ form_end(form) }}
                                 </div>
                             {% else %}
-                                <div class="mt-4"><a type="button" href="#" data-toggle="modal" data-target="#connexionModal">Connectez vous</a> pour laisser un message.</div>
+                                <div class="mt-4 mb-5"><a type="button" href="#" data-toggle="modal" data-target="#connexionModal">Connectez vous</a> pour laisser un message.</div>
                             {% endif %}
                             {% for commentaire in article.commentaires|sort((a, b) => a.createdAt <=> b.createdAt)|reverse %}
                                 {% if commentaire.isPublished %}
