@@ -16,8 +16,11 @@
                             {% for partner in partners %}
                             <div class="col-12 col-sm-6 col-lg-4 mb-5 text-center partenaires partenaires-hover">
                                 <a href="{{ partner.website }}" target="_blank">
-                                    <img src="{{ asset('/images/partners/' ~ partner.media.nom ) }}" alt="">
-                                    {# <img src="{{ asset('/images/logo.svg' ) }}" alt=""> #}
+                                    {% if partner.media %}
+                                        <img id='partnerImage' style="max-width:280px; max-height:120px" class="img-fluid" alt="Logo du partenaire" src="{{ asset('/uploads/' ~ partner.media.nom ) }}">
+                                    {% else %}
+                                        <img id='partnerImage' style="max-width:280px; max-height:120px" class="img-fluid" alt="Logo du partenaire" src="{{ asset('/images/defaut/partner-default.png') }}">
+                                    {% endif %}
                                 </a>
                             </div>
                             {% endfor %}
@@ -56,7 +59,7 @@
                         Plafonnement du montant du don : 20 000 €, ou 5 pour mille du chiffre d’affaires de l’entreprise
                     </li>
                 </ul>
-            
+
                 <div class="table-responsive">
                     <table class="table table-striped">
                         <thead>
@@ -100,7 +103,7 @@
                 <p>
                     Les dons monétaires et en nature pour les particuliers sont déductibles à hauteur de 66 %. Ils peuvent être lissés sur 3 ans et plus, dans une limite de 20% du revenu net imposable.
                 </p>
-            
+
                 <div class="table-responsive">
                     <table class="table table-striped">
                         <thead>
@@ -140,9 +143,9 @@
                     </table>
                 </div>
             </div>
-            <div class="container mt-5">
+            {# <div class="container mt-5">
                 <iframe id="haWidget" allowtransparency="true" scrolling="auto" src="https://www.helloasso.com/associations/sep%20a%20la%20voile/collectes/sep-a-la-voile/widget" style="width:100%;height:750px;border:none;" onload="window.scroll(0, this.offsetTop)"></iframe><div style="width:100%;text-align:center;">Propulsé par <a href="https://www.helloasso.com" rel="nofollow">HelloAsso</a></div>
-            </div>
+            </div> #}
         </div>
     </section>
 {% endblock %}
