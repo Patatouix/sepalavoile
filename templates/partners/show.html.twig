@@ -18,9 +18,9 @@
             <div class="row bg-white">
                 <div class="col-4 text-center my-auto">
                     {% if partner.media %}
-                        <img id='partnerImage' class="img-fluid w-50" alt="Logo du partenaire" src="{{ asset('/uploads/' ~ partner.media.nom ) }}">
+                        <img id='partnerImage' style="max-width:280px; max-height:120px" class="img-fluid" alt="Logo du partenaire" src="{{ asset('/uploads/' ~ partner.media.nom ) }}">
                     {% else %}
-                        <img id='partnerImage' class="img-fluid w-50" alt="Logo du partenaire" src="{{ asset('/images/logo.svg') }}">
+                        <img id='partnerImage' style="max-width:280px; max-height:120px" class="img-fluid" alt="Logo du partenaire" src="{{ asset('/images/defaut/partner-default.png') }}">
                     {% endif %}
                 </div>
                 <div class="col-8 my-5 pl-5 border-left-profil ">

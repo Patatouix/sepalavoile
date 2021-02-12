@@ -335,9 +335,9 @@
                         <div class="col-12 col-sm-6 col-lg-4 mb-5 text-center partenaires partenaires-hover">
                             <a href="{{ partner.website }}" target="_blank">
                                 {% if partner.media %}
-                                    <img id='partnerImage' class="img-fluid" alt="Logo du partenaire" src="{{ asset('/uploads/' ~ partner.media.nom ) }}">
+                                    <img id='partnerImage' style="max-width:280px; max-height:120px" class="img-fluid" alt="Logo du partenaire" src="{{ asset('/uploads/' ~ partner.media.nom ) }}">
                                 {% else %}
-                                    <img id='partnerImage' class="img-fluid" alt="Logo du partenaire" src="{{ asset('/images/logo.svg') }}">
+                                    <img id='partnerImage' style="max-width:280px; max-height:120px" class="img-fluid" alt="Logo du partenaire" src="{{ asset('/images/defaut/partner-default.png') }}">
                                 {% endif %}
                             </a>
                         </div>
