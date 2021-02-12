@@ -23,7 +23,9 @@ class PartnersType extends AbstractType
                 'label' => 'Médias associés :',
                 'class' => Media::class,
                 'choice_label' => 'nom',
-                
+                'placeholder' => 'Choisir un fichier',
+                'required' => false,
+
                 ])
         ;
     }
