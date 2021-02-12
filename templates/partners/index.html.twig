@@ -49,7 +49,7 @@
                                             <div class="modal-body font-weight-normal p-0">
                                                 {% include "partners/show.html.twig" %}
 
-                                                <div class="modal-footer"> 
+                                                <div class="modal-footer">
                                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
                                                 </div>
                                             </div>
@@ -78,7 +78,11 @@
                                             <div class="modal-body font-weight-normal">
                                                 <div class="row bg-white">
                                                     <div class="col-4 text-center my-auto">
-                                                        {# <img id='eventImage' class="img-fluid" alt="Photo de l'événement" src="{{ partner.filename ? asset('/images/partners/' ~ partner.filename) : asset('/images/logo.svg') }}"> #}
+                                                        {% if partner.media.nom %}
+                                                            <img id='partnerImage' class="img-fluid w-50" alt="Logo du partenaire" src="{{ asset('/uploads/' ~ partner.media.nom ) }}">
+                                                        {% else %}
+                                                            <img id='partnerImage' class="img-fluid w-50" alt="Logo du partenaire" src="{{ asset('/images/logo.svg') }}">
+                                                        {% endif %}
                                                     </div>
                                                     <div class="col-8 my-5 pl-5 border-left-profil ">
                                                         <div class="col-12">
@@ -109,7 +113,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="modal-footer"> 
+                                            <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
                                                 {% include "partners/_delete_form.html.twig" %}
                                             </div>
@@ -117,7 +121,7 @@
                                     </div>
                                 </div>
                                 {# Fin de la modal supprimer expérience #}
-                            
+
                             </td>
                             <td>
                                 {{ partner.name }}
@@ -126,9 +130,16 @@
                                 {{ partner.website }}
                             </td>
                             <td>
-                                <img id='partnerImage' class="img-fluid w-25" alt="Logo du partenaire" src="{{ partner.media.nom ? asset('/images/partners/' ~ partner.media.nom) : asset('/images/logo.svg') }}">
-                                                                
-                            </td>                            
+                            {% if partner.media.nom %}
+                                <img id='partnerImage' class="img-fluid w-50" alt="Logo du partenaire" src="{{ asset('/uploads/' ~ partner.media.nom ) }}">
+                            {% else %}
+                                <img id='partnerImage' class="img-fluid w-50" alt="Logo du partenaire" src="{{ asset('/images/logo.svg') }}">
+                            {% endif %}
+
+
+                                {# <img id='partnerImage' class="img-fluid w-25" alt="Logo du partenaire" src="{{ partner.media.nom ? asset('/images/partners/' ~ partner.media.nom) : asset('/images/logo.svg') }}"> #}
+
+                            </td>
                         </tr>
                     {% else %}
                         <tr>
