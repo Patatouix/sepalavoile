@@ -313,6 +313,7 @@
                     <script type="text/javascript" class="carte">
                         var width = "100%";
                         var height = "300px";
+                        var zoom="5";
                         var mmsi = "227538890";
                         var show_track = true;
                     </script>
@@ -331,12 +332,16 @@
                 <div class="row d-flex justify-content-around">
                     {# BOUCLE SUR LES PARTENAIRES #}
                     {% for partner in partners %}
-                    <div class="col-12 col-sm-6 col-lg-4 mb-5 text-center partenaires partenaires-hover">
-                        <a href="{{ partner.website }}" target="_blank">
-                            <img src="{{ partner.media.nom ? asset('/images/partners/' ~ partner.media.nom) : asset('/images/logo.svg') }}" alt="">
-                            {# <img src="{{ asset('/images/logo.svg' ) }}" alt=""> #}
-                        </a>
-                    </div>
+                        <div class="col-12 col-sm-6 col-lg-4 mb-5 text-center partenaires partenaires-hover">
+                            <a href="{{ partner.website }}" target="_blank">
+                                {% if partner.media %}
+                                    <img id='partnerImage' class="img-fluid" alt="Logo du partenaire" src="{{ asset('/uploads/' ~ partner.media.nom ) }}">
+                                {% else %}
+                                    <img id='partnerImage' class="img-fluid" alt="Logo du partenaire" src="{{ asset('/images/logo.svg') }}">
+                                {% endif %}
+                                {# {{ partner.filename ? asset('/images/partners/' ~ partner.filename) : asset('/images/logo.svg') }} #}
+                            </a>
+                        </div>
                     {% endfor %}
                     {# FIN DE LA BOUCLE SUR LES PARTENAIRES #}
                 </div>
