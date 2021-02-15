@@ -1,0 +1,76 @@
+{% block body %}
+        <div id="show_commentaire" class="container bg-light rounded">
+            <div class="row border-bottom py-3 px-5">
+                <div class="col-6">
+                    <h1 class="text-uppercase text-left m-0">
+                        Commentaire #{{ commentaire.id }}
+                    </h1>
+                </div>
+                <div class="col-6 text-right my-auto">
+                    <span class="text-muted mr-2 font-italic">
+                        Modifier le commentaire :
+                    </span>
+                    <a href="{{ path('admin_commentaire_edit', {'id': commentaire.id}) }}">
+                        <i class="fad fa-edit"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="row bg-white">
+                <div class="col-9 my-5 pl-3 border-left-form">
+                    <div class="col-12">
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group">
+                                <div class="row mb-3">
+                                    <div class="col-1 p-0 text-center"><i class="fad fa-id-badge"></i></div>
+                                    <div class="col-3">Id commentaire :</div>
+                                    <div class="col-8 p-0">{{ commentaire.id }}</div>
+                                </div>
+                            </li>
+                            <li class="list-group">
+                                <div class="row mb-3">
+                                    <div class="col-1 p-0 text-center"><i class="fad fa-file-edit"></i></div>
+                                    <div class="col-3">Contenu du commentaire :</div>
+                                    <div class="col-8 p-0 pr-5">{{ commentaire.contenu|raw }}</div>
+                                </div>
+                            </li>
+                            <li class="list-group">
+                                <div class="row mb-3">
+                                    <div class="col-1 p-0 text-center"><i class="fal fa-user-alt"></i></div>
+                                    <div class="col-3">Article :</div>
+                                    <div class="col-8 p-0 break-word">{{ commentaire.article.title }}</div>
+                                </div>
+                            </li>
+                            <li class="list-group">
+                                <div class="row mb-3">
+                                    <div class="col-1 p-0 text-center"><i class="fal fa-user-alt"></i></div>
+                                    <div class="col-3">Auteur :</div>
+                                    <div class="col-8 p-0 break-word">{{ commentaire.user.nomComplet }}</div>
+                                </div>
+                            </li>
+                            <li class="list-group">
+                                <div class="row mb-3">
+                                    <div class="col-1 p-0 text-center"><i class="fal fa-user-alt"></i></div>
+                                    <div class="col-3">Commentaire publié :</div>
+                                    <div class="col-8 p-0 break-word">{{ commentaire.isPublished ? 'Oui' : 'Non' }}</div>
+                                </div>
+                            </li>
+                            <li class="list-group">
+                                <div class="row mb-3">
+                                    <div class="col-1 p-0 text-center"><i class="fal fa-user-alt"></i></div>
+                                    <div class="col-3">Date de création :</div>
+                                    <div class="col-8 p-0 break-word">{{ commentaire.createdAt|date('Y-m-d H:i:s') }}</div>
+                                </div>
+                            </li>
+                            <li class="list-group">
+                                <div class="row mb-3">
+                                    <div class="col-1 p-0 text-center"><i class="fal fa-user-alt"></i></div>
+                                    <div class="col-3">Date de modification :</div>
+                                    <div class="col-8 p-0 break-word">{{ commentaire.updatedAt ? commentaire.updatedAt|date('Y-m-d H:i:s') : '' }}</div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+{% endblock %}

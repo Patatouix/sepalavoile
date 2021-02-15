@@ -67,23 +67,16 @@
                 <div class="widget shadow">
                     <h2 class="text-right">Derniers commentaires</h2>
                     <div class="topv">
+                    {% for commentaire in lastComments %}
                         <div class="mb15 mt15">
-                            <a href="#">L'achat d'un Soling pour réaliser des baptêmes et la réalisation de régate</a> -
+                            <a href="{{ path('article_show', {'id': commentaire.article.id}) }}">{{ commentaire.article.title }}</a> -
                             <span class="meta">Publié
-                                le 19 novembre 2019 - 125 vues</span>
+                                le {{ commentaire.article.createdAt|date('d/m/Y') }} - {{ commentaire.article.nbVues }} vues</span>
                         </div>
                         <blockquote>
-                            <a href="#">“labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-                                exercitation ullamco ...”</a>
+                            {{ commentaire.contenu|u.truncate(100, '...') }}
                         </blockquote>
-                        <div class="mb15 mt15">
-                            <a href="#">Prise en main du bateau à Porto</a> - <span class="meta">Publié
-                                le 8 décembre 2017 - 125 vues</span>
-                        </div>
-                        <blockquote>
-                            <a href="#">“labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-                                exercitation ullamco ...”</a>
-                        </blockquote>
+                    {% endfor %}
                     </div>
                 </div>
                 <!-- Fin widget -->
