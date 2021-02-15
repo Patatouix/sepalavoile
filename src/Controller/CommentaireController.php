@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Commentaire;
+use App\Form\CommentaireAdminType;
 use App\Form\CommentaireType;
 use App\Repository\CommentaireRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -11,45 +12,22 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/commentaire")
+ * @Route("/admin/commentaire")
  */
 class CommentaireController extends AbstractController
 {
     /**
-     * @Route("/", name="commentaire_index", methods={"GET"})
+     * @Route("/", name="admin_commentaire_index", methods={"GET"})
      */
     public function index(CommentaireRepository $commentaireRepository): Response
     {
-        return $this->render('commentaire/index.html.twig', [
+        return $this->render('commentaire/admin/index.html.twig', [
             'commentaires' => $commentaireRepository->findAll(),
         ]);
     }
 
     /**
-     * @Route("/new", name="commentaire_new", methods={"GET","POST"})
-     */
-    public function new(Request $request): Response
-    {
-        $commentaire = new Commentaire();
-        $form = $this->createForm(CommentaireType::class, $commentaire);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($commentaire);
-            $entityManager->flush();
-
-            return $this->redirectToRoute('commentaire_index');
-        }
-
-        return $this->render('commentaire/new.html.twig', [
-            'commentaire' => $commentaire,
-            'form' => $form->createView(),
-        ]);
-    }
-
-    /**
-     * @Route("/{id}", name="commentaire_show", methods={"GET"})
+     * @Route("/{id}", name="admin_commentaire_show", methods={"GET"})
      */
     public function show(Commentaire $commentaire): Response
     {
@@ -59,27 +37,27 @@ class CommentaireController extends AbstractController
     }
 
     /**
-     * @Route("/{id}/edit", name="commentaire_edit", methods={"GET","POST"})
+     * @Route("/{id}/edit", name="admin_commentaire_edit", methods={"GET","POST"})
      */
     public function edit(Request $request, Commentaire $commentaire): Response
     {
-        $form = $this->createForm(CommentaireType::class, $commentaire);
+        $form = $this->createForm(CommentaireAdminType::class, $commentaire);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('commentaire_index');
+            return $this->redirectToRoute('admin_commentaire_index');
         }
 
-        return $this->render('commentaire/edit.html.twig', [
+        return $this->render('commentaire/admin/edit.html.twig', [
             'commentaire' => $commentaire,
             'form' => $form->createView(),
         ]);
     }
 
     /**
-     * @Route("/{id}", name="commentaire_delete", methods={"DELETE"})
+     * @Route("/{id}", name="admin_commentaire_delete", methods={"DELETE"})
      */
     public function delete(Request $request, Commentaire $commentaire): Response
     {
@@ -89,6 +67,25 @@ class CommentaireController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('commentaire_index');
+        return $this->redirectToRoute('admin_commentaire_index');
+    }
+
+    /**
+     * @return Response
+     * @Route("/{id}/togglePublished", name="admin_commentaire_togglePublished", methods={"POST"})
+     */
+    public function togglePublished(Request $request, CommentaireRepository $commentaireRepository): Response
+    {
+        $commentaireId = $request->request->get('id');
+        $isPublished = $request->request->get('isPublished');
+
+        $commentaire = $commentaireRepository->find($commentaireId);
+        $commentaire->setIsPublished($isPublished ? '0' : '1');
+
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->persist($commentaire);
+        $entityManager->flush();
+
+        return $this->redirectToRoute('admin_commentaire_index');
     }
 }

@@ -1,0 +1,138 @@
+{% extends 'base_dashboard.html.twig' %}
+
+{% block title %}Commentaire index{% endblock %}
+
+{% block body %}
+    <div id="user-list" class="container-fluid">
+        <h1 class="mb-4">Liste des commentaires</h1>
+        <div class="table-responsive card px-2 py-2">
+            <table id="example1" class="table table-bordered table-striped mx-2 my-2">
+                <thead>
+                    <tr class="text-center">
+                        <th>Id</th>
+                        <th width="10%">Actions</th>
+                        <th width="25%">Contenu</th>
+                        <th>Article</th>
+                        <th>Auteur</th>
+                        <th>Publié</th>
+                        <th>Date de création</th>
+                        <th>Date de modification</th>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr class="text-center">
+                        <th>Id</th>
+                        <th width="10%">Actions</th>
+                        <th width="25%">Contenu</th>
+                        <th>Article</th>
+                        <th>Auteur</th>
+                        <th>Publié</th>
+                        <th>Date de création</th>
+                        <th>Date de modification</th>
+                    </tr>
+                </tfoot>
+                <tbody>
+                {% for commentaire in commentaires %}
+                    <tr>
+                        <td class="text-center">
+                            {{ commentaire.id }}
+                        </td>
+                        <td class="text-center">
+                            {# Modal pour voir un commentaire #}
+                            <a href="" type="button" class="m-0" data-toggle="modal" data-target="#showCommentaireModal{{ commentaire.id }}">
+                                <i class="fad fa-eye"></i>
+                            </a>
+                            <div class="modal fade text-left" id="showCommentaireModal{{ commentaire.id }}" tabindex="-1" role="dialog" aria-labelledby="showCommentaireModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-xl" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h6 class="modal-title text-uppercase font-weight-bold">Consulter</h6>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body font-weight-normal p-0">
+                                            {% include "commentaire/admin/show.html.twig" %}
+                                            {# {% include 'template.html' with {'foo': 'bar'} %} #}
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            {# Fin de la modal voir expérience #}
+
+                            {# Lien pour modifier un événement #}
+                            <a href="{{ path('admin_commentaire_edit', {'id': commentaire.id}) }}">
+                                <i class="fad fa-user-edit px-2 py-2"></i>
+                            </a>
+                            {# Fin lien pour modifier un événement #}
+
+                            {# Modal pour supprimer un événement #}
+                            <a href="" type="button" class="m-0" data-toggle="modal" data-target="#deleteCommentaireModal{{ commentaire.id }}">
+                                <i class="fad fa-trash-alt"></i>
+                            </a>
+                            <div class="modal fade text-left" id="deleteCommentaireModal{{ commentaire.id }}" tabindex="-1" role="dialog" aria-labelledby="deleteCommentaireModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-lg" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h6 class="modal-title text-uppercase font-weight-bold">Suppression</h6>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body font-weight-normal">
+                                            <div class="col font-weight-bold">
+                                                Commentaire : #{{ commentaire.id }}
+                                            </div>
+                                            <div class="col">
+                                                Article : {{ commentaire.article.title }}
+                                            </div>
+                                            <div class="col">
+                                                Auteur : {{ commentaire.user.nomComplet }}
+                                            </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                                                {% include "commentaire/admin/_delete_form.html.twig" %}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            {# Fin de la modal supprimer événement #}
+                        </td>
+                        <td class="text-center">
+                            {{ commentaire.contenu|u.truncate(230, '...')|raw }}
+                        </td>
+                        <td class="text-center">
+                            {{ commentaire.article.title }}
+                        </td>
+                        <td class="text-center">
+                            {{ commentaire.user.nomComplet }}
+                        </td>
+                         <td class="text-center">
+                            <form action="{{ path('admin_commentaire_togglePublished', {'id': commentaire.id }) }}" method="POST">
+                                <input type="hidden" name="id" value="{{ commentaire.id }}">
+                                <input type="hidden" name="isPublished" value="{{ commentaire.isPublished }}">
+                                <input type="submit" class="alert alert-{{ commentaire.isPublished == 1 ? 'success' : 'danger' }}" value="{{ commentaire.isPublished == 1 ? 'Oui' : 'Non' }}">
+                            </form>
+                        </td>
+                        <td class="text-center">
+                            {{ commentaire.createdAt|date('d/m/Y H:i:s') }}
+                        </td>
+                        <td class="text-center">
+                            {{ commentaire.updatedAt ? commentaire.updatedAt|date('d/m/Y H:i:s') : '' }}
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="8">Pas d'enregistrement trouvé</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}
