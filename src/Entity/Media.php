@@ -78,6 +78,16 @@ class Media
      */
     private $imageFile;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=MediaCategory::class, inversedBy="Medias")
+     */
+    private $mediaCategory;
+
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $isDisplayed;
+
     public function __construct()
     {
         $this->produits = new ArrayCollection();
@@ -94,7 +104,7 @@ class Media
         return $this->nom;
     }
 
-    public function setNom(string $nom): self
+    public function setNom( ?string $nom): self
     {
         $this->nom = $nom;
 
@@ -255,6 +265,30 @@ class Media
             // if 'updatedAt' is not defined in your entity, use another property
             $this->updatedAt = new \DateTime('now');
         }
+    }
+
+    public function getMediaCategory(): ?MediaCategory
+    {
+        return $this->mediaCategory;
+    }
+
+    public function setMediaCategory(?MediaCategory $mediaCategory): self
+    {
+        $this->mediaCategory = $mediaCategory;
+
+        return $this;
+    }
+
+    public function getIsDisplayed(): ?bool
+    {
+        return $this->isDisplayed;
+    }
+
+    public function setIsDisplayed(?bool $isDisplayed): self
+    {
+        $this->isDisplayed = $isDisplayed;
+
+        return $this;
     }
 
 }
