@@ -25,8 +25,12 @@ class FrontController extends AbstractController
 
         $articleBestView = $this->getDoctrine()->getRepository(Article::class)->findBynombreVuDesc();
 
-        $mediaCategory = $mediaCategoryRepository->findBy(['name' => MediaCategory::MEDIA_CATEGORY_VIDEO_NAME]);
-        $videoYt = $this->getDoctrine()->getRepository(Media::class)->findBy(['mediaCategory' => $mediaCategory], ['createdAt' => 'desc'], 3);
+        $mediaCategoryVideoYt = $mediaCategoryRepository->findBy(['name' => MediaCategory::MEDIA_CATEGORY_VIDEO_NAME]);
+        $videoYt = $this->getDoctrine()->getRepository(Media::class)->findBy(['mediaCategory' => $mediaCategoryVideoYt], ['createdAt' => 'desc'], 3);
+
+        $mediaCategoryHeaderVideo = $mediaCategoryRepository->findBy(['name' => MediaCategory::MEDIA_CATEGORY_HEADERVIDEO_NAME]);
+        $headerVideo = $this->getDoctrine()->getRepository(Media::class)->findBy(['mediaCategory' => $mediaCategoryHeaderVideo], ['createdAt' => 'desc'], 3);
+
         $galerie = $this->getDoctrine()->getRepository(Media::class)->findBy(['type' => 'galerie'], ['createdAt' => 'desc']);
 
         return $this->render('front/home_page.html.twig', [
@@ -35,6 +39,7 @@ class FrontController extends AbstractController
             'article'           => $articleRepository->findBy([],['createdAt' => 'desc']),
             'partners'          => $partnersRepository -> findAll(),
             'videoYt'           => $videoYt,
+            'headerVideo'       => $headerVideo,
             'galerie'           => $galerie,
         ]);
     }
@@ -148,8 +153,8 @@ class FrontController extends AbstractController
 
     public function carousel(MediaCategoryRepository $mediaCategoryRepository): Response
     {
-        $mediaCategory = $mediaCategoryRepository->findBy(['name' => MediaCategory::MEDIA_CATEGORY_SLIDERPHOTO_NAME]);
-        $sliderPhoto = $this->getDoctrine()->getRepository(Media::class)->findBy(['mediaCategory' => $mediaCategory], ['createdAt' => 'desc']);
+        $mediaCategorySliderPhoto = $mediaCategoryRepository->findBy(['name' => MediaCategory::MEDIA_CATEGORY_SLIDERPHOTO_NAME]);
+        $sliderPhoto = $this->getDoctrine()->getRepository(Media::class)->findBy(['mediaCategory' => $mediaCategorySliderPhoto], ['createdAt' => 'desc']);
 
         return $this->render('_include/carousel.html.twig', [
             'sliderPhoto' => $sliderPhoto,
