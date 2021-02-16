@@ -12,7 +12,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/media")
+ * @Route("/admin/media")
  */
 class MediaController extends AbstractController
 {
@@ -36,6 +36,8 @@ class MediaController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            $medium->setCreatedAt( new DateTime('NOW'));
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($medium);
             $entityManager->flush();
@@ -94,6 +96,9 @@ class MediaController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            $medium->setUpdatedAt( new DateTime('NOW'));
+
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('media_index');
