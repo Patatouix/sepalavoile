@@ -19,9 +19,11 @@
                         </div>
                     </div>
                 </div>
-                <video autoplay loop muted src="{{ asset('/images/slidevideo/video-site-internet-projet-web-disii.mov') }}" width="100%"
-                    class="video">Il est temps de mettre à jour votre navigateur !
-                </video>
+                {% for headerVideo in headerVideo %}
+                    <video autoplay loop muted src="{{ asset('/uploads/' ~ headerVideo.nom ) }}" width="100%"
+                        class="video">Il est temps de mettre à jour votre navigateur !
+                    </video>
+                {% endfor %}
             </div>
         </div>
     </section>
