@@ -96,6 +96,12 @@ class AppLoginAuthenticator extends AbstractFormLoginAuthenticator implements Pa
             return new RedirectResponse($targetPath);
         }
 
+        //si on s'est connecté via la modale, on veut rester sur la page où on était
+        if (null !== $request->request->get('modal')) {
+            $referer = $request->headers->get('referer');
+            return new RedirectResponse($referer);
+        }
+
         // For example : return new RedirectResponse($this->urlGenerator->generate('some_route'));
         // throw new \Exception('TODO: provide a valid redirect inside '.__FILE__);
         return new RedirectResponse($this->urlGenerator->generate('home_page'));

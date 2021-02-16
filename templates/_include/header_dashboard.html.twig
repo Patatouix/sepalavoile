@@ -404,7 +404,7 @@
                             <a href="" class="nav-link">
                                 <i class="nav-icon far fa-newspaper"></i>
                                 <p>
-                                    Article
+                                    Blog
                                     <i class="fas fa-angle-left right"></i>
                                     {# {* Permet de rajouter un badge à la fin *} #}
                                     {# <span class="badge badge-info right" style="background-color : #ff8300">{{ articles|length }}</span> #}
@@ -415,17 +415,7 @@
                                     <a href="{{ path('article_index') }}" class="nav-link">
                                         <i class="nav-icon far fa-circle"></i>
                                         <p>
-                                            Liste des articles
-                                            {# {* Permet de rajouter un badge à la fin *} #}
-                                            <span class="badge badge-info right"></span>
-                                        </p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="{{ path('article_categorie_index') }}" class="nav-link">
-                                        <i class="nav-icon far fa-circle"></i>
-                                        <p>
-                                            Catégorie article
+                                            Articles
                                             {# {* Permet de rajouter un badge à la fin *} #}
                                             <span class="badge badge-info right"></span>
                                         </p>
@@ -436,6 +426,26 @@
                                         <i class="nav-icon far fa-circle"></i>
                                         <p>
                                             Ajouter un article
+                                            {# {* Permet de rajouter un badge à la fin *} #}
+                                            <span class="badge badge-info right"></span>
+                                        </p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{ path('article_categorie_index') }}" class="nav-link">
+                                        <i class="nav-icon far fa-circle"></i>
+                                        <p>
+                                            Catégories d'articles
+                                            {# {* Permet de rajouter un badge à la fin *} #}
+                                            <span class="badge badge-info right"></span>
+                                        </p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{ path('admin_commentaire_index') }}" class="nav-link">
+                                        <i class="nav-icon far fa-circle"></i>
+                                        <p>
+                                            Commentaires
                                             {# {* Permet de rajouter un badge à la fin *} #}
                                             <span class="badge badge-info right"></span>
                                         </p>

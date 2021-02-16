@@ -37,10 +37,24 @@
 
                         <aside class="mt60">
                             <h2>Laisser un commentaire</h2>
-                            <p>ici plugin commentaire....</p>
+                            {% if app.user %}
+                                <div class="mb-5">
+                                    {{ form_start(form) }}
+                                    {{ form_end(form) }}
+                                </div>
+                            {% else %}
+                                <div class="mt-4 mb-5"><a type="button" href="#" data-toggle="modal" data-target="#connexionModal">Connectez vous</a> pour laisser un message.</div>
+                            {% endif %}
+                            {% for commentaire in article.commentaires|sort((a, b) => a.createdAt <=> b.createdAt)|reverse %}
+                                {% if commentaire.isPublished %}
+                                    <div>{{ commentaire.contenu }}</div>
+                                    <div class="meta text-right">{{ commentaire.user.nomComplet }}, le {{ commentaire.createdAt|date('d/m/Y') }}</div>
+                                {% endif %}
+                            {% endfor %}
                         </aside>
 
                         <aside class="mt60">
+                            <hr>
                             <h2>Articles les plus récents</h2>
                             <div class="row">
                                 {% for articleRandom in articleRandom|slice(0, 3) %}
