@@ -219,31 +219,31 @@
                                 </p>
                             </a>
                             <ul class="nav nav-treeview">
-                                <li class="nav-item">
+                                {# <li class="nav-item">
                                     <a href="" class="nav-link">
                                         <i class="nav-icon far fa-circle"></i>
                                         <p>
-                                            Sliders photos
+                                            Sliders photos #}
+                                            {# {* Permet de rajouter un badge à la fin *} #}
+                                            {# <span class="badge badge-info right"></span>
+                                        </p>
+                                    </a>
+                                </li> #}
+                                <li class="nav-item">
+                                    <a href="{{ path('media_index') }}" class="nav-link">
+                                        <i class="nav-icon far fa-circle"></i>
+                                        <p>
+                                            Les médias
                                             {# {* Permet de rajouter un badge à la fin *} #}
                                             <span class="badge badge-info right"></span>
                                         </p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="" class="nav-link">
+                                    <a href="{{ path('media_new') }}" class="nav-link">
                                         <i class="nav-icon far fa-circle"></i>
                                         <p>
-                                            Vidéo / Home_page
-                                            {# {* Permet de rajouter un badge à la fin *} #}
-                                            <span class="badge badge-info right"></span>
-                                        </p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="" class="nav-link">
-                                        <i class="nav-icon far fa-circle"></i>
-                                        <p>
-                                            Vidéo YouTube
+                                            Ajouter un média
                                             {# {* Permet de rajouter un badge à la fin *} #}
                                             <span class="badge badge-info right"></span>
                                         </p>
