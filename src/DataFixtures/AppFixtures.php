@@ -7,6 +7,7 @@ use App\Entity\Article;
 use App\Entity\ArticleCategorie;
 use App\Entity\Creneau;
 use App\Entity\Media;
+use App\Entity\MediaCategory;
 use App\Entity\Message;
 use App\Entity\Partners;
 use App\Entity\Produit;
@@ -135,6 +136,28 @@ class AppFixtures extends Fixture
         $produitAdhesion->setSlug(ProduitType::PRODUIT_TYPE_ADHESION_SLUG);
         $manager->persist($produitAdhesion);
 
+
+        //mediaCategory
+        $mediaCategoryImage = new MediaCategory();
+        $mediaCategoryImage->setName(MediaCategory::MEDIA_CATEGORY_IMAGE_NAME);
+        $manager->persist($mediaCategoryImage);
+
+        $mediaCategoryVideo = new MediaCategory();
+        $mediaCategoryVideo->setName(MediaCategory::MEDIA_CATEGORY_VIDEO_NAME);
+        $manager->persist($mediaCategoryVideo);
+
+        $mediaCategorySliderPhoto = new MediaCategory();
+        $mediaCategorySliderPhoto->setName(MediaCategory::MEDIA_CATEGORY_SLIDERPHOTO_NAME);
+        $manager->persist($mediaCategorySliderPhoto);
+
+        $mediaCategoryHeaderVideo = new MediaCategory();
+        $mediaCategoryHeaderVideo->setName(MediaCategory::MEDIA_CATEGORY_HEADERVIDEO_NAME);
+        $manager->persist($mediaCategoryHeaderVideo);
+
+        $mediaCategoryFichier = new MediaCategory();
+        $mediaCategoryFichier->setName(MediaCategory::MEDIA_CATEGORY_FICHIER_NAME);
+        $manager->persist($mediaCategoryFichier);
+
         // medias
         $media = new Media();
         $media->setCreatedAt(new DateTime('NOW'));
@@ -142,94 +165,137 @@ class AppFixtures extends Fixture
         $media->setUrl('https://www.événementiel.net/wp-content/uploads/2014/02/default-placeholder.png');
         $media->setDescription('Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat aperiam doloremque, dolores voluptates obcaecati nihil ipsam voluptatibus vero exercitationem in, debitis sapiente. Alias ullam culpa sint vel esse, numquam in?');
         $media->setTitre('Image par défaut pour nos entités');
+        $media->setMediaCategory($mediaCategoryImage);
         $manager->persist($media);
 
         $mediaAiragri = new Media();
         $mediaAiragri->setCreatedAt(new DateTime('NOW'));
         $mediaAiragri->setNom('sponsor-airagri.jpg');
-        $mediaAiragri->setUrl('');
+        $mediaAiragri->setUrl('http://www.sas-airagri.com/');
         $mediaAiragri->setDescription('AIRAGRI');
         $mediaAiragri->setTitre('AIRAGRI');
+        $mediaAiragri->setMediaCategory($mediaCategoryImage);
         $manager->persist($mediaAiragri);
 
         $mediaPicvert = new Media();
         $mediaPicvert->setCreatedAt(new DateTime('NOW'));
         $mediaPicvert->setNom('sponsor-picvert.jpg');
-        $mediaPicvert->setUrl('');
+        $mediaPicvert->setUrl('https://www.picvert.com/');
         $mediaPicvert->setDescription('PICVERT');
         $mediaPicvert->setTitre('PICVERT');
+        $mediaPicvert->setMediaCategory($mediaCategoryImage);
         $manager->persist($mediaPicvert);
 
         $mediaDivatec = new Media();
         $mediaDivatec->setCreatedAt(new DateTime('NOW'));
         $mediaDivatec->setNom('sponsor-divatec.jpg');
-        $mediaDivatec->setUrl('');
+        $mediaDivatec->setUrl('https://www.divatec.eu/');
         $mediaDivatec->setDescription('DIVATEC');
         $mediaDivatec->setTitre('DIVATEC');
+        $mediaDivatec->setMediaCategory($mediaCategoryImage);
         $manager->persist($mediaDivatec);
 
         $mediaDalmard = new Media();
         $mediaDalmard->setCreatedAt(new DateTime('NOW'));
         $mediaDalmard->setNom('sponsor-dalmard.jpg');
-        $mediaDalmard->setUrl('');
+        $mediaDalmard->setUrl('https://www.dalmardmarine.com/');
         $mediaDalmard->setDescription('DALMARD MARINE');
         $mediaDalmard->setTitre('DALMARD MARINE');
+        $mediaDalmard->setMediaCategory($mediaCategoryImage);
         $manager->persist($mediaDalmard);
 
         $mediaIej = new Media();
         $mediaIej->setCreatedAt(new DateTime('NOW'));
         $mediaIej->setNom('sponsor-iej.jpg');
-        $mediaIej->setUrl('');
+        $mediaIej->setUrl('https://iej.eu/strasbourg/');
         $mediaIej->setDescription('IEJ');
         $mediaIej->setTitre('IEJ');
+        $mediaIej->setMediaCategory($mediaCategoryImage);
         $manager->persist($mediaIej);
 
         $mediaVieuxCampeur = new Media();
         $mediaVieuxCampeur->setCreatedAt(new DateTime('NOW'));
         $mediaVieuxCampeur->setNom('sponsor-vieuxcampeur.jpg');
-        $mediaVieuxCampeur->setUrl('');
+        $mediaVieuxCampeur->setUrl('https://www.auvieuxcampeur.fr/');
         $mediaVieuxCampeur->setDescription('AUX VIEUX CAMPEUR');
         $mediaVieuxCampeur->setTitre('AUX VIEUX CAMPEUR');
+        $mediaVieuxCampeur->setMediaCategory($mediaCategoryImage);
         $manager->persist($mediaVieuxCampeur);
 
         $mediaAcal = new Media();
         $mediaAcal->setCreatedAt(new DateTime('NOW'));
         $mediaAcal->setNom('sponsor-acal.jpg');
-        $mediaAcal->setUrl('');
+        $mediaAcal->setUrl('http://www.acal67.com/voile-acal-strasbourg/');
         $mediaAcal->setDescription('ACAL');
         $mediaAcal->setTitre('ACAL');
+        $mediaAcal->setMediaCategory($mediaCategoryImage);
         $manager->persist($mediaAcal);
 
         // MEDIA TYPE YOUTUBE
         $mediaYoutube1 = new Media();
         $mediaYoutube1->setCreatedAt(new DateTime('NOW'));
-        $mediaYoutube1->setNom('Vlog #3');
+        $mediaYoutube1->setNom('couv-vlog3.jpg');
         $mediaYoutube1->setUrl('https://www.youtube.com/embed/lAxDV7KQV6I');
         $mediaYoutube1->setDescription('Navigations 2019');
         $mediaYoutube1->setTitre('Navigations 2019');
         $mediaYoutube1->setFacebookLink('https://www.facebook.com/dialog/share?app_id=87741124305&href=https%3A//www.youtube.com/watch%3Fv%3DpwMJ_hzBp8M%26feature%3Demb_share&display=popup');
-        $mediaYoutube1->setType('video');
+        $mediaYoutube1->setMediaCategory($mediaCategoryVideo);
         $manager->persist($mediaYoutube1);
 
         $mediaYoutube2 = new Media();
         $mediaYoutube2->setCreatedAt(new DateTime('NOW'));
-        $mediaYoutube2->setNom('Vlog #2');
+        $mediaYoutube2->setNom('couv-vlog2.jpg');
         $mediaYoutube2->setUrl('https://www.youtube.com/embed/W8BpET1Juhk');
         $mediaYoutube2->setDescription('Remontée du bateau, Porto - La Vendée');
         $mediaYoutube2->setTitre('Remontée du bateau, Porto - La Vendée');
         $mediaYoutube2->setFacebookLink('https://www.facebook.com/dialog/share?app_id=87741124305&href=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DW8BpET1Juhk%26feature%3Demb_share&display=popup');
-        $mediaYoutube2->setType('video');
+        $mediaYoutube2->setMediaCategory($mediaCategoryVideo);
         $manager->persist($mediaYoutube2);
 
         $mediaYoutube3 = new Media();
         $mediaYoutube3->setCreatedAt(new DateTime('NOW'));
-        $mediaYoutube3->setNom('Vlog #1');
+        $mediaYoutube3->setNom('couv-vlog1.jpg');
         $mediaYoutube3->setUrl('https://www.youtube.com/embed/pwMJ_hzBp8M');
         $mediaYoutube3->setDescription('Découverte du bateau par l\'équipe projet');
         $mediaYoutube3->setTitre('Découverte du bateau par l\'équipe projet');
         $mediaYoutube3->setFacebookLink('https://www.facebook.com/dialog/share?app_id=87741124305&href=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DlAxDV7KQV6I%26feature%3Demb_share&display=popup');
-        $mediaYoutube3->setType('video');
+        $mediaYoutube3->setMediaCategory($mediaCategoryVideo);
         $manager->persist($mediaYoutube3);
+
+        //MEDIA TYPE SLIDER HEADER PHOTO
+        $sliderHeaderPhoto1 = new Media();
+        $sliderHeaderPhoto1->setCreatedAt(new DateTime('NOW'));
+        $sliderHeaderPhoto1->setNom('bg-slide-1.jpg');
+        $sliderHeaderPhoto1->setDescription('slider bg 1');
+        $sliderHeaderPhoto1->setTitre('slider bg 1');
+        $sliderHeaderPhoto1->setMediaCategory($mediaCategorySliderPhoto);
+        $manager->persist($sliderHeaderPhoto1);
+
+        $sliderHeaderPhoto2 = new Media();
+        $sliderHeaderPhoto2->setCreatedAt(new DateTime('NOW'));
+        $sliderHeaderPhoto2->setNom('bg-slide-2.jpg');
+        $sliderHeaderPhoto2->setDescription('slider bg 2');
+        $sliderHeaderPhoto2->setTitre('slider bg 2');
+        $sliderHeaderPhoto2->setMediaCategory($mediaCategorySliderPhoto);
+        $manager->persist($sliderHeaderPhoto2);
+
+        $sliderHeaderPhoto3 = new Media();
+        $sliderHeaderPhoto3->setCreatedAt(new DateTime('NOW'));
+        $sliderHeaderPhoto3->setNom('bg-slide-3.jpg');
+        $sliderHeaderPhoto3->setDescription('slider bg 3');
+        $sliderHeaderPhoto3->setTitre('slider bg 3');
+        $sliderHeaderPhoto3->setMediaCategory($mediaCategorySliderPhoto);
+        $manager->persist($sliderHeaderPhoto3);
+
+        //MEDIA TYPE HEADER VIDEO
+
+        $headerVideo = new Media();
+        $headerVideo->setCreatedAt(new DateTime('NOW'));
+        $headerVideo->setNom('video-site-internet-projet-web.mov');
+        $headerVideo->setDescription('header video');
+        $headerVideo->setTitre('header video');
+        $headerVideo->setMediaCategory($mediaCategoryHeaderVideo);
+        $manager->persist($headerVideo);
 
         //Galerie
         $mediaGalerie1 = new Media();
