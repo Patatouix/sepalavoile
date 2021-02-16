@@ -76,9 +76,12 @@
                     "language": {
                         "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/French.json"
                     }
-                    
+
                     });
                 });
+            </script>
+            <script>
+                $("input[type=file]").change(function (e){$(this).next('.custom-file-label').text(e.target.files[0].name);})
             </script>
 
         {% endblock %}
