@@ -241,6 +241,7 @@ class AppFixtures extends Fixture
         $mediaYoutube1->setTitre('Navigations 2019');
         $mediaYoutube1->setFacebookLink('https://www.facebook.com/dialog/share?app_id=87741124305&href=https%3A//www.youtube.com/watch%3Fv%3DpwMJ_hzBp8M%26feature%3Demb_share&display=popup');
         $mediaYoutube1->setMediaCategory($mediaCategoryVideo);
+        $mediaYoutube1->setIsDisplayed(true);
         $manager->persist($mediaYoutube1);
 
         $mediaYoutube2 = new Media();
@@ -251,6 +252,7 @@ class AppFixtures extends Fixture
         $mediaYoutube2->setTitre('Remontée du bateau, Porto - La Vendée');
         $mediaYoutube2->setFacebookLink('https://www.facebook.com/dialog/share?app_id=87741124305&href=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DW8BpET1Juhk%26feature%3Demb_share&display=popup');
         $mediaYoutube2->setMediaCategory($mediaCategoryVideo);
+        $mediaYoutube2->setIsDisplayed(true);
         $manager->persist($mediaYoutube2);
 
         $mediaYoutube3 = new Media();
@@ -261,6 +263,7 @@ class AppFixtures extends Fixture
         $mediaYoutube3->setTitre('Découverte du bateau par l\'équipe projet');
         $mediaYoutube3->setFacebookLink('https://www.facebook.com/dialog/share?app_id=87741124305&href=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DlAxDV7KQV6I%26feature%3Demb_share&display=popup');
         $mediaYoutube3->setMediaCategory($mediaCategoryVideo);
+        $mediaYoutube3->setIsDisplayed(true);
         $manager->persist($mediaYoutube3);
 
         //MEDIA TYPE SLIDER HEADER PHOTO
@@ -270,6 +273,7 @@ class AppFixtures extends Fixture
         $sliderHeaderPhoto1->setDescription('slider bg 1');
         $sliderHeaderPhoto1->setTitre('slider bg 1');
         $sliderHeaderPhoto1->setMediaCategory($mediaCategorySliderPhoto);
+        $sliderHeaderPhoto1->setIsDisplayed(true);
         $manager->persist($sliderHeaderPhoto1);
 
         $sliderHeaderPhoto2 = new Media();
@@ -278,6 +282,7 @@ class AppFixtures extends Fixture
         $sliderHeaderPhoto2->setDescription('slider bg 2');
         $sliderHeaderPhoto2->setTitre('slider bg 2');
         $sliderHeaderPhoto2->setMediaCategory($mediaCategorySliderPhoto);
+        $sliderHeaderPhoto2->setIsDisplayed(true);
         $manager->persist($sliderHeaderPhoto2);
 
         $sliderHeaderPhoto3 = new Media();
@@ -286,6 +291,7 @@ class AppFixtures extends Fixture
         $sliderHeaderPhoto3->setDescription('slider bg 3');
         $sliderHeaderPhoto3->setTitre('slider bg 3');
         $sliderHeaderPhoto3->setMediaCategory($mediaCategorySliderPhoto);
+        $sliderHeaderPhoto3->setIsDisplayed(true);
         $manager->persist($sliderHeaderPhoto3);
 
         //MEDIA TYPE HEADER VIDEO
@@ -296,6 +302,7 @@ class AppFixtures extends Fixture
         $headerVideo->setDescription('header video');
         $headerVideo->setTitre('header video');
         $headerVideo->setMediaCategory($mediaCategoryHeaderVideo);
+        $headerVideo->setIsDisplayed(true);
         $manager->persist($headerVideo);
 
         //Galerie
