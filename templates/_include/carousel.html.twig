@@ -17,10 +17,12 @@
                     <div class="carousel-inner">
                         {% set count = 0 %}
                         {% for sliderPhoto in sliderPhoto %}
-                            <div class="carousel-item {% if count == 0 %} active {% endif %}" data-interval="3000">
-                                <img src="{{ asset('/images/slidephoto/' ~ sliderPhoto.nom ) }}" class="d-block w-100" alt="...">
-                            </div>
+                            {% if sliderPhoto.isDisplayed %}
+                                <div class="carousel-item {% if count == 0 %} active {% endif %}" data-interval="3000">
+                                    <img src="{{ asset('/images/slidephoto/' ~ sliderPhoto.nom ) }}" class="d-block w-100" alt="...">
+                                </div>
                             {% set count = count + 1 %}
+                            {% endif %}
                         {% endfor %}
                     </div>
                 {# FIN DE LA VERSION DYNAMIQUE #}
