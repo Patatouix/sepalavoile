@@ -26,10 +26,10 @@ class FrontController extends AbstractController
         $articleBestView = $this->getDoctrine()->getRepository(Article::class)->findBynombreVuDesc();
 
         $mediaCategoryVideoYt = $mediaCategoryRepository->findBy(['name' => MediaCategory::MEDIA_CATEGORY_VIDEO_NAME]);
-        $videoYt = $this->getDoctrine()->getRepository(Media::class)->findBy(['mediaCategory' => $mediaCategoryVideoYt], ['createdAt' => 'desc'], 3);
+        $videoYt = $this->getDoctrine()->getRepository(Media::class)->findBy(['mediaCategory' => $mediaCategoryVideoYt, 'isDisplayed' => true], ['createdAt' => 'desc']);
 
         $mediaCategoryHeaderVideo = $mediaCategoryRepository->findBy(['name' => MediaCategory::MEDIA_CATEGORY_HEADERVIDEO_NAME]);
-        $headerVideo = $this->getDoctrine()->getRepository(Media::class)->findBy(['mediaCategory' => $mediaCategoryHeaderVideo], ['createdAt' => 'desc'], 3);
+        $headerVideo = $this->getDoctrine()->getRepository(Media::class)->findBy(['mediaCategory' => $mediaCategoryHeaderVideo], ['createdAt' => 'desc'], 1);
 
         $galerie = $this->getDoctrine()->getRepository(Media::class)->findBy(['type' => 'galerie'], ['createdAt' => 'desc']);
 
