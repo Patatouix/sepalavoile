@@ -20,9 +20,11 @@
                     </div>
                 </div>
                 {% for headerVideo in headerVideo %}
-                    <video autoplay loop muted src="{{ asset('/uploads/' ~ headerVideo.nom ) }}" width="100%"
-                        class="video">Il est temps de mettre à jour votre navigateur !
-                    </video>
+                    {% if headerVideo.isDisplayed %}
+                        <video autoplay loop muted src="{{ asset('/uploads/' ~ headerVideo.nom ) }}" width="100%"
+                            class="video">Il est temps de mettre à jour votre navigateur !
+                        </video>
+                    {% endif %}
                 {% endfor %}
             </div>
         </div>
