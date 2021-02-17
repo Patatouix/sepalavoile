@@ -19,9 +19,13 @@
                         </div>
                     </div>
                 </div>
-                <video autoplay loop muted src="{{ asset('/images/slidevideo/video-site-internet-projet-web-disii.mov') }}" width="100%"
-                    class="video">Il est temps de mettre à jour votre navigateur !
-                </video>
+                {% for headerVideo in headerVideo %}
+                    {% if headerVideo.isDisplayed %}
+                        <video autoplay loop muted src="{{ asset('/uploads/' ~ headerVideo.nom ) }}" width="100%"
+                            class="video">Il est temps de mettre à jour votre navigateur !
+                        </video>
+                    {% endif %}
+                {% endfor %}
             </div>
         </div>
     </section>
@@ -66,33 +70,33 @@
                 </div>
                 <div class="row d-flex justify-content-around">
                     <!-- DÉBUT BOUCLE VIDEO -->
-                    {% for media in media|slice(0, 3) %}
+                    {# {% for media in media|slice(0, 3) %}
                         <div class="col-12 col-md-4 mb-3 mb-md-0 px-md-4">
                             <div class="embed-responsive embed-responsive-16by9 z-depth-1-half">
                                 <iframe class="embed-responsive-item" src="{{ media.url }}" allowfullscreen></iframe>
                             </div>
                         </div>
-                    {% endfor %}
+                    {% endfor %} #}
                     <!-- FIN BOUCLE VIDEO -->
                     <!-- DÉBUT MODAL VIDEO -->
-                    {# {% for video in video|slice(0, 3) %}
+                    {% for videoYt in videoYt %}
                         <div class="col-lg-4 col-md-12 mb-4">
                             <a>
                                 <img class="img-fluid z-depth-1 shadow-vlog" style="cursor:pointer;"
-                                src="{{ asset('/images/video/' ~ video.filename ) }}" alt="" data-toggle="modal" data-target="#modalShowVideo{{ video.id }}">
+                                src="{{ asset('/uploads/' ~ videoYt.nom ) }}" alt="" data-toggle="modal" data-target="#modalShowVideo{{ videoYt.id }}">
                             </a>
-                            <div class="modal fade" id="modalShowVideo{{ video.id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel{{ video.id }}"
+                            <div class="modal fade" id="modalShowVideo{{ videoYt.id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel{{ videoYt.id }}"
                                 aria-hidden="true">
                                 <div class="modal-dialog modal-lg" role="document">
                                     <div class="modal-content">
                                         <div class="modal-body mb-0 p-0">
                                             <div class="embed-responsive embed-responsive-16by9 z-depth-1-half">
-                                                <iframe class="embed-responsive-item" src="{{ video.videoLink }}" allowfullscreen></iframe>
+                                                <iframe class="embed-responsive-item" src="{{ videoYt.url }}" allowfullscreen></iframe>
                                             </div>
                                         </div>
                                         <div class="modal-footer footer-vlog justify-content-between">
                                             <span class="mr-4 parlez-en">
-                                                <a type="button" class="btn-floating btn-sm btn-fb mr-4" href="{{ video.facebookLink }}" target="_blank">
+                                                <a type="button" class="btn-floating btn-sm btn-fb mr-4" href="{{ videoYt.facebookLink }}" target="_blank">
                                                     <i class="fab fa-facebook-f"></i>
                                                 </a>
                                                 Parlez-en !
@@ -105,7 +109,7 @@
                                 </div>
                             </div>
                         </div>
-                    {% endfor %} #}
+                    {% endfor %}
                     <!-- FIN MODAL VIDEO -->
                 </div>
             </div>

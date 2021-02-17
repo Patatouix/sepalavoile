@@ -4,8 +4,10 @@ namespace App\Controller;
 
 use App\Entity\Article;
 use App\Entity\Media;
+use App\Entity\MediaCategory;
 use App\Repository\ArticleCategorieRepository;
 use App\Repository\ArticleRepository;
+use App\Repository\MediaCategoryRepository;
 use App\Repository\MediaRepository;
 use App\Repository\PartnersRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -18,19 +20,27 @@ class FrontController extends AbstractController
     /**
      * @Route("/", name="home_page")
      */
-    public function index(ArticleRepository $articleRepository, PartnersRepository $partnersRepository): Response
+    public function index(ArticleRepository $articleRepository, PartnersRepository $partnersRepository, MediaCategoryRepository $mediaCategoryRepository): Response
     {
+
         $articleBestView = $this->getDoctrine()->getRepository(Article::class)->findBynombreVuDesc();
-        $media = $this->getDoctrine()->getRepository(Media::class)->findBy(['type' => 'video'], ['createdAt' => 'desc']);
+
+        $mediaCategoryVideoYt = $mediaCategoryRepository->findBy(['name' => MediaCategory::MEDIA_CATEGORY_VIDEO_NAME]);
+        $videoYt = $this->getDoctrine()->getRepository(Media::class)->findBy(['mediaCategory' => $mediaCategoryVideoYt, 'isDisplayed' => true], ['createdAt' => 'desc']);
+
+        $mediaCategoryHeaderVideo = $mediaCategoryRepository->findBy(['name' => MediaCategory::MEDIA_CATEGORY_HEADERVIDEO_NAME]);
+        $headerVideo = $this->getDoctrine()->getRepository(Media::class)->findBy(['mediaCategory' => $mediaCategoryHeaderVideo], ['createdAt' => 'desc'], 1);
+
         $galerie = $this->getDoctrine()->getRepository(Media::class)->findBy(['type' => 'galerie'], ['createdAt' => 'desc']);
 
         return $this->render('front/home_page.html.twig', [
-            'controller_name' => 'FrontController',
+            'controller_name'   => 'FrontController',
             'articleBestView'   => $articleBestView,
-            'article' => $articleRepository->findBy([],['createdAt' => 'desc']),
+            'article'           => $articleRepository->findBy([],['createdAt' => 'desc']),
             'partners'          => $partnersRepository -> findAll(),
-            'media' => $media,
-            'galerie' => $galerie,
+            'videoYt'           => $videoYt,
+            'headerVideo'       => $headerVideo,
+            'galerie'           => $galerie,
         ]);
     }
 
@@ -137,6 +147,17 @@ class FrontController extends AbstractController
         return $this->render('front/nospartenaires.html.twig', [
             'controller_name' => 'FrontController',
             'partners'          => $partnersRepository -> findAll(),
+        ]);
+    }
+
+
+    public function carousel(MediaCategoryRepository $mediaCategoryRepository): Response
+    {
+        $mediaCategorySliderPhoto = $mediaCategoryRepository->findBy(['name' => MediaCategory::MEDIA_CATEGORY_SLIDERPHOTO_NAME]);
+        $sliderPhoto = $this->getDoctrine()->getRepository(Media::class)->findBy(['mediaCategory' => $mediaCategorySliderPhoto], ['createdAt' => 'desc']);
+
+        return $this->render('_include/carousel.html.twig', [
+            'sliderPhoto' => $sliderPhoto,
         ]);
     }
 }

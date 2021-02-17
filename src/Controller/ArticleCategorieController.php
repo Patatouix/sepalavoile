@@ -92,7 +92,7 @@ class ArticleCategorieController extends AbstractController
         return $this->redirectToRoute('article_categorie_index');
     }
 
-    
+
     public function allCategorieFooter(ArticleCategorieRepository $articleCategorieRepository): Response
     {
         $allCategory = $articleCategorieRepository -> findBy([],['name' => 'asc']);

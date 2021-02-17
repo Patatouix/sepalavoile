@@ -219,31 +219,51 @@
                                 </p>
                             </a>
                             <ul class="nav nav-treeview">
-                                <li class="nav-item">
+                                {# <li class="nav-item">
                                     <a href="" class="nav-link">
                                         <i class="nav-icon far fa-circle"></i>
                                         <p>
-                                            Sliders photos
+                                            Sliders photos #}
+                                            {# {* Permet de rajouter un badge à la fin *} #}
+                                            {# <span class="badge badge-info right"></span>
+                                        </p>
+                                    </a>
+                                </li> #}
+                                <li class="nav-item">
+                                    <a href="{{ path('media_index') }}" class="nav-link">
+                                        <i class="nav-icon far fa-circle"></i>
+                                        <p>
+                                            Tous les médias
                                             {# {* Permet de rajouter un badge à la fin *} #}
                                             <span class="badge badge-info right"></span>
                                         </p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="" class="nav-link">
+                                    <a href="{{ path('media_index_header') }}" class="nav-link">
                                         <i class="nav-icon far fa-circle"></i>
                                         <p>
-                                            Vidéo / Home_page
+                                            Header
                                             {# {* Permet de rajouter un badge à la fin *} #}
                                             <span class="badge badge-info right"></span>
                                         </p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="" class="nav-link">
+                                    <a href="{{ path('media_index_video') }}" class="nav-link">
                                         <i class="nav-icon far fa-circle"></i>
                                         <p>
-                                            Vidéo YouTube
+                                            Vidéos YouTube
+                                            {# {* Permet de rajouter un badge à la fin *} #}
+                                            <span class="badge badge-info right"></span>
+                                        </p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{ path('media_new') }}" class="nav-link">
+                                        <i class="nav-icon far fa-circle"></i>
+                                        <p>
+                                            Ajouter un média
                                             {# {* Permet de rajouter un badge à la fin *} #}
                                             <span class="badge badge-info right"></span>
                                         </p>
@@ -257,14 +277,14 @@
 
                         {# {* NEWSLETTER *} #}
                         {# {if isset($smarty.session) AND $smarty.session.user.role eq 'Admin'} #}
-                        <li class="nav-item has-treeview mb-4">
+                        {# <li class="nav-item has-treeview mb-4">
                             <a href="" class="nav-link">
                                 <i class="nav-icon fas fa-envelope-open-text"></i>
                                 <p>
                                     Newsletter
-                                    <i class="fas fa-angle-left right"></i>
+                                    <i class="fas fa-angle-left right"></i> #}
                                     {# {* Permet de rajouter un badge à la fin *} #}
-                                    <span class="badge badge-info right"></span>
+                                    {# <span class="badge badge-info right"></span>
                                 </p>
                             </a>
                             <ul class="nav nav-treeview">
@@ -272,9 +292,9 @@
                                     <a href="" class="nav-link">
                                         <i class="nav-icon far fa-circle"></i>
                                         <p>
-                                            Liste des abonnées
+                                            Liste des abonnées #}
                                             {# {* Permet de rajouter un badge à la fin *} #}
-                                            <span class="badge badge-info right"></span>
+                                            {# <span class="badge badge-info right"></span>
                                         </p>
                                     </a>
                                 </li>
@@ -282,9 +302,9 @@
                                     <a href="" class="nav-link">
                                         <i class="nav-icon far fa-circle"></i>
                                         <p>
-                                            Ajouter une newsletter
+                                            Ajouter une newsletter #}
                                             {# {* Permet de rajouter un badge à la fin *} #}
-                                            <span class="badge badge-info right"></span>
+                                            {# <span class="badge badge-info right"></span>
                                         </p>
                                     </a>
                                 </li>
@@ -292,14 +312,14 @@
                                     <a href="" class="nav-link">
                                         <i class="nav-icon far fa-circle"></i>
                                         <p>
-                                            Envoyer newsletters
+                                            Envoyer newsletters #}
                                             {# {* Permet de rajouter un badge à la fin *} #}
-                                            <span class="badge badge-info right"></span>
+                                            {# <span class="badge badge-info right"></span>
                                         </p>
                                     </a>
                                 </li>
                             </ul>
-                        </li>
+                        </li> #}
                         {# {/if} #}
 
 
