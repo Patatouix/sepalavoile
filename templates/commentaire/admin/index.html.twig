@@ -112,11 +112,11 @@
                         <td class="text-center">
                             {{ commentaire.user.nomComplet }}
                         </td>
-                         <td class="text-center">
+                        <td class="text-center">
                             <form action="{{ path('admin_commentaire_togglePublished', {'id': commentaire.id }) }}" method="POST">
                                 <input type="hidden" name="id" value="{{ commentaire.id }}">
                                 <input type="hidden" name="isPublished" value="{{ commentaire.isPublished }}">
-                                <input type="submit" class="alert alert-{{ commentaire.isPublished == 1 ? 'success' : 'danger' }}" value="{{ commentaire.isPublished == 1 ? 'Oui' : 'Non' }}">
+                                <input type="submit" class="m-0 alert alert-{{ commentaire.isPublished == 1 ? 'success' : 'danger' }}" value="{{ commentaire.isPublished == 1 ? 'Oui' : 'Non' }}">
                             </form>
                         </td>
                         <td class="text-center">

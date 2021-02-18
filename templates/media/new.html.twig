@@ -1,11 +1,14 @@
-{% extends 'base.html.twig' %}
+{% extends 'base_dashboard.html.twig' %}
 
-{% block title %}New Media{% endblock %}
+{% block title %}Nouveau média{% endblock %}
 
 {% block body %}
-    <h1>Create new Media</h1>
-
+<div class="container  px-0">
+    <div class="col-12 mt-5 border-right border-left border-top p-0">
+        <h1 class="py-3 pl-5 bg-light border-bottom">
+            Créer un média :
+        </h1>
+    </div>
     {{ include('media/_form.html.twig') }}
-
-    <a href="{{ path('media_index') }}">back to list</a>
+</div>
 {% endblock %}
