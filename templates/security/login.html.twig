@@ -6,7 +6,6 @@
     <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
     {% endif %}
 
-    
     <div class="container">
         {% if app.user %}
             <div class="alert alert-danger mb-5 col-6 offset-3">
@@ -14,7 +13,6 @@
             </div>
         {% endif %}
         <div class="col-6 offset-3 mb-5 border bg-light rounded">
-            
             <h1 class="h3 mb-3 font-weight-normal text-center pt-4">
                 Connectez-vous
             </h1>
@@ -40,8 +38,8 @@
             <button class="btn btn-lg btn-style mt-4 mb-5" type="submit">
                 Connexion
             </button>
+            <a href="{{ path('app_forgot_password_request') }}" class="float-right">J'ai oublié mon mot de passe</a>
         </div>
     </div>
-    
 </form>
 {% endblock %}

@@ -86,14 +86,14 @@ class RegistrationController extends AbstractController
 
         // Verify the user id exists and is not null
         if (null === $id) {
-            return $this->redirectToRoute('app_home');
+            return $this->redirectToRoute('home_page');
         }
 
         $user = $userRepository->find($id);
 
         // Ensure the user exists in persistence
         if (null === $user) {
-            return $this->redirectToRoute('app_home');
+            return $this->redirectToRoute('home_page');
         }
 
         // validate email confirmation link, sets User::isVerified=true and persists
@@ -102,7 +102,7 @@ class RegistrationController extends AbstractController
         } catch (VerifyEmailExceptionInterface $exception) {
             $this->addFlash('verify_email_error', $exception->getReason());
 
-            return $this->redirectToRoute('app_home');
+            return $this->redirectToRoute('home_page');
         }
 
         // @TODO Change the redirect on success and handle or remove the flash message in your templates

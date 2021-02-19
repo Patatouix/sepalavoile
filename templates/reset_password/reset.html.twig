@@ -1,0 +1,18 @@
+{% extends 'carousel.html.twig' %}
+
+{% block title %}Reset your password{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="col-6 offset-3 mb-5 border bg-light rounded">
+            <h1 class="h3 mb-3 font-weight-normal text-center pt-4">
+                Changez votre mot de passe
+            </h1>
+
+            {{ form_start(resetForm) }}
+            {{ form_row(resetForm.plainPassword) }}
+            <button class="btn btn-lg btn-style mt-4 mb-4">Reset password</button>
+            {{ form_end(resetForm) }}
+        </div>
+    </div>
+{% endblock %}
