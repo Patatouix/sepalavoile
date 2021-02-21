@@ -16,30 +16,30 @@
                     <ul class="list-group list-group-flush">
                         <li class="list-group">
                             <div class="row mb-3">
-                                <div class="col-1 p-0 text-center"><i class="fad fa-clock"></i></div>
-                                <div class="col-3">Date du message :</div>
-                                <div class="col-8 p-0">{{ message.createdAt|date('d/m/Y H:i:s') }}</div>
+                                <div class="col-1 col-md-1 p-0 text-center"><i class="fad fa-clock"></i></div>
+                                <div class="col-11 col-md-3 font-weight-bold">Date :</div>
+                                <div class="col-12 col-md-8 p-0 text-muted">{{ message.createdAt|date('d/m/Y H:i:s') }}</div>
                             </div>
                         </li>
                         <li class="list-group">
                             <div class="row mb-3">
-                                <div class="col-1 p-0 text-center"><i class="fad fa-user"></i></div>
-                                <div class="col-3">Expéditeur du message :</div>
-                                <div class="col-8 p-0 pr-5">{{ message.expediteur.nomComplet}} ({{ message.expediteur.email }})</div>
+                                <div class="col-1 col-md-1 p-0 text-center"><i class="fad fa-user"></i></div>
+                                <div class="col-11 col-md-3 mt-3 mt-md-0 font-weight-bold">Expéditeur :</div>
+                                <div class="col-12 col-md-8 p-0 pr-5 text-muted">{{ message.expediteur.nomComplet}} ({{ message.expediteur.email }})</div>
                             </div>
                         </li>
                         <li class="list-group">
                             <div class="row mb-3">
-                                <div class="col-1 p-0 text-center"><i class="fad fa-envelope-open-text"></i></div>
-                                <div class="col-3">Objet du message :</div>
-                                <div class="col-8 p-0 break-word">{{ message.objet }}</div>
+                                <div class="col-1 col-md-1 p-0 text-center"><i class="fad fa-envelope-open-text"></i></div>
+                                <div class="col-11 col-md-3 mt-3 mt-md-0 font-weight-bold">Objet :</div>
+                                <div class="col-12 col-md-8 p-0 break-word text-muted">{{ message.objet }}</div>
                             </div>
                         </li>
                         <li class="list-group">
                             <div class="row mb-3">
-                                <div class="col-1 p-0 text-center"><i class="fad fa-comment-dots"></i></div>
-                                <div class="col-3">Contenu du message :</div>
-                                <div class="col-8 p-0 break-word">{{ message.contenu|raw }}</div>
+                                <div class="col-1 col-md-1 p-0 text-center"><i class="fad fa-comment-dots"></i></div>
+                                <div class="col-11 col-md-3 mt-3 mt-md-0 font-weight-bold">Contenu :</div>
+                                <div class="col-12 col-md-8 p-0 break-word text-muted">{{ message.contenu|raw }}</div>
                             </div>
                         </li>
                     </ul>
