@@ -38,9 +38,11 @@
         </div>
     </div>
 
-    <div class="container-fluid sticky-footer border py-3">
-        <a href="{{ path('produit_index') }}" class="btn btn-darkgrey" >Revenir aux produits</a>
-        <a href="{{ path('produit_adhesion', {'id': produit.id}) }}" class="btn btn-darkgrey float-right">Adhérer</a>
+    <div class="container-fluid border">
+        <div class="container sticky-footer py-3">
+            <a href="{{ path('produit_index') }}" class="btn btn-darkgrey" >Revenir aux produits</a>
+            <a href="{{ path('produit_adhesion', {'id': produit.id}) }}" class="btn btn-darkgrey float-right">Adhérer</a>
+        </div>
     </div>
 
 {% endblock %}

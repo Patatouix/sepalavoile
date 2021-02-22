@@ -39,13 +39,14 @@
             </div>
         </div>
     </div>
-
-    <div class="container-fluid sticky-footer border py-3">
-        <a href="{{ path('produit_index') }}" class="btn btn-darkgrey" >Revenir aux produits</a>
-        <a href="{{ path('produit_reservation', {'id': produit.id}) }}" class="btn btn-darkgrey float-right">Réserver</a>
-        <button type="button" class="btn btn-darkgrey-inverse float-right mr-3" data-toggle="modal" data-target="#modal_disponibilite">
-            Voir dispos
-        </button>
+    <div class="container-fluid border">
+        <div class="container sticky-footer py-3">
+            <a href="{{ path('produit_index') }}" class="btn btn-darkgrey" >Revenir aux produits</a>
+            <a href="{{ path('produit_reservation', {'id': produit.id}) }}" class="btn btn-darkgrey float-right">Réserver</a>
+            <button type="button" class="btn btn-darkgrey-inverse float-right mr-3" data-toggle="modal" data-target="#modal_disponibilite">
+                Voir dispos
+            </button>
+        </div>
     </div>
 
 {% endblock %}

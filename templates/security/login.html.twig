@@ -12,7 +12,8 @@
                 Vous êtes déjà connecté en tant que : {{ app.user.username }}, <a href="{{ path('app_logout') }}">Déconnectez-vous</a>
             </div>
         {% endif %}
-        <div class="col-6 offset-3 mb-5 border bg-light rounded">
+        <div class="col-12 col-md-12 col-lg-6 offset-lg-3 mb-5 border bg-light rounded">
+
             <h1 class="h3 mb-3 font-weight-normal text-center pt-4">
                 Connectez-vous
             </h1>
@@ -24,20 +25,26 @@
 
             <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
 
-            {#
-            Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
-            See https://symfony.com/doc/current/security/remember_me.html
+            {# Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
+            See https://symfony.com/doc/current/security/remember_me.html #}
 
-            <div class="checkbox mb-3">
-                <label>
-                    <input type="checkbox" name="_remember_me"> Se souvenir de moi
-                </label>
+            <div class="checkbox mb-1">
+                    <label>
+                        <input type="checkbox" id="remember_me" name="_remember_me" class="mr-2 mt-3">Se souvenir de moi
+                    </label>
             </div>
-            #}
-
-            <button class="btn btn-lg btn-style mt-4 mb-5" type="submit">
-                Connexion
-            </button>
+            <div class="row">
+                <div class="col-7 text-left pt-3 pb-4">
+                    <a href="{{ path('app_register') }}" class="mt-2 mb-2 text-muted">
+                        Vous n'avez pas encore de compte ?
+                    </a>
+                </div>
+                <div class="col-5 text-right pb-4">
+                    <button class="btn btn-lg btn-style mt-2 mb-2" type="submit">
+                        Connexion
+                    </button>
+                </div>
+            </div>
             <a href="{{ path('app_forgot_password_request') }}" class="float-right">J'ai oublié mon mot de passe</a>
         </div>
     </div>

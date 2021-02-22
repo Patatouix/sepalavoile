@@ -66,6 +66,30 @@
                     </tbody>
                 </table>
             </div>
+            {# Modale pour éditer les infos persos et changer le mdp #}
+            <a href="#" type="button" class="m-0" data-toggle="modal" data-target="#showInfosModal">
+                <i class="fad fa-eye"></i>
+            </a>
+            <div class="modal fade text-left" id="showInfosModal" tabindex="-1" role="dialog" aria-labelledby="showInfosModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-xl" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h6 class="modal-title text-uppercase font-weight-bold">Message reçu</h6>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body font-weight-normal p-0">
+                            {{ form_start(form) }}
+                            {{ form_end(form) }}
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {# Fin de la modale des infos persos + mdp #}
         </div>
 
         <div class="tab-pane fade" id="nav-achats" role="tabpanel" aria-labelledby="nav-achats-tab">
@@ -184,7 +208,7 @@
 
                                         {# Lien pour répondre à un message #}
                                         <a href="#" class="repondre" data-expediteur-id="{{ message.expediteur.id }}">
-                                            <i class="fad fa-reply mt-2"></i>
+                                            <i class="fad fa-reply px-2 py-2"></i>
                                         </a>
                                         {# Fin lien pour répondre à un message #}
                                     </td>
