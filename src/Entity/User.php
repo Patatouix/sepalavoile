@@ -8,6 +8,9 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
+use App\Entity\ProduitType;
+use DateInterval;
+use DateTime;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
@@ -526,5 +529,47 @@ class User implements UserInterface
         }
 
         return $this;
+    }
+
+    public function isAdherent()
+    {
+        $isAdherent = false;
+        $achats = $this->getAchats();
+        foreach ($achats as $achat) {
+            $produit = $achat->getProduit();
+            $produitType = $produit->getProduitType();
+            if ($produitType->getNom() == ProduitType::PRODUIT_TYPE_ADHESION_NAME) {
+                //check si adhésion toujours valide
+                $dateAdhesion = $achat->getCreatedAt();
+                $dureeAdhesion = $produit->getDuree();
+                if ($dureeAdhesion == null) {
+                    //pas de durée définie, l'adhésion est considérée comme toujours valide
+                    $isAdherent = true;
+                } else {
+                    $finAdhesion = $dateAdhesion->add(new DateInterval('P' . $dureeAdhesion . 'M'));
+                    $now = new DateTime();
+                    if ($now < $finAdhesion) {
+                        $isAdherent = true;
+                    }
+                }
+            }
+        }
+
+        return $isAdherent;
+    }
+
+    public function isDonateur()
+    {
+        $isDonateur = false;
+        $achats = $this->getAchats();
+        foreach ($achats as $achat) {
+            $produit = $achat->getProduit();
+            $produitType = $produit->getProduitType();
+            if ($produitType->getNom() == ProduitType::PRODUIT_TYPE_DONATION_NAME) {
+                $isDonateur = true;
+            }
+        }
+
+        return $isDonateur;
     }
 }
