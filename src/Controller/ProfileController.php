@@ -2,13 +2,18 @@
 
 namespace App\Controller;
 
-use App\Form\ChangePasswordFormType;
-use App\Form\ProfileType;
 use DateTime;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Entity\Media;
+use App\Entity\Reservation;
+use App\Form\ProfileType;
+use App\Form\MediaFrontType;
+use App\Repository\MediaRepository;
+use App\Form\ChangePasswordFormType;
+use App\Form\ReservationProfileType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 /**
@@ -27,27 +32,15 @@ class ProfileController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-
-
-            /*if ($encoder->isPasswordValid($user, $oldPassword)) {
-                $encodedPassword = $encoder->encodePassword($user, $newPassword);
-                dd($user);
-                $this->addFlash('success', 'Votre mot de passe a bien été modifié !');
-            } else {
-                $this->addFlash('success', 'Mauvais mot de passe');
-            }*/
-            $user
-                // ->setPassword(
-                //     $passwordEncoder->encodePassword(
-                //         $user,
-                //         $form->get('password')->getData()
-                //     )
-                // )
-                ->setUpdatedAt(
-                    new DateTime('NOW')
-                );
-
+            $user->setUpdatedAt(new DateTime('NOW'));
             $this->getDoctrine()->getManager()->flush();
+        }
+
+        $imgProfil = null;
+        foreach ($user->getMedias() as $media) {
+            if ($media->getIsDisplayed()) {
+                $imgProfil = $media;
+            }
         }
 
         //formulaire de changement de mot de passe
@@ -56,7 +49,8 @@ class ProfileController extends AbstractController
         return $this->render('profile/infos.html.twig', [
             'user' => $this->getUser(),
             'form' => $form->createView(),
-            'formPwd' => $formPwd->createView()
+            'formPwd' => $formPwd->createView(),
+            'imgProfil' => $imgProfil
         ]);
     }
 
@@ -100,10 +94,115 @@ class ProfileController extends AbstractController
     }
 
     /**
+     * @Route("/medias", name="profile_medias", methods={"GET", "POST"})
+     *
+     * @param Request $request
+     *
+     * @return [type]
+     */
+    public function medias(Request $request)
+    {
+        $user = $this->getUser();
+        $medias = $user->getMedias();
+
+        $medium = new Media();
+        $form = $this->createForm(MediaFrontType::class, $medium);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $medium->setCreatedAt( new DateTime('NOW'));
+            $medium->setIsDisplayed(false);
+            $user->addMedia($medium);
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($medium);
+            $entityManager->flush();
+        }
+
+        return $this->render('profile/medias.html.twig', [
+            'user' => $user,
+            'form' => $form->createView(),
+            'medias' => $medias
+        ]);
+    }
+
+    /**
+     * @return Response
+     * @Route("/toggleMedia", name="profile_toggleMedia", methods={"POST"})
+     */
+    public function toggleMedia(Request $request, MediaRepository $mediaRepository): Response
+    {
+        $mediaId = $request->request->get('id');
+        $isDisplayed = $request->request->get('isDisplayed');
+
+        $media = $mediaRepository->find($mediaId);
+        $media->setIsDisplayed($isDisplayed? '0' : '1');
+
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->persist($media);
+        $entityManager->flush();
+
+        $referer = $request->headers->get('referer');
+            return $this->redirect($referer);
+    }
+
+    /**
      * @Route("/achats", name="profile_achats")
      */
     public function achats(): Response
     {
-        return $this->render('');
+        $user = $this->getUser();
+
+        return $this->render('profile/achats.html.twig', [
+            'user' => $user,
+        ]);
+    }
+
+    /**
+     * @Route("/reservations", name="profile_reservations")
+     */
+    public function reservations(): Response
+    {
+        $user = $this->getUser();
+
+        return $this->render('profile/reservations.html.twig', [
+            'user' => $user,
+        ]);
+    }
+
+    /**
+     * @Route("/reservations/{id}/edit", name="profile_reservations_edit", methods={"GET","POST"})
+     *
+     * @param Request $request
+     *
+     * @return [type]
+     */
+    public function editReservation(Request $request, Reservation $reservation)
+    {
+        $form = $this->createForm(ReservationProfileType::class, $reservation);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->getDoctrine()->getManager()->flush();
+
+            return $this->redirectToRoute('profile_reservations');
+        }
+
+        return $this->render('profile/editReservation.html.twig', [
+            'reservation' => $reservation,
+            'form' => $form->createView(),
+        ]);
+    }
+
+    /**
+     * @Route("/messagerie", name="profile_messagerie")
+     */
+    public function messagerie(): Response
+    {
+        $user = $this->getUser();
+
+        return $this->render('profile/messagerie.html.twig', [
+            'user' => $user,
+        ]);
     }
 }

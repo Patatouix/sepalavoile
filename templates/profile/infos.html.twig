@@ -18,8 +18,13 @@
     <div class="row align-items-center mb-4 justify-content-center justify-content-sm-start">
         <div class="col-auto">
             <div style="height: 150px; width: 150px;">
-                <img src="https://media.gettyimages.com/photos/portrait-of-a-serious-young-man-picture-id544979402?s=612x612"
-                    style="height: 100%; width: 100%; object-fit: cover;" class="rounded-circle">
+                {% if imgProfil %}
+                    <img src="{{ asset('/uploads/' ~ imgProfil.nom) }}"
+                        style="height: 100%; width: 100%; object-fit: cover;" class="rounded-circle">
+                {% else %}
+                    <img src="https://www.french-weekendbreaks.co.uk/sites/uk.picardiev3/themes/picardiev3/img_v2/user-default.jpg"
+                        style="height: 100%; width: 100%; object-fit: cover;" class="rounded-circle">
+                {% endif %}
             </div>
         </div>
         <div class="col-auto text-center text-sm-left mb-3 mt-3">

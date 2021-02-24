@@ -60,10 +60,11 @@
                 <!-- Sidenav -->
                 <nav id="sidenav" class="rounded">
                     <h3 class="SideNav-item">Mon compte</h3>
-                    <a class="selected SideNav-item d-flex flex-items-center repo-menu-item" href="#">Profil</a>
-                    <a class="SideNav-item d-flex flex-items-center repo-menu-item" href="#">Achats</a>
-                    <a class="SideNav-item d-flex flex-items-center repo-menu-item" href="#">Réservations</a>
-                    <a class="SideNav-item d-flex flex-items-center repo-menu-item" href="#">Messagerie</a>
+                    <a class="selected SideNav-item d-flex flex-items-center repo-menu-item" href="{{ path('profile_infos') }}">Profil</a>
+                    <a class="SideNav-item d-flex flex-items-center repo-menu-item" href="{{ path('profile_medias') }}">Images</a>
+                    <a class="SideNav-item d-flex flex-items-center repo-menu-item" href="{{ path('profile_achats') }}">Achats</a>
+                    <a class="SideNav-item d-flex flex-items-center repo-menu-item" href="{{ path('profile_reservations') }}">Réservations</a>
+                    <a class="SideNav-item d-flex flex-items-center repo-menu-item" href="{{ path('profile_messagerie') }}">Messagerie</a>
                 </nav>
             </div>
             <div class="col-12 col-md-9 mb-5">

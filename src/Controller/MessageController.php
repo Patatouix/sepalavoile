@@ -54,7 +54,7 @@ class MessageController extends AbstractController
 
             $this->addFlash('success', 'Votre message a bien été envoyé !');
 
-            return $this->redirectToRoute('admin_user_show', ['id' => $this->getUser()->getId()]);
+            return $this->redirectToRoute('profile_messagerie');
         }
 
         return $this->render('message/_form.html.twig', [
