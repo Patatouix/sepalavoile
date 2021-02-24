@@ -13,9 +13,9 @@
         <!-- Grid column -->
         <div class="col-md-12 d-flex justify-content-center mb-5">
                 <button type="button" class="btn btn-outline-black waves-effect filter" data-rel="all">Toutes</button>
-                {# {% for galerietag in galerietags %}
-                    <button type="button" class="btn btn-outline-black waves-effect filter" data-rel="{{ galerietag.id }}">{{ galerietag.name }}</button>
-                {% endfor %} #}
+                {% for galerieCategorie in galerieCategories %}
+                    <button type="button" class="btn btn-outline-black waves-effect filter" data-rel="{{ galerieCategorie.id }}">{{ galerieCategorie.nom }}</button>
+                {% endfor %}
         </div>
         <!-- Grid column -->
 

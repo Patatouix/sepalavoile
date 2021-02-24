@@ -89,6 +89,11 @@ class Media
     private $isDisplayed;
 
     /**
+     * @ORM\ManyToMany(targetEntity=Galerie::class, mappedBy="medias")
+     */
+    private $galeries;
+
+    /**
      * @ORM\ManyToMany(targetEntity=User::class, mappedBy="medias")
      */
     private $users;
@@ -107,6 +112,7 @@ class Media
     {
         $this->produits = new ArrayCollection();
         $this->partners = new ArrayCollection();
+        $this->galeries = new ArrayCollection();
         $this->users = new ArrayCollection();
         $this->achats = new ArrayCollection();
         $this->reservations = new ArrayCollection();
@@ -310,8 +316,27 @@ class Media
     }
 
     /**
+     * @return Collection|Galerie[]
+     */
+    public function getGaleries(): Collection
+    {
+        return $this->galeries;
+    }
+
+    public function addGalery(Galerie $galery): self
+    {
+        if (!$this->galeries->contains($galery)) {
+            $this->galeries[] = $galery;
+            $galery->addMedia($this);
+        }
+
+        return $this;
+    }
+
+    /**
      * @return Collection|User[]
      */
+
     public function getUsers(): Collection
     {
         return $this->users;
@@ -322,6 +347,15 @@ class Media
         if (!$this->users->contains($user)) {
             $this->users[] = $user;
             $user->addMedia($this);
+        }
+
+        return $this;
+    }
+
+    public function removeGalery(Galerie $galery): self
+    {
+        if ($this->galeries->removeElement($galery)) {
+            $galery->removeMedia($this);
         }
 
         return $this;

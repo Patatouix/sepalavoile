@@ -1,0 +1,41 @@
+{% block body %}
+        <div id="show_user" class="container bg-light rounded">
+            <div class="row border-bottom py-3 px-5">
+                <div class="col-6">
+                    <h1 class="text-uppercase text-left m-0">
+                        Catégorie : {{ galerie_categorie.nom }}&nbsp&nbsp{{ galerie_categorie.id }}
+                    </h1>
+                </div>
+                <div class="col-6 text-right my-auto">
+                    <span class="text-muted mr-2 font-italic">
+                        Modifier la catégorie :
+                    </span>
+                    <a href="{{ path('galerie_categorie_edit', {'id': galerie_categorie.id}) }}">
+                        <i class="fad fa-user-edit"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="row bg-white">
+                <div class="col-8 my-5 pl-5 border-left-profil border-left-form">
+                    <div class="col-12">
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group">
+                                <div class="row mb-3">
+                                    <div class="col-1 p-0 text-center"><i class="fad fa-id-card-alt"></i></div>
+                                    <div class="col-4">Id de la catégorie :</div>
+                                    <div class="col-7 p-0">{{ galerie_categorie.id }}</div>
+                                </div>
+                            </li>
+                            <li class="list-group">
+                                <div class="row mb-3">
+                                    <div class="col-1 p-0 text-center"><i class="fad fa-user-alt"></i></div>
+                                    <div class="col-4">Nom de la cétagorie :</div>
+                                    <div class="col-7 p-0">{{ galerie_categorie.nom }}</div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+{% endblock %}

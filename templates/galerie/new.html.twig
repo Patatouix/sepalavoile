@@ -1,0 +1,15 @@
+{% extends 'base_dashboard.html.twig' %}
+
+{% block title %}Nouvelle galerie{% endblock %}
+
+{% block body %}
+    <div class="container px-0">
+        <div class="col-12 mt-5 border-right border-left border-top p-0">
+            <h1 class="py-3 pl-5 bg-light border-bottom">
+                Créer une nouvelle galerie :
+            </h1>
+        </div>
+    </div>
+    {{ include('galerie/_form.html.twig') }}
+{% endblock %}
+
