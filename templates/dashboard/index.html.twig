@@ -175,7 +175,7 @@
 									<div class="card-body">
                                         <h4 class="card-title mb-2"><u>Derniers inscrits :</u></h4>
                                         {% for user in users|slice(0, 5) %}
-                                            <a href="{{ path('user_show', {'id': user.id}) }}" class="text-dark"><p class="card-text text-left ml-3 mb-1"><strong>{{ user.firstName }} {{ user.name }}</strong> : inscrit le <strong>{{ user.createdAt|date('d/m/Y') }}</strong> à {{ user.createdAt|date('H:i') }}<span></span></p></a>
+                                            <a href="{{ path('admin_user_show', {'id': user.id}) }}" class="text-dark"><p class="card-text text-left ml-3 mb-1"><strong>{{ user.firstName }} {{ user.name }}</strong> : inscrit le <strong>{{ user.createdAt|date('d/m/Y') }}</strong> à {{ user.createdAt|date('H:i') }}<span></span></p></a>
                                         {% endfor %}
                                     </div>
 								</div>

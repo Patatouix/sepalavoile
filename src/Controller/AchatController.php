@@ -59,7 +59,7 @@ class AchatController extends AbstractController
     }
 
     /**
-     * @Route("/{id}/edit", name="achat_edit", methods={"GET","POST"})
+     * @Route("/{id}/edit", name="admin_achat_edit", methods={"GET","POST"})
      */
     public function edit(Request $request, Achat $achat): Response
     {
@@ -69,7 +69,7 @@ class AchatController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('achat_index');
+            return $this->redirectToRoute('admin_achat_index');
         }
 
         return $this->render('achat/edit.html.twig', [
