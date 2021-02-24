@@ -362,7 +362,7 @@
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="" class="nav-link">
+                                    <a href="{{ path('admin_sondage_index') }}" class="nav-link">
                                         <i class="nav-icon far fa-circle"></i>
                                         <p>
                                             Liste des sondages
@@ -372,10 +372,30 @@
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="{{ path('sondage_new') }}" class="nav-link">
+                                    <a href="{{ path('admin_sondage_new') }}" class="nav-link">
                                         <i class="nav-icon far fa-circle"></i>
                                         <p>
                                             Nouveau sondage
+                                            {# {* Permet de rajouter un badge à la fin *} #}
+                                            <span class="badge badge-info right"></span>
+                                        </p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{ path('question_new') }}" class="nav-link">
+                                        <i class="nav-icon far fa-circle"></i>
+                                        <p>
+                                            Creation de question
+                                            {# {* Permet de rajouter un badge à la fin *} #}
+                                            <span class="badge badge-info right"></span>
+                                        </p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{ path('reponse_index') }}" class="nav-link">
+                                        <i class="nav-icon far fa-circle"></i>
+                                        <p>
+                                            Liste des réponses
                                             {# {* Permet de rajouter un badge à la fin *} #}
                                             <span class="badge badge-info right"></span>
                                         </p>

@@ -1,14 +1,14 @@
-{% extends 'carousel.html.twig' %}
+{% extends 'base_dashboard.html.twig' %}
 
-{% block title %}Sondage{% endblock %}
+{% block title %}Nouvelle Question{% endblock %}
 
 {% block body %}
     <div class="container px-0">
         <div class="col-12 mt-5 border-right border-left border-top p-0">
             <h1 class="py-3 pl-5 bg-light border-bottom">
-                 Sondage :
+                Créer une nouvelle question au sondage :
             </h1>
         </div>
-        {{ include('sondage/_form.html.twig', {'button_label': 'Envoyer'}) }}
+        {{ include('question/_form.html.twig') }}
     </div>
 {% endblock %}

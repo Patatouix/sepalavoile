@@ -1,0 +1,22 @@
+{% extends 'base_dashboard.html.twig' %}
+
+{% block title %}Modification de question{% endblock %}
+
+{% block body %}
+    <div class="container px-0">
+        <h1>Modification de question</h1>
+            <div class="col-12 mt-5 border-right border-left border-top p-0">
+                <h1 class="py-3 pl-5 bg-light border-bottom"></h1>
+            </div>
+        {{ include('question/_form.html.twig', {'button_label': 'Valider'}) }}
+
+        <a href="{{ path('question_index') }}" class="btn btn-style">Retour à la liste de question</a></button>
+    </div>
+        <div class="col-12 mt-5 border-right border-left border-top p-0">
+        {{ include('question/_delete_form.html.twig', ) }}
+        </div>
+
+{% endblock %}
+
+
+

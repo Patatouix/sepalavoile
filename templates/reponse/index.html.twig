@@ -1,0 +1,39 @@
+{% extends 'base_dashboard.html.twig' %}
+
+{% block title %}Liste des réponses{% endblock %}
+
+{% block body %}
+    <div id="partners-list" class="container-fluid">
+        <h1>Liste des réponses</h1>
+        <div class="table-responsive card px-2 py-2">
+            <table id="example1" class="table table-bordered table-striped  mx-2 my-2">
+                <thead>
+                    <tr class="text-center">
+                        <th>Utilisateur id</th>
+                        <th>Réponse</th>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr class="text-center">
+                        <th>Utilisateur id</th>
+                        <th>Réponse</th>
+                    </tr>
+                </tfoot>
+                <tbody>
+                    {% for reponse in reponses %}
+                        <tr class="text-center">
+                            <td>{{ reponse.user.id }}</td>
+                            <td>
+                                {{ reponse.contenu }}
+                            </td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="9">Pas d'enregistrement trouvé</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}

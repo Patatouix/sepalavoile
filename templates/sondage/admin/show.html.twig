@@ -1,0 +1,49 @@
+{% block body %}
+        <div id="show_sondage" class="container bg-light rounded">
+            <div class="row border-bottom py-3 px-5">
+                <div class="col-6">
+                    <h1 class="text-uppercase text-left m-0">
+                        {{ sondage.titre }}
+                    </h1>
+                </div>
+                <div class="col-6 text-right my-auto">
+                    <span class="text-muted mr-2 font-italic">
+                        Modifier le sondage :
+                    </span>
+                    <a href="{{ path('admin_sondage_edit', {'id': sondage.id}) }}"><i class="fad fa-edit px-2 border-left border-right"></i></a>
+                </div>
+            </div>
+            <div class="row bg-white">
+                <div class="col-4 text-center my-auto">
+                    {# <img id='partnerImage' class="img-fluid w-50 my-4" alt="Photo de l'événement" src="{{ partner.filename ? asset('/images/partners/' ~ partner.filename) : asset('/images/logo.svg') }}"> #}
+                </div>
+                <div class="col-8 my-5 pl-5 border-left-profil ">
+                    <div class="col-12">
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group">
+                                <div class="row mb-3">
+                                    <div class="col-1 p-0 text-center"><i class="fad fa-id-badge"></i></div>
+                                    <div class="col-4">Id Sondage :</div>
+                                    <div class="col-7 p-0">{{ sondage.id }}</div>
+                                </div>
+                            </li>
+                            <li class="list-group">
+                                <div class="row mb-3">
+                                    <div class="col-1 p-0 text-center"><i class="fad fa-calendar-check"></i></div>
+                                    <div class="col-4">Titre :</div>
+                                    <div class="col-7 p-0">{{ sondage.titre }}</div>
+                                </div>
+                            </li>
+                            <li class="list-group">
+                                <div class="row mb-3">
+                                    <div class="col-1 p-0 text-center"><i class="fad fa-calendar-times"></i></div>
+                                    <div class="col-4">Description :</div>
+                                    <div class="col-7 p-0">{{sondage.description }}</div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+{% endblock %}
