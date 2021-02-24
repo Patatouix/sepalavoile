@@ -7,7 +7,7 @@
     <div id="user-list" class="container-fluid">
         <h1>Liste des utilisateurs</h1>
         <div class="col-12  mt-5 mb-3">
-            <a href="{{ path('user_new') }}" class="btn btn-style">Nouvel utilisateur</a>
+            <a href="{{ path('admin_user_new') }}" class="btn btn-style">Nouvel utilisateur</a>
         </div>
         <div class="table-responsive card px-2 py-2">
             <table id="example1" class="table table-bordered table-striped  mx-2 my-2">
@@ -76,7 +76,7 @@
                                 {# Fin de la modal voir un utilisateur #}
 
                                 {# Lien pour modifier un utilisateur #}
-                                <a href="{{ path('user_edit', {'id': user.id}) }}">
+                                <a href="{{ path('admin_user_edit', {'id': user.id}) }}">
                                     <i class="fad fa-user-edit px-2 py-2"></i>
                                 </a>
                                 {# Fin lien pour modifier un utilisateur #}
