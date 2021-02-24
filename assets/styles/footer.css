@@ -61,7 +61,7 @@ FOOTER gris
     font-family: 'Open Sans', sans-serif;
     text-decoration: none;
     color: rgb(255, 255, 255);
-    font-size: .8em;
+    font-size: .85em;
 }
 
 .footer-gris a:hover {
@@ -73,7 +73,7 @@ FOOTER gris
 }
 
 .sousmenusommaire {
-    font-size: 0.8em;
+    font-size: 1em;
     font-weight: 100;
 }
 

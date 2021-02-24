@@ -1,54 +1,109 @@
-{% extends 'base.html.twig' %}
-
-{% block title %}Media{% endblock %}
-
 {% block body %}
-    <h1>Media</h1>
+        <div id="show_media" class="container bg-light rounded">
+            <div class="row border-bottom py-3 px-5">
+                <div class="col-8">
+                    <h1 class="text-uppercase text-left m-0">
+                        Média : {{ medium.nom }}
+                        <br>
+                        Média Id :{{ medium.id }}
+                    </h1>
+                </div>
+                <div class="col-4 text-right my-auto">
+                    <span class="text-muted mr-2 font-italic">
+                        Modifier le profil :
+                    </span>
+                    <a href="{{ path('media_edit', {'id': medium.id}) }}">
+                        <i class="fad fa-user-edit"></i>
+                    </a>
+                </div>
+            </div>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ medium.id }}</td>
-            </tr>
-            <tr>
-                <th>Nom</th>
-                <td>{{ medium.nom }}</td>
-            </tr>
-            <tr>
-                <th>Url</th>
-                <td>{{ medium.url }}</td>
-            </tr>
-            <tr>
-                <th>Description</th>
-                <td>{{ medium.description }}</td>
-            </tr>
-            <tr>
-                <th>Titre</th>
-                <td>{{ medium.titre }}</td>
-            </tr>
-            <tr>
-                <th>FacebookLink</th>
-                <td>{{ medium.facebookLink }}</td>
-            </tr>
-            <tr>
-                <th>CreatedAt</th>
-                <td>{{ medium.createdAt ? medium.createdAt|date('Y-m-d H:i:s') : '' }}</td>
-            </tr>
-            <tr>
-                <th>UpdatedAt</th>
-                <td>{{ medium.updatedAt ? medium.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
-            </tr>
-            <tr>
-                <th>Type</th>
-                <td>{{ medium.type }}</td>
-            </tr>
-        </tbody>
-    </table>
-
-    <a href="{{ path('media_index') }}">back to list</a>
-
-    <a href="{{ path('media_edit', {'id': medium.id}) }}">edit</a>
-
-    {{ include('media/_delete_form.html.twig') }}
+<div class="row bg-white">
+                <div class="col-4 text-center my-auto">
+                    <i class="fad fa-inbox-in mr-4"></i>
+                    <img id='mediaImage' class="" alt="miniature du média" src="{{ medium.nom ? asset('/uploads/' ~ medium.nom) : asset('/images/logo.svg') }}">
+                </div>
+                <div class="col-8 my-5 pl-5 border-left-profil border-left-form">
+                    <div class="col-12">
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group">
+                                <div class="row mb-3">
+                                    <div class="col-1 p-0 text-center"><i class="fad fa-id-card-alt"></i></div>
+                                    <div class="col-4">Id du média :</div>
+                                    <div class="col-7 p-0">{{ medium.id }}</div>
+                                </div>
+                            </li>
+                            <li class="list-group">
+                                <div class="row mb-3">
+                                    <div class="col-1 p-0 text-center"><i class="fad fa-user-alt"></i></div>
+                                    <div class="col-4">Nom du fichier :</div>
+                                    <div class="col-7 p-0">{{ medium.nom }}</div>
+                                </div>
+                            </li>
+                            <li class="list-group">
+                                <div class="row mb-3">
+                                    <div class="col-1 p-0 text-center"><i class="fal fa-user-alt"></i></div>
+                                    <div class="col-4">Url de la vidéo Youtube :</div>
+                                    <div class="col-7 p-0">{{ medium.url }}</div>
+                                </div>
+                            </li>
+                            <li class="list-group">
+                                <div class="row mb-3">
+                                    <div class="col-1 p-0 text-center"><i class="fad fa-envelope-open-text"></i></div>
+                                    <div class="col-4">Description :</div>
+                                    <div class="col-7 p-0">{{ medium.description }}</div>
+                                </div>
+                            </li>
+                            <li class="list-group">
+                                <div class="row mb-3">
+                                    <div class="col-1 p-0 text-center"><i class="fad fa-phone"></i></div>
+                                    <div class="col-4">Titre du média</div>
+                                    <div class="col-7 p-0">{{ medium.titre }}</div>
+                                </div>
+                            </li>
+                            <li class="list-group">
+                                <div class="row mb-3">
+                                    <div class="col-1 p-0 text-center"><i class="fad fa-smile-plus"></i></div>
+                                    <div class="col-4">Lien partage FaceBook :</div>
+                                    <div class="col-7 p-0">{{ medium.facebookLink }}</div>
+                                </div>
+                            </li>
+                            <li class="list-group">
+                                <div class="row mb-3">
+                                    <div class="col-1 p-0 text-center"><i class="fad fa-road"></i></div>
+                                    <div class="col-4">Date de Création</div>
+                                    <div class="col-7 p-0">{{ medium.createdAt ? medium.createdAt|date('d-m-Y' ~ ' ' ~ 'à' ~ ' ' ~ 'H:i:s') : '' }}</div>
+                                </div>
+                            </li>
+                            <li class="list-group">
+                                <div class="row mb-3">
+                                    <div class="col-1 p-0 text-center"><i class="fad fa-mailbox"></i></div>
+                                    <div class="col-4">Date de modification</div>
+                                    <div class="col-7 p-0">{{ medium.updatedAt ? medium.updatedAt|date('d-m-Y' ~ ' ' ~ 'à' ~ ' ' ~ 'H:i:s') : '' }}</div>
+                                </div>
+                            </li>
+                            <li class="list-group">
+                                <div class="row mb-3">
+                                    <div class="col-1 p-0 text-center"><i class="fad fa-map-marked"></i></div>
+                                    <div class="col-4">Type de média</div>
+                                    <div class="col-7 p-0">{{ medium.type }}</div>
+                                </div>
+                            </li>
+                            <li class="list-group">
+                                <div class="row mb-3">
+                                    <div class="col-1 p-0 text-center"><i class="fad fa-user-check"></i></div>
+                                    <div class="col-4">Utilisateur vérifié ?</div>
+                                    <div class="col-7 p-0">
+                                        {% if medium.isDisplayed == 1 %}
+                                        <span class="text-success">Affiché</span>
+                                        {% else %}
+                                        <span class=="text-danger">Pas affiché</span>
+                                        {% endif %}
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
 {% endblock %}

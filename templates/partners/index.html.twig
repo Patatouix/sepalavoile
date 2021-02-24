@@ -6,7 +6,7 @@
     <div id="partners-list" class="container-fluid">
         <h1>Liste des partenaires</h1>
         <div class="col-12  mt-5 mb-3">
-            <a href="{{ path('partners_new') }}" class="btn btn-style">Nouveau partenaire</a>
+            <a href="{{ path('partners_new') }}" class="btn btn-style">Nouveau partenaire dimension : 280 x 120px</a>
         </div>
         <div class="table-responsive card px-2 py-2">
             <table id="example1" class="table table-bordered table-striped  mx-2 my-2">
@@ -78,7 +78,11 @@
                                             <div class="modal-body font-weight-normal">
                                                 <div class="row bg-white">
                                                     <div class="col-4 text-center my-auto">
-                                                        {# <img id='eventImage' class="img-fluid" alt="Photo de l'événement" src="{{ partner.filename ? asset('/images/partners/' ~ partner.filename) : asset('/images/logo.svg') }}"> #}
+                                                        {% if partner.media %}
+                                                            <img id='partnerImage' style="max-width:280px; max-height:120px" class="img-fluid" alt="Logo du partenaire" src="{{ asset('/uploads/' ~ partner.media.nom ) }}">
+                                                        {% else %}
+                                                            <img id='partnerImage' style="max-width:280px; max-height:120px" class="img-fluid" alt="Logo du partenaire" src="{{ asset('/images/defaut/partner-default.png') }}">
+                                                        {% endif %}
                                                     </div>
                                                     <div class="col-8 my-5 pl-5 border-left-profil ">
                                                         <div class="col-12">
@@ -109,7 +113,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="modal-footer"> 
+                                            <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
                                                 {% include "partners/_delete_form.html.twig" %}
                                             </div>
@@ -122,10 +126,16 @@
                                 {{ partner.name }}
                             </td>
                             <td>
-                                {{ partner.website }}
+                                <a href="{{ partner.website }}" target="blank">
+                                    {{ partner.website }}
+                                </a>
                             </td>
                             <td>
-                                <img id='partnerImage' class="img-fluid w-25" alt="Logo du partenaire" src="{{ partner.media.nom ? asset('/images/partners/' ~ partner.media.nom) : asset('/images/logo.svg') }}">
+                            {% if partner.media %}
+                                <img id='partnerImage' style="max-width:280px; max-height:120px" class="img-fluid w-25" alt="Logo du partenaire" src="{{ asset('/uploads/' ~ partner.media.nom ) }}">
+                            {% else %}
+                                <img id='partnerImage' style="max-width:280px; max-height:120px" class="img-fluid w-25" alt="Logo du partenaire" src="{{ asset('/images/defaut/partner-default.png') }}">
+                            {% endif %}
                             </td>
                         </tr>
                     {% else %}

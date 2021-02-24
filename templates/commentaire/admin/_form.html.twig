@@ -1,0 +1,64 @@
+{# {{ form_start(form) }}
+    {{ form_widget(form) }}
+    <button class="btn">{{ button_label|default('Save') }}</button>
+{{ form_end(form) }} #}
+
+
+{{ form_start(form) }}
+    <div id="form-new-commentaire" class="container bg-light rounded">
+        <div class="row bg-light border-bottom border-right border-left">
+            <div class="col-12 mt-5 pb-4 px-5">
+                <div class="col-12 mt-5">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group">
+                            <div class="row mb-5">
+                                <div class="col-1 p-0 text-center"><i class="fad fa-pen-alt"></i></div>
+                                <div class="col-4">{{ form_label(form.contenu) }}</div>
+                                <div class="col-7 p-0">{{ form_widget(form.contenu, {'attr': {'placeholder': 'Titre de l\'commentaire'}}) }}</div>
+                            </div>
+                        </li>
+                        <li class="list-group">
+                            <div class="row mb-5">
+                                <div class="col-1 p-0 text-center"><i class="fad fa-newspaper"></i></div>
+                                <div class="col-4">{{ form_label(form.article) }}</div>
+                                <div class="col-7 p-0">{{ form_widget(form.article) }}</div>
+                            </div>
+                        </li>
+                        <li class="list-group">
+                            <div class="row mb-5">
+                                <div class="col-1 p-0 text-center"><i class="fad fa-user"></i></div>
+                                <div class="col-4 font-weight-bold">{{ form_label(form.user) }}</div>
+                                <div class="col-7 p-0">{{ form_widget(form.user) }}</div>
+                            </div>
+                        </li>
+                        <li class="list-group">
+                            <div class="row mb-5">
+                                <div class="col-1 p-0 text-center"><i class="fad fa-user-check"></i></div>
+                                <div class="col-4 font-weight-bold">Modération</div>
+                                <div class="col-7 p-0">{{ form_widget(form.isPublished) }}</div>
+                            </div>
+                        </li>
+                        <li class="list-group">
+                            <div class="row mb-5">
+                                <div class="col-1 p-0 text-center"><i class="fad fa-calendar-alt"></i></div>
+                                <div class="col-4 font-weight-bold">{{ form_label(form.createdAt) }}</div>
+                                <div class="col-7 p-0">{{ form_widget(form.createdAt) }}</div>
+                            </div>
+                        </li>
+                        <li class="list-group">
+                            <div class="row mb-1">
+                                <div class="col-1 p-0 text-center"><i class="fad fa-calendar-alt"></i></div>
+                                <div class="col-4 font-weight-bold">{{ form_label(form.updatedAt) }}</div>
+                                <div class="col-7 p-0">{{ form_widget(form.updatedAt) }}</div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-12 text-right p-4">
+                <a href="{{ path('admin_commentaire_index') }}" class="btn btn-secondary">Annuler</a>
+                <button class="btn btn-style">{{ button_label|default('Valider') }}</button>
+            </div>
+        </div>
+    </div>
+{{ form_end(form) }}

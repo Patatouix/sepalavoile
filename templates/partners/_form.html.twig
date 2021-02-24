@@ -6,29 +6,29 @@
                         <ul class="list-group list-group-flush">
                             <li class="list-group">
                                 <div class="row mb-3">
-                                    <div class="col-1 p-0 text-center"><i class="fad fa-id-badge"></i></div>
-                                    <div class="col-4">{{ form_label(form.name) }}</div>
-                                    <div class="col-6 p-0">{{ form_widget(form.name, {'attr': {'placeholder': 'Nom du partenaire'}}) }}</div>
+                                    <div class="col-1 col-sm-1 p-0 text-center"><i class="fad fa-inbox-in"></i></div>
+                                    <div class="col-11 col-sm-3">{{ form_label(form.media) }}</div>
+                                    <div class="col-12 col-sm-8 p-0 mr-sm-2">{{ form_widget(form.media) }}</div>
                                 </div>
                             </li>
                             <li class="list-group">
                                 <div class="row mb-3">
-                                    <div class="col-1 p-0 text-center"><i class="fad fa-calendar-check"></i></div>
-                                    <div class="col-4">{{ form_label(form.webSite) }}</div>
-                                    <div class="col-6 p-0">{{ form_widget(form.webSite) }}</div>
+                                    <div class="col-1 col-sm-1 p-0 p-0 text-center"><i class="fad fa-id-badge"></i></div>
+                                    <div class="col-11 col-sm-3">{{ form_label(form.name) }}</div>
+                                    <div class="col-12 col-sm-8 p-0">{{ form_widget(form.name, {'attr': {'placeholder': 'Nom du partenaire'}}) }}</div>
                                 </div>
                             </li>
                             <li class="list-group">
                                 <div class="row mb-3">
-                                    <div class="col-1 p-0 text-center"><i class="fad fa-inbox-in mr-2"></i></div>
-                                    <div class="col-4">{{ form_label(form.media) }}</div>
-                                    <div class="col-6 p-0">{{ form_widget(form.media) }}</div>
+                                    <div class="col-1 col-sm-1 p-0 p-0 text-center"><i class="fad fa-calendar-check"></i></div>
+                                    <div class="col-11 col-sm-3">{{ form_label(form.webSite) }}</div>
+                                    <div class="col-12 col-sm-8 p-0">{{ form_widget(form.webSite) }}</div>
                                 </div>
                             </li>
                         </ul>
                     </div>
                 </div>
-                <div class="col-12 text-right p-4"> 
+                <div class="col-12 text-right p-4">
                     <a href="{{ path('partners_index') }}" class="btn btn-secondary">Annuler</a>
                     <button class="btn btn-style">{{ button_label|default('Valider') }}</button>
                 </div>

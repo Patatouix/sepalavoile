@@ -1,4 +1,66 @@
 {{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn btn-style">{{ button_label|default('Save') }}</button>
+    <div id="user_form" class="container bg-light rounded">
+            <div class="row bg-light border-bottom border-right border-left">
+                <div class="col-12 mt-5 pb-4">
+                    <div class="col-12 mt-5 pr-5">
+                        <ul class="list-group list-group-flush">
+
+                            <li class="list-group">
+                                <div class="row mb-3">
+                                    <div class="col-12 col-md-1 p-0 text-center"><i class="fad fa-inbox-in"></i></div>
+                                    <div class="col-12 col-md-4">{{ form_label(form.imageFile) }}</div>
+                                    <div class="col-12 col-md-7 p-0">{{ form_widget(form.imageFile, {'attr': {'placeholder': 'Choisissez le fichier à uploader'}}) }}</div>
+                                </div>
+                            </li>
+                            {# <li class="list-group">
+                                <div class="row mb-3">
+                                    <div class="col-12 col-md-1 p-0 text-center"><i class="fad fa-photo-video"></i></div>
+                                    <div class="col-12 col-md-4">{{ form_label(form.nom) }}</div>
+                                    <div class="col-12 col-md-7 p-0">{{ form_widget(form.nom, {'attr': {'placeholder': 'Nom du fichier'}}) }}</div>
+                                </div>
+                            </li> #}
+                            <li class="list-group">
+                                <div class="row mb-3">
+                                    <div class="col-12 col-md-1 p-0 text-center"><i class="fab fa-youtube"></i></div>
+                                    <div class="col-12 col-md-4">{{ form_label(form.url) }}</div>
+                                    <div class="col-12 col-md-7 p-0">{{ form_widget(form.url, {'attr': {'placeholder': 'URL de la vidéo YouTube'}}) }}</div>
+                                </div>
+                            </li>
+                            <li class="list-group">
+                                <div class="row mb-3">
+                                    <div class="col-12 col-md-1 p-0 text-center"><i class="fad fa-browser"></i></div>
+                                    <div class="col-12 col-md-4">{{ form_label(form.description) }}</div>
+                                    <div class="col-12 col-md-7 p-0">{{ form_widget(form.description, {'attr': {'placeholder': 'Description du média (texte alternatif) :'}}) }}</div>
+                                </div>
+                            </li>
+                            <li class="list-group">
+                                <div class="row mb-3">
+                                    <div class="col-12 col-md-1 p-0 text-center"><i class="fad fa-heading"></i></div>
+                                    <div class="col-12 col-md-4">{{ form_label(form.titre) }}</div>
+                                    <div class="col-12 col-md-7 p-0">{{ form_widget(form.titre, {'attr': {'placeholder': 'Titre du média'}}) }}</div>
+                                </div>
+                            </li>
+                            <li class="list-group">
+                                <div class="row mb-3">
+                                    <div class="col-12 col-md-1 p-0 text-center"><i class="fab fa-facebook-square"></i></div>
+                                    <div class="col-12 col-md-4">{{ form_label(form.facebookLink) }}</div>
+                                    <div class="col-12 col-md-7 p-0">{{ form_widget(form.facebookLink, {'attr': {'placeholder': 'Lien de partage sur Facebook'}}) }}</div>
+                                </div>
+                            </li>
+                            <li class="list-group">
+                                <div class="row mb-3">
+                                    <div class="col-12 col-md-1 p-0 text-center"><i class="fad fa-photo-video"></i></div>
+                                    <div class="col-12 col-md-4">{{ form_label(form.mediaCategory) }}</div>
+                                    <div class="col-12 col-md-7 p-0">{{ form_widget(form.mediaCategory, {'attr': {'placeholder': 'Type de média'}}) }}</div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-12 text-right p-4">
+                    <a href="{{ path('media_index') }}" class="btn btn-secondary">Annuler</a>
+                    <button class="btn btn-style">{{ button_label|default('Valider') }}</button>
+                </div>
+            </div>
+        </div>
 {{ form_end(form) }}

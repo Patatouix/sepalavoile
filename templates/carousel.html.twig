@@ -4,56 +4,9 @@
 
 {% block body %}
 
-    <section id="carousel">
-        <div class="fondslide pb-5">
-            <div class="container-video">
-                <div class="bloc-degrade">
-                    <div class="container">
-                        <div class="conteneur-titre">
-                            <h1>Le tour du monde à la voile</h1>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- CAROUSEL -->
-                {# VERSION DYNAMIQUE #}
-                {# <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
-                    <div class="carousel-inner">
-                        {% set count = 0 %}
-                        {% for slidephoto in slidephotos %}
-                            <div class="carousel-item {% if count == 0 %} active {% endif %}" data-interval="3000">
-                                <img src="{{ asset('/images/slidephoto/' ~ slidephoto.filename ) }}" class="d-block w-100" alt="...">
-                            </div>
-                            {% set count = count + 1 %}
-                        {% endfor %}
-                    </div> #}
-                {# FIN DE LA VERSION DYNAMIQUE #}
-                    {# <a class="carousel-control-prev" href="#carouselExampleSlidesOnly" role="button" data-slide="prev">
-                        <i class="fad fa-chevron-left"></i>
-                    </a>
-                    <a class="carousel-control-next" href="#carouselExampleSlidesOnly" role="button" data-slide="next">
-                        <i class="fad fa-chevron-right"></i>
-                    </a> #}
 
+    {{ render (controller('App\\Controller\\FrontController::carousel'))}}
 
-                    <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
-                        <div class="carousel-inner">
-                            <div class="carousel-item active">
-                                <img src="{{ asset('/images/slidephoto/bg-slide-1.jpg') }}" class="d-block w-100" alt="...">
-                            </div>
-                            <div class="carousel-item">
-                                <img src="{{ asset('/images/slidephoto/bg-slide-2.jpg') }}" class="d-block w-100" alt="...">
-                            </div>
-                            <div class="carousel-item">
-                                <img src="{{ asset('/images/slidephoto/bg-slide-3.jpg') }}" class="d-block w-100" alt="...">
-                            </div>
-                        </div>
-                    </div>
-
-                </div>                
-            </div>
-        </div>
-    </section>
     {% block content %}
 
     {% endblock %}

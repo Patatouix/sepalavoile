@@ -16,8 +16,13 @@
                 <div class="row">
                     <!-- Article -->
                     <article class="articlestyle m-top-articlestyle shadow">
-                        {# <img src="{{ article.filename ? asset('/images/photoarticle/' ~ article.filename) : asset('/images/logo.svg') }}" width="100%"> #}
-                        <img src="{{ asset('/images/logo.svg') }}" width="100%">
+                        {% if article.medias|first %}
+                            <img id='articleImage' class="img-fluid" alt="Photo de l'article" src="{{ asset('/uploads/' ~ article.medias|first.nom ) }}" width="100%">
+                        {% else %}
+                            <img id='articleImage' class="img-fluid" alt="Photo de l'article" src="{{ asset('/images/logo.svg') }}" width="100%">
+                        {% endif %}
+                        {# <img src="{{ article.filename ? asset('/images/photoarticle/' ~ article.filename) : asset('/images/logo.svg') }}"  #}
+                        {# <img src="{{ asset('/images/logo.svg') }}" width="100%"> #}
                         <p class="meta">
                             Publié le <strong>{{ article.createdAt|date('d/m/Y') }}</strong> par <strong>{{ article.author }}</strong> dans la rubrique 
                             {% for category in article.articleCategories %}
@@ -32,17 +37,47 @@
 
                         <aside class="mt60">
                             <h2>Laisser un commentaire</h2>
-                            <p>ici plugin commentaire....</p>
+                            {% if app.user %}
+                                <div class="mb-5">
+                                    {{ form_start(form) }}
+                                    {{ form_end(form) }}
+                                </div>
+                            {% else %}
+                                <div class="mt-4 mb-5"><a type="button" href="#" data-toggle="modal" data-target="#connexionModal">Connectez vous</a> pour laisser un message.</div>
+                            {% endif %}
+                            {% for commentaire in article.commentaires|sort((a, b) => a.createdAt <=> b.createdAt)|reverse %}
+                                {% if commentaire.isPublished %}
+                                    <div>{{ commentaire.contenu }}</div>
+                                    <div class="meta text-right">{{ commentaire.user.nomComplet }}, le {{ commentaire.createdAt|date('d/m/Y') }}</div>
+                                {% endif %}
+                            {% endfor %}
                         </aside>
 
                         <aside class="mt60">
+                            <hr>
                             <h2>Articles les plus récents</h2>
                             <div class="row">
-                                {% for articleRandom in articleRandom|slice(0, 3) %}                                    
-                                    <div class="col-md-4 col-sm-4 col-xs-4">
+                                {% for articleRandom in articleRandom|slice(0, 3) %}
+                                    <div class="col-md-4 col-sm-4 col-xs-4 p-2">
+                                        <div class="text-center mb-3 pt-2" style="height:150px">
+                                                <a href="{{ path('article_show', {'id': articleRandom.id}) }}">
+                                                    {% if article.medias|first %}
+                                                        <img id='articleImage' class="img-fluid align-self-center" alt="Photo de l'article" src="{{ asset('/uploads/' ~ articleRandom.medias|first.nom) }}" style="max-height:100%">
+                                                    {% else %}
+                                                        <img id='articleImage' class="img-fluid" alt="Photo de l'article" src="{{ asset('/images/logo.svg') }}">
+                                                    {% endif %}
+                                                </a>
+                                        </div>
 
-                                        {# <span class="imgWrap"><a href="{{ path('article_show', {'id': articleRandom.id}) }}"><img src="{{ articleRandom.filename ? asset('/images/photoarticle/' ~ articleRandom.filename) : asset('/images/logo.svg') }}" width="100%"></a></span> #}
-                                        <span class="imgWrap"><a href="{{ path('article_show', {'id': articleRandom.id}) }}"><img class="mb-2 mt-2" src="{{ asset('/images/logo.svg') }}" width="100%"></a></span>
+                                        {# <div class="text-center" style="height:200px">
+                                                <a href="{{ path('article_show', {'id': articleRandom.id}) }}">
+                                                    {% if article.medias|first %}
+                                                        <img id='articleImage' class="img-fluid" alt="Photo de l'article" src="{{ asset('/uploads/' ~ articleRandom.medias|first.nom) }}" style="height:100%; width:100%">
+                                                    {% else %}
+                                                        <img id='articleImage' class="img-fluid" alt="Photo de l'article" src="{{ asset('/images/logo.svg') }}">
+                                                    {% endif %}
+                                                </a>
+                                        </div> #}
                                         <a href="{{ path('article_show', {'id': articleRandom.id}) }}">{{ articleRandom.title }}</a>
                                         <hr class="mt-1 mb-1">
                                         <span class="meta text-muted font-italic font-weight-light">Publié

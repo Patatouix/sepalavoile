@@ -4,9 +4,14 @@ namespace App\Controller;
 
 use App\Entity\Article;
 use App\Entity\ArticleCategorie;
+use App\Entity\Commentaire;
+use App\Entity\Media;
 use App\Form\ArticleType;
+use App\Form\CommentaireType;
 use App\Repository\ArticleCategorieRepository;
 use App\Repository\ArticleRepository;
+use App\Repository\CommentaireRepository;
+use App\Repository\MediaRepository;
 use DateTime;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -22,15 +27,18 @@ class ArticleController extends AbstractController
      */
     public function index(ArticleRepository $articleRepository): Response
     {
+
         return $this->render('article/index.html.twig', [
             'articles' => $articleRepository->findAll(),
         ]);
+
     }
 
     /**
      * @Route("/blog/{categoryId}", name="blog")
      */
-    public function blog(ArticleRepository $articleRepository, Request $request, ArticleCategorieRepository $articleCategorieRepository, int $categoryId = null, PaginatorInterface $paginator): Response
+    public function blog(ArticleRepository $articleRepository, Request $request, ArticleCategorieRepository $articleCategorieRepository,
+        int $categoryId = null, PaginatorInterface $paginator, CommentaireRepository $commentaireRepository): Response
     {
         // Permet d'afficher dans le ASIDE les articles avec le plus de vue
         $articleBestView = $this->getDoctrine()->getRepository(Article::class)->findBynombreVuDesc();
@@ -67,6 +75,8 @@ class ArticleController extends AbstractController
         // sans tenir compte de la pagination
         $article = $articleRepository->findAll();
 
+        $lastComments = $commentaireRepository->findBy(['isPublished' => true], ['createdAt' => 'DESC'], 3);
+
         return $this->render('article/blog.html.twig', [
             'articlesPaginate'  => $articlesPaginate,
             'category'          => $allCategory,
@@ -74,7 +84,7 @@ class ArticleController extends AbstractController
             'categories'        => $categories,
             'categoryId'        => $categoryId,
             'articles'          => $articles,
-
+            'lastComments'      => $lastComments
         ]);
     }
 
@@ -106,9 +116,9 @@ class ArticleController extends AbstractController
     }
 
     /**
-     * @Route("/article/{id}", name="article_show", methods={"GET"})
+     * @Route("/article/{id}", name="article_show", methods={"GET", "POST"})
      */
-    public function show(Article $article, ArticleRepository $articleRepository, Request $request, ArticleCategorieRepository $articleCategorieRepository): Response
+    public function show(Article $article, ArticleRepository $articleRepository, Request $request, ArticleCategorieRepository $articleCategorieRepository, CommentaireRepository $commentaireRepository): Response
     {
         // PERMET DE RAJOUTER +1 à chaque fois que l\'article est visité
         $article->setNbVues($article->getNbVues() + 1);
@@ -123,6 +133,25 @@ class ArticleController extends AbstractController
 
         $articleRandom = $articleRepository -> findBy([],['createdAt' => 'DESC']);
 
+        $commentaire = new Commentaire();
+        $form = $this->createForm(CommentaireType::class, $commentaire);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $commentaire->setCreatedAt( new DateTime('NOW'));
+            $commentaire->setArticle($article);
+            $commentaire->setUser($this->getUser());
+            //si la personne qui poste est admin, on publie directement le message
+            $commentaire->setIsPublished($this->isGranted('ROLE_ADMIN'));
+
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($commentaire);
+            $entityManager->flush();
+        }
+
+        //on récupère les derniers commentaires publiés après la soumission du formulaire, pour avoir celui qu'on vient d'enregistrer
+        $lastComments = $commentaireRepository->findBy(['isPublished' => true], ['createdAt' => 'DESC'], 3);
+
         return $this->render('article/show_article.html.twig', [
             'articles'          => $articleRepository->findBy([],['createdAt' => 'desc']),
             'category'          => $allCategory,
@@ -130,6 +159,8 @@ class ArticleController extends AbstractController
             'categories'        => $categories,
             'article'           => $article,
             'articleRandom'     => $articleRandom,
+            'form'              => $form->createView(),
+            'lastComments'      => $lastComments
         ]);
     }
 

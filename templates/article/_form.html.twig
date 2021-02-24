@@ -12,44 +12,43 @@
                     <ul class="list-group list-group-flush">
                         <li class="list-group">
                             <div class="row mb-5">
-                                <div class="col-1 p-0 text-center"><i class="fad fa-inbox-in mr-2"></i></div>
-                                <div class="col-4">{{ form_label(form.medias) }}</div>
-                                <div class="col-7 p-0">{{ form_widget(form.medias) }}</div>
+                                <div class="col-1 col-sm-1 p-0 text-center"><i class="fad fa-inbox-in mr-2"></i></div>
+                                <div class="col-11 col-sm-4">{{ form_label(form.medias) }}</div>
+                                <div class="col-12 col-sm-7 p-0">{{ form_widget(form.medias) }}</div>
                             </div>
                         </li>
                         <li class="list-group">
                             <div class="row mb-5">
-                                <div class="col-1 p-0 text-center"><i class="fad fa-heading"></i></div>
-                                <div class="col-4">{{ form_label(form.title) }}</div>
-                                <div class="col-7 p-0">{{ form_widget(form.title, {'attr': {'placeholder': 'Titre de l\'article'}}) }}</div>
+                                <div class="col-1 col-sm-1 p-0 text-center"><i class="fad fa-heading"></i></div>
+                                <div class="col-11 col-sm-4">{{ form_label(form.title) }}</div>
+                                <div class="col-12 col-sm-7 p-0">{{ form_widget(form.title, {'attr': {'placeholder': 'Titre de l\'article'}}) }}</div>
                             </div>
                         </li>
                         <li class="list-group">
                             <div class="row mb-5">
-                                <div class="col-1 p-0 text-center"><i class="fad fa-user"></i></div>
-                                <div class="col-4">{{ form_label(form.author) }}</div>
-                                <div class="col-7 p-0">{{ form_widget(form.author) }}</div>
+                                <div class="col-1 col-sm-1 p-0 text-center"><i class="fad fa-user"></i></div>
+                                <div class="col-11 col-sm-4">{{ form_label(form.author) }}</div>
+                                <div class="col-12 col-sm-7 p-0">{{ form_widget(form.author) }}</div>
                             </div>
                         </li>
                         <li class="list-group">
                             <div class="row mb-5">
-                                <div class="col-1 p-0 text-center"><i class="fad fa-tags"></i></div>
-                                <div class="col-4 font-weight-bold">{{ form_label(form.articleCategories) }}</div>
-                                <div class="col-7 p-0">{{ form_widget(form.articleCategories) }}</div>
+                                <div class="col-1 col-sm-1 p-0 text-center"><i class="fad fa-tags"></i></div>
+                                <div class="col-11 col-sm-4 font-weight-bold">{{ form_label(form.articleCategories) }}</div>
+                                <div class="col-12 col-sm-7 p-0">{{ form_widget(form.articleCategories) }}</div>
                             </div>
                         </li>
                         <li class="list-group">
                             <div class="row mb-5">
-                                <div class="col-1 p-0 text-center"><i class="fad fa-pen-alt"></i></div>
+                                <div class="col-1 col-sm-1 p-0 text-center"><i class="fad fa-pen-alt"></i></div>
                                 <div class="col-9 mb-4">{{ form_label(form.content) }}</div>
                                 <div class="col-12 p-0">{{ form_widget(form.content) }}</div>
                             </div>
                         </li>
                         <li class="list-group">
                             <div class="row mb-1">
-                                <div class="col-1 p-0 text-center"><i class="fad fa-calendar-check"></i></div>
-                                <div class="col-4">{{ form_label(form.isPublished) }}</div>
-                                <div class="col-7 p-0">{{ form_widget(form.isPublished) }}</div>
+                                <div class="col-1 col-sm-1 p-0 text-center"><i class="fad fa-calendar-check"></i></div>
+                                <div class="col-11 col-sm-11 p-0">{{ form_widget(form.isPublished) }}</div>
                             </div>
                         </li>
                     </ul>

@@ -1,0 +1,50 @@
+{% block body %}
+    <div id="show_message" class="container bg-light rounded">
+        <div class="row border-bottom py-3 px-5">
+            <div class="col-12 text-right my-auto">
+                <span class="text-muted mr-2 font-italic">
+                    Répondre :
+                </span>
+                <a href="" class="repondreModal" data-expediteur-id="{{ message.expediteur.id }}">
+                    <i class="fad fa-edit"></i>
+                </a>
+            </div>
+        </div>
+        <div class="row bg-white">
+            <div class="col-12 my-5 pl-3">
+                <div class="col-12">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group">
+                            <div class="row mb-3">
+                                <div class="col-1 col-md-1 p-0 text-center"><i class="fad fa-clock"></i></div>
+                                <div class="col-11 col-md-3 font-weight-bold">Date :</div>
+                                <div class="col-12 col-md-8 p-0 text-muted">{{ message.createdAt|date('d/m/Y H:i:s') }}</div>
+                            </div>
+                        </li>
+                        <li class="list-group">
+                            <div class="row mb-3">
+                                <div class="col-1 col-md-1 p-0 text-center"><i class="fad fa-user"></i></div>
+                                <div class="col-11 col-md-3 mt-3 mt-md-0 font-weight-bold">Expéditeur :</div>
+                                <div class="col-12 col-md-8 p-0 pr-5 text-muted">{{ message.expediteur.nomComplet}} ({{ message.expediteur.email }})</div>
+                            </div>
+                        </li>
+                        <li class="list-group">
+                            <div class="row mb-3">
+                                <div class="col-1 col-md-1 p-0 text-center"><i class="fad fa-envelope-open-text"></i></div>
+                                <div class="col-11 col-md-3 mt-3 mt-md-0 font-weight-bold">Objet :</div>
+                                <div class="col-12 col-md-8 p-0 break-word text-muted">{{ message.objet }}</div>
+                            </div>
+                        </li>
+                        <li class="list-group">
+                            <div class="row mb-3">
+                                <div class="col-1 col-md-1 p-0 text-center"><i class="fad fa-comment-dots"></i></div>
+                                <div class="col-11 col-md-3 mt-3 mt-md-0 font-weight-bold">Contenu :</div>
+                                <div class="col-12 col-md-8 p-0 break-word text-muted">{{ message.contenu|raw }}</div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
