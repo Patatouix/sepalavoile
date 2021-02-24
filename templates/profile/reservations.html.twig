@@ -1,0 +1,54 @@
+{% extends "profile/base_profile.html.twig" %}
+
+{% block sideContent %}
+
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr style="background-color: #ff8300;"><th style="color: white" colspan="6"><i class="fad fa-calendar-times text-white mr-2"></i> MES RESERVATIONS</th></tr>
+                <tr>
+                    <th>Date</th>
+                    <th>Produit</th>
+                    <th>Créneau</th>
+                    <th>Quantité</th>
+                    <th>Prix</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for reservation in user.reservations %}
+                    <tr>
+                        <td>{{ reservation.createdAt|date('d/m/Y') }}</td>
+                        <td>{{ reservation.creneau.produit.nom }}</td>
+                        <td>{{ reservation.creneau.debut|date('d/m/Y') }}</td>
+                        <td>{{ reservation.quantitePlaces }}</td>
+                        <td>{{ reservation.prixPaye * reservation.quantitePlaces }} €</td>
+                        <td class="text-right">
+                            <a href="#" type="button" class="m-0" data-toggle="modal" data-target="#feedbackModal{{ reservation.id }}">
+                                <i class="fad fa-stars mr-2"></i>
+                            </a>
+                            <div class="modal fade text-left" id="feedbackModal{{ reservation.id }}" tabindex="-1" role="dialog" aria-labelledby="feedbackModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-xl" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h6 class="modal-title text-uppercase font-weight-bold">Mon expérience</h6>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body font-weight-normal p-0">
+                                            {{ render (controller('App\\Controller\\ProfileController::editReservation', {'id': reservation.id })) }}
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-darkgrey" data-dismiss="modal">Fermer</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

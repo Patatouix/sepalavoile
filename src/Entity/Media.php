@@ -93,11 +93,29 @@ class Media
      */
     private $galeries;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=User::class, mappedBy="medias")
+     */
+    private $users;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=Achat::class, mappedBy="medias")
+     */
+    private $achats;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=Reservation::class, mappedBy="medias")
+     */
+    private $reservations;
+
     public function __construct()
     {
         $this->produits = new ArrayCollection();
         $this->partners = new ArrayCollection();
         $this->galeries = new ArrayCollection();
+        $this->users = new ArrayCollection();
+        $this->achats = new ArrayCollection();
+        $this->reservations = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -315,6 +333,25 @@ class Media
         return $this;
     }
 
+    /**
+     * @return Collection|User[]
+     */
+
+    public function getUsers(): Collection
+    {
+        return $this->users;
+    }
+
+    public function addUser(User $user): self
+    {
+        if (!$this->users->contains($user)) {
+            $this->users[] = $user;
+            $user->addMedia($this);
+        }
+
+        return $this;
+    }
+
     public function removeGalery(Galerie $galery): self
     {
         if ($this->galeries->removeElement($galery)) {
@@ -324,5 +361,67 @@ class Media
         return $this;
     }
 
+    public function removeUser(User $user): self
+    {
+        if ($this->users->removeElement($user)) {
+            $user->removeMedia($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Achat[]
+     */
+    public function getAchats(): Collection
+    {
+        return $this->achats;
+    }
+
+    public function addAchat(Achat $achat): self
+    {
+        if (!$this->achats->contains($achat)) {
+            $this->achats[] = $achat;
+            $achat->addMedia($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAchat(Achat $achat): self
+    {
+        if ($this->achats->removeElement($achat)) {
+            $achat->removeMedia($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Reservation[]
+     */
+    public function getReservations(): Collection
+    {
+        return $this->reservations;
+    }
+
+    public function addReservation(Reservation $reservation): self
+    {
+        if (!$this->reservations->contains($reservation)) {
+            $this->reservations[] = $reservation;
+            $reservation->addMedia($this);
+        }
+
+        return $this;
+    }
+
+    public function removeReservation(Reservation $reservation): self
+    {
+        if ($this->reservations->removeElement($reservation)) {
+            $reservation->removeMedia($this);
+        }
+
+        return $this;
+    }
 
 }

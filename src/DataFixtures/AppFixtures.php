@@ -43,7 +43,7 @@ class AppFixtures extends Fixture
         $userAlbanAdmin->setName('jaillais');
         $userAlbanAdmin->setFirstname('alban');
         $userAlbanAdmin->setCreatedAt(new DateTime('NOW'));
-        $userAlbanAdmin->setIsVerified(false);
+        $userAlbanAdmin->setIsVerified(true);
         $manager->persist($userAlbanAdmin);
 
         $userAlbanUser = new User();
@@ -53,7 +53,7 @@ class AppFixtures extends Fixture
         $userAlbanUser->setName('jaillais');
         $userAlbanUser->setFirstname('alban');
         $userAlbanUser->setCreatedAt(new DateTime('2021-05-31 00:00:30'));
-        $userAlbanUser->setIsVerified(false);
+        $userAlbanUser->setIsVerified(true);
         $manager->persist($userAlbanUser);
 
         $userFabienAdmin = new User();
@@ -63,7 +63,7 @@ class AppFixtures extends Fixture
         $userFabienAdmin->setName('rohrbal');
         $userFabienAdmin->setFirstname('fabien');
         $userFabienAdmin->setCreatedAt(new DateTime('2021-09-18 00:00:01'));
-        $userFabienAdmin->setIsVerified(false);
+        $userFabienAdmin->setIsVerified(true);
         $manager->persist($userFabienAdmin);
 
         $userFabienUser = new User();
@@ -73,7 +73,7 @@ class AppFixtures extends Fixture
         $userFabienUser->setName('rohrbal');
         $userFabienUser->setFirstname('fabien');
         $userFabienUser->setCreatedAt(new DateTime('NOW'));
-        $userFabienUser->setIsVerified(false);
+        $userFabienUser->setIsVerified(true);
         $manager->persist($userFabienUser);
 
         $userCharlesAdmin = new User();
@@ -83,7 +83,7 @@ class AppFixtures extends Fixture
         $userCharlesAdmin->setName('anguenot');
         $userCharlesAdmin->setFirstname('charles');
         $userCharlesAdmin->setCreatedAt(new DateTime('NOW'));
-        $userCharlesAdmin->setIsVerified(false);
+        $userCharlesAdmin->setIsVerified(true);
         $manager->persist($userCharlesAdmin);
 
         $userCharlesUser = new User();
@@ -93,7 +93,7 @@ class AppFixtures extends Fixture
         $userCharlesUser->setName('anguenot');
         $userCharlesUser->setFirstname('charles');
         $userCharlesUser->setCreatedAt(new DateTime('NOW'));
-        $userCharlesUser->setIsVerified(false);
+        $userCharlesUser->setIsVerified(true);
         $manager->persist($userCharlesUser);
 
         $userArray = [$userAlbanAdmin, $userAlbanUser, $userFabienAdmin, $userFabienUser, $userCharlesAdmin, $userCharlesUser];

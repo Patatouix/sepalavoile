@@ -17,9 +17,6 @@
                     <a class="nav-link" data-widget="pushmenu" href="#"><i class="fas fa-bars"></i></a>
                 </div>
                 <div class="nav-item d-sm-inline-block">
-                    <a href="{{ path('dashboard') }}" class="nav-link">Retour au dashboard</a>
-                </div>
-                <div class="nav-item d-sm-inline-block">
                     <a href="{{ path('home_page') }}" class="nav-link">Retour au site</a>
                 </div>
             <div class="d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
@@ -33,7 +30,7 @@
         <!-- Main Sidebar Container -->
         <aside class="main-sidebar sidebar-dark-primary">
             <!-- Brand Logo -->
-            <a href="{{ path('home_page') }}" class="brand-link align-middle">
+            <a href="{{ path('dashboard') }}" class="brand-link align-middle">
                 <img src="{{ asset('/images/logo.svg') }}" alt="Logo Sepalavoile" class="brand-image">
                 <span class="brand-text font-weight-light">Sepalavoile</span>
             </a>
@@ -46,7 +43,7 @@
                         {# <img src="{{ app.user.filename ? asset('/images/user/' ~ app.user.filename) : asset('/images/avatar.png') }}" class="avatar" alt="User Image"> #}
                     </div>
                     <div class="info">
-                        <a href="{{ path('user_show', {'id': app.user.id}) }}" class="d-block">{{ app.user.firstName }} {{ app.user.name }}</a>
+                        <a href="{{ path('admin_user_show', {'id': app.user.id}) }}" class="d-block">{{ app.user.firstName }} {{ app.user.name }}</a>
                     </div>
                 </div>
 
@@ -73,7 +70,7 @@
                                 {# {* {$smarty.session|var_dump} *} #}
                                 {# {if isset($smarty.session) AND $smarty.session.user.role eq 'Admin' OR $smarty.session.user.role eq 'Moderateur'} #}
                                 <li class="nav-item">
-                                    <a href="{{ path('user_index') }}" class="nav-link">
+                                    <a href="{{ path('admin_user_index') }}" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Liste des utilisateurs</p>
                                     </a>
@@ -81,7 +78,7 @@
                                 {# {/if} #}
 
                                 <li class="nav-item">
-                                    <a href="{{ path('user_show', {'id': app.user.id}) }}" class="nav-link">
+                                    <a href="{{ path('admin_user_show', {'id': app.user.id}) }}" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Consulter mon profil</p>
                                     </a>

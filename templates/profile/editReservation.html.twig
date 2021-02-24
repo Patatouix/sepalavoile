@@ -1,0 +1,7 @@
+<div class="m-3">
+    {{ form_start(form, {'action': path('profile_reservations_edit', {'id': reservation.id})}) }}
+        {{ form_widget(form) }}
+        <button type="submit" class="btn btn-style">Enregistrer</button>
+    {{ form_end(form) }}
+</div>
+
