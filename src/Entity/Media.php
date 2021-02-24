@@ -88,10 +88,16 @@ class Media
      */
     private $isDisplayed;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=Galerie::class, mappedBy="medias")
+     */
+    private $galeries;
+
     public function __construct()
     {
         $this->produits = new ArrayCollection();
         $this->partners = new ArrayCollection();
+        $this->galeries = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -290,5 +296,33 @@ class Media
 
         return $this;
     }
+
+    /**
+     * @return Collection|Galerie[]
+     */
+    public function getGaleries(): Collection
+    {
+        return $this->galeries;
+    }
+
+    public function addGalery(Galerie $galery): self
+    {
+        if (!$this->galeries->contains($galery)) {
+            $this->galeries[] = $galery;
+            $galery->addMedia($this);
+        }
+
+        return $this;
+    }
+
+    public function removeGalery(Galerie $galery): self
+    {
+        if ($this->galeries->removeElement($galery)) {
+            $galery->removeMedia($this);
+        }
+
+        return $this;
+    }
+
 
 }

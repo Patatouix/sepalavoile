@@ -7,6 +7,7 @@ use App\Entity\Media;
 use App\Entity\MediaCategory;
 use App\Repository\ArticleCategorieRepository;
 use App\Repository\ArticleRepository;
+use App\Repository\GalerieCategorieRepository;
 use App\Repository\MediaCategoryRepository;
 use App\Repository\MediaRepository;
 use App\Repository\PartnersRepository;
@@ -115,14 +116,15 @@ class FrontController extends AbstractController
     }
 
     /**
-     * @Route("/galerie", name="galerie")
+     * @Route("/galerie_photo", name="galerie_photo")
      */
-    public function galerie(): Response
+    public function galerie(GalerieCategorieRepository $galerieCategorieRepository): Response
     {
         $galerie = $this->getDoctrine()->getRepository(Media::class)->findBy(['type' => 'galerie'], ['createdAt' => 'desc']);
 
         return $this->render('front/galerie.html.twig', [
             'controller_name' => 'FrontController',
+            'galerieCategories' => $galerieCategorieRepository->findAll(),
             'galerie' => $galerie,
         ]);
     }

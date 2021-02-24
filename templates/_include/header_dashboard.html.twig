@@ -336,30 +336,40 @@
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="" class="nav-link">
+                                    <a href="{{ path('galerie_index') }}" class="nav-link">
                                         <i class="nav-icon far fa-circle"></i>
                                         <p>
-                                            Liste des photos
+                                            Galeries
                                             {# {* Permet de rajouter un badge à la fin *} #}
                                             <span class="badge badge-info right"></span>
                                         </p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="" class="nav-link">
+                                    <a href="{{ path('galerie_categorie_index') }}" class="nav-link">
                                         <i class="nav-icon far fa-circle"></i>
                                         <p>
-                                            Liste des tags
+                                            Catégorie
                                             {# {* Permet de rajouter un badge à la fin *} #}
                                             <span class="badge badge-info right"></span>
                                         </p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="" class="nav-link">
+                                    <a href="{{ path('galerie_new') }}" class="nav-link">
                                         <i class="nav-icon far fa-circle"></i>
                                         <p>
-                                            Ajouter une photo
+                                            Ajouter une galerie
+                                            {# {* Permet de rajouter un badge à la fin *} #}
+                                            <span class="badge badge-info right"></span>
+                                        </p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{ path('galerie_categorie_new') }}" class="nav-link">
+                                        <i class="nav-icon far fa-circle"></i>
+                                        <p>
+                                            Ajouter une catégorie
                                             {# {* Permet de rajouter un badge à la fin *} #}
                                             <span class="badge badge-info right"></span>
                                         </p>
