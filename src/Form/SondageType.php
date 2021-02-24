@@ -15,6 +15,7 @@ class SondageType extends AbstractType
             ->add('titre')
             ->add('description')
             ->add('createdAt')
+            ->add('StopAt')
         ;
     }
 
