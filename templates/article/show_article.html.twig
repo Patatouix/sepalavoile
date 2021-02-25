@@ -61,23 +61,13 @@
                                     <div class="col-md-4 col-sm-4 col-xs-4 p-2">
                                         <div class="text-center mb-3 pt-2" style="height:150px">
                                                 <a href="{{ path('article_show', {'id': articleRandom.id}) }}">
-                                                    {% if article.medias|first %}
+                                                    {% if articleRandom.medias|first %}
                                                         <img id='articleImage' class="img-fluid align-self-center" alt="Photo de l'article" src="{{ asset('/uploads/' ~ articleRandom.medias|first.nom) }}" style="max-height:100%">
                                                     {% else %}
                                                         <img id='articleImage' class="img-fluid" alt="Photo de l'article" src="{{ asset('/images/logo.svg') }}">
                                                     {% endif %}
                                                 </a>
                                         </div>
-
-                                        {# <div class="text-center" style="height:200px">
-                                                <a href="{{ path('article_show', {'id': articleRandom.id}) }}">
-                                                    {% if article.medias|first %}
-                                                        <img id='articleImage' class="img-fluid" alt="Photo de l'article" src="{{ asset('/uploads/' ~ articleRandom.medias|first.nom) }}" style="height:100%; width:100%">
-                                                    {% else %}
-                                                        <img id='articleImage' class="img-fluid" alt="Photo de l'article" src="{{ asset('/images/logo.svg') }}">
-                                                    {% endif %}
-                                                </a>
-                                        </div> #}
                                         <a href="{{ path('article_show', {'id': articleRandom.id}) }}">{{ articleRandom.title }}</a>
                                         <hr class="mt-1 mb-1">
                                         <span class="meta text-muted font-italic font-weight-light">Publié
