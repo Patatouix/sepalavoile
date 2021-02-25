@@ -52,11 +52,13 @@
                                 le {{ articleBestView.createdAt|date('d/m/Y') }} - {{ articleBestView.nbVues }} vues</span>
                         </div>
                         <span class="imgWrap">
-                            {% if articleBestView.medias|first %}
-                            <img id='articleImage' class="img-fluid" alt="Photo de l'article" src="{{ asset('/uploads/' ~ articleBestView.medias|first.nom ) }}" width="100%">
-                            {% else %}
-                                <img id='articleImage' class="img-fluid" alt="Photo de l'article" src="{{ asset('/images/logo.svg') }}" width="100%">
-                            {% endif %}
+                            <a href="{{ path('article_show', {'id': articleBestView.id}) }}">
+                                {% if articleBestView.medias|first %}
+                                <img id='articleImage' class="img-fluid" alt="Photo de l'article" src="{{ asset('/uploads/' ~ articleBestView.medias|first.nom ) }}" width="100%">
+                                {% else %}
+                                    <img id='articleImage' class="img-fluid" alt="Photo de l'article" src="{{ asset('/images/logo.svg') }}" width="100%">
+                                {% endif %}
+                            </a>
                         </span>
                         {% endfor %}
                     </div>
