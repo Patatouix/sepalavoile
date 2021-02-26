@@ -1,16 +1,14 @@
 <!-- MENU LANGUE -->
 <header>
-    {% block stylesheets %}
-    {# {{ parent() }} #}
-    {# {{ encore_entry_link_tags('header') }} #}
-    {% endblock %}
-    <div class="container-fluid">
-        {% for message in app.flashes('success') %}
-        <div class="alert alert-success text-center mt-3">
-            {{ message }}
-        </div>
-        {% endfor %}
 
+    <div class="container-fluid">
+        {% for label, messages in app.flashes %}
+            {% for message in messages %}
+                <div class="alert alert-{{ label }} text-center mt-3">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endfor %}
         {# {% if not form.vars.valid %}
         <div class="alert alert-danger text-center">
             Vérifier votre adresse e-mail
