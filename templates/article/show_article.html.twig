@@ -40,6 +40,8 @@
                             {% if app.user %}
                                 <div class="mb-5">
                                     {{ form_start(form) }}
+                                        {{ form_widget(form)}}
+                                        <button type="submit" class="btn btn-style">Envoyer</button>
                                     {{ form_end(form) }}
                                 </div>
                             {% else %}
@@ -47,14 +49,65 @@
                             {% endif %}
                             {% for commentaire in article.commentaires|sort((a, b) => a.createdAt <=> b.createdAt)|reverse %}
                                 {% if commentaire.isPublished %}
-                                    <div>{{ commentaire.contenu }}</div>
-                                    <div class="meta text-right">{{ commentaire.user.nomComplet }}, le {{ commentaire.createdAt|date('d/m/Y') }}</div>
+                                    <div class="mt-4">
+
+                                        <div>
+                                            {{ commentaire.contenu }}
+                                        </div>
+                                    </div>
+                                    <div class="meta text-right mb-2">
+                                        {{ commentaire.user.nomComplet }}, le {{ commentaire.createdAt|date('d/m/Y') }}{% if is_granted("ROLE_ADMIN") or (is_granted("ROLE_USER") and commentaire.user == app.user) %}
+
+
+
+                                                <a class="btn btn-sm p-1" title="Modifier" data-toggle="collapse" href="#collapseModifierCommentaire{{ commentaire.id }}" role="button" aria-expanded="false" aria-controls="collapseModifierCommentaire{{ commentaire.id }}">
+                                                    <i class="fad fa-comment-alt-edit fa-sm text-success" style="font-size: 1rem;"></i>
+                                                </a>
+
+                                                {# Modal pour supprimer un commentaire #}
+                                                    <a href="" type="button" title="Supprimer" class="btn btn-sm p-1" data-toggle="modal" data-target="#deleteCommentaireModal{{ commentaire.id }}">
+                                                        <i class="fad fa-comment-alt-times fa-sm text-danger" style="font-size: 1rem;"></i>
+                                                    </a>
+                                                    <div class="modal fade text-left" id="deleteCommentaireModal{{ commentaire.id }}" tabindex="-1" role="dialog" aria-labelledby="deleteCommentaireModalLabel" aria-hidden="true">
+                                                        <div class="modal-dialog" role="document">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h5 class="modal-title text-uppercase font-weight-bold">Voulez-vous supprimer votre commentaire ?</h5>
+                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                        <span aria-hidden="true">&times;</span>
+                                                                    </button>
+                                                                </div>
+                                                                <div class="modal-body font-weight-normal">
+                                                                    <div class="modal-body font-weight-normal">
+                                                                        <div class="col">
+                                                                            {{ commentaire.contenu }}
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="modal-footer">
+                                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                                                                        {% include "commentaire/_delete_form.html.twig" %}
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                {# Fin de la modal supprimer un commentaire #}
+
+                                            <div class="collapse mb-5" id="collapseModifierCommentaire{{ commentaire.id }}">
+                                                {# <div class="card card-body border-none"> #}
+                                                    {{ render (controller('App\\Controller\\CommentaireController::editProfile', {'id': commentaire.id })) }}
+                                                {# </div> #}
+                                            </div>
+
+                                        {% endif %}
+                                    </div>
                                 {% endif %}
+                                <hr class="m-0">
                             {% endfor %}
                         </aside>
 
-                        <aside class="mt60">
-                            <hr>
+                        <aside>
+                            <hr class="mt-2 mb-50">
                             <h2>Articles les plus récents</h2>
                             <div class="row">
                                 {% for articleRandom in articleRandom|slice(0, 3) %}
