@@ -60,11 +60,11 @@
                 <!-- Sidenav -->
                 <nav id="sidenav" class="rounded">
                     <h3 class="SideNav-item">Mon compte</h3>
-                    <a class="selected SideNav-item d-flex flex-items-center repo-menu-item" href="{{ path('profile_infos') }}">Profil</a>
-                    <a class="SideNav-item d-flex flex-items-center repo-menu-item" href="{{ path('profile_medias') }}">Images</a>
-                    <a class="SideNav-item d-flex flex-items-center repo-menu-item" href="{{ path('profile_achats') }}">Achats</a>
-                    <a class="SideNav-item d-flex flex-items-center repo-menu-item" href="{{ path('profile_reservations') }}">Réservations</a>
-                    <a class="SideNav-item d-flex flex-items-center repo-menu-item" href="{{ path('profile_messagerie') }}">Messagerie</a>
+                    <a class="{{ tab == 'profile_infos' ? 'selected' : '' }} SideNav-item d-flex flex-items-center repo-menu-item" href="{{ path('profile_infos') }}">Profil</a>
+                    <a class="{{ tab == 'profile_medias' ? 'selected' : '' }} SideNav-item d-flex flex-items-center repo-menu-item" href="{{ path('profile_medias') }}">Images</a>
+                    <a class="{{ tab == 'profile_achats' ? 'selected' : '' }} SideNav-item d-flex flex-items-center repo-menu-item" href="{{ path('profile_achats') }}">Achats</a>
+                    <a class="{{ tab == 'profile_reservations' ? 'selected' : '' }} SideNav-item d-flex flex-items-center repo-menu-item" href="{{ path('profile_reservations') }}">Réservations</a>
+                    <a class="{{ tab == 'profile_messagerie' ? 'selected' : '' }} SideNav-item d-flex flex-items-center repo-menu-item" href="{{ path('profile_messagerie') }}">Messagerie</a>
                 </nav>
             </div>
             <div class="col-12 col-md-9 mb-5">
