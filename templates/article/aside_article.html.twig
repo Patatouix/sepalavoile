@@ -47,17 +47,22 @@
                     <h2 class="text-right">Top vues</h2>
                     <div class="topv">
                         {% for articleBestView in articleBestView %}
-                        <div class="mb15 mt15">
-                            <a href="{{ path('article_show', {'id': articleBestView.id}) }}">{{ articleBestView.title }}</a> - <span class="meta font-italic">Publié
-                                le {{ articleBestView.createdAt|date('d/m/Y') }} - {{ articleBestView.nbVues }} vues</span>
+                        <div class="mb-2 mt-4">
+                            <h5><a href="{{ path('article_show', {'id': articleBestView.id}) }}">{{ articleBestView.title }}</a></h5>
                         </div>
-                        <span class="imgWrap">
-                            {% if articleBestView.medias|first %}
-                            <img id='articleImage' class="img-fluid" alt="Photo de l'article" src="{{ asset('/uploads/' ~ articleBestView.medias|first.nom ) }}" width="100%">
-                            {% else %}
-                                <img id='articleImage' class="img-fluid" alt="Photo de l'article" src="{{ asset('/images/logo.svg') }}" width="100%">
-                            {% endif %}
+                        <span class="imgWrap mb-2">
+                            <a href="{{ path('article_show', {'id': articleBestView.id}) }}">
+                                {% if articleBestView.medias|first %}
+                                <img id='articleImage' class="img-fluid" alt="Photo de l'article" src="{{ asset('/uploads/' ~ articleBestView.medias|first.nom ) }}" width="100%">
+                                {% else %}
+                                    <img id='articleImage' class="img-fluid" alt="Photo de l'article" src="{{ asset('/images/logo.svg') }}" width="100%">
+                                {% endif %}
+                            </a>
                         </span>
+                        <span class="meta font-italic">Publié
+                            le {{ articleBestView.createdAt|date('d/m/Y') }} - {{ articleBestView.nbVues }} vues
+                        </span>
+                        <hr class="mt-1 mb-1">
                         {% endfor %}
                     </div>
                 </div>
@@ -68,14 +73,19 @@
                     <h2 class="text-right">Derniers commentaires</h2>
                     <div class="topv">
                     {% for commentaire in lastComments %}
-                        <div class="mb15 mt15">
-                            <a href="{{ path('article_show', {'id': commentaire.article.id}) }}">{{ commentaire.article.title }}</a> -
-                            <span class="meta">Publié
-                                le {{ commentaire.article.createdAt|date('d/m/Y') }} - {{ commentaire.article.nbVues }} vues</span>
+                    <a href="{{ path('article_show', {'id': commentaire.article.id}) }}" style="text-decoration: none">
+                        <div class="mb-2 mt-4">
+                            <h5>{{ commentaire.article.title }}</h5>
                         </div>
-                        <blockquote>
+
+                        <blockquote class="text-dark">
                             {{ commentaire.contenu|u.truncate(100, '...') }}
                         </blockquote>
+                        <span class="meta font-italic">
+                            Publié le {{ commentaire.article.createdAt|date('d/m/Y') }} - {{ commentaire.article.nbVues }} vues
+                        </span>
+                    </a>
+                    <hr class="mt-1 mb-1">
                     {% endfor %}
                     </div>
                 </div>

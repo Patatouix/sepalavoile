@@ -23,11 +23,11 @@ class CommentaireType extends AbstractType
                     'rows' => 3
                 ]
             ])
-            ->add('Envoyer', SubmitType::class, [
-                'attr' => [
-                    'class' => 'btn-style'
-                ]
-            ])
+            // ->add('Envoyer', SubmitType::class, [
+            //     'attr' => [
+            //         'class' => 'btn-style'
+            //     ]
+            // ])
         ;
     }
 
