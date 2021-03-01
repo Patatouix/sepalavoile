@@ -18,7 +18,11 @@
             <div class="row bg-white">
                 <div class="col-3 text-center my-auto">
                     <i class="fad fa-inbox-in mr-4"></i>
-                    {# <img id='articleImage' class="img-fluid" alt="Photo de l'événement" src="{{ article.filename ? asset('/images/article/' ~ article.filename) : asset('/images/logo.svg') }}"> #}
+                        {% if article.medias|first %}
+                            <img id='articleImage' class="img-fluid" alt="Photo de l'article" src="{{ asset('/uploads/' ~ article.medias|first.nom ) }}">
+                        {% else %}
+                            <img id='articleImage' class="img-fluid" alt="Photo de l'article" src="{{ asset('/images/logo.svg') }}">
+                        {% endif %}
                 </div>
                 <div class="col-9 my-5 pl-3 border-left-form">
                     <div class="col-12">

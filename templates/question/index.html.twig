@@ -1,0 +1,135 @@
+{% extends 'base_dashboard.html.twig' %}
+
+{% block title %}Liste des questions{% endblock %}
+
+{% block body %}
+    <div id="partners-list" class="container-fluid">
+        <h1>Liste des questions</h1>
+        <div class="col-12  mt-5 mb-3">
+            <a href="{{ path('question_new') }}" class="btn btn-style">Nouvelle question</a>
+        </div>
+        <div class="table-responsive card px-2 py-2">
+            <table id="example1" class="table table-bordered table-striped  mx-2 my-2">
+                <thead>
+                    <tr class="text-center">
+                        <th>Id de la question</th>
+                        <th>Action</th>
+                        <th>Question</th>
+                        <th>Help</th>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr class="text-center">
+                        <th>Id de la question</th>
+                        <th>Action</th>
+                        <th>Question</th>
+                        <th>Help</th>
+                    </tr>
+                </tfoot>
+                <tbody>
+                    {% for question in questions %}
+                        <tr class="text-center">
+                            <td>{{ question.id }}</td>
+                            <td>
+                                {# Modal pour afficher un partenaire #}
+                                <a href="" type="button" class="m-0" data-toggle="modal" data-target="#showPartnersModal{{ question.id }}">
+                                    <i class="fad fa-eye mr-1"></i>
+                                </a>
+                                <div class="modal fade text-left" id="showPartnersModal{{ question.id }}" tabindex="-1" role="dialog" aria-labelledby="showPartnersModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-xl" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h6 class="modal-title text-uppercase font-weight-bold">Consulter</h6>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body font-weight-normal p-0">
+                                                {% include "question/show.html.twig" %}
+
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                {# Fin de la modal afficher un partenaire #}
+
+                                <a href="{{ path('question_edit', {'id': question.id}) }}">
+                                    <i class="fad fa-edit px-2 border-left border-right"></i>
+                                </a>
+
+                                {# Modal pour supprimer un partenaire #}
+                                <a href="" type="button" class="m-0" data-toggle="modal" data-target="#deletePartnersModal{{ question.id }}">
+                                    <i class="fad fa-trash-alt ml-1"></i>
+                                </a>
+                                <div class="modal fade text-left" id="deletePartnersModal{{ question.id }}" tabindex="-1" role="dialog" aria-labelledby="deletePartnersModallLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-lg" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h6 class="modal-title text-uppercase font-weight-bold">Supprimer</h6>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body font-weight-normal">
+                                                <div class="row bg-white">
+                                                    <div class="col-4 text-center my-auto">
+                                                        {# <img id='eventImage' class="img-fluid" alt="Photo de l'événement" src="{{ partner.filename ? asset('/images/partners/' ~ partner.filename) : asset('/images/logo.svg') }}"> #}
+                                                    </div>
+                                                    <div class="col-8 my-5 pl-5 border-left-profil ">
+                                                        <div class="col-12">
+                                                            <ul class="list-group list-group-flush">
+                                                                <li class="list-group">
+                                                                    <div class="row mb-3">
+                                                                        <div class="col-1 p-0 text-center"><i class="fad fa-id-badge"></i></div>
+                                                                        <div class="col-4">Id du profil :</div>
+                                                                        <div class="col-7 p-0">{{ question.id }}</div>
+                                                                    </div>
+                                                                </li>
+                                                                <li class="list-group">
+                                                                    <div class="row mb-3">
+                                                                        <div class="col-1 p-0 text-center"><i class="fad fa-calendar-check"></i></div>
+                                                                        <div class="col-4">Prénom :</div>
+                                                                        <div class="col-7 p-0">{{ question.label }}</div>
+                                                                    </div>
+                                                                </li>
+                                                                <li class="list-group">
+                                                                    <div class="row mb-3">
+                                                                        <div class="col-1 p-0 text-center"><i class="fad fa-calendar-check"></i></div>
+                                                                        <div class="col-4">Site web :</div>
+                                                                        <div class="col-7 p-0">{{ question.help }}</div>
+                                                                    </div>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                                                {% include "question/_delete_form.html.twig" %}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                {# Fin de la modal supprimer expérience #}
+                            </td>
+                            <td>
+                                {{ question.label }}
+                            </td>
+                            <td>
+                                {{ question.help }}
+                            </td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="9">Pas d'enregistrement trouvé</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}

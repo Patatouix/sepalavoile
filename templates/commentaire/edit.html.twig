@@ -1,0 +1,6 @@
+<div class="">
+    {{ form_start(form, {'action': path('profile_commentaire_edit', {'id': commentaire.id})}) }}
+    {{ form_widget(form)}}
+    <button type="submit" class="btn btn-style">Modifier</button>
+    {{ form_end(form) }}
+</div>

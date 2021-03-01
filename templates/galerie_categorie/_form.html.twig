@@ -1,0 +1,28 @@
+{{ form_start(form) }}
+    <div id="user_form" class="container bg-light rounded">
+            <div class="row bg-light border-bottom border-right border-left">
+                <div class="col-12 mt-5 pb-4 ">
+                    <div class="col-12 mt-5">
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group">
+                                <div class="row mb-3">
+                                    <div class="col-1 col-md-1 p-0 text-center"><i class="fad fa-user-alt "></i></div>
+                                    <div class="col-11 col-md-4">{{ form_label(form.nom) }}</div>
+                                    <div class="col-12 col-md-7 p-0">{{ form_widget(form.nom, {'attr': {'placeholder': 'Nom de la catégorie'}}) }}</div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-12 text-right p-4">
+                    <a href="{{ path('galerie_categorie_index') }}" class="btn btn-secondary">Annuler</a>
+                    <button class="btn btn-style">{{ button_label|default('Valider') }}</button>
+                </div>
+            </div>
+        </div>
+{{ form_end(form) }}
+
+
+
+
+

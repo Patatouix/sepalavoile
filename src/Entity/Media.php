@@ -78,10 +78,44 @@ class Media
      */
     private $imageFile;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=MediaCategory::class, inversedBy="Medias")
+     */
+    private $mediaCategory;
+
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $isDisplayed;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=Galerie::class, mappedBy="medias")
+     */
+    private $galeries;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=User::class, mappedBy="medias")
+     */
+    private $users;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=Achat::class, mappedBy="medias")
+     */
+    private $achats;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=Reservation::class, mappedBy="medias")
+     */
+    private $reservations;
+
     public function __construct()
     {
         $this->produits = new ArrayCollection();
         $this->partners = new ArrayCollection();
+        $this->galeries = new ArrayCollection();
+        $this->users = new ArrayCollection();
+        $this->achats = new ArrayCollection();
+        $this->reservations = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -94,7 +128,7 @@ class Media
         return $this->nom;
     }
 
-    public function setNom(string $nom): self
+    public function setNom( ?string $nom): self
     {
         $this->nom = $nom;
 
@@ -255,6 +289,139 @@ class Media
             // if 'updatedAt' is not defined in your entity, use another property
             $this->updatedAt = new \DateTime('now');
         }
+    }
+
+    public function getMediaCategory(): ?MediaCategory
+    {
+        return $this->mediaCategory;
+    }
+
+    public function setMediaCategory(?MediaCategory $mediaCategory): self
+    {
+        $this->mediaCategory = $mediaCategory;
+
+        return $this;
+    }
+
+    public function getIsDisplayed(): ?bool
+    {
+        return $this->isDisplayed;
+    }
+
+    public function setIsDisplayed(?bool $isDisplayed): self
+    {
+        $this->isDisplayed = $isDisplayed;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Galerie[]
+     */
+    public function getGaleries(): Collection
+    {
+        return $this->galeries;
+    }
+
+    public function addGalery(Galerie $galery): self
+    {
+        if (!$this->galeries->contains($galery)) {
+            $this->galeries[] = $galery;
+            $galery->addMedia($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|User[]
+     */
+
+    public function getUsers(): Collection
+    {
+        return $this->users;
+    }
+
+    public function addUser(User $user): self
+    {
+        if (!$this->users->contains($user)) {
+            $this->users[] = $user;
+            $user->addMedia($this);
+        }
+
+        return $this;
+    }
+
+    public function removeGalery(Galerie $galery): self
+    {
+        if ($this->galeries->removeElement($galery)) {
+            $galery->removeMedia($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUser(User $user): self
+    {
+        if ($this->users->removeElement($user)) {
+            $user->removeMedia($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Achat[]
+     */
+    public function getAchats(): Collection
+    {
+        return $this->achats;
+    }
+
+    public function addAchat(Achat $achat): self
+    {
+        if (!$this->achats->contains($achat)) {
+            $this->achats[] = $achat;
+            $achat->addMedia($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAchat(Achat $achat): self
+    {
+        if ($this->achats->removeElement($achat)) {
+            $achat->removeMedia($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Reservation[]
+     */
+    public function getReservations(): Collection
+    {
+        return $this->reservations;
+    }
+
+    public function addReservation(Reservation $reservation): self
+    {
+        if (!$this->reservations->contains($reservation)) {
+            $this->reservations[] = $reservation;
+            $reservation->addMedia($this);
+        }
+
+        return $this;
+    }
+
+    public function removeReservation(Reservation $reservation): self
+    {
+        if ($this->reservations->removeElement($reservation)) {
+            $reservation->removeMedia($this);
+        }
+
+        return $this;
     }
 
 }

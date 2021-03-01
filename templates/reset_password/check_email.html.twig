@@ -1,0 +1,10 @@
+{% extends 'carousel.html.twig' %}
+
+{% block title %}Password Reset Email Sent{% endblock %}
+
+{% block content %}
+    <div class="container mb-5">
+        <p>Un email vous a été envoyé, il contient un lien que vous pouvez cliquer pour réinitialiser votre mot de passe. Ce lien est valable pendant {{ tokenLifetime|date('g') }} heure(s).</p>
+        <p>Si vous n'avez pas reçu le lien, vérifiez dans vos spams ou <a href="{{ path('app_forgot_password_request') }}">réessayez</a>.</p>
+    </div>
+{% endblock %}

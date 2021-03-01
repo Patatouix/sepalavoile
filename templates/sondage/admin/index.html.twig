@@ -1,0 +1,140 @@
+{% extends 'base_dashboard.html.twig' %}
+
+{% block title %}Liste des sondages{% endblock %}
+
+{% block body %}
+    <div id="partners-list" class="container-fluid">
+        <h1>Liste des sondages</h1>
+        <div class="col-12  mt-5 mb-3">
+            <a href="{{ path('admin_sondage_new') }}" class="btn btn-style">Nouveau sondage</a>
+        </div>
+        <div class="table-responsive card px-2 py-2">
+            <table id="example1" class="table table-bordered table-striped  mx-2 my-2">
+                <thead>
+                    <tr class="text-center">
+                        <th>Id du sondage</th>
+                        <th>Actions</th>
+                        <th>Titre</th>
+                        <th>Description</th>
+                        <th>Date de création</th>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr class="text-center">
+                        <th>Id du sondage</th>
+                        <th>Actions</th>
+                        <th>Titre</th>
+                        <th>Description</th>
+                        <th>Date de création</th>
+                    </tr>
+                </tfoot>
+                <tbody>
+                    {% for sondage in sondages %}
+                        <tr class="text-center">
+                            <td>{{ sondage.id }}</td>
+                            <td>
+                                {# Modal pour afficher un partenaire #}
+                                <a href="" type="button" class="m-0" data-toggle="modal" data-target="#showPartnersModal{{ sondage.id }}">
+                                    <i class="fad fa-eye mr-1"></i>
+                                </a>
+                                <div class="modal fade text-left" id="showPartnersModal{{ sondage.id }}" tabindex="-1" role="dialog" aria-labelledby="showPartnersModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-xl" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h6 class="modal-title text-uppercase font-weight-bold">Consulter</h6>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body font-weight-normal p-0">
+                                                {% include "sondage/admin/show.html.twig" %}
+
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                {# Fin de la modal afficher un partenaire #}
+
+                                <a href="{{ path('admin_sondage_edit', {'id': sondage.id}) }}">
+                                    <i class="fad fa-edit px-2 border-left border-right"></i>
+                                </a>
+
+                                {# Modal pour supprimer un partenaire #}
+                                <a href="" type="button" class="m-0" data-toggle="modal" data-target="#deletePartnersModal{{ sondage.id }}">
+                                    <i class="fad fa-trash-alt ml-1"></i>
+                                </a>
+                                <div class="modal fade text-left" id="deletePartnersModal{{ sondage.id }}" tabindex="-1" role="dialog" aria-labelledby="deletePartnersModallLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-lg" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h6 class="modal-title text-uppercase font-weight-bold">Supprimer</h6>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body font-weight-normal">
+                                                <div class="row bg-white">
+                                                    <div class="col-4 text-center my-auto">
+                                                        {# <img id='eventImage' class="img-fluid" alt="Photo de l'événement" src="{{ partner.filename ? asset('/images/partners/' ~ partner.filename) : asset('/images/logo.svg') }}"> #}
+                                                    </div>
+                                                    <div class="col-8 my-5 pl-5 border-left-profil ">
+                                                        <div class="col-12">
+                                                            <ul class="list-group list-group-flush">
+                                                                <li class="list-group">
+                                                                    <div class="row mb-3">
+                                                                        <div class="col-1 p-0 text-center"><i class="fad fa-id-badge"></i></div>
+                                                                        <div class="col-4">Id du sondage :</div>
+                                                                        <div class="col-7 p-0">{{ sondage.id }}</div>
+                                                                    </div>
+                                                                </li>
+                                                                <li class="list-group">
+                                                                    <div class="row mb-3">
+                                                                        <div class="col-1 p-0 text-center"><i class="fad fa-calendar-check"></i></div>
+                                                                        <div class="col-4">Titre du sondage :</div>
+                                                                        <div class="col-7 p-0">{{ sondage.titre }}</div>
+                                                                    </div>
+                                                                </li>
+                                                                <li class="list-group">
+                                                                    <div class="row mb-3">
+                                                                        <div class="col-1 p-0 text-center"><i class="fad fa-calendar-check"></i></div>
+                                                                        <div class="col-4">Description :</div>
+                                                                        <div class="col-7 p-0">{{ sondage.description }}</div>
+                                                                    </div>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                                                {% include "sondage/admin/_delete_form.html.twig" %}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                {# Fin de la modal supprimer expérience #}
+                            </td>
+                            <td>
+                                {{ sondage.titre }}
+                            </td>
+                            <td>
+                                {{ sondage.description }}
+                            </td>
+                             <td>
+                             {{ sondage.createdAt ? sondage.createdAt|date('Y-m-d H:i:s') : '' }}
+                             </td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="9">Pas d'enregistrement trouvé</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}

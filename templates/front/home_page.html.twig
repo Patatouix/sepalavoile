@@ -13,15 +13,19 @@
         <div class="fondslide">
             <div class="container-video">
                 <div class="bloc-degrade">
-                    <div class="container">
-                        <div class="conteneur-titre">
+                    <div class="container-fluid">
+                        <div class="conteneur-titre mr-md-5">
                             <h1>Le tour du monde à la voile</h1>
                         </div>
                     </div>
                 </div>
-                <video autoplay loop muted src="{{ asset('/images/slidevideo/video-site-internet-projet-web-disii.mov') }}" width="100%"
-                    class="video">Il est temps de mettre à jour votre navigateur !
-                </video>
+                {% for headerVideo in headerVideo %}
+                    {% if headerVideo.isDisplayed %}
+                        <video autoplay loop muted src="{{ asset('/uploads/' ~ headerVideo.nom ) }}" width="100%"
+                            class="video">Il est temps de mettre à jour votre navigateur !
+                        </video>
+                    {% endif %}
+                {% endfor %}
             </div>
         </div>
     </section>
@@ -66,33 +70,33 @@
                 </div>
                 <div class="row d-flex justify-content-around">
                     <!-- DÉBUT BOUCLE VIDEO -->
-                    {% for media in media|slice(0, 3) %}
+                    {# {% for media in media|slice(0, 3) %}
                         <div class="col-12 col-md-4 mb-3 mb-md-0 px-md-4">
                             <div class="embed-responsive embed-responsive-16by9 z-depth-1-half">
                                 <iframe class="embed-responsive-item" src="{{ media.url }}" allowfullscreen></iframe>
                             </div>
                         </div>
-                    {% endfor %}
+                    {% endfor %} #}
                     <!-- FIN BOUCLE VIDEO -->
                     <!-- DÉBUT MODAL VIDEO -->
-                    {# {% for video in video|slice(0, 3) %}
-                        <div class="col-lg-4 col-md-12 mb-4">
+                    {% for videoYt in videoYt %}
+                        <div class="col-lg-4 col-md-12 mb-4 text-center">
                             <a>
-                                <img class="img-fluid z-depth-1 shadow-vlog" style="cursor:pointer;"
-                                src="{{ asset('/images/video/' ~ video.filename ) }}" alt="" data-toggle="modal" data-target="#modalShowVideo{{ video.id }}">
+                                <img class="img-fluid z-depth-1 shadow-vlog" style="max-width:360px; max-height:200px; cursor:pointer;"
+                                src="{{ asset('/uploads/' ~ videoYt.nom ) }}" alt="" data-toggle="modal" data-target="#modalShowVideo{{ videoYt.id }}">
                             </a>
-                            <div class="modal fade" id="modalShowVideo{{ video.id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel{{ video.id }}"
+                            <div class="modal fade" id="modalShowVideo{{ videoYt.id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel{{ videoYt.id }}"
                                 aria-hidden="true">
                                 <div class="modal-dialog modal-lg" role="document">
                                     <div class="modal-content">
                                         <div class="modal-body mb-0 p-0">
                                             <div class="embed-responsive embed-responsive-16by9 z-depth-1-half">
-                                                <iframe class="embed-responsive-item" src="{{ video.videoLink }}" allowfullscreen></iframe>
+                                                <iframe class="embed-responsive-item" src="{{ videoYt.url }}" allowfullscreen></iframe>
                                             </div>
                                         </div>
                                         <div class="modal-footer footer-vlog justify-content-between">
                                             <span class="mr-4 parlez-en">
-                                                <a type="button" class="btn-floating btn-sm btn-fb mr-4" href="{{ video.facebookLink }}" target="_blank">
+                                                <a type="button" class="btn-floating btn-sm btn-fb mr-4" href="{{ videoYt.facebookLink }}" target="_blank">
                                                     <i class="fab fa-facebook-f"></i>
                                                 </a>
                                                 Parlez-en !
@@ -105,7 +109,7 @@
                                 </div>
                             </div>
                         </div>
-                    {% endfor %} #}
+                    {% endfor %}
                     <!-- FIN MODAL VIDEO -->
                 </div>
             </div>
@@ -149,15 +153,20 @@
                             <div class="card-group">
                                 {% for article in article|slice(0, 3)  %}
                                     <div class="col-12 col-md-12 col-lg-4">
-                                        <div class="card card-article d-flex justify-content-between mx-3 border mb-4 mb-md-4 mb-lg-0">
-                                            {# <img src="{{ article.filename ? asset('/images/photoarticle/' ~ article.filename) : asset('/images/logo.svg') }}" class="card-img-top" alt="..."> #}
-                                            <img src="{{ asset('/images/logo.svg') }}" class="card-img-top" alt="...">
+                                        <div class="card card-article d-flex justify-content-between border mb-4 mb-md-4 mb-lg-0">
+                                            <div class="text-center" style="height:200px">
+                                                {% if article.medias|first %}
+                                                    <img id='articleImage' class="img-fluid" alt="Photo de l'article" src="{{ asset('/uploads/' ~ article.medias|first.nom ) }}" style="max-height=100%">
+                                                {% else %}
+                                                    <img id='articleImage' class="img-fluid" alt="Photo de l'article" src="{{ asset('/images/logo.svg') }}" style="max-height=100%">
+                                                {% endif %}
+                                            </div>
                                             <hr class="mt-3">
                                             <div class="card-body py-0">
                                                 <h3 class="card-title">{{ article.title|u.truncate(65, '...') }}</h3>
                                                 <h6 class="card-title text-muted font-italic">Par : {{ article.author }}</h6>
                                             <hr class="mt-3">
-                                                <p class="card-text">{{ article.content|u.truncate(190, '...')|raw }}</p>
+                                                <p class="card-text">{{ article.content|u.truncate(200, '...')|raw }}</p>
                                             </div>
                                             <div class="text-right mt-3 mb-3 mr-3">
                                                 <a href="{{ path('article_show', {'id': article.id}) }}" class="btn btn-style">En lire plus</a>
@@ -181,9 +190,14 @@
                             <div class="card-group">
                                 {% for articleBestView in articleBestView|slice(0, 3)  %}
                                     <div class="col-12 col-md-12 col-lg-4">
-                                        <div class="card card-article d-flex justify-content-between mx-3 border mb-4 mb-md-4 mb-lg-0">
-                                            {# <img src="{{ articleBestView.filename ? asset('/images/photoarticle/' ~ articleBestView.filename) : asset('/images/logo.svg') }}" class="card-img-top" alt="..."> #}
-                                            <img src="{{ asset('/images/logo.svg') }}" class="card-img-top" alt="...">
+                                        <div class="card card-article d-flex justify-content-between border mb-4 mb-md-4 mb-lg-0">
+                                            <div class="text-center" style="height:200px">
+                                                {% if articleBestView.medias|first %}
+                                                    <img id='articleImage' class="img-fluid" alt="Photo de l'article" src="{{ asset('/uploads/' ~ articleBestView.medias|first.nom ) }}" style="max-height=100%">
+                                                {% else %}
+                                                    <img id='articleImage' class="img-fluid" alt="Photo de l'article" src="{{ asset('/images/logo.svg') }}" style="max-height=100%">
+                                                {% endif %}
+                                            </div>
                                             <hr class="mt-3">
                                             <div class="card-body py-0">
                                                 <h3 class="card-title">{{ articleBestView.title|u.truncate(65, '...') }}</h3>
@@ -303,6 +317,7 @@
                     <script type="text/javascript" class="carte">
                         var width = "100%";
                         var height = "300px";
+                        var zoom="5";
                         var mmsi = "227538890";
                         var show_track = true;
                     </script>
@@ -321,12 +336,15 @@
                 <div class="row d-flex justify-content-around">
                     {# BOUCLE SUR LES PARTENAIRES #}
                     {% for partner in partners %}
-                    <div class="col-12 col-sm-6 col-lg-4 mb-5 text-center partenaires partenaires-hover">
-                        <a href="{{ partner.website }}" target="_blank">
-                            <img src="{{ partner.media.nom ? asset('/images/partners/' ~ partner.media.nom) : asset('/images/logo.svg') }}" alt="">
-                            {# <img src="{{ asset('/images/logo.svg' ) }}" alt=""> #}
-                        </a>
-                    </div>
+                        <div class="col-12 col-sm-6 col-lg-4 mb-5 text-center partenaires partenaires-hover">
+                            <a href="{{ partner.website }}" target="_blank">
+                                {% if partner.media %}
+                                    <img id='partnerImage' style="max-width:280px; max-height:120px" class="img-fluid" alt="Logo du partenaire" src="{{ asset('/uploads/' ~ partner.media.nom ) }}">
+                                {% else %}
+                                    <img id='partnerImage' style="max-width:280px; max-height:120px" class="img-fluid" alt="Logo du partenaire" src="{{ asset('/images/defaut/partner-default.png') }}">
+                                {% endif %}
+                            </a>
+                        </div>
                     {% endfor %}
                     {# FIN DE LA BOUCLE SUR LES PARTENAIRES #}
                 </div>

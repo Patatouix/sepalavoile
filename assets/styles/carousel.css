@@ -37,17 +37,68 @@
 
 /*-------- MEDIA QUERIES --------*/
 
-/* Extra small devices (portrait phones, less than 576px) */
-@media (max-width: 575.98px) {
-    p {
-        font-size: 1.3em;
-    }
-    h6 {
-        font-size: 1.5em;
+
+/* Large devices (desktops, less than 1200px) */
+/* @media (max-width: 1199.98px) {
+    .logo img {
+        position: absolute;
+        top: 50px;
+        height: 100px;
+        width: 100px;
     }
 
-    .card .card-body h5 {
-        font-size: 2em;
+    .logo-responsive {
+        display: none;
+    }
+} */
+
+@media (max-width: 1080px) {
+
+    .logo img {
+        position: absolute;
+        top: 50px;
+        height: 100px;
+        width: 100px;
+    }
+}
+
+@media (max-width: 901.00px) {
+
+    .logo img {
+        position: absolute;
+        top: 60px;
+        height: 100px;
+        width: 100px;
+    }
+}
+
+
+@media (max-width: 801px) {
+
+    .logo img {
+        position: absolute;
+        top: 70px;
+        height: 100px;
+        width: 100px;
+    }
+}
+@media (max-width: 797px) {
+
+    .logo img {
+        position: absolute;
+        top: 80px;
+        height: 100px;
+        width: 100px;
+    }
+}
+
+@media (max-width: 778.99px) {
+
+    .logo img {
+        position: absolute;
+        top: 80px;
+        height: 100px;
+        width: 100px;
     }
 }
 
@@ -62,9 +113,16 @@
         padding-top: 0;
     }
 
+    .logo img {
+        position: absolute;
+        top:60px;
+        height: 100px;
+        width: 100px;
+    }
+
     .bloc-degrade {
         width: 100%;
-        height: 46px;
+        height: 50px;
         background-image: url(../../public/images/bg-slide-repeat.png);
         background-repeat: repeat-x;
         opacity: 1;
@@ -87,30 +145,17 @@
     }
 }
 
-/* Medium devices (tablets, less than 992px) */
-@media (max-width: 991.98px) {
-
-    .logo img {
-        position: absolute;
-        top: 57px;
-        height: 100px;
-        width: 100px;
-
+/* Extra small devices (portrait phones, less than 576px) */
+@media (max-width: 575.98px) {
+    p {
+        font-size: 1.3em;
     }
-    .logo-responsive {
-        top: 3px;
+    h6 {
+        font-size: 1.5em;
     }
 
-    .menuindex {
-        position: relative;
-        z-index: 20;
-    }
-}
-
-/* Large devices (desktops, less than 1200px) */
-@media (max-width: 1199.98px) {
-    .logo-responsive {
-        display: none;
+    .card .card-body h5 {
+        font-size: 2em;
     }
 }
 

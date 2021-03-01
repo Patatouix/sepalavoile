@@ -1,0 +1,48 @@
+{% block body %}
+        <div id="show_partner" class="container bg-light rounded">
+            <div class="row border-bottom py-3 px-5">
+                <div class="col-6">
+                    <h1 class="text-uppercase text-left m-0">
+                        {{ question.label }}
+                    </h1>
+                </div>
+                <div class="col-6 text-right my-auto">
+                    <span class="text-muted mr-2 font-italic">
+                       Question
+                    </span>
+                    <a href="{{ path('partners_edit', {'id': question.id}) }}">
+                        <i class="fad fa-edit"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="row bg-white">
+                <div class="col-8 my-5 pl-5 border-left-profil ">
+                    <div class="col-12">
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group">
+                                <div class="row mb-3">
+                                    <div class="col-1 p-0 text-center"><i class="fad fa-id-badge"></i></div>
+                                    <div class="col-4">Id de la question :</div>
+                                    <div class="col-7 p-0">{{ question.id }}</div>
+                                </div>
+                            </li>
+                            <li class="list-group">
+                                <div class="row mb-3">
+                                    <div class="col-1 p-0 text-center"><i class="fad fa-calendar-check"></i></div>
+                                    <div class="col-4">Question :</div>
+                                    <div class="col-7 p-0">{{ question.label }}</div>
+                                </div>
+                            </li>
+                            <li class="list-group">
+                                <div class="row mb-3">
+                                    <div class="col-1 p-0 text-center"><i class="fad fa-calendar-times"></i></div>
+                                    <div class="col-4">Aide</div>
+                                    <div class="col-7 p-0">{{ question.help }}</div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+{% endblock %}

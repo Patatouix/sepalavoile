@@ -8,12 +8,15 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
+use App\Entity\ProduitType;
+use DateInterval;
+use DateTime;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
  * @UniqueEntity(fields={"email"}, message="There is already an account with this email")
  */
-class User implements UserInterface
+class User implements UserInterface, \Serializable
 {
     /**
      * @ORM\Id
@@ -76,11 +79,6 @@ class User implements UserInterface
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $avatar;
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
     private $pseudo;
 
     /**
@@ -103,16 +101,40 @@ class User implements UserInterface
      */
     private $reponses;
 
-    /*
+    /**
      * @ORM\OneToMany(targetEntity=Reservation::class, mappedBy="user")
      */
     private $reservations;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Message::class, mappedBy="expediteur")
+     */
+    private $messagesEnvoyes;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Message::class, mappedBy="destinataire")
+     */
+    private $messagesRecus;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Commentaire::class, mappedBy="user")
+     */
+    private $commentaires;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=Media::class, inversedBy="users")
+     */
+    private $medias;
 
     public function __construct()
     {
         $this->achats = new ArrayCollection();
         $this->reponses = new ArrayCollection();
         $this->reservations = new ArrayCollection();
+        $this->messagesEnvoyes = new ArrayCollection();
+        $this->messagesRecus = new ArrayCollection();
+        $this->commentaires = new ArrayCollection();
+        $this->medias = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -277,18 +299,6 @@ class User implements UserInterface
         return $this;
     }
 
-    public function getAvatar(): ?string
-    {
-        return $this->avatar;
-    }
-
-    public function setAvatar(?string $avatar): self
-    {
-        $this->avatar = $avatar;
-
-        return $this;
-    }
-
     public function getPseudo(): ?string
     {
         return $this->pseudo;
@@ -373,7 +383,7 @@ class User implements UserInterface
         return $this;
     }
 
-    /*
+    /**
      * @return Collection|Reservation[]
      */
     public function getReservations(): Collection
@@ -413,5 +423,186 @@ class User implements UserInterface
         }
 
         return $this;
+    }
+
+    /**
+     * @return Collection|Message[]
+     */
+    public function getMessagesEnvoyes(): Collection
+    {
+        return $this->messagesEnvoyes;
+    }
+
+    public function addMessagesEnvoye(Message $messagesEnvoye): self
+    {
+        if (!$this->messagesEnvoyes->contains($messagesEnvoye)) {
+            $this->messagesEnvoyes[] = $messagesEnvoye;
+            $messagesEnvoye->setExpediteur($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMessagesEnvoye(Message $messagesEnvoye): self
+    {
+        if ($this->messagesEnvoyes->removeElement($messagesEnvoye)) {
+            // set the owning side to null (unless already changed)
+            if ($messagesEnvoye->getExpediteur() === $this) {
+                $messagesEnvoye->setExpediteur(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Message[]
+     */
+    public function getMessagesRecus(): Collection
+    {
+        return $this->messagesRecus;
+    }
+
+    public function addMessagesRecu(Message $messagesRecu): self
+    {
+        if (!$this->messagesRecus->contains($messagesRecu)) {
+            $this->messagesRecus[] = $messagesRecu;
+            $messagesRecu->setDestinataire($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMessagesRecu(Message $messagesRecu): self
+    {
+        if ($this->messagesRecus->removeElement($messagesRecu)) {
+            // set the owning side to null (unless already changed)
+            if ($messagesRecu->getDestinataire() === $this) {
+                $messagesRecu->setDestinataire(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getNomComplet()
+    {
+        return ucfirst($this->firstname) . ' ' . ucfirst($this->name);
+    }
+
+    /**
+     * @return Collection|Commentaire[]
+     */
+    public function getCommentaires(): Collection
+    {
+        return $this->commentaires;
+    }
+
+    public function addCommentaire(Commentaire $commentaire): self
+    {
+        if (!$this->commentaires->contains($commentaire)) {
+            $this->commentaires[] = $commentaire;
+            $commentaire->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCommentaire(Commentaire $commentaire): self
+    {
+        if ($this->commentaires->removeElement($commentaire)) {
+            // set the owning side to null (unless already changed)
+            if ($commentaire->getUser() === $this) {
+                $commentaire->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function isAdherent()
+    {
+        $isAdherent = false;
+        $achats = $this->getAchats();
+        foreach ($achats as $achat) {
+            $produit = $achat->getProduit();
+            $produitType = $produit->getProduitType();
+            if ($produitType->getNom() == ProduitType::PRODUIT_TYPE_ADHESION_NAME) {
+                //check si adhésion toujours valide
+                $dateAdhesion = $achat->getCreatedAt();
+                $dureeAdhesion = $produit->getDuree();
+                if ($dureeAdhesion == null) {
+                    //pas de durée définie, l'adhésion est considérée comme toujours valide
+                    $isAdherent = true;
+                } else {
+                    $finAdhesion = $dateAdhesion->add(new DateInterval('P' . $dureeAdhesion . 'M'));
+                    $now = new DateTime();
+                    if ($now < $finAdhesion) {
+                        $isAdherent = true;
+                    }
+                }
+            }
+        }
+
+        return $isAdherent;
+    }
+
+    public function isDonateur()
+    {
+        $isDonateur = false;
+        $achats = $this->getAchats();
+        foreach ($achats as $achat) {
+            $produit = $achat->getProduit();
+            $produitType = $produit->getProduitType();
+            if ($produitType->getNom() == ProduitType::PRODUIT_TYPE_DONATION_NAME) {
+                $isDonateur = true;
+            }
+        }
+
+        return $isDonateur;
+    }
+
+    /**
+     * @return Collection|Media[]
+     */
+    public function getMedias(): Collection
+    {
+        return $this->medias;
+    }
+
+    public function addMedia(Media $media): self
+    {
+        if (!$this->medias->contains($media)) {
+            $this->medias[] = $media;
+        }
+
+        return $this;
+    }
+
+    public function removeMedia(Media $media): self
+    {
+        $this->medias->removeElement($media);
+
+        return $this;
+    }
+
+    // pour les médias attachés au user qui ne se sérialisent pas
+    public function serialize()
+    {
+        return serialize(array(
+            $this->id,
+            $this->email,
+            $this->password,
+            $this->roles,
+        ));
+    }
+    public function unserialize($serialized)
+    {
+        list (
+            $this->id,
+            $this->email,
+            $this->password,
+            $this->roles,
+        ) = unserialize($serialized);
     }
 }

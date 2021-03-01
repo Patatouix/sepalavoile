@@ -1,16 +1,14 @@
 {% extends 'base_dashboard.html.twig' %}
 
-{% block title %}Nouveau sondage{% endblock %}
+{% block title %}Modifier partenaire{% endblock %}
 
 {% block body %}
     <div class="container px-0">
         <div class="col-12 mt-5 border-right border-left border-top p-0">
             <h1 class="py-3 pl-5 bg-light border-bottom">
-                Créer un nouveau sondage :
+                Modifier le partenaire :
             </h1>
         </div>
-        {{ include('sondage/_form.html.twig') }}
-
-        <a href="{{ path('sondage_index') }}">back to list</a>
+        {{ include('sondage/admin/_form.html.twig', {'button_label': 'Modifier'}) }}
     </div>
 {% endblock %}

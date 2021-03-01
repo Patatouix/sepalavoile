@@ -67,7 +67,7 @@
                                         <div class="modal-body font-weight-normal p-0">
                                             {% include "article/show.html.twig" %}
                                             {# {% include 'template.html' with {'foo': 'bar'} %} #}
-                                            <div class="modal-footer"> 
+                                            <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
                                             </div>
                                         </div>
@@ -104,7 +104,7 @@
                                                     Auteur {{ article.author }}
                                                 </div>
                                             </div>
-                                            <div class="modal-footer"> 
+                                            <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
                                                 {% include "article/_delete_form.html.twig" %}
                                             </div>
@@ -121,7 +121,11 @@
                             {{ article.content|u.truncate(230, '...')|raw }}
                         </td>
                         <td class="text-center">
-                            {# <img id='articleImage' class="img-fluid" alt="Photo de l'article" src="{{ article.filename ? asset('/images/photoarticle/' ~ article.filename) : asset('/images/logo.svg') }}"> #}
+                            {% if article.medias|first %}
+                                <img id='articleImage' class="img-fluid" alt="Photo de l'article" src="{{ asset('/uploads/' ~ article.medias|first.nom ) }}">
+                            {% else %}
+                                <img id='articleImage' class="img-fluid" alt="Photo de l'article" src="{{ asset('/images/logo.svg') }}">
+                            {% endif %}
                         </td>
                         <td class="text-center">
                             {{ article.author }}
@@ -132,7 +136,7 @@
                                 <li>
                                     {{ articleCategorie.name }}
                                 </li>
-                            {% endfor %}                            
+                            {% endfor %}
                             </ul>
                         </td>
                         <td class="text-center">
@@ -155,7 +159,7 @@
                             <span class="alert alert-success">Oui</span>
                             {% else %}
                             <span class="alert alert-danger">Non</span>
-                            {% endif %}                            
+                            {% endif %}
                         </td>
                     </tr>
                 {% else %}
@@ -167,5 +171,4 @@
             </table>
         </div>
     </div>
-    
 {% endblock %}

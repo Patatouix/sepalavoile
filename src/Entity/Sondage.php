@@ -39,6 +39,11 @@ class Sondage
      */
     private $questions;
 
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $stop_at;
+
     public function __construct()
     {
         $this->questions = new ArrayCollection();
@@ -111,6 +116,18 @@ class Sondage
                 $question->setSondage(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getStopAt(): ?\DateTimeInterface
+    {
+        return $this->stop_at;
+    }
+
+    public function setStopAt(?\DateTimeInterface $stop_at): self
+    {
+        $this->stop_at = $stop_at;
 
         return $this;
     }

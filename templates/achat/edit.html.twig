@@ -1,13 +1,17 @@
-{% extends 'base.html.twig' %}
-
-{% block title %}Edit Achat{% endblock %}
+{% extends 'base_dashboard.html.twig' %}
 
 {% block body %}
-    <h1>Edit Achat</h1>
-
-    {{ include('achat/_form.html.twig', {'button_label': 'Update'}) }}
-
-    <a href="{{ path('achat_index') }}">back to list</a>
-
-    {{ include('achat/_delete_form.html.twig') }}
+<div class="container px-0">
+    <div class="col-12 mt-5 border-right border-left border-top p-0">
+        <h1 class="py-3 pl-5 bg-light border-bottom">
+            Ajouter des téléchargements
+        </h1>
+    </div>
+    {{ include('achat/_form.html.twig', {'button_label': 'Enregistrer'}) }}
+</div>
 {% endblock %}
+
+
+
+{% block title %}Modifier l'article{% endblock %}
+

@@ -1,41 +1,49 @@
 {% extends 'carousel.html.twig' %}
 
-{% block title %}Sondage index{% endblock %}
+{% block title %}Liste des sondages{% endblock %}
 
 {% block content %}
-    <div class="container">
-        <h1>Sondage index</h1>
-
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>Id</th>
-                    <th>Titre</th>
-                    <th>Description</th>
-                    <th>CreatedAt</th>
-                    <th>actions</th>
-                </tr>
-            </thead>
-            <tbody>
-            {% for sondage in sondages %}
-                <tr>
-                    <td>{{ sondage.id }}</td>
-                    <td>{{ sondage.titre }}</td>
-                    <td>{{ sondage.description }}</td>
-                    <td>{{ sondage.createdAt ? sondage.createdAt|date('Y-m-d H:i:s') : '' }}</td>
-                    <td>
-                        <a href="{{ path('sondage_show', {'id': sondage.id}) }}">show</a>
-                        <a href="{{ path('sondage_edit', {'id': sondage.id}) }}">edit</a>
-                    </td>
-                </tr>
-            {% else %}
-                <tr>
-                    <td colspan="5">no records found</td>
-                </tr>
-            {% endfor %}
-            </tbody>
-        </table>
-
-        <a href="{{ path('sondage_new') }}">Create new</a>
+    <div id="partners-list" class="container-fluid">
+        <h1>Liste des sondages</h1>
+        <div class="table-responsive card px-2 py-2">
+            <table id="example1" class="table table-bordered table-striped  mx-2 my-2">
+                <thead>
+                    <tr class="text-center">
+                        <th>Titre</th>
+                        <th>Description</th>
+                        <th>Date de création</th>
+                        <th>Actions<th>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr class="text-center">
+                        <th>Titre</th>
+                        <th>Description</th>
+                        <th>Date de création</th>
+                        <th>Actions<th>
+                    </tr>
+                </tfoot>
+                <tbody>
+                    {% for sondage in sondages %}
+                        <tr class="text-center">
+                            <td>{{ sondage.titre }}</td>
+                            <td>
+                                {{ sondage.description }}
+                            </td>
+                            <td>
+                                {{ sondage.createdAt ? sondage.createdAt|date('Y-m-d H:i:s') : '' }}
+                            </td>
+                             <td>
+                                <a href="{{ path('sondage_show', {'id': sondage.id}) }}" class="btn btn-style">Participer</a>
+                             </td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="9">Pas d'enregistrement trouvé</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
     </div>
 {% endblock %}

@@ -28,7 +28,8 @@ class EmailVerifier
         $signatureComponents = $this->verifyEmailHelper->generateSignature(
             $verifyEmailRouteName,
             $user->getId(),
-            $user->getEmail()
+            $user->getEmail(),
+            ['id' => $user->getId()] // on ajoute l'id de l'utilisateur dans l'url pour pouvoir retrouver cet utilisateur et le vérifier quand il cliquera sur le lien du mail
         );
 
         $context = $email->getContext();

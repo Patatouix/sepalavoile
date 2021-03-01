@@ -10,6 +10,7 @@
                 <thead>
                     <tr class="text-center">
                         <th>Id</th>
+                        <th width="10%">Actions</th>
                         <th>Produit</th>
                         <th>Type</th>
                         <th>Utilisateur</th>
@@ -20,6 +21,7 @@
                 <tfoot>
                     <tr class="text-center">
                         <th>Id</th>
+                        <th width="10%">Actions</th>
                         <th>Produit</th>
                         <th>Type</th>
                         <th>Utilisateur</th>
@@ -34,13 +36,20 @@
                             {{ achat.id }}
                         </td>
                         <td class="text-center">
+                            {# Lien pour upload des documents #}
+                            <a href="{{ path('admin_achat_edit', {'id': achat.id}) }}">
+                                <i class="fad fa-paperclip px-2 py-2"></i>
+                            </a>
+                            {# Fin lien pour upload des documents #}
+                        </td>
+                        <td class="text-center">
                             {{ achat.produit.nom }}
                         </td>
                         <td class="text-center">
                             {{ achat.produit.produitType.nom }}
                         </td>
                         <td class="text-center">
-                            {{ achat.user.firstname }} {{ achat.user.name }}
+                            {{ achat.user.nomComplet }} ({{ achat.user.email}})
                         </td>
                         <td class="text-center">
                             {{ achat.prixPaye }}

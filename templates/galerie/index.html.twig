@@ -1,0 +1,128 @@
+{% extends 'base_dashboard.html.twig' %}
+
+{% block title %}Liste des catégories pour les galeries{% endblock %}
+
+{% block body %}
+    <div id="galerie-list" class="container-fluid">
+        <h1>Liste des galeries</h1>
+        <div class="col-12  mt-5 mb-3">
+            <a href="{{ path('galerie_new') }}" class="btn btn-style">Nouvelle galerie</a>
+        </div>
+        <div class="table-responsive card px-2 py-2">
+            <table id="example1" class="table table-bordered table-striped  mx-2 my-2">
+                <thead>
+                    <tr class="text-center">
+                        <th>N°&nbsp;Id</th>
+                        <th>Action</th>
+                        <th>Nom</th>
+                        <th>Description</th>
+                        <th>Catégories</th>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr class="text-center">
+                        <th>N°&nbsp;Id</th>
+                        <th>Action</th>
+                        <th>Nom</th>
+                        <th>Description</th>
+                        <th>Catégories</th>
+                    </tr>
+                </tfoot>
+                <tbody>
+                    {% for galerie in galeries %}
+                        <tr class="text-center">
+                            <td>{{ galerie.id }}</td>
+                            <td>
+                                {# Modal pour voir une galerie #}
+                                    <a href="" type="button" class="m-0" data-toggle="modal" data-target="#showgalerieModal{{ galerie.id }}">
+                                        <i class="fad fa-eye"></i>
+                                    </a>
+                                    <div class="modal fade text-left" id="showgalerieModal{{ galerie.id }}" tabindex="-1" role="dialog" aria-labelledby="showgalerieModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog modal-lg" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h6 class="modal-title text-uppercase font-weight-bold">Consulter</h6>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body font-weight-normal p-0">
+                                                    {% include "galerie/show.html.twig" %}
+
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                {# Fin de la modal voir une galerie #}
+
+                                {# Lien pour modifier une galerie #}
+                                <a href="{{ path('galerie_edit', {'id': galerie.id}) }}">
+                                    <i class="fad fa-edit px-2 py-2"></i>
+                                </a>
+                                {# Fin lien pour modifier une galerie #}
+
+                                {# Modal pour supprimer une galerie #}
+                                    <a href="" type="button" class="m-0" data-toggle="modal" data-target="#deletegalerieModal{{ galerie.id }}">
+                                        <i class="fad fa-trash-alt"></i>
+                                    </a>
+                                    <div class="modal fade text-left" id="deletegalerieModal{{ galerie.id }}" tabindex="-1" role="dialog" aria-labelledby="deletegalerieModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog modal-lg" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title text-uppercase font-weight-bold">Voulez-vous supprimer cette catégorie : {{ galerie.nom }}</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body font-weight-normal">
+                                                    <div class="col font-weight-bold">
+                                                        Nom de la catégorie : {{ galerie.nom }}
+                                                    </div>
+                                                    <div class="modal-body font-weight-normal">
+                                                        <div class="col">
+                                                        </div>
+                                                        <div class="col">
+                                                        </div>
+                                                        <div class="col">
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                                                        {% include "galerie/_delete_form.html.twig" %}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                {# Fin de la modal supprimer une galerie #}
+
+                            </td>
+                            <td>
+                                {{ galerie.nom }}
+                            </td>
+                            <td>
+                                {{ galerie.descritpion }}
+                            </td>
+                            <td>
+                                <ul class="text-none">
+                                    {% for galerieCategorie in galerie.galerieCategorie %}
+                                        <li>
+                                            {{ galerieCategorie.nom }}
+                                        </li>
+                                    {% endfor %}
+                                </ul>
+                            </td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="9">Pas d'enregistrement trouvé</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}
