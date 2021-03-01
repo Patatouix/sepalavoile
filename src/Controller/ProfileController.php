@@ -50,7 +50,8 @@ class ProfileController extends AbstractController
             'user' => $this->getUser(),
             'form' => $form->createView(),
             'formPwd' => $formPwd->createView(),
-            'imgProfil' => $imgProfil
+            'imgProfil' => $imgProfil,
+            'tab' => 'profile_infos'
         ]);
     }
 
@@ -122,7 +123,8 @@ class ProfileController extends AbstractController
         return $this->render('profile/medias.html.twig', [
             'user' => $user,
             'form' => $form->createView(),
-            'medias' => $medias
+            'medias' => $medias,
+            'tab' => 'profile_medias'
         ]);
     }
 
@@ -132,8 +134,17 @@ class ProfileController extends AbstractController
      */
     public function toggleMedia(Request $request, MediaRepository $mediaRepository): Response
     {
+        $user = $this->getUser();
+
         $mediaId = $request->request->get('id');
         $isDisplayed = $request->request->get('isDisplayed');
+
+        if (!$isDisplayed) {    //avant d'activer une photo, on les désactive toutes
+            $medias = $user->getMedias();
+            foreach ($medias as $media) {
+                $media->setIsDisplayed($isDisplayed);
+            }
+        }
 
         $media = $mediaRepository->find($mediaId);
         $media->setIsDisplayed($isDisplayed? '0' : '1');
@@ -155,6 +166,7 @@ class ProfileController extends AbstractController
 
         return $this->render('profile/achats.html.twig', [
             'user' => $user,
+            'tab' => 'profile_achats'
         ]);
     }
 
@@ -167,6 +179,7 @@ class ProfileController extends AbstractController
 
         return $this->render('profile/reservations.html.twig', [
             'user' => $user,
+            'tab' => 'profile_reservations'
         ]);
     }
 
@@ -203,6 +216,7 @@ class ProfileController extends AbstractController
 
         return $this->render('profile/messagerie.html.twig', [
             'user' => $user,
+            'tab' => 'profile_messagerie'
         ]);
     }
 }

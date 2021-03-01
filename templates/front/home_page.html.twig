@@ -80,9 +80,9 @@
                     <!-- FIN BOUCLE VIDEO -->
                     <!-- DÉBUT MODAL VIDEO -->
                     {% for videoYt in videoYt %}
-                        <div class="col-lg-4 col-md-12 mb-4">
+                        <div class="col-lg-4 col-md-12 mb-4 text-center">
                             <a>
-                                <img class="img-fluid z-depth-1 shadow-vlog" style="cursor:pointer;"
+                                <img class="img-fluid z-depth-1 shadow-vlog" style="max-width:360px; max-height:200px; cursor:pointer;"
                                 src="{{ asset('/uploads/' ~ videoYt.nom ) }}" alt="" data-toggle="modal" data-target="#modalShowVideo{{ videoYt.id }}">
                             </a>
                             <div class="modal fade" id="modalShowVideo{{ videoYt.id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel{{ videoYt.id }}"

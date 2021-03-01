@@ -1,16 +1,14 @@
 <!-- MENU LANGUE -->
 <header>
-    {% block stylesheets %}
-    {# {{ parent() }} #}
-    {# {{ encore_entry_link_tags('header') }} #}
-    {% endblock %}
-    <div class="container-fluid">
-        {% for message in app.flashes('success') %}
-        <div class="alert alert-success text-center mt-3">
-            {{ message }}
-        </div>
-        {% endfor %}
 
+    <div class="container-fluid">
+        {% for label, messages in app.flashes %}
+            {% for message in messages %}
+                <div class="alert alert-{{ label }} text-center mt-3">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endfor %}
         {# {% if not form.vars.valid %}
         <div class="alert alert-danger text-center">
             Vérifier votre adresse e-mail
@@ -22,7 +20,7 @@
                 {% if app.user != null %}
                 <span class="">Bonjour</span>
                 <a href="{{ path('profile_infos') }}" title="profile">
-                    {{ app.user.firstName }} {{ app.user.name }}
+                    {{ app.user.firstName|capitalize }} {{ app.user.name|capitalize }}
                     <i class="fas fa-users-cog ml-3"></i>
                 </a>
                 {% if is_granted('ROLE_ADMIN') %}
