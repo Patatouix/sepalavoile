@@ -134,8 +134,17 @@ class ProfileController extends AbstractController
      */
     public function toggleMedia(Request $request, MediaRepository $mediaRepository): Response
     {
+        $user = $this->getUser();
+
         $mediaId = $request->request->get('id');
         $isDisplayed = $request->request->get('isDisplayed');
+
+        if (!$isDisplayed) {    //avant d'activer une photo, on les désactive toutes
+            $medias = $user->getMedias();
+            foreach ($medias as $media) {
+                $media->setIsDisplayed($isDisplayed);
+            }
+        }
 
         $media = $mediaRepository->find($mediaId);
         $media->setIsDisplayed($isDisplayed? '0' : '1');
